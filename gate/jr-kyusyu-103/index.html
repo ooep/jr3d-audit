@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>jr-kyusyu-103 · 3D 模型查看</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#e9e9e9}
+  #app{position:fixed;inset:0}
+  canvas{display:block;touch-action:none}
+  .bar{position:fixed;top:0;left:0;right:0;padding:10px 14px;background:rgba(255,255,255,.92);box-shadow:0 1px 6px rgba(0,0,0,.12);z-index:10}
+  .bar h1{font-size:16px;margin:0}
+  .bar p{font-size:12px;color:#666;margin:2px 0 0}
+  .ctl{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;display:flex;gap:8px;z-index:10}
+  .ctl button{border:1px solid #ccc;background:#fff;border-radius:20px;padding:9px 16px;font-size:14px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .ctl button.on{background:#1a7f37;color:#fff;border-color:#1a7f37}
+  .hint{position:fixed;left:50%;transform:translateX(-50%);bottom:64px;font-size:12px;color:#666;background:rgba(255,255,255,.75);padding:3px 10px;border-radius:12px;z-index:10;white-space:nowrap}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:#e9e9e9;z-index:20;font-size:15px;color:#555}
+  #err{display:none;position:fixed;left:12px;right:12px;top:76px;background:#fdecea;color:#8c1d18;border:1px solid #f5c6c2;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.6;z-index:30;white-space:pre-wrap}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="app"></div>
+<div class="bar">
+  <h1>jr-kyusyu-103 · 3D 模型</h1>
+  <p>JR九州 103系1500番台 初代塗装 · クハ103 + モハ102 · 2 辆编组 · 自审通过</p>
+</div>
+<div id="err"></div>
+<div class="hint">拖动旋转 · 双指 / 滚轮缩放 · 右键拖动平移</div>
+<div class="ctl">
+  <button id="btnReset">重置视角</button>
+  <button id="btnSide">侧面</button>
+  <button id="btnTop">俯视</button>
+  <button id="btnSpin">自动旋转</button>
+</div>
+<div id="loading"><div>正在加载 3D 模型…</div><div style="font-size:12px;color:#999">首次打开需加载约 3 MB 模型文件</div></div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const TARGET = new THREE.Vector3(0, 1.8, -19.65);
+const HOME = new THREE.Vector3(26, 9, 6);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.getElementById('app').appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe9e9e9);
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 500);
+camera.position.copy(HOME);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.copy(TARGET);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 5;
+controls.maxDistance = 120;
+controls.maxPolarAngle = Math.PI * 0.495;
+controls.autoRotateSpeed = 1.2;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8a8a, 0.9));
+const sun = new THREE.DirectionalLight(0xffffff, 2.0);
+sun.position.set(20, 30, 12);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.left = -30; sun.shadow.camera.right = 30;
+sun.shadow.camera.top = 30; sun.shadow.camera.bottom = -30;
+sun.shadow.camera.far = 120;
+scene.add(sun);
+
+// 地面 + 钢轨（轨面 y=0，轨距 1435mm）
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(300, 300),
+  new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 1 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.02;
+ground.receiveShadow = true;
+scene.add(ground);
+const railMat = new THREE.MeshStandardMaterial({ color: 0x555555, roughness: 0.6, metalness: 0.4 });
+for (const x of [-0.7175, 0.7175]) {
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.15, 44), railMat);
+  rail.position.set(x, -0.075, -19.65);
+  rail.receiveShadow = true;
+  scene.add(rail);
+}
+
+const errBox = document.getElementById('err');
+function showErr(msg) {
+  errBox.style.display = 'block';
+  errBox.textContent = msg;
+  document.getElementById('loading').style.display = 'none';
+}
+
+const loader = new GLTFLoader();
+let loaded = 0;
+function done() {
+  loaded++;
+  if (loaded === 2) document.getElementById('loading').style.display = 'none';
+}
+loader.load('car1.glb', (g) => {
+  g.scene.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  scene.add(g.scene);
+  done();
+}, undefined, (e) => showErr('car1.glb 加载失败：' + (e && e.message ? e.message : '请检查网络后刷新重试')));
+loader.load('car2.glb', (g) => {
+  g.scene.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  g.scene.position.z = -19.8;
+  scene.add(g.scene);
+  done();
+}, undefined, (e) => showErr('car2.glb 加载失败：' + (e && e.message ? e.message : '请检查网络后刷新重试')));
+
+function setView(pos, tgt) {
+  camera.position.copy(pos);
+  controls.target.copy(tgt || TARGET);
+  controls.update();
+}
+document.getElementById('btnReset').onclick = () => setView(HOME);
+document.getElementById('btnSide').onclick = () => setView(new THREE.Vector3(38, 3.5, -19.65));
+document.getElementById('btnTop').onclick = () => setView(new THREE.Vector3(0, 55, -19.6));
+const spinBtn = document.getElementById('btnSpin');
+spinBtn.onclick = () => {
+  controls.autoRotate = !controls.autoRotate;
+  spinBtn.classList.toggle('on', controls.autoRotate);
+};
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
