@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主站三线问题 · 本地内测（方案 C）— jr3d-audit</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#0f1115;color:#e8e8e8}
+header{padding:28px 20px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 8px}
+.sub{color:#9aa3af;font-size:14px;line-height:1.7}
+.badge{display:inline-block;background:#14532d;color:#bbf7d0;border-radius:999px;padding:4px 12px;font-size:13px;margin:6px 8px 6px 0}
+.badge.warn{background:#422006;color:#fde68a}
+main{max-width:1100px;margin:0 auto;padding:12px 20px 40px}
+section{background:#181b21;border:1px solid #2a2f38;border-radius:12px;padding:18px;margin:16px 0}
+h2{font-size:18px;margin:0 0 4px}
+.meta{color:#9aa3af;font-size:13px;margin:0 0 12px}
+img{width:100%;border-radius:8px;display:block;background:#222}
+.verdict{font-size:15px;line-height:1.8}
+.verdict b{color:#4ade80}
+.note{color:#9aa3af;font-size:13px;line-height:1.7}
+code{color:#fbbf24}
+</style>
+</head>
+<body>
+<header>
+<h1>主站三线问题 · 本地内测（方案 C）</h1>
+<p class="sub">测试时间：2026-11-26 00:25–01:35（CST）｜ 基准：main 分支 c631da0 本地副本 + models-pipeline 的三辆车（index 136→139，map 226→229）｜ 只测本地，未合并、未推 main、未部署上线</p>
+<p><span class="badge">✅ 内测通过：三辆车全部以 3D 带涂装正常渲染</span><span class="badge">建议选 A：合并 models-pipeline 到 main</span></p>
+</header>
+<main>
+<section>
+<h2>1. desneyrline-100 — 迪士尼度假区线 100 形（6 辆）</h2>
+<p class="meta">ディズニーリゾートライン → /models/desneyrline-100/consist.json ｜ pathOf ✅ ｜ openViewer ✅ ready，85.49 m</p>
+<img src="viewer3-disney.png" alt="迪士尼 100 形本地渲染">
+<p class="verdict">✅ <b>通过</b>：黄色波浪带 + 米奇窗，整列可见。不是 2D 图标，不是素色占位盒。</p>
+</section>
+<section>
+<h2>2. titibu-7500 — 秩父 7500 系（3 辆）</h2>
+<p class="meta">秩父本線 → /models/titibu-7500/consist.json ｜ pathOf ✅ ｜ openViewer ✅ ready，60.33 m</p>
+<img src="viewer3-chichibu.png" alt="秩父 7500 系本地渲染">
+<p class="verdict">✅ <b>通过</b>：白底绿带，整列可见。不是 2D 图标，不是素色占位盒。</p>
+</section>
+<section>
+<h2>3. hakodatesiden-9600 — 函馆市电 9600 形（1 辆）</h2>
+<p class="meta">函館市電本線 → /models/hakodatesiden-9600/consist.json ｜ pathOf ✅ ｜ openViewer ✅ ready，12.37 m</p>
+<img src="viewer3-hakodate.png" alt="函馆市电 9600 形本地渲染">
+<p class="verdict">✅ <b>通过</b>：白底蓝带，整车可见。不是 2D 图标，不是素色占位盒。</p>
+</section>
+<section>
+<h2>4. 地图本身（本地副本）</h2>
+<p class="meta">Mini JapanRail • 6 Live • 95,030 Today，全日本线路几何正常绘制。底图瓦片空白是沙箱无头 Chrome 无法访问公网所致，不影响 3D 查看器。</p>
+<img src="map3-full.png" alt="本地地图全景">
+</section>
+<section>
+<h2>结论与建议</h2>
+<p class="verdict">✅ <b>内测通过</b>：三辆车全部正常加载 GLB 模板（<code>__tmplInfo.ready=true</code>），没有一辆触发素色占位盒回退，没有一辆显示 2D 图标；第三轮零控制台错误；对照组山手线 E235（11 辆）表现完全一致。迪士尼车高 5.24 m 已核实：含单轨导向梁裙边（官方全高 5,237 mm = 车体 3,807 mm + 梁高 ~1,430 mm），数值正确，无需修正。</p>
+<p class="verdict">❓ <b>建议选 A</b>：合并 models-pipeline 到 main，一次解决全部 488 辆车、405 条映射。B 只修三条线，留下 485 辆同类缺口。合并后白天抽查三条线运行中班次最终确认（本次深夜无班次，地图上的 3D 列车实例未能直接目击）。另注意：秩父鉄道 operator key 错指、train_wiki_map 错数据这两个小问题，合并本身不修复，需另行处理。</p>
+<p class="note">完整报告：~/workspace/jr3d/work/main-site-localtest-20261126/LOCALTEST.md ｜ 第三轮结果：results3.json ｜ 核对报告：../main-site-code-audit-20261126/MAIN_SITE_AUDIT.md（仓库内路径）</p>
+</section>
+</main>
+</body>
+</html>
