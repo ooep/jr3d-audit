@@ -28,6 +28,7 @@
   <h1>返工 14 辆单独审核（第 201–250 批，2026-11-25）</h1>
   <p>每辆三张图：整列、斜视角、三维形态图。点击上方编号跳转。分支 models-pipeline。</p>
   <p class="fixnote">2026-11-25 用户第四份返工清单 14 辆（第 201–250 批）全部完成并重推，单独汇总在此页（不含补映射）。图片均为返工后版本。jr-tokai-383 未补到 6 辆：实车标准 6 辆，图纸仅 2 张先头车净片，缺 5 张中间车图纸，现 2 辆真实先头车。</p>
+  <p class="fixnote">2026-11-25 二次返工刷新：以下 7 辆已换为二次返工后新图——tobu-n100（提交 5da1cc4）、meitetsu-100（提交 4a3db5b）、keisei-8800（提交 d1784140）、jr-tokai-383（提交 f84f34e3，仍 2 辆真实先头车、缺 5 张中间车图纸未补到 6 辆）、nankai-7100（提交 fd5575a）、jr-tokai-315（提交 3c22acd）、jr-west-283（提交 3683ad34）。其余 7 辆图不变。</p>
 </header>
 <nav><a href="#tikuden-5000">1</a> <a href="#nisitetu-7050">2</a> <a href="#meitetsu-100">3</a> <a href="#keisei-8800">4</a> <a href="#tobu-n100">5</a> <a href="#jr-tokai-383">6</a> <a href="#oigawa-21000">7</a> <a href="#nankai-7100">8</a> <a href="#jr-tokai-315">9</a> <a href="#kintetsu-3200">10</a> <a href="#jr-west-283">11</a> <a href="#nisitetu-9000">12</a> <a href="#tosaden-1000">13</a> <a href="#tokyu-3020">14</a></nav>
 <main>
@@ -54,7 +55,7 @@
     <section id="meitetsu-100">
       <h2>3. 名鉄100系 <span class="mid">meitetsu-100</span></h2>
       <p class="lines">映射线路：豊田線</p>
-      <p class="lines">返工：删了重做。司机面上下颠倒，FLIP_TOP_BOTTOM 翻正（保黄色标记在右）；car1/car4 新，car2/3 未变。删 0c49726 → 推 2416f5a。注：实车后为 6 辆，现 4 辆。</p>
+      <p class="lines">返工：删了重做。司机面上下颠倒，FLIP_TOP_BOTTOM 翻正（保黄色标记在右）；car1/car4 新，car2/3 未变。删 0c49726 → 推 2416f5a。注：实车后为 6 辆，现 4 辆。二次返工：车底带改取图纸台车侧视条，两台 FS398+设备箱群全回，轮底 y=0，司机面保持翻正版。提交 4a3db5b。</p>
       <div class="imgs">
       <figure><img src="meitetsu-100/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="meitetsu-100/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -64,7 +65,7 @@
     <section id="keisei-8800">
       <h2>4. 京成8800形 <span class="mid">keisei-8800</span></h2>
       <p class="lines">映射线路：京成松戸線</p>
-      <p class="lines">返工：转向架没扣干净。轮子浮空 0.42 m（下带是不透灰板，MASK 量的是板边非轮底）；清白底、轮重采样为真圆、清横幅+QR。提交 18953b7。</p>
+      <p class="lines">返工：转向架没扣干净。轮子浮空 0.42 m（下带是不透灰板，MASK 量的是板边非轮底）；清白底、轮重采样为真圆、清横幅+QR。提交 18953b7。二次返工：车底带改用立面图像素，5 设备箱+两台构架全回，保留率 36.9%→45.5%，轮底 y=0。提交 d1784140。</p>
       <div class="imgs">
       <figure><img src="keisei-8800/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="keisei-8800/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -74,7 +75,7 @@
     <section id="tobu-n100">
       <h2>5. 東武N100系「スペーシアX」 <span class="mid">tobu-n100</span></h2>
       <p class="lines">映射线路：未映射（東武日光線第二模型）</p>
-      <p class="lines">返工：头型不是方的，按实车图改。鼻尖 2.62 m、约 38° 斜坡 1.82 m；仅几何，贴图与 v1 字节一致。提交 755c8fd。</p>
+      <p class="lines">返工：头型不是方的，按实车图改。鼻尖 2.62 m、约 38° 斜坡 1.82 m；仅几何，贴图与 v1 字节一致。提交 755c8fd。二次返工：司机室白黏贴耳裁净，头型/转向架/车底未动。提交 5da1cc4。</p>
       <div class="imgs">
       <figure><img src="tobu-n100/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="tobu-n100/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -84,7 +85,7 @@
     <section id="jr-tokai-383">
       <h2>6. JR東海383系「ワイドビューしなの」 <span class="mid">jr-tokai-383</span></h2>
       <p class="lines">映射线路：篠ノ井線</p>
-      <p class="lines">返工：补全整列、头型不对。⚠️ 未补到 6 辆：实车标准 6 辆 3M3T，图纸仅 2 张先头车净片，缺 5 张（モハ383、サハ383、モハ383-100、サハ383-100、クモハ383），翻转 Tc 造假车不可取；本次原 car2（クロ383 翻转复制）换成图纸右净片真实车クロ383-100，现 2 辆真实先头车、贯通端面对面；头型重修流线鼻锥并对照实车照片核过。提交 b78c856。</p>
+      <p class="lines">返工：补全整列、头型不对。⚠️ 未补到 6 辆：实车标准 6 辆 3M3T，图纸仅 2 张先头车净片，缺 5 张（モハ383、サハ383、モハ383-100、サハ383-100、クモハ383），翻转 Tc 造假车不可取；本次原 car2（クロ383 翻转复制）换成图纸右净片真实车クロ383-100，现 2 辆真实先头车、贯通端面对面；头型重修流线鼻锥并对照实车照片核过。提交 b78c856。二次返工：侧板重组取带（窗 1.95–2.98 m、橙带中心 1.75 m）、鼻锥 1.2 m、鼻尖 3.44/3.37 m、车底填白、转向架残影清净；仍 2 辆真实先头车，缺 5 张中间车图纸未补到 6 辆。提交 f84f34e3。</p>
       <div class="imgs">
       <figure><img src="jr-tokai-383/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="jr-tokai-383/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -104,7 +105,7 @@
     <section id="nankai-7100">
       <h2>8. 南海7100系 <span class="mid">nankai-7100</span></h2>
       <p class="lines">映射线路：加太線</p>
-      <p class="lines">返工：删了重做。car2 侧面复用 car1 侧面（实车 Tc 侧=Mc 侧），加司机门+斜带+NANKAI 字。删 7f8572a/9350d07 → 推 4db2b3f。注：两头司机面都印 7110（图纸原号）。</p>
+      <p class="lines">返工：删了重做。car2 侧面复用 car1 侧面（实车 Tc 侧=Mc 侧），加司机门+斜带+NANKAI 字。删 7f8572a/9350d07 → 推 4db2b3f。注：两头司机面都印 7110（图纸原号）。二次返工：车底带改用图纸 R 条恢复设备，car1 主电阻器 13 格百叶栅格、car2 设备箱群，保留率 19%→99.8%，轮底 y=0。提交 fd5575a。</p>
       <div class="imgs">
       <figure><img src="nankai-7100/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="nankai-7100/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -114,7 +115,7 @@
     <section id="jr-tokai-315">
       <h2>9. JR東海315系 <span class="mid">jr-tokai-315</span></h2>
       <p class="lines">映射线路：東海道本線</p>
-      <p class="lines">返工：删了重做。v2 方向本无错，实因是图纸 0 行暗边造成司机裙 0.19 m 暗带；裁 3 行+中灰填。删 26c9b9e → 推 1d2107f3。</p>
+      <p class="lines">返工：删了重做。v2 方向本无错，实因是图纸 0 行暗边造成司机裙 0.19 m 暗带；裁 3 行+中灰填。删 26c9b9e → 推 1d2107f3。二次返工：联结器盒上移 0.156 m、前脸下部灰带填白，司机面顺序与橙带核对无误。提交 3c22acd。</p>
       <div class="imgs">
       <figure><img src="jr-tokai-315/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="jr-tokai-315/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
@@ -134,7 +135,7 @@
     <section id="jr-west-283">
       <h2>11. JR西日本283系「オーシャンアロー」 <span class="mid">jr-west-283</span></h2>
       <p class="lines">映射线路：きのくに線</p>
-      <p class="lines">返工：补全编组。补到 6 辆 HB630 3+3（car4=car3 绕 Y 旋 180°，car5/6=car2/3 复制）；car1–3 未变。提交 9e1af095。注：9 辆编组需サハ283 图纸（无）。</p>
+      <p class="lines">返工：补全编组。补到 6 辆 HB630 3+3（car4=car3 绕 Y 旋 180°，car5/6=car2/3 复制）；car1–3 未变。提交 9e1af095。注：9 辆编组需サハ283 图纸（无）。二次返工：站内中间一对 car3–car4 贯通端相对，consist 仅 car3/car4 加 flip + car3/4/6 的 side_f 贴图 U→1−U 解镜像；car6 本就是司机端。提交 3683ad34。</p>
       <div class="imgs">
       <figure><img src="jr-west-283/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
       <figure><img src="jr-west-283/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
