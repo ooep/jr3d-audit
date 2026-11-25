@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返工 7 辆 + 补映射 2 辆（2026-11-25）</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f4f4f4; color: #222; }
+  header { background: #1a3a5c; color: #fff; padding: 20px 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  nav { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 24px; position: sticky; top: 0; }
+  nav a { margin-right: 12px; font-size: 13px; color: #1a3a5c; text-decoration: none; }
+  main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; }
+  h2.part { margin: 24px 0 4px; font-size: 20px; }
+  section { background: #fff; margin: 16px 0; padding: 16px 20px 20px; border-radius: 8px; }
+  section h2 { margin: 0 0 4px; font-size: 18px; }
+  section h2 .mid { font-size: 13px; color: #666; font-weight: normal; }
+  section p.lines { margin: 0 0 12px; font-size: 13px; color: #555; }
+  .imgs { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  figure { margin: 0; }
+  figure img { width: 100%; display: block; border: 1px solid #ddd; border-radius: 4px; }
+  figcaption { font-size: 13px; color: #555; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>返工 7 辆 + 补映射 2 辆（2026-11-25）</h1>
+  <p>第一部分：用户第三份返工清单 7 辆（第 151–200 批），图为返工后版本。第二部分：映射核查补挂的 2 条线，模型本身未动，图为现行 GLB 渲染。每辆三张图：整列、斜视角、三维形态图。</p>
+</header>
+<nav><a href="#nisitetu-600">返工1</a> <a href="#kintetsu-21000">返工2</a> <a href="#manyosen-7070">返工3</a> <a href="#yurikogen-yr3000">返工4</a> <a href="#sapporosiden-1100">返工5</a> <a href="#yamagata-yr880">返工6</a> <a href="#tyousi-3000">返工7</a> | <a href="#jr-west-kiha187">补映射1</a> <a href="#nankai-10000">补映射2</a></nav>
+<main>
+  <h2 class="part">第一部分：返工 7 辆</h2>
+    <section id="nisitetu-600">
+      <h2>1. 西鉄600形（2代目） <span class="mid">nisitetu-600</span></h2>
+      <p class="lines">删除重做。车底带改走图纸下框条（真转向架+设备箱），裙板延伸段改透明。删 0037a50a / 重推 4e08e3f0。映射：西鉄貝塚線。</p>
+      <div class="imgs">
+      <figure><img src="nisitetu-600/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="nisitetu-600/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="nisitetu-600/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="kintetsu-21000">
+      <h2>2. 近鉄21000系「アーバンライナーplus」 <span class="mid">kintetsu-21000</span></h2>
+      <p class="lines">编组返工：car3 重建成 Tc，两头司机端（Tc+M+Tc）。实车 6 辆，仍缺 3 辆中间车图纸。提交 79d6d60f。未映射。</p>
+      <div class="imgs">
+      <figure><img src="kintetsu-21000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="kintetsu-21000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="kintetsu-21000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="manyosen-7070">
+      <h2>3. 万葉線デ7070形 <span class="mid">manyosen-7070</span></h2>
+      <p class="lines">车轮重做：改用图纸真 N-110B 转向架（原版只有 4 只孤悬圆盘）。提交 0c88329c。映射：万葉線。</p>
+      <div class="imgs">
+      <figure><img src="manyosen-7070/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="manyosen-7070/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="manyosen-7070/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="yurikogen-yr3000">
+      <h2>4. 由利高原鉄道YR3000形 <span class="mid">yurikogen-yr3000</span></h2>
+      <p class="lines">司机面翻正：两块端面件 rot 均判反，逐块取反。提交 ea009881。映射：鳥海山ろく線。</p>
+      <div class="imgs">
+      <figure><img src="yurikogen-yr3000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="yurikogen-yr3000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="yurikogen-yr3000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="sapporosiden-1100">
+      <h2>5. 札幌市電1100形「シリウス」 <span class="mid">sapporosiden-1100</span></h2>
+      <p class="lines">两端楔形重建 + 车轮重做（轴距改实车 1.60 m）+ 色带对齐到 1.28 m。提交 a703fef9。映射：札幌市電。</p>
+      <div class="imgs">
+      <figure><img src="sapporosiden-1100/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="sapporosiden-1100/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="sapporosiden-1100/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="yamagata-yr880">
+      <h2>6. 山形鉄道YR-880形「こぶし」 <span class="mid">yamagata-yr880</span></h2>
+      <p class="lines">司机端翻正：两端端面件 rot 均判反。提交 fce23637。映射：フラワー長井線。</p>
+      <div class="imgs">
+      <figure><img src="yamagata-yr880/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="yamagata-yr880/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="yamagata-yr880/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="tyousi-3000">
+      <h2>7. 銚子電気鉄道3000形「澪つくし号」 <span class="mid">tyousi-3000</span></h2>
+      <p class="lines">转向架周围清干净 + 司机面端面贴图消白缝（白色粘贴翼）。提交 8e64b074。映射：銚子電気鉄道線。</p>
+      <div class="imgs">
+      <figure><img src="tyousi-3000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="tyousi-3000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="tyousi-3000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+  <h2 class="part">第二部分：补映射 2 辆</h2>
+    <section id="jr-west-kiha187">
+      <h2>1. JR西日本キハ187系0番台「スーパーおき」 <span class="mid">jr-west-kiha187</span></h2>
+      <p class="lines">补映射：山口線（新挂本车；本车原为山陰本線第二模型、未映射）。模型本身未动，图为现行 GLB 渲染。</p>
+      <div class="imgs">
+      <figure><img src="jr-west-kiha187/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-west-kiha187/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-west-kiha187/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="nankai-10000">
+      <h2>2. 南海10000系「サザン」 <span class="mid">nankai-10000</span></h2>
+      <p class="lines">补映射：和歌山港線（新挂本车；本车原为南海本線第二模型、未映射）。模型本身未动，图为现行 GLB 渲染。</p>
+      <div class="imgs">
+      <figure><img src="nankai-10000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="nankai-10000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="nankai-10000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+</main>
+</body>
+</html>
