@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>和歌山電鐵2270系 — 司机室核实（2026-11-25）</title>
+<style>
+body { font-family: sans-serif; max-width: 1100px; margin: 0 auto; padding: 20px; background: #f5f5f5; color: #222; }
+h1 { font-size: 22px; }
+p { line-height: 1.7; }
+.note { background: #fff; border-left: 4px solid #2a7; padding: 12px 16px; margin: 16px 0; }
+figure { background: #fff; padding: 12px; margin: 20px 0; }
+figcaption { font-weight: bold; margin-bottom: 8px; }
+img { width: 100%; height: auto; display: block; }
+.small img { max-width: 480px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<h1>和歌山電鐵2270系 wakayama-2270 — 司机室核实</h1>
+<p>映射线路：貴志川線。返工提交：248a475c（car2 后端面重裁，车灯补回）。</p>
+<div class="note">
+<p>这次是我亲自从服务器上把现在推着的模型（car1.glb / car2.glb）下载下来，打开里面的贴图一张张看的，又核了贴图在模型上的朝向（UV）：两头司机端都是正的——蓝带在上、风挡居中、车灯在最下端。页面上的图是从这个返工版模型直接渲的，不是旧图。</p>
+<p>如果你之前打开的审核页看着还是反的，那是浏览器缓存了返工前的旧图。这个页面是新地址，图也是新文件名，浏览器没有旧缓存，打开就是返工后的样子。</p>
+</div>
+
+<figure class="small">
+<figcaption>car1（モハ2271）司机端正脸 — 蓝带在上、风挡居中、车灯在最下端</figcaption>
+<img src="car1_front.png" alt="car1 司机端正脸">
+</figure>
+
+<figure class="small">
+<figcaption>car2（クハ2701）司机端正脸 — 蓝带在上、风挡居中、车灯在最下端（返工补回了车灯）</figcaption>
+<img src="car2_rear.png" alt="car2 司机端正脸">
+</figure>
+
+<figure>
+<figcaption>整列侧面 — 两端都是司机端</figcaption>
+<img src="user_consist_side.png" alt="整列侧面">
+</figure>
+
+<figure>
+<figcaption>斜视角 — 两端都是司机端</figcaption>
+<img src="user_oblique.png" alt="斜视角">
+</figure>
+
+<figure>
+<figcaption>三维形态图 — 两端都是司机端</figcaption>
+<img src="user_3dform.png" alt="三维形态图">
+</figure>
+
+<p><a href="../rework-20261125/">← 回返工 25 辆单独审核页</a></p>
+</body>
+</html>
