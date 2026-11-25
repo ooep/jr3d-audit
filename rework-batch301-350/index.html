@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返工 1 辆单独审核（第 301–350 批，2026-11-25）</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f4f4f4; color: #222; }
+  header { background: #1a3a5c; color: #fff; padding: 20px 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  header p.fixnote { margin-top: 8px; opacity: .95; }
+  nav { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 24px; position: sticky; top: 0; }
+  nav a { margin-right: 12px; font-size: 13px; color: #1a3a5c; text-decoration: none; }
+  main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; }
+  section { background: #fff; margin: 16px 0; padding: 16px 20px 20px; border-radius: 8px; }
+  section h2 { margin: 0 0 4px; font-size: 18px; }
+  section h2 .mid { font-size: 13px; color: #666; font-weight: normal; }
+  section p.lines { margin: 0 0 12px; font-size: 13px; color: #555; }
+  .imgs { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  figure { margin: 0; }
+  figure img { width: 100%; display: block; border: 1px solid #ddd; border-radius: 4px; }
+  figcaption { font-size: 13px; color: #555; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>返工 1 辆单独审核（第 301–350 批，2026-11-25）</h1>
+  <p>每辆三张图：整列、斜视角、三维形态图。点击上方编号跳转。分支 models-pipeline。</p>
+  <p class="fixnote">2026-11-25 第 301–350 批返工 1 辆（keisei-3400 前脸红蓝带按实车重组）已完成并重推，单独汇总在此页。图片为返工后版本（与 batch301-350 审核页同图）。</p>
+</header>
+<nav><a href="#keisei-3400">1</a></nav>
+<main>
+    <section id="keisei-3400">
+      <h2>1. 京成3400形 <span class="mid">keisei-3400</span></h2>
+      <p class="lines">映射线路：京成本線（未映射）</p>
+      <p class="lines">返工：前脸红蓝带按实车重组：3408 前脸红上蓝下移到风挡下方腰线高度（红带 y 1.91–1.74、蓝带 y 1.68–1.53，车灯随蓝带走）、车号“3408”移入红带内右侧、行先板居中横跨红带；图纸把风挡画低约 1.2 m（玻璃底 y 0.68，实车约 1.95），风挡玻璃块整体上移（像素/形状/尺寸不变，仅行位置上移），按“与实车照片一致”规则执行；前蓝带底比侧蓝带底低约 0.11 m（图纸前蓝带画得比侧面高，灯高所限，顶已对齐）。仅改 car3.glb（blob 68c42b4c…，旧 e9b3da74…），car1/car2/consist 未变。提交 a866bf2b。skill 升 1.2.31（前脸色带顺序/位置与实车相反 +1 行）。</p>
+      <div class="imgs">
+      <figure><img src="keisei-3400/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="keisei-3400/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="keisei-3400/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+</main>
+</body>
+</html>
