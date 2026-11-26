@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一面墙复诊：DoubleSide 让车顶显现 — jr3d-audit</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#0f1115;color:#e8e8e8}
+header{padding:28px 20px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 8px}
+.sub{color:#9aa3af;font-size:14px;line-height:1.7}
+.badge{display:inline-block;background:#14532d;color:#bbf7d0;border-radius:999px;padding:4px 12px;font-size:13px;margin:6px 8px 6px 0}
+.badge.warn{background:#422006;color:#fde68a}
+.badge.bad{background:#450a0a;color:#fecaca}
+main{max-width:1100px;margin:0 auto;padding:12px 20px 40px}
+section{background:#181b21;border:1px solid #2a2f38;border-radius:12px;padding:18px;margin:16px 0}
+h2{font-size:18px;margin:0 0 4px}
+.meta{color:#9aa3af;font-size:13px;margin:0 0 12px}
+img{width:100%;border-radius:8px;display:block;background:#222}
+.verdict{font-size:15px;line-height:1.8}
+.verdict b{color:#4ade80}
+.verdict b.warn{color:#fbbf24}
+.verdict b.bad{color:#f87171}
+.note{color:#9aa3af;font-size:13px;line-height:1.7}
+code{color:#fbbf24}
+table{border-collapse:collapse;font-size:14px;line-height:1.6;margin:8px 0;width:100%}
+td,th{border:1px solid #2a2f38;padding:6px 10px;text-align:left;vertical-align:top}
+th{color:#9aa3af}
+ul{font-size:15px;line-height:1.9;margin:8px 0}
+li b{color:#4ade80}
+.ask{font-size:16px;line-height:1.9}
+.ask b{color:#fbbf24}
+.cap{color:#9aa3af;font-size:13px;margin:10px 0 0;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+<h1>一面墙复诊：DoubleSide 让车顶显现</h1>
+<p class="sub">复诊时间：2026-11-26 14:56–15:17 ｜ 测试站 <a href="https://ooep.github.io/jr3d-maptest/" style="color:#93c5fd">https://ooep.github.io/jr3d-maptest/</a>（远端 HEAD c2ed463）｜ 复诊报告：<code>~/workspace/jr3d/work/main-site-map-wall-redx-20261126/REDX.md</code>｜ 前次对比页：<a href="../wallfix-20261126/" style="color:#93c5fd">wallfix-20261126</a></p>
+<p><span class="badge">✅ 面没翻：绕序 0/12,020,009 反转</span><span class="badge">✅ 覆盖面没问题：495/500 命中</span><span class="badge">✅ 线上确实是修复版 c2ed463</span><span class="badge warn">⏳ 什么都没推，等 MC 定夺</span></p>
+</header>
+<main>
+<section>
+<h2>一句话结论</h2>
+<p class="verdict">墙修复（c2ed463）之后纸模还是“一面墙”，但原因<b>不是</b>面内外翻了、<b>不是</b>修复没覆盖到、<b>不是</b>缓存没生效。真正的原因是：<b>纸模车顶贴图在单面（FrontSide）渲染下不显</b>——俯视是一块无细节的灰板；改成<b>双面（DoubleSide）</b>后，车顶清晰显示受电弓 / 空调 / 面板贴图。<b>同车次 A/B（trip 2591）已证实</b>：同车次、同压暗 0.85、仅 side 设置不同，车顶贴图的有无就翻转。高精度东急 5050 在 FrontSide 下车顶正常，故为<b>纸模特有</b>。机理未完全解明（诚实标注），但效果可复现。</p>
+</section>
+<section>
+<h2>三项已排除</h2>
+<table>
+<tr><th style="width:26%">怀疑</th><th>实测结果</th></tr>
+<tr><td><b>① 线上不是修复版（缓存/部署）</b></td><td>远端 HEAD c2ed463；线上 train3d.js 含 fixRoofMat×3、阴影 3.2、0.45、WALLFIX×4，CDN 完好；首页 maptest2、index.json 636 个。MC 14:54 看到的就是修复版，<b>不是旧代码</b>。</td></tr>
+<tr><td><b>② 面内外翻了（绕序反了）</b></td><td>全量实测 500 纸模、1,109 个 GLB、<b>12,020,009 个三角形，绕序与法线不一致的为 0 个</b>。车顶法线 100% 朝上、前/后端面朝外、底朝下。GLB 不是内翻壳，剔除行为正常。<b>“内外翻转”假说被证伪。</b>MC 的“反面”感受是视觉层级倒置造成的错觉，不是几何反转。</td></tr>
+<tr><td><b>③ 修复覆盖面不够</b></td><td>修正扫描口径后（consist.json 有 model / file / id 三种写法，初版漏了后两种），<b>495/500（99%）纸模命中车顶压暗</b>。仅 5 辆不命中（见下表），解释不了“全部纸模都有问题”。</td></tr>
+</table>
+<p class="note">不命中的 5 辆：jr-hokkaido-kiha283（车顶叫 c1_roof / c2_roof）、tukubaexpress-tx1000（roof_h / roof_m）、nagasakidenki-3000（无独立车顶材质）、kagoshimasiden-9500 与 kobesinkotu-portliner8000（车顶材质无贴图）。方案 C 可顺手覆盖其中 4 辆。</p>
+</section>
+<section>
+<h2>真正原因：视觉层级倒置，不是几何反了</h2>
+<p class="verdict">纸模车顶即使压暗 0.85，侧视仍只是一条约 4 px 的浅灰边（对比度 16→33–60，仍远低于高精度车顶深灰面约 130+ 的对比度）；俯视是一块无细节的均匀灰板。而车底深色带（dark 材质 + 阴影）始终最显眼。结果是<b>“该看见的顶看不见，不该突出的底最突出”</b>——观感上正是 MC 说的“只显示了视角看不到的那几面”。<b>c2ed463 的压暗方向没错，但力度太弱，且没解决车顶贴图在 FrontSide 下不显的根本问题。</b></p>
+<p class="verdict">车顶贴图本身是细致的——从 GLB 抽出的 roof1.png 含受电弓、空调机组（带风扇）、面板、深色边框，并非纯色。俯视下它本应清晰可见：</p>
+<img src="enoden-roof-tex-roof1.png" alt="江之电 1000 车顶贴图 roof1：受电弓、空调机组、面板">
+<p class="cap">江之电 1000 的车顶贴图（GLB 内 roof1.png）：受电弓、空调机组、面板、深色边框俱全。问题不在贴图本身，在它于地图 FrontSide 下渲染不出来。</p>
+</section>
+<section>
+<h2>决定性 A/B：俯视（同车次 trip 2591）</h2>
+<p class="meta">江之电 1000（纸模，2 辆），俯视；上 = DoubleSide，下 = FrontSide（现状）；同车次、同压暗 0.85、仅 side 设置不同</p>
+<img src="compare-AB-ds-vs-base-top.png" alt="俯视 A/B：上 DoubleSide 车顶细节清晰，下 FrontSide 车顶灰板">
+<p class="verdict">✅ <b>决定性对照</b>：上（DoubleSide）车顶清晰显示受电弓 / 空调 / 面板贴图；下（FrontSide）车顶是一块无细节的均匀灰板。车次 / 位置干扰已排除——side 设置是车顶贴图显 / 隐的决定因素。</p>
+</section>
+<section>
+<h2>决定性 A/B：侧视（同车次 trip 2591）</h2>
+<p class="meta">江之电 1000，z18.5、侧视；上 = DoubleSide，下 = FrontSide（现状）；同车次、同压暗 0.85、仅 side 设置不同</p>
+<img src="compare-AB-ds-vs-base-side.png" alt="侧视 A/B：上 DoubleSide 车顶深色条且能看到转向架，下 FrontSide 车顶 faint、底下一整条实色底带">
+<p class="verdict">✅ <b>侧视也有改善</b>：上（DoubleSide）车顶为清晰深色条，且能看到转向架，不再是一整条实色底带；下（FrontSide）车顶 faint、底下是一整条实色深灰底带——典型“一面墙 + 底”。</p>
+</section>
+<section>
+<h2>斜 45°：DoubleSide vs FrontSide（同车次 trip 2591）</h2>
+<p class="meta">江之电 1000，z18.5、斜 45°；两图取自同车次同角度，裁剪倍率略有不同</p>
+<img src="crop-ds-enoden1000-q45.png" alt="斜 45 度 DoubleSide：车顶深灰面、整车有立体感">
+<p class="cap">上：DoubleSide——车顶呈深灰面（带设备细节），整车有立体感，能看到转向架。</p>
+<img src="crop-base2591-enoden1000-q45.png" alt="斜 45 度 FrontSide 现状：车顶灰板、底带最显眼" style="margin-top:12px">
+<p class="cap">下：FrontSide（现状）——车顶是一块灰板、底带最显眼，仍是“一面墙 + 底”。</p>
+<p class="verdict">✅ <b>斜视角是 DoubleSide 改善最明显的角度</b>：车顶从灰板变成带设备细节的深灰面，车厢恢复为“顶 + 侧墙 + 转向架”的完整形态。</p>
+</section>
+<section>
+<h2>下一步方案（均未实施、未推送）</h2>
+<ul>
+<li><b>A（最优先）：纸模材质改 DoubleSide（保留车顶压暗 0.85）</b>——只改 <code>app/train3d.js</code>，渲染侧、<b>不动模型</b>，不违反 11:53“不改模型”禁令；可与 0.55 压暗叠加。先在测试站推一版、发前后对比请 MC 看。</li>
+<li><b>B（备选/补充）：压暗加码到 0.55 + 阴影降到 0.25</b>——单用治不了贴图不显（strong 俯视仍是灰板），只能作为 A 的补充。</li>
+<li><b>C（附带）：放宽车顶材质匹配，覆盖剩余 5 辆</b>——正则改为匹配一切含 <code>roof</code> 的材质名，并对无贴图车顶也压暗。可与 A 合并做。</li>
+<li><b>D（产品级）：改地图默认视角 pitch 60 → 45–50</b>——让车顶面投影更大；但改变全站默认视角、影响所有车型与用户习惯，需 MC 定夺；且用户自己转到纯侧视时问题依旧。</li>
+<li><b>E（改模型）：给纸模车顶加 3D 受电弓 / 空调</b>——唯一能在纯侧视下也立体的办法，需 MC 松口 11:53“不改模型”禁令；工作量大（500 辆）。</li>
+</ul>
+<p class="verdict"><b class="warn">不建议</b>：小幅加码压暗（0.8 / 0.75，实测改善有限）、BackSide 作修复（侧视会渲染成远侧内壁，是反效果）、只收阴影（不解决车顶不显）。</p>
+<p class="note">更正：前次诊断曾写“DoubleSide 已排除、对一面墙无效”。本次实测推翻了这一条——DoubleSide 现为首选方案 A。机理未完全解明：按文件分析车顶是单层、法线 100% 朝上、带贴图，FrontSide 从上方理应正常显示，但实测就是灰板；可能与地图强顶光洗亮或 three.js 侧未查出的材质细节有关。无论机理如何，实测效果可复现。</p>
+</section>
+<section>
+<h2>等 MC 定夺</h2>
+<p class="ask">本页所有变体（DoubleSide / BackSide / 强压暗）均为<b>本地试验、未上线</b>，测试站线上仍是 c2ed463（阴影 + 车顶压暗 0.85）。<b>要不要先在测试站推一版 DoubleSide（方案 A），看 live 效果再定？回“推”就行。</b>若只想要其中某项（比如 A + B 叠加、或 A + C 一起），直接说。</p>
+<p class="note">测试站：<a href="https://ooep.github.io/jr3d-maptest/" style="color:#93c5fd">https://ooep.github.io/jr3d-maptest/</a> ｜ 复诊报告全文：<code>~/workspace/jr3d/work/main-site-map-wall-redx-20261126/REDX.md</code></p>
+</section>
+</main>
+</body>
+</html>
