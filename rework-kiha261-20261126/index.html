@@ -28,24 +28,31 @@
 <body>
 <header>
   <h1>返工 1 辆单独审核（2026-11-26）</h1>
-  <p>只放返工的车：JR北海道キハ261系 0番台（2 辆编组）。分支 models-pipeline，返工提交 c196494；完全重建提交 499ea0f9（2026-11-26）。</p>
+  <p>只放返工的车：JR北海道キハ261系 0番台（2 辆编组）。分支 models-pipeline，返工提交 c196494；完全重建提交 499ea0f9；按实车照片再次重做 v4 提交 d0105fff（2026-11-26）。</p>
   <p class="fixnote">用户反馈（2026-11-26 22:29）：“编组的时候司机室没有面朝两端”。诊断：两车单看都对（car1 司机室在 z=0 端、car2 司机室在 z=21.67 端），但按原 consist [car1, car2] 编组后，两端外侧都是贯通端、两个司机室在中间面对面——审核图与站内模拟一致复现。另查出侧面贴图镜像缺陷：蓝色司机端侧面（黄乘务员门）在每辆车的一侧落在司机端、另一侧落在贯通端。</p>
   <p class="fixnote">返工：① consist.json 车序对调为 [car2, car1]（不加 flip；站内首尾对调后两端仍为司机室朝外，审核与站内一致）；② car1 的 −X 面、car2 的 +X 面侧面贴图 U 镜像（u→1−u），蓝色司机端侧面回到司机端；③ 顺手修正名字笔误 0番代→0番台。位置、法线、三角、材质、贴图与涂装均未动。两端验收图（end_plusZ / end_minusZ）均为蓝色司机面。</p>
-  <p class="fixnote">完全重建（2026-11-26 23:19，MC 指令“效果还是不佳，完全删除重建”）：返工版效果仍不佳，旧模型已从 models-pipeline 彻底删除（提交 6398e47e，index 651→650），从图纸从头重建、未复用旧 GLB。查明返工版贴图并非第 50 批原版——2026-11-24 14:41 的一次重构（提交 edcd386ef）只换了两个 GLB，贴图质量下降（前头灰色中柱代替蓝色中柱、车底椭圆“眼”轮代替合成圆轮，像素对比：前头 81,046/657,594 像素不同、车底 351,100/496,440 像素不同），返工只修了朝向、没修贴图，所以 MC 仍觉不佳。重建恢复第 50 批原版贴图质量，并在建模时把车序 [car2, car1] 与侧面 U 镜像（两面都镜像）做进模型；名字 0番台。重建提交 499ea0f9，index 656→657。以下图片均为重建后版本，“重建前”为返工版（c196494）。</p>
+  <p class="fixnote">完全重建（2026-11-26 23:19，MC 指令“效果还是不佳，完全删除重建”）：返工版效果仍不佳，旧模型已从 models-pipeline 彻底删除（提交 6398e47e，index 651→650），从图纸从头重建、未复用旧 GLB。查明返工版贴图并非第 50 批原版——2026-11-24 14:41 的一次重构（提交 edcd386ef）只换了两个 GLB，贴图质量下降（前头灰色中柱代替蓝色中柱、车底椭圆“眼”轮代替合成圆轮，像素对比：前头 81,046/657,594 像素不同、车底 351,100/496,440 像素不同），返工只修了朝向、没修贴图，所以 MC 仍觉不佳。重建恢复第 50 批原版贴图质量，并在建模时把车序 [car2, car1] 与侧面 U 镜像（两面都镜像）做进模型；名字 0番台。重建提交 499ea0f9，index 656→657。</p>
+  <p class="fixnote">按实车照片再次重做 v4（2026-11-26 23:46，MC 第三次否定“不是这个车怎么这么奇怪，你去网上看看图重新做一下”）：重建版仍不像实车。诊断（对照 SE-104 实车照片）：①车头 HET261 字一侧镜像，实车车头正面根本没有这行大字；②风挡画成两条窄黑竖缝，实车是顶部一整片弧形大风挡；③车头是扁平矩形蓝板，实车是巨大圆润的钴蓝色斜面鼻子（“高驾驶室电锅头”）；④贯通门、前灯画法也不对。结论：只按图纸原样重建修不好，图纸的扁平车头画法本身画不出实车的圆鼻子。v4 按实车照片重画车头（大弧形风挡、中央贯通门、每侧 2 盏圆前灯、风挡上方 2 盏小 HID、EL 目的地框，正面无 HET261 字），并把 HET261 移到侧面司机室旁（白字 + “Hokkaido Express Train” 小字，按实车位置与大小；2013 年由 Tilt261 改名，1000番台已取消，只有 0番台车体仍有此字）。车头不做鼻锥（参考已建的同类车 kiha283：平板端面 + 车顶圆顶 + 前头贴图即是“电锅头”效果）。以下图片均为 v4 版本，“重建版”为 499ea0f9。</p>
+  <p class="fixnote">图纸两页分工（MC 23:54 澄清核对）：第 1 页是车头（先头车/司机车），第 2 页是车厢。v2/v3 把两辆车都按第 1 页建（两辆一模一样的司机车），v4 改成各按各的那页——car1 按第 1 页建司机车，car2 按第 2 页建中间车キハ260（两头贯通端、无驾驶室、无 HET261 字，21.30 m）。注意：按图纸画法，第 2 页是中间车，所以 v4 的 2 辆编成只有一头有驾驶室（另一头是贯通端），是实车 4 辆编成的稚内端一对（1 号车キロハ261-200 + 2 号车キハ260-200）；“两头都有驾驶室”与“第 2 页是中间车”不能同时成立，请 MC 定夺是要保持中间车如图纸，还是把 car2 也改成司机车。实车编组：1 号车キロハ261-200（司机车，绿+普通）— 2 号车キハ260-200（中间车）— 3 号车キハ260-100（中间车）— 4 号车キハ261-100（司机车，普通），平时 4 辆、忙时 6 辆。</p>
 </header>
 <nav><a href="#jr-hokkaido-kiha261">1</a></nav>
 <main>
     <section id="jr-hokkaido-kiha261">
       <h2>1. JR北海道キハ261系 0番台 <span class="mid">jr-hokkaido-kiha261</span></h2>
-      <p class="lines">映射线路：宗谷本線、石北本線。2 辆编组（キハ261 + キハ260）。返工提交 c196494；完全重建提交 499ea0f9（models-pipeline，index 656→657）。第 50 批审核页（batch50 #38）图片已同步更新为重建后版本。</p>
+      <p class="lines">映射线路：宗谷本線、石北本線。2 辆编组（car1 司机车キハ261 + car2 中间车キハ260）。返工提交 c196494；完全重建提交 499ea0f9；按实车照片重做 v4 提交 d0105fff（models-pipeline，index 661 不变）。第 50 批审核页（batch50 #38）图片已同步更新为 v4 版本。</p>
       <div class="imgs">
       <figure class="before"><img src="jr-hokkaido-kiha261/before_consist_side.png" alt="返工前整列"><figcaption>返工前（整列）：两端外侧是灰色贯通端，司机室藏在中间；右侧车的蓝色司机端侧面落在外侧贯通端</figcaption></figure>
       <figure class="before"><img src="jr-hokkaido-kiha261/before_rebuild_consist_side.png" alt="重建前整列"><figcaption>重建前（返工版，提交 c196494）：两端司机室已朝外，但前头灰色中柱、车底椭圆“眼”轮——MC 仍觉不佳</figcaption></figure>
-      <figure><img src="jr-hokkaido-kiha261/user_consist_side.png" alt="整列"><figcaption>整列（重建后）：两端蓝色司机端朝外，中间贯通端相对；前头蓝色中柱、车底合成圆轮</figcaption></figure>
-      <figure><img src="jr-hokkaido-kiha261/user_oblique.png" alt="斜视角"><figcaption>斜视角（重建后）</figcaption></figure>
-      <figure><img src="jr-hokkaido-kiha261/user_3dform.png" alt="三维形态图"><figcaption>三维形态图（重建后）</figcaption></figure>
-      <figure><img src="jr-hokkaido-kiha261/end_plusZ.png" alt="+Z 端验收"><figcaption>两端验收 +Z 端：蓝色司机面（风挡 + HET261 + 前灯）</figcaption></figure>
-      <figure><img src="jr-hokkaido-kiha261/end_minusZ.png" alt="-Z 端验收"><figcaption>两端验收 −Z 端：蓝色司机面（风挡 + HET261 + 前灯）</figcaption></figure>
+      <figure class="before"><img src="jr-hokkaido-kiha261/before_v4_consist_side.png" alt="重建版整列"><figcaption>重建版（v2，提交 499ea0f9）：两辆都是按第 1 页建的司机车，车头 HET261 字镜像、风挡两条窄缝、扁平蓝板——MC 第三次否定</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/compare_front_vs_real.png" alt="车头与实车照片对比"><figcaption>车头与实车照片对比（v4 vs SE-104 实车照片）：大弧形风挡、中央贯通门、圆前灯、钴蓝脸、车顶圆顶——这次的车头就是实车那张蓝脸</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/user_consist_side.png" alt="整列"><figcaption>整列（v4）：左侧中间车（全银 + 贯通端涂装），右侧司机车（大蓝司机室段 + HET261）；司机室朝外、贯通端相对</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/user_oblique.png" alt="斜视角"><figcaption>斜视角（v4）</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/user_3dform.png" alt="三维形态图"><figcaption>三维形态图（v4）</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/v4_car1_side.png" alt="司机车一侧"><figcaption>司机车 car1 一侧：HET261 + Hokkaido Express Train 正读，蓝司机室段、黄乘务员门、绿带都在司机室端</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/v4_car1_side_nz.png" alt="司机车另一侧"><figcaption>司机车 car1 另一侧：HET261 同样正读（两侧用了正写/预镜像两张贴图，见 REPORT）</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/v4_car2_side.png" alt="中间车"><figcaption>中间车 car2：全银色、无 HET261、无蓝司机室段，一端绿/蓝/黄贯通端涂装</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/end_minusZ.png" alt="-Z 端验收"><figcaption>两端验收 −Z 端：蓝色司机车头（大风挡 + 贯通门 + 前灯，正面无 HET261 字）</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha261/end_plusZ.png" alt="+Z 端验收"><figcaption>两端验收 +Z 端：灰色贯通端（中间车，无驾驶室）——v4 的 2 辆编成只有一头有驾驶室，见上方说明</figcaption></figure>
       </div>
     </section>
 </main>
