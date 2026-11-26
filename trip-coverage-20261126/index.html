@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主站班次级模型覆盖清单（2026-11-26）</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f4f4f4; color: #222; }
+  header { background: #1a3a5c; color: #fff; padding: 20px 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  header p.fixnote { margin-top: 8px; opacity: .95; }
+  main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; }
+  section { background: #fff; margin: 16px 0; padding: 16px 20px 20px; border-radius: 8px; }
+  section h2 { margin: 0 0 8px; font-size: 18px; }
+  section p { font-size: 14px; line-height: 1.7; margin: 6px 0; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .card { border: 1px solid #ddd; border-radius: 8px; padding: 14px 16px; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card .big { font-size: 26px; font-weight: bold; }
+  .card .sub { font-size: 13px; color: #555; }
+  .c1 { border-top: 5px solid #2e7d32; } .c2 { border-top: 5px solid #ef6c00; } .c3 { border-top: 5px solid #c62828; }
+  .warn { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 12px 16px; }
+  .warn h3 { margin: 0 0 6px; font-size: 15px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f0f0f0; position: sticky; top: 0; }
+  tr.l2 td { background: #fff3e0; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 12px; color: #fff; }
+  .b1 { background: #2e7d32; } .b2 { background: #ef6c00; } .b3 { background: #c62828; }
+  .tag { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 11px; background: #ffe082; color: #5d4037; }
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 10px 0; }
+  .filters label { font-size: 13px; }
+  .filters select, .filters input[type=text] { font-size: 13px; padding: 5px 8px; border: 1px solid #ccc; border-radius: 4px; }
+  .filters input[type=text] { min-width: 260px; }
+  .pager { display: flex; gap: 10px; align-items: center; margin: 12px 0 4px; font-size: 13px; }
+  .pager button { font-size: 13px; padding: 5px 12px; border: 1px solid #1a3a5c; background: #fff; color: #1a3a5c; border-radius: 4px; cursor: pointer; }
+  .pager button:disabled { opacity: .4; cursor: default; }
+  .muted { color: #666; font-size: 13px; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>主站班次级模型覆盖清单</h1>
+  <p>来源：主站 jr.suki.ing 的 trains_wd.json（95,030 个平日班次）× models-pipeline 模型库（636 辆）× 主站现有模型（136 辆）。一行 = 一个不重复的（运行图 tmap，车次名），附该班次模式一周的班次数。</p>
+  <p class="fixnote">解模型用的是测试站一期修复版 pathOf 逻辑（2026-11-26，提交 ec9998f）：车次名 → 规则（站名归一化后）→ 跑得最长的线（majority-line）→ 首条线；不是旧版首条规则。主站目前仍是旧逻辑，合并后才会按这个取法。</p>
+  <p class="fixnote">数据口径：2026-11-26 19:40 生成。底层数据：<code>groups.csv</code>（同目录，9,519 行）与工作目录 <code>~/workspace/jr3d/work/main-site-trip-coverage-20261126/</code>。</p>
+</header>
+<main>
+
+<section>
+  <h2>📊 汇总：三个类别</h2>
+  <div class="cards">
+    <div class="card c1">
+      <h3>① 已有高精度模型（主站已有）</h3>
+      <div class="big">41,306 班次 · 43.5%</div>
+      <div class="sub">4,639 个不重复班次模式 · 48.7%</div>
+      <div class="sub">解出的模型在主站 136 辆里（含 tf2 占位模型）。</div>
+    </div>
+    <div class="card c2">
+      <h3>② 已做纸模、还没合并</h3>
+      <div class="big">46,657 班次 · 49.1%</div>
+      <div class="sub">4,522 个不重复班次模式 · 47.5%</div>
+      <div class="sub">解出的模型在 pipeline 636 辆里、但不在主站 136 辆里。合并后即有 3D。</div>
+    </div>
+    <div class="card c3">
+      <h3>③ 什么都没弄</h3>
+      <div class="big">7,067 班次 · 7.4%</div>
+      <div class="sub">358 个不重复班次模式 · 3.8%</div>
+      <div class="sub">pathOf 返回 null：车次名、规则、线路全都对不上（所跑线路在 map 里无 key）。</div>
+    </div>
+  </div>
+  <p>合计 <b>95,030 班次 / 9,519 个不重复班次模式</b>。取模型步骤（按班次）：车次名 710 · 规则 8,341 · majority-line 4,739 · 首条线 74,173 · 无解 7,067。</p>
+  <p>按类别看“谁解的”：① 里规则解出 8,341 班次（山手线环线→E235-0 等）、majority-line 纠正 3,110 班次；② 里 majority-line 纠正 1,629 班次。横滨线直通车 142 班次已全部从 315 纠正为 E233-6000（315 现在是 0 班次）。</p>
+</section>
+
+<section>
+  <h2>⚠️ L2 提醒：有模型 ≠ 模型是对的</h2>
+  <div class="warn">
+    <h3>普通车显示特急模型：3,835 班次 / 800 个班次模式（占全部班次 4.0%）</h3>
+    <p>一条线在 map 里只能指一个模型。普通车跑在“特急模型”那条线上时，解出来的是特急车——上面 ①② 的计数只看“模型存不存在”，不保证“车型对不对”。这些行在下表里用<strong>橙色底</strong>标出，另有 <span class="tag">特急模型</span> 标签。</p>
+    <p>最大的几处（按班次）：小田急 3000-10cars 罗曼史特快 <b>1,400</b>（小田原線・多摩線・江の島線三条线都指它，① 类——模型在主站，但普通车不该显示它）· JR九州 787 系 <b>746</b>（鹿児島本線）· JR東日本 E353 <b>513</b>（中央本線）· JR四国 2700 <b>504</b>（予讃線・土讃線等）· JR九州 783 系 <b>369</b>（日豊本線）· JR四国 2600 <b>101</b>（高徳線）。</p>
+    <p>这是二期工作（按车型分规则）要解决的问题，一期修复修不了它。判定标准：专用特急模型 59 个（车次名表 20 个 + JR 特急 37 个系列 + 小田急罗曼史特快），双用途车型（313、E233、223、阪急 9000 等，普通车和特急都跑）<strong>不算</strong>错配。</p>
+  </div>
+</section>
+
+<section>
+  <h2>🔍 ③ 什么都没弄：主要集中在哪</h2>
+  <p>按班次最多的线路：東北本線 <b>582</b>（无 key 且无规则覆盖的区段）· 名古屋市営地下鉄 1号線東山線 <b>520</b> · 2号線名城線・名港線 <b>494</b> · 大阪モノレール線 <b>345</b> · 金沢シーサイド線 <b>327</b> · 6号線桜通線 <b>297</b> · 4号線名城線 <b>292</b> · 京都市営地下鉄東西線 <b>268</b> · 烏丸線 <b>260</b> · 国際文化公園都市モノレール線 <b>221</b> · 甲陽線 <b>217</b> · 東京メトロ有楽町線 <b>214</b> · 小田急江ノ島線 <b>187</b> · 桜島線 <b>187</b> · 阪急嵐山線 <b>172</b>。主要是地铁、单轨、支线——这些线在 map 里没有 key，也没有规则兜底。</p>
+  <p class="muted">注：813（图纸错标为京阪 600）、C57・キハ189 等 8 个无图缺口，它们的班次大多仍能按线路解出别的车型（进 ①/②，只是车型不对），所以不在 ③ 里；③ 是“连线路模型都没有”的班次。</p>
+</section>
+
+<section>
+  <h2>📋 班次明细（9,519 行）</h2>
+  <div class="filters">
+    <label>类别 <select id="fCat"><option value="">全部</option><option value="1">① 高精度（主站已有）</option><option value="2">② 纸模未合并</option><option value="3">③ 什么都没弄</option></select></label>
+    <label>取模型步骤 <select id="fStep"><option value="">全部</option><option value="names">车次名</option><option value="rules">规则</option><option value="majority-line">majority-line</option><option value="lines">首条线</option><option value="none">无解</option></select></label>
+    <label><input type="checkbox" id="fL2"> 只看特急模型错配（L2）</label>
+    <label><input type="checkbox" id="fUnc"> 只看 majority-line 不确定</label>
+    <label>搜索 <input type="text" id="fQ" placeholder="车次名 / 站名 / 线路 / 模型 slug / tmap"></label>
+  </div>
+  <p class="muted" id="countLine">加载中……</p>
+  <table>
+    <thead><tr><th>类别</th><th>车次名</th><th>种别</th><th>起点 → 终点</th><th>出发时段</th><th>运行线</th><th>解出模型</th><th>步骤</th><th>班次</th><th>tmap</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="pager">
+    <button id="prevBtn">上一页</button><span id="pageInfo"></span><button id="nextBtn">下一页</button>
+    <span class="muted">每页 200 行。橙色底 = L2（普通车显示特急模型）；“不确定” = majority-line 估计不可靠，仍按首条线取（共 516 个模式 / 4,004 班次）。</span>
+  </div>
+  <p class="muted">方法说明：majority-line 是按“跑得最长的线”取模型（用单线运行图建站→线表、按区段归属统计）。其中 794 个模式 / 4,739 班次的纠正通过了稳健性检验（即使把未归属区段全算给竞争对手，胜出线仍赢）；516 个模式 / 4,004 班次通不过检验，保留首条线结果并标“不确定”。tmaps 本身没有逐段线路数据，离线无法算出精确的 majority-line——这是估计，不是实测。另：常磐线品川始发各停仍显示 E233-3000-15（规则 12 只覆盖千代田線直通），修法待定，见 JOBAN_FIX.md。</p>
+</section>
+
+</main>
+<script>
+let ROWS = [], view = [], page = 0; const PER = 200;
+const CATNAME = {1:'① 高精度', 2:'② 纸模', 3:'③ 无'};
+const STEPNAME = {'names':'车次名','rules':'规则','majority-line':'majority','lines':'首条线','none':'无解'};
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function apply(){
+  const cat = document.getElementById('fCat').value;
+  const step = document.getElementById('fStep').value;
+  const l2 = document.getElementById('fL2').checked;
+  const unc = document.getElementById('fUnc').checked;
+  const q = document.getElementById('fQ').value.trim();
+  view = ROWS.filter(r => {
+    if (cat && String(r[8]) !== cat) return false;
+    if (step && r[9] !== step) return false;
+    if (l2 && !r[11]) return false;
+    if (unc && !r[10]) return false;
+    if (q) {
+      const hay = [r[0], r[1], r[2], r[3], r[4], r[6], r[7]].join(' ').toLowerCase();
+      if (!hay.includes(q.toLowerCase())) return false;
+    }
+    return true;
+  });
+  page = 0; render();
+}
+function render(){
+  const total = view.length, pages = Math.max(1, Math.ceil(total / PER));
+  if (page >= pages) page = pages - 1;
+  const slice = view.slice(page * PER, page * PER + PER);
+  const tb = document.getElementById('tbody');
+  tb.innerHTML = slice.map(r => {
+    const badge = r[8] === 1 ? 'b1' : r[8] === 2 ? 'b2' : 'b3';
+    const tags = (r[11] ? ' <span class="tag">特急模型</span>' : '') + (r[10] ? ' <span class="tag">不确定</span>' : '');
+    return `<tr${r[11] ? ' class="l2"' : ''}><td><span class="badge ${badge}">${CATNAME[r[8]]}</span></td><td>${esc(r[1] || '—')}</td><td>${esc(r[2])}</td><td>${esc(r[3])} → ${esc(r[4])}</td><td>${esc(r[5])}</td><td>${esc(r[6])}</td><td>${esc(r[7] || '—')}${tags}</td><td>${STEPNAME[r[9]] || r[9]}</td><td>${r[12]}</td><td>${r[0]}</td></tr>`;
+  }).join('');
+  const trips = slice.reduce((a, r) => a + r[12], 0);
+  document.getElementById('countLine').textContent = `共 ${total.toLocaleString()} 个班次模式（本页 ${slice.length} 行，合计 ${trips.toLocaleString()} 班次）。`;
+  document.getElementById('pageInfo').textContent = `第 ${page + 1} / ${pages} 页`;
+  document.getElementById('prevBtn').disabled = page === 0;
+  document.getElementById('nextBtn').disabled = page >= pages - 1;
+}
+document.getElementById('fCat').addEventListener('change', apply);
+document.getElementById('fStep').addEventListener('change', apply);
+document.getElementById('fL2').addEventListener('change', apply);
+document.getElementById('fUnc').addEventListener('change', apply);
+document.getElementById('fQ').addEventListener('input', apply);
+document.getElementById('prevBtn').addEventListener('click', () => { page--; render(); });
+document.getElementById('nextBtn').addEventListener('click', () => { page++; render(); });
+fetch('data.json').then(r => r.json()).then(d => { ROWS = d; apply(); })
+  .catch(e => { document.getElementById('countLine').textContent = '数据加载失败：' + e; });
+</script>
+</body>
+</html>
