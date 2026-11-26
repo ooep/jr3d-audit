@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>合并后地图显示效果测试 — jr3d-audit</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#0f1115;color:#e8e8e8}
+header{padding:28px 20px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 8px}
+.sub{color:#9aa3af;font-size:14px;line-height:1.7}
+.badge{display:inline-block;background:#14532d;color:#bbf7d0;border-radius:999px;padding:4px 12px;font-size:13px;margin:6px 8px 6px 0}
+.badge.warn{background:#422006;color:#fde68a}
+.badge.bad{background:#450a0a;color:#fecaca}
+main{max-width:1100px;margin:0 auto;padding:12px 20px 40px}
+section{background:#181b21;border:1px solid #2a2f38;border-radius:12px;padding:18px;margin:16px 0}
+h2{font-size:18px;margin:0 0 4px}
+.meta{color:#9aa3af;font-size:13px;margin:0 0 12px}
+img{width:100%;border-radius:8px;display:block;background:#222}
+img.crop{max-width:760px;margin:12px auto 0}
+.verdict{font-size:15px;line-height:1.8}
+.verdict b{color:#4ade80}
+.verdict b.warn{color:#fbbf24}
+.note{color:#9aa3af;font-size:13px;line-height:1.7}
+code{color:#fbbf24}
+table{border-collapse:collapse;font-size:14px;line-height:1.6;margin:8px 0}
+td,th{border:1px solid #2a2f38;padding:6px 10px;text-align:left}
+th{color:#9aa3af}
+</style>
+</head>
+<body>
+<header>
+<h1>合并后地图显示效果测试（方案 A 模拟）</h1>
+<p class="sub">测试时间：2026-11-26 09:02–09:19 JST（白天有班次）｜ 基准：本地“合并后”主站（main c631da0 + models-pipeline f05bccf 全量，index 636 / map 624）｜ 只测本地，未合并、未推 main、未部署上线</p>
+<p><span class="badge">✅ 三条线 + 予讃線样本全部 3D 带涂装显示（V=1）</span><span class="badge">建议选 A：推进合并</span><span class="badge warn">⚠️ 先看 §5：山手线会显示成 315 系</span></p>
+</header>
+<main>
+<section>
+<h2>先说关键：3D 只在高缩放出现</h2>
+<p class="verdict">代码核实 + 实测吻合：3D 列车推送门 <code>z ≥ 14.2</code>，实例创建门 <code>z ≥ 16.2</code>，完全淡入 <code>z = 17.5</code>（Z_ON=16 / Z_FULL=17.5）。日常浏览缩放（z&lt;14）时列车仍是 2D 图标；放大到街道级才会看到 3D 列车。以下截图全部在 <code>z=17.5、pitch 60°</code> 拍摄（V=1，2D 图标完全隐藏）。</p>
+<p class="meta">全国普查（z=5，09:09 JST）：在运班次 4,812 辆，分属 279 个模型路径；迪士尼 4、秩父 7、函馆 13、予讃 2700 系 51、未映射 202 辆（约 4.2%）。控制台错误：全程 0 条。</p>
+</section>
+<section>
+<h2>1. desneyrline-100 — 迪士尼度假区线 100 形（6 辆）</h2>
+<p class="meta">ディズニーリゾートライン → /models/desneyrline-100/consist.json ｜ 2 辆同时在视口（20 / 19 km/h）｜ V=1</p>
+<img src="map-disney-3d-tilt.png" alt="迪士尼 100 形地图 3D 倾斜视角">
+<img class="crop" src="crop-disney-tilt.png" alt="迪士尼 100 形裁切放大：黄色波浪带">
+<p class="verdict">✅ <b>通过</b>：白底 + 黄色波浪带 + 车窗清晰可见，6 节编组完整。不是 2D 图标，不是素色占位盒。</p>
+</section>
+<section>
+<h2>2. titibu-7500 — 秩父 7500 系（3 辆）</h2>
+<p class="meta">秩父本線 → /models/titibu-7500/consist.json ｜ 1 辆停站 ｜ V=1</p>
+<img src="map-chichibu-3d-tilt.png" alt="秩父 7500 系地图 3D 倾斜视角">
+<img class="crop" src="crop-chichibu-tilt.png" alt="秩父 7500 系裁切放大">
+<p class="verdict">✅ <b>通过</b>：3 节编组、形态正确。绿带仅在车顶边缘隐约可见——列车南北向与视线方向重合，侧面难见（角度问题，非模型问题）。</p>
+</section>
+<section>
+<h2>3. hakodatesiden-9600 — 函馆市电 9600 形（1 辆）</h2>
+<p class="meta">函館市電本線 → /models/hakodatesiden-9600/consist.json ｜ 2 辆同时在视口，均停站 ｜ V=1</p>
+<img src="map-hakodate-3d-tilt.png" alt="函馆市电 9600 形地图 3D 倾斜视角">
+<img class="crop" src="crop-hakodate-tilt.png" alt="函馆市电 9600 形裁切放大">
+<p class="verdict">✅ <b>通过</b>：单节 12 m 电车以 3D 实例显示在轨道上。车太小，蓝带未清晰入镜（尺寸问题，非模型问题）。</p>
+</section>
+<section>
+<h2>4. jr-shikoku-2700 — 予讃線 2700 系（301 批样本）</h2>
+<p class="meta">予讃線 → /models/jr-shikoku-2700/consist.json ｜ 2 辆南風同时 V=1；另 1 辆いしづち侧面视角 V=1</p>
+<img src="map-yosan-3d-tilt.png" alt="予讃線 2700 系地图 3D 倾斜视角">
+<img src="map-yosan-3d-side.png" alt="予讃線 2700 系侧面视角（bearing 90）">
+<img class="crop" src="crop-yosan-side.png" alt="予讃線 2700 系裁切放大：白底红带">
+<p class="verdict">✅ <b>通过</b>：白底红带清晰可见（侧面 bearing 90 拍摄），2 节编组。301 批纸模在地图上同样正常显示。</p>
+</section>
+<section>
+<h2>5. ⚠️ 对照：山手線列车显示为 315 系（错车）</h2>
+<p class="meta">目白站 z17.5 守候：5 辆山手线列车入镜，1 辆 t3du=/models/jr-tokai-315/consist.json、V=1；其余 4 辆为同一 trip 的重复对象，共享该实例。普查：E235 全日本仅 1 辆在运。</p>
+<img src="map-yamanote-3d-tilt.png" alt="山手線目白站倾斜视角">
+<img class="crop" src="crop-yamanote-tilt.png" alt="山手線列车（315 系模型）裁切放大">
+<p class="verdict">⚠️ <b class="warn">合并副作用，非模型问题</b>：山手线列车的 <code>lines</code> 数组是 <code>["東海道本線","東北本線","山手線"]</code>，<code>pathOf</code> 按顺序取第一个有映射的 key——合并新增的 <code>東海道本線→315</code> 命中后立即返回，专门给山手线写的 E235 规则（<code>stopsIn</code> 山手 30 站）被遮蔽、永不生效。主站时代東海道本線无 key，不会触发。单给山手線加 key 也修不了（東海道本線排在前面），需调整 <code>pathOf</code> 优先级或按区段拆分映射。合并前请定夺。</p>
+</section>
+<section>
+<h2>6. 中缩放对照：z=13 的迪士尼（仍是 2D 图标）</h2>
+<p class="meta">低于 3D 门限时，列车正常显示为 2D 图标——这是既有设计，不是合并失败。</p>
+<img src="map-disney-overview.png" alt="迪士尼 z13 中缩放：2D 图标">
+</section>
+<section>
+<h2>7. 全日本总览</h2>
+<img src="map-japan-overview.png" alt="全日本总览">
+<p class="meta">俯视全日本（z=5）：线路几何正常，Live 约 4,900。</p>
+</section>
+<section>
+<h2>结论与建议</h2>
+<p class="verdict">✅ <b>合并后地图显示效果达到预期</b>：三条线 + 予讃線样本在高缩放下全部以正确纸模 3D 带涂装显示，V=1，零控制台错误。<b>建议推进合并（选 A）</b>。</p>
+<p class="verdict">⚠️ <b class="warn">两个前提请定夺</b>：（1）山手线变 315（§5）：合并后山手线列车将显示为错误的 315 系 3D 模型而非绿色 E235，建议合并同时修 <code>pathOf</code> 优先级或相关映射；（2）3D 只在高缩放出现（z≥16.2，完全淡入 z=17.5），日常浏览缩放仍是 2D 图标——若期望“地图上随处可见 3D 列车”，需另议（改阈值是产品改动，不在本次合并范围内）。</p>
+<p class="note">完整报告：~/workspace/jr3d/work/main-site-maptest-20261126/MAPTEST.md ｜ 测试脚本：maptest5/6/7.mjs，结果：maptest-results.json / maptest6-results.json / maptest7-results.json ｜ 未核实：合并部署到线上后的实际表现，待部署后白天抽查运行中班次最终确认。</p>
+</section>
+</main>
+</body>
+</html>
