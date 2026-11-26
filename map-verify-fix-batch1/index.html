@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>map-verify-fix-batch1 审核（25 辆）</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; margin: 0; background: #f4f4f4; color: #222; }
+  header { background: #1a3a5c; color: #fff; padding: 20px 24px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  header p.fixnote { margin-top: 8px; opacity: .95; }
+  nav { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 24px; position: sticky; top: 0; }
+  nav a { margin-right: 12px; font-size: 13px; color: #1a3a5c; text-decoration: none; }
+  main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; }
+  section { background: #fff; margin: 16px 0; padding: 16px 20px 20px; border-radius: 8px; }
+  section h2 { margin: 0 0 4px; font-size: 18px; }
+  section h2 .mid { font-size: 13px; color: #666; font-weight: normal; }
+  section p.lines { margin: 0 0 12px; font-size: 13px; color: #555; }
+  p.pending { background: #fff3cd; border: 1px solid #e6c200; color: #7a5b00; padding: 8px 12px; border-radius: 4px; font-size: 14px; font-weight: bold; margin: 0 0 10px; }
+  .imgs { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  figure { margin: 0; }
+  figure img { width: 100%; display: block; border: 1px solid #ddd; border-radius: 4px; }
+  figcaption { font-size: 13px; color: #555; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>map-verify-fix-batch1 审核（25 辆）</h1>
+  <p>地图核查 split 的 (B) 类“没有模型”车辆建模批，skill v1.2.32。每辆三张图：整列、斜视角、三维形态图。点击上方编号跳转。全部 unmapped 推（lines={}），模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 661 个模型，远端 HEAD 8aa4df2（nagano-3000）。</p>
+  <p class="fixnote">本批 26 项 = 23 辆已推 + 3 辆已建待推（本页 25 节：①–㉒ 已推，㉓–㉕ 待推，节顶有黄色横幅）。另 3 项不在节内：TX-2000 已有模型未重建（不占一节）；227系500番台与名鉄9100系无图纸、不可建。合计口径：26 项任务 = 23 已推 + 3 已建待推，另 3 项为已有/无图不建。</p>
+  <p class="fixnote">注：index 657 是外部返工任务重建的 jr-hokkaido-kiha261，不属本批，不占一节。index 651 由 minamiaso-mt3000 与 jr-west-115 共用（外部 kiha261 删除致 index 回落，见 DISPATCH.md）。顺序为推送顺序（最老在前）。</p>
+</header>
+<nav><a href="#jr-shikoku-kiha54">1</a> <a href="#hokuso-7500">2</a> <a href="#kobesinkotu-portliner2000">3</a> <a href="#yurikamome-7300">4</a> <a href="#kotoden-600">5</a> <a href="#jrw227-0">6</a> <a href="#toyohasi-t1000">7</a> <a href="#jr-east-e8">8</a> <a href="#keikyu-n1000-al-4c">9</a> <a href="#tosakuroshio-tkt8000">10</a> <a href="#toei-5500">11</a> <a href="#minamiaso-mt3000">12</a> <a href="#jr-west-115">13</a> <a href="#ise-ise3">14</a> <a href="#jr-east-e131">15</a> <a href="#nagasakidenki-1200">16</a> <a href="#aidu-at400">17</a> <a href="#kyototango-ktr700">18</a> <a href="#senboku-9300">19</a> <a href="#osakametro-70">20</a> <a href="#asakaigan-dmv93">21</a> <a href="#nagano-3000">22</a> <a href="#hiroden-1000">23</a> <a href="#jr-hokkaido-kiha40">24</a> <a href="#jr-500-shinkansen">25</a></nav>
+<main>
+    <section id="jr-shikoku-kiha54">
+      <h2>1. キハ54形 <span class="mid">jr-shikoku-kiha54</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：予讃線・土讃線・徳島線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：3361543（models-pipeline 分支）&nbsp;·&nbsp; index 第 640 个模型</p>
+      <p class="lines">単辆 [キハ54-0番台] 四国色、3.845 m。与既有 jr-hokkaido-kiha54（500番台寒地仕様）不同车。</p>
+      <div class="imgs">
+      <figure><img src="jr-shikoku-kiha54/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-shikoku-kiha54/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-shikoku-kiha54/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="hokuso-7500">
+      <h2>2. 北総7500形 <span class="mid">hokuso-7500</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：北総線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：f6b3cd5（models-pipeline 分支）&nbsp;·&nbsp; index 第 641 个模型</p>
+      <p class="lines">3 辆子集 [7501-1 M2c][7501-2 M1][7501-3 T]。图纸车号自身不一致（司机面 7501、net1 左侧面 7502、其余 7201），按司机面取 7501-x。</p>
+      <div class="imgs">
+      <figure><img src="hokuso-7500/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="hokuso-7500/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="hokuso-7500/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="kobesinkotu-portliner2000">
+      <h2>3. ポートライナー2000型 <span class="mid">kobesinkotu-portliner2000</span></h2>
+      <p class="lines">编组：6 辆 &nbsp;·&nbsp; 运行线：ポートライナー線（神戸新交通） &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：86cff88（models-pipeline 分支）&nbsp;·&nbsp; index 第 642 个模型</p>
+      <p class="lines">6 辆编组。两头司机面均显示“2014”（图纸只给一张司机面）；4 辆中间车共用一张 net（纸模常态）。</p>
+      <div class="imgs">
+      <figure><img src="kobesinkotu-portliner2000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="kobesinkotu-portliner2000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="kobesinkotu-portliner2000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="yurikamome-7300">
+      <h2>4. ゆりかもめ7300系 <span class="mid">yurikamome-7300</span></h2>
+      <p class="lines">编组：6 辆 &nbsp;·&nbsp; 运行线：ゆりかもめ線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：ec4b712（models-pipeline 分支）&nbsp;·&nbsp; index 第 643 个模型</p>
+      <p class="lines">6 辆 [7311 Mc][7312 M]×4[7311 Mc]（7311F）。首推因分支移动失败、重拉重试成功（孤儿 commit 3a4453cc 未上链、无害）。</p>
+      <div class="imgs">
+      <figure><img src="yurikamome-7300/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="yurikamome-7300/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="yurikamome-7300/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="kotoden-600">
+      <h2>5. 琴電600形 <span class="mid">kotoden-600</span></h2>
+      <p class="lines">编组：2 辆 &nbsp;·&nbsp; 运行线：琴電志度線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：5a578b0（models-pipeline 分支）&nbsp;·&nbsp; index 第 644 个模型</p>
+      <p class="lines">2 辆 [628 Mc][627 Tc]（627–628 志度線色）。首推 f537d60 因 gh api 传文件用法错误写坏 4 个 blob，已用 5a578b0 修复、逐字节比对一致；net2 纵向贴图须沿车长翻转。</p>
+      <div class="imgs">
+      <figure><img src="kotoden-600/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="kotoden-600/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="kotoden-600/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jrw227-0">
+      <h2>6. 227系0番台 <span class="mid">jrw227-0</span></h2>
+      <p class="lines">编组：2 辆 &nbsp;·&nbsp; 运行线：山陽本線・可部線・呉線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：7801ec4（models-pipeline 分支）&nbsp;·&nbsp; index 第 645 个模型</p>
+      <p class="lines">2 辆 [クモハ227 Mc][クハ226 Tc] Red Wing。Tc 外端司机面复用同一框（实车两司机室设计相同）；端件顶角弧线致 cap 顶角白边。</p>
+      <div class="imgs">
+      <figure><img src="jrw227-0/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jrw227-0/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jrw227-0/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="toyohasi-t1000">
+      <h2>7. 豊橋鉄道T1000形 <span class="mid">toyohasi-t1000</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：豊橋鉄道東田本線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：4293101（models-pipeline 分支）&nbsp;·&nbsp; index 第 646 个模型</p>
+      <p class="lines">3 辆 A/C/B 車「ほっとトラム」。按图纸原样建：图纸门画在关节附近、实车门在司机室正后方；C 车图纸约短 18%（已 UV 拉伸至实长）。</p>
+      <div class="imgs">
+      <figure><img src="toyohasi-t1000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="toyohasi-t1000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="toyohasi-t1000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jr-east-e8">
+      <h2>8. E8系 <span class="mid">jr-east-e8</span></h2>
+      <p class="lines">编组：4 辆 &nbsp;·&nbsp; 运行线：山形新幹線「つばさ」 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：49fa0c0（models-pipeline 分支）&nbsp;·&nbsp; index 第 647 个模型</p>
+      <p class="lines">4 辆子集 [E811 + E828 + E829 + E821]（实车 7 辆）。风挡不在鼻锥斜顶上（只前盖显示风挡下部）；鼻尖比实车钝 0.8 m；M/R 车号为窗数推断。</p>
+      <div class="imgs">
+      <figure><img src="jr-east-e8/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-east-e8/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-east-e8/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="keikyu-n1000-al-4c">
+      <h2>9. 京急新1000形4両 <span class="mid">keikyu-n1000-al-4c</span></h2>
+      <p class="lines">编组：4 辆 &nbsp;·&nbsp; 运行线：京急大師線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：60c5f9b（models-pipeline 分支）&nbsp;·&nbsp; index 第 648 个模型</p>
+      <p class="lines">4 辆编组。两端司机车都印「1001」（图纸画 1001F 8両，实车 4両应为 1401–1404，不虚构）；car2 车顶 2 副单臂受电弓（图纸如此）。</p>
+      <div class="imgs">
+      <figure><img src="keikyu-n1000-al-4c/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="keikyu-n1000-al-4c/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="keikyu-n1000-al-4c/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="tosakuroshio-tkt8000">
+      <h2>10. TKT-8000形 <span class="mid">tosakuroshio-tkt8000</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：土佐くろしお鉄道 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：e7fd824（models-pipeline 分支）&nbsp;·&nbsp; index 第 649 个模型</p>
+      <p class="lines">单辆 [TKT-8003]「くろしお」。只建「くろしお」1 辆、其余 14 个爱称车未建；源轮盘椭圆重采样为 0.86 m 正圆。</p>
+      <div class="imgs">
+      <figure><img src="tosakuroshio-tkt8000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="tosakuroshio-tkt8000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="tosakuroshio-tkt8000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="toei-5500">
+      <h2>11. 都営5500形 <span class="mid">toei-5500</span></h2>
+      <p class="lines">编组：2 辆 &nbsp;·&nbsp; 运行线：都営浅草線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：d521e0f（models-pipeline 分支）&nbsp;·&nbsp; index 第 650 个模型</p>
+      <p class="lines">2 辆子集 [5501-1 M1c][5501-8 M8c]（实车 8 辆，缺 6 辆中间车）。车号 5501 名义号；画出轮盘比实车大 ~19%（已按 0.86 m 重采样）。</p>
+      <div class="imgs">
+      <figure><img src="toei-5500/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="toei-5500/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="toei-5500/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="minamiaso-mt3000">
+      <h2>12. MT-3000形 <span class="mid">minamiaso-mt3000</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：南阿蘇鉄道高森線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：ddd672c（models-pipeline 分支）&nbsp;·&nbsp; index 第 651 个模型</p>
+      <p class="lines">单辆 [MT-3001]。⚠️ 本车是 MT-4000形 的替代品（高森線实际跑 MT-4000，但 MT-4000 无图）；且图纸的 MT-3001 已于 2024-02 退役——作为现役线映射目标是否合适，待 MC 定夺。</p>
+      <div class="imgs">
+      <figure><img src="minamiaso-mt3000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="minamiaso-mt3000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="minamiaso-mt3000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jr-west-115">
+      <h2>13. 115系 <span class="mid">jr-west-115</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：山陽本線（瀬戸内地区） &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：b2d019f（models-pipeline 分支）&nbsp;·&nbsp; index 第 651 个模型</p>
+      <p class="lines">3 辆 [クモハ115 Mc][モハ114 M'][クハ115 Tc] 瀬戸内色。Tc 侧面无司机门（图纸未画，不重绘）；3 辆子集。</p>
+      <div class="imgs">
+      <figure><img src="jr-west-115/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-west-115/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-west-115/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="ise-ise3">
+      <h2>14. イセIII型 <span class="mid">ise-ise3</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：伊勢鉄道伊勢線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：726096a（models-pipeline 分支）&nbsp;·&nbsp; index 第 652 个模型</p>
+      <p class="lines">单辆。图纸已核验确为イセIII型（标题「伊勢鉄道 イセIII形」+ 2003 年登场 18 m 级气动车）。端面纵向压缩约 7–8%；总高 3.65 m（实车 4.03 m）。</p>
+      <div class="imgs">
+      <figure><img src="ise-ise3/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="ise-ise3/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="ise-ise3/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jr-east-e131">
+      <h2>15. E131系800番台 <span class="mid">jr-east-e131</span></h2>
+      <p class="lines">编组：2 辆 &nbsp;·&nbsp; 运行线：仙石線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：ffb1f92（models-pipeline 分支）&nbsp;·&nbsp; index 第 653 个模型</p>
+      <p class="lines">2 辆子集 [クモハE131-801 Mc][クハE130-801 Tc']。⚠️ 实车 4 辆编组 [Tc'][M2][T][Mc]，中部车 M2/T 无图纸未建；本模型是把两端先头车直接连起来的 2 辆子集，现实中不存在此编成。</p>
+      <div class="imgs">
+      <figure><img src="jr-east-e131/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-east-e131/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-east-e131/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="nagasakidenki-1200">
+      <h2>16. 長崎電軌1200形 <span class="mid">nagasakidenki-1200</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：長崎電気軌道 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：bd0b026（models-pipeline 分支）&nbsp;·&nbsp; index 第 654 个模型</p>
+      <p class="lines">单辆 [1201]。pepar.net 水印为图纸原带未清除；端面件图纸比 3.10 m 短约 6%（V0 拉伸补足）。</p>
+      <div class="imgs">
+      <figure><img src="nagasakidenki-1200/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="nagasakidenki-1200/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="nagasakidenki-1200/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="aidu-at400">
+      <h2>17. 会津AT-400形 <span class="mid">aidu-at400</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：会津鉄道会津線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：8319b71（models-pipeline 分支）&nbsp;·&nbsp; index 第 655 个模型</p>
+      <p class="lines">单辆「風覧望」。AT-400/500/600 PDF 完好，AT-700 已损坏（无 %%EOF、截断）。台车中心距按图纸 15.7 m（实 14.0 m）。注：整列图源文件为 user_hero.png（本车无 user_consist_side.png），内容即整列图。</p>
+      <div class="imgs">
+      <figure><img src="aidu-at400/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="aidu-at400/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="aidu-at400/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="kyototango-ktr700">
+      <h2>18. KTR700形 <span class="mid">kyototango-ktr700</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：京都丹後鉄道宮福線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：3d6a85c（models-pipeline 分支）&nbsp;·&nbsp; index 第 656 个模型</p>
+      <p class="lines">单辆 [KTR701]（实车 9 辆，常单辆一人运转）。台车中心距图纸 14.08 m（諸元 14.40 m）；下台车轮图纸画得较浅。</p>
+      <div class="imgs">
+      <figure><img src="kyototango-ktr700/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="kyototango-ktr700/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="kyototango-ktr700/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="senboku-9300">
+      <h2>19. 泉北9300系 <span class="mid">senboku-9300</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：泉北高速鉄道泉北線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：03cf2ca（models-pipeline 分支）&nbsp;·&nbsp; index 第 658 个模型</p>
+      <p class="lines">单辆 [クモハ9301 Mc1]（实车 4 辆，中间车 + Mc2 无图纸待图后补、不克隆）。远侧（−Z）文字镜像已修正（只镜 SEMBOKU/NANKAI 文字）。</p>
+      <div class="imgs">
+      <figure><img src="senboku-9300/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="senboku-9300/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="senboku-9300/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="osakametro-70">
+      <h2>20. 大阪メトロ70系 <span class="mid">osakametro-70</span></h2>
+      <p class="lines">编组：4 辆 &nbsp;·&nbsp; 运行线：大阪メトロ長堀鶴見緑地線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：fda4dbc（models-pipeline 分支）&nbsp;·&nbsp; index 第 659 个模型</p>
+      <p class="lines">4 辆（7105F）。受电弓在两端先头车司机端侧（推翻“中间车带弓”初判）。图纸轴距/轮径画大 24%（轮径已按实车 0.66 m 重采样）。</p>
+      <div class="imgs">
+      <figure><img src="osakametro-70/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="osakametro-70/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="osakametro-70/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="asakaigan-dmv93">
+      <h2>21. DMV93形 <span class="mid">asakaigan-dmv93</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：阿佐海岸鉄道阿佐東線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：6035a3d（models-pipeline 分支）&nbsp;·&nbsp; index 第 660 个模型</p>
+      <p class="lines">3 辆（931 蓝「未来への波乗り」/ 932 绿「すだちの風」/ 933 红「阿佐海岸維新」）。3 辆为独立车辆展示编组（非连挂编成）；图纸窗为连续带（实车有窗柱）。</p>
+      <div class="imgs">
+      <figure><img src="asakaigan-dmv93/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="asakaigan-dmv93/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="asakaigan-dmv93/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="nagano-3000">
+      <h2>22. 長野電鉄3000系 <span class="mid">nagano-3000</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：長野電鉄長野線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：8aa4df2（models-pipeline 分支）&nbsp;·&nbsp; index 第 661 个模型</p>
+      <p class="lines">3 辆（クハ3051 — モハ3001 — デハ3011，M1 编成）。受电弓 1-vs-2 待定（图纸+实车近照只 1 架，Wikipedia “◇ VVVF ◇”或指 2 架，不凭空加）；灯带图纸蓝灰色非长野红（按图纸原样）。</p>
+      <div class="imgs">
+      <figure><img src="nagano-3000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="nagano-3000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="nagano-3000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="hiroden-1000">
+      <p class="pending">⚠️ 已建好、自审通过，待 MC 批准后推送，未上 models-pipeline</p>
+      <h2>23. 広電1000形 <span class="mid">hiroden-1000</span></h2>
+      <p class="lines">编组：3 辆 &nbsp;·&nbsp; 运行线：広島電鉄 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：未推（staging 就绪，推送被系统执行风险检查拦下，等 MC 说“可以推”）</p>
+      <p class="lines">3 辆 A/B/C 車 [1001-1003] グリーンムーバーLEX。staging GLB 就绪，推送被系统执行风险检查拦下，等 MC 说“可以推”后再推；推后 index 应为 651。</p>
+      <div class="imgs">
+      <figure><img src="hiroden-1000/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="hiroden-1000/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="hiroden-1000/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jr-hokkaido-kiha40">
+      <p class="pending">⚠️ 已建好、自审通过，待 MC 批准后推送，未上 models-pipeline</p>
+      <h2>24. JR北海道キハ40形（日高線重涂版） <span class="mid">jr-hokkaido-kiha40</span></h2>
+      <p class="lines">编组：1 辆 &nbsp;·&nbsp; 运行线：JR北海道日高線 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：未推（staging 就绪，推送被系统执行风险检查拦下，等 MC 说“可以推”）</p>
+      <p class="lines">单辆 21.3 m、两端司机端。评估可行（重涂、不是改标）：底图为 donanisaribi 白雪色车体，只去一条品红波浪线 + logo，重涂成标准 JR北海道色。带高照片估算 ±0.1 m；前脸无车号。</p>
+      <div class="imgs">
+      <figure><img src="jr-hokkaido-kiha40/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha40/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-hokkaido-kiha40/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+    <section id="jr-500-shinkansen">
+      <p class="pending">⚠️ 已建好、自审通过，待 MC 批准后推送，未上 models-pipeline</p>
+      <h2>25. 500系新幹線 <span class="mid">jr-500-shinkansen</span></h2>
+      <p class="lines">编组：4 辆 &nbsp;·&nbsp; 运行线：山陽新幹線「のぞみ」 &nbsp;·&nbsp; 未映射（本批全部 unmapped 推）</p>
+      <p class="lines">提交：未推（staging 就绪，推送被系统执行风险检查拦下，等 MC 说“可以推”）</p>
+      <p class="lines">4 辆子集 [521 先頭][526][527 パンタ][522 先頭]。鼻长取图纸值 11.0 m（实车 15 m，图纸本身短 ~24%）；526/528 身份为假设；2027-01-13 引退（图纸注）。</p>
+      <div class="imgs">
+      <figure><img src="jr-500-shinkansen/user_consist_side.png" alt="整列"><figcaption>整列</figcaption></figure>
+      <figure><img src="jr-500-shinkansen/user_oblique.png" alt="斜视角"><figcaption>斜视角</figcaption></figure>
+      <figure><img src="jr-500-shinkansen/user_3dform.png" alt="三维形态图"><figcaption>三维形态图</figcaption></figure>
+      </div>
+    </section>
+</main>
+</body>
+</html>
