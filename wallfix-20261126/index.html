@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一面墙修复前后对比 — jr3d-audit</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#0f1115;color:#e8e8e8}
+header{padding:28px 20px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 8px}
+.sub{color:#9aa3af;font-size:14px;line-height:1.7}
+.badge{display:inline-block;background:#14532d;color:#bbf7d0;border-radius:999px;padding:4px 12px;font-size:13px;margin:6px 8px 6px 0}
+.badge.warn{background:#422006;color:#fde68a}
+.badge.bad{background:#450a0a;color:#fecaca}
+main{max-width:1100px;margin:0 auto;padding:12px 20px 40px}
+section{background:#181b21;border:1px solid #2a2f38;border-radius:12px;padding:18px;margin:16px 0}
+h2{font-size:18px;margin:0 0 4px}
+.meta{color:#9aa3af;font-size:13px;margin:0 0 12px}
+img{width:100%;border-radius:8px;display:block;background:#222}
+.verdict{font-size:15px;line-height:1.8}
+.verdict b{color:#4ade80}
+.verdict b.warn{color:#fbbf24}
+.verdict b.bad{color:#f87171}
+.note{color:#9aa3af;font-size:13px;line-height:1.7}
+code{color:#fbbf24}
+table{border-collapse:collapse;font-size:14px;line-height:1.6;margin:8px 0;width:100%}
+td,th{border:1px solid #2a2f38;padding:6px 10px;text-align:left;vertical-align:top}
+th{color:#9aa3af}
+ul{font-size:15px;line-height:1.9;margin:8px 0}
+li b{color:#4ade80}
+.ask{font-size:16px;line-height:1.9}
+.ask b{color:#fbbf24}
+</style>
+</head>
+<body>
+<header>
+<h1>一面墙修复前后对比</h1>
+<p class="sub">诊断时间：2026-11-26 13:43–15:10 JST ｜ 测试站 <a href="https://ooep.github.io/jr3d-maptest/" style="color:#93c5fd">https://ooep.github.io/jr3d-maptest/</a>（远端 HEAD 0d936fb）｜ 诊断报告：<code>~/workspace/jr3d/work/main-site-map-wall-fix-20261126/REPORT.md</code></p>
+<p><span class="badge">✅ 问题确为纸模特有，不是 LOD</span><span class="badge">✅ 本地变体有效，但未推送</span><span class="badge warn">⏳ 等用户点头再推</span></p>
+</header>
+<main>
+<section>
+<h2>一句话结论</h2>
+<p class="verdict">同缩放 <code>z=18.5</code>、同视角（pitch 60°、斜 45°）下，高精度东急 5050 是<b>完整立体车厢</b>，纸模江之电 1000 还是<b>只有一面墙 + 一个底</b>。两者都是 full LOD、精细涂装——<b>不是 LOD 的问题，是纸模本身的渲染问题</b>。中缩放下的半透明色块是 LOD 设计，不用管。</p>
+</section>
+<section>
+<h2>根因（已量化实测）</h2>
+<table>
+<tr><th style="width:26%">成因</th><th>实测数字</th></tr>
+<tr><td><b>① 车顶看不见</b></td><td>车顶纹理本身是中灰 (119)，被地图强光（主光 1.75 + 半球 0.6 + 环境光 0.42 + RoomEnvironment，ACES 曝光 1.3）洗亮约 100 级，渲染后 (217,225,217)；侧视下车顶只剩约 2 px 发丝带，与淡色底图 (233,236,233) 对比仅约 <b>16/255</b>，几乎同色。查看器用同一套色调映射/曝光，车顶能看清是因为深色背景（#0b0f16）+ 可旋转近距离视角，不是渲染器不同。</td></tr>
+<tr><td><b>② “底”比墙还显眼</b></td><td>模型自带深色底板（<code>dark</code>，0.15）+ 每节车下的阴影椭圆（宽 4.6 m、长=车长+2.2 m、不透明度 0.68）合成约 6 px、RGB ~128 的深色横带，与底图对比约 <b>105/255</b>，是车顶对比度的约 <b>6.5 倍</b>、高度的约 3 倍。</td></tr>
+<tr><td><b>③ 单面材质已排除</b></td><td>纸模材质确为 <code>doubleSided: false</code>，但法线全部朝外、三角数 22,256 = GLB 总数，没有任何面被剔除。<b>DoubleSide 改了也看不出区别，是无效项，已从修复清单里划掉。</b></td></tr>
+</table>
+</section>
+<section>
+<h2>两项修复（本地变体，未推送）</h2>
+<p class="verdict">变体只改 <code>variant/app/train3d.js</code> 14 行（均标 <code>WALLFIX-LOCAL-ONLY</code>），其余文件与部署代码逐字节一致：</p>
+<ul>
+<li><b>① 阴影椭圆收窄调淡</b>：宽 4.6 → 3.2 m、长 车长+2.2 → 车长+0.6 m、不透明度 0.68 → 0.45。</li>
+<li><b>② 车顶压暗 0.85</b>：只对 GLB 自带有名车顶材质（<code>roof1</code> / <code>roof2</code>）压暗；高精度 extMaterial 无名，<b>不受影响</b>。</li>
+</ul>
+<p class="verdict">效果（实测）：侧视车顶对比度 <b>16 → 33–60</b>（约 4 px、RGB 173–200，已可辨）；“底”带收窄变淡，不再像一块厚地板。斜 45° 下改善最明显。两项各管一半，<b>缺一不可</b>：只修阴影，车顶仍看不见；只修车顶，“底”仍是一块厚地板。</p>
+</section>
+<section>
+<h2>三幅并排：纸模修前 / 纸模修后 / 高精度</h2>
+<p class="meta">江之电 1000（纸模，2 辆）vs 东急 5050（高精度，8 辆），均为 z18.5、pitch 60°、斜 45°</p>
+<img src="compare-paper-vs-hp.png" alt="纸模修前 / 纸模修后 / 高精度三幅并排">
+<p class="verdict">✅ <b>修后介于两者之间</b>：底板收窄变淡、车顶略深，更像一个实心盒子；但仍不及高精度（高精度车顶是带空调机组、受电弓的深灰 3D 面，纸模车顶是平顶薄片）。</p>
+</section>
+<section>
+<h2>侧视修前 vs 修后</h2>
+<p class="meta">江之电 1000，z18.5、pitch 60°、纯侧视；上修前、下修后</p>
+<img src="compare-side.png" alt="侧视修前修后并排">
+<p class="verdict">✅ <b>改善可见</b>：修后“底”带明显收窄变淡，车顶多了一条可辨的灰边。但注意：纯侧视下车顶仍只是一条边（见下一节）。</p>
+</section>
+<section>
+<h2>斜 45°修前 vs 修后</h2>
+<p class="meta">江之电 1000，z18.5、pitch 60°、斜 45°；上修前、下修后</p>
+<img src="compare-q45.png" alt="斜 45 度修前修后并排">
+<p class="verdict">✅ <b>斜视角是改善最明显的角度</b>：能看到车顶面，修后车厢更像实心盒子。</p>
+</section>
+<section>
+<h2>单张对照</h2>
+<p class="meta">修前 / 修后 / 高精度（斜 45°）单张大图</p>
+<img src="before-enoden1000-side.png" alt="江之电 1000 修前侧视">
+<p class="note">修前侧视：车顶几乎看不见，“底”带与侧墙等高。</p>
+<img src="after-enoden1000-side.png" alt="江之电 1000 修后侧视" style="margin-top:12px">
+<p class="note">修后侧视：底带收窄变淡，车顶边缘可辨。</p>
+<img src="hp-tokyu5050-q45.png" alt="东急 5050 高精度斜 45 度" style="margin-top:12px">
+<p class="note">高精度对照（东急 5050，斜 45°）：深灰车顶面 + 3D 设备 + 侧墙俱全，一眼就是立体车厢。</p>
+</section>
+<section>
+<h2>⚠️ 诚实说明：这两项是必要条件，不是充分条件</h2>
+<p class="verdict">纸模车顶是<b>平顶薄片、无 3D 设备</b>，纯侧视下它永远只是一条边——渲染端压暗只能让它<b>可辨</b>，不能让它变成立体面。要“跟查看器一样立体”，<b>斜视角下才成立</b>。若要侧视也立体，得改模型（加 3D 受电弓/空调，11:53 已禁，另议）。</p>
+</section>
+<section>
+<h2>请示：请松口最小集合（只两项）</h2>
+<p class="ask">① <b>阴影椭圆收窄调淡</b>（4.6 → 3.2 m、长+2.2 → 长+0.6、不透明度 0.68 → 0.45）<br>
+② <b>车顶压暗 0.85</b>（仅纸模有名车顶材质，高精度不受影响）<br>
+DoubleSide 不用松（无效，已划掉）。</p>
+<p class="verdict"><b>现状：什么都没推。</b>测试仓库远端 HEAD 仍是 <code>0d936fb</code>，本地克隆干净，变体只在专员工作目录里。等用户点头后，再把这两项推到测试站。</p>
+</section>
+</main>
+</body>
+</html>
