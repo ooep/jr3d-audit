@@ -32,8 +32,8 @@ h3{font-size:16px;margin:18px 0 8px}
 <h1>MC 快速审核第二批返工 — 70 辆（2026-11-27）</h1>
 <p class="sub">MC 2026-11-27 12:06 微信审核结果的第二批返工（#387–#521），只放这 70 辆。MC 原话“自己该重建，重建。该修复修复，不要问我了，全部弄好以后再给我审批”（09:29 放行）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663 个模型（本批全是已有 slug，不增新车型）。第一批返工页：<a href="../rework-batch1-20261127/">rework-batch1-20261127</a>；快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>。每辆一卡：号码、类别、MC 原话、根因、修法、commit SHA、返工前后斜视角对比图。</p>
 
-<div class="ok"><b>汇总：已推 59/70、未推 11 辆。</b>未推 11 辆＝OT-3 5 辆阻塞（执行风险检查，等 MC fresh 确认后由续做专员做）＋无图 5 辆＋无错 1 辆：
-<ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了，需重绘/改色或 MC 重新确认</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图）</li><li><b>#434 sendai-sub-2000</b>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</li><li><b>#435 sendai-sub-3000</b>——未推：OT-3 执行风险检查阻塞；另编组不齐（缺 2 辆中间车，是否扩编待 MC 定夺）</li><li><b>#437 shizuoka-a3000</b>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</li><li><b>#442 sotetsu-10000</b>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</li><li><b>#443 sotetsu-11000</b>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul></div>
+<div class="ok"><b>汇总：已推 64/70、未推 6 辆。</b>未推 6 辆＝无图 4 辆（先接受现有子集，MC 14:34 授权决断）＋暂缓 1 辆（sagano-de10，MC 14:34 指令先不做）＋无错 1 辆：
+<ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul></div>
 
 <div class="warn"><b>特别标注：</b><br>
 ⚠️ <b>#520 yokohamasub-10000 左缘胶耳未修（已推，耳未修）</b>：x 0–43、约 12.8% 宽白竖带；任务定本车只修贴图颠倒，无干净的裁切-重标方案（风挡宽已正确 1.96 m，拉伸会变 2.33 m），留待以后单独处理。<br>
@@ -42,13 +42,13 @@ h3{font-size:16px;margin:18px 0 8px}
 
 <div class="card"><h3 style="margin-top:0">待定夺事项（需 MC 定夺）</h3>
 <ul>
-<li><b>alphaMode 丢失 16 辆 34 个 GLB</b>：第一批 OT-3 7 辆 11 个 GLB＋本批 OT-1 5 辆 10 个 GLB＋本批 OT-2 4 辆 13 个 GLB。凡经 <code>model.write_glb</code> 重写或新建脚本建出的 GLB，若不显式恢复 alphaMode，under/skirt 材质的 MASK 就会丢成 OPAQUE（缺省），裙板/底盘贴图透明区域可能错显（MASK 切掉透明像素 → OPAQUE 后透明区按黑色/贴图色显示）。未丢：OT-4 loft 重建 9 个 GLB、OT-5 warp 4 个 GLB（已恢复 MASK/0.5）、FM-1/FM-2 netbuild 新车。回补方案（只恢复 alphaMode 字段，不动几何/贴图，一车一 commit）待定夺；OT-3 续做推前须先修好 warp 脚本（参照 OT-5 的 <code>set_alpha_mode</code> 恢复）。</li>
-<li><b>OT-3 5 辆阻塞</b>（#434 sendai-sub-2000、#435 sendai-sub-3000、#437 shizuoka-a3000、#442 sotetsu-10000、#443 sotetsu-11000）：执行风险检查拦截，0/5 未修未推，等 MC 对本次检查明确放行后由续做专员沿用 ot-3/ 目录＋各 REPORT 续做；#435 是否扩成 4 辆全编组另等 MC 定夺。</li>
+<li><b>alphaMode 丢失 16 辆 34 个 GLB——已决断回补，正在回补</b>：第一批 OT-3 7 辆 11 个 GLB＋本批 OT-1 5 辆 10 个 GLB＋本批 OT-2 4 辆 13 个 GLB。凡经 <code>model.write_glb</code> 重写或新建脚本建出的 GLB，若不显式恢复 alphaMode，under/skirt 材质的 MASK 就会丢成 OPAQUE（缺省），裙板/底盘贴图透明区域可能错显。MC 14:34 授权“按实际情况做决断”后已决断回补（只恢复 alphaMode 字段，不动几何/贴图，一车一 commit）；回补前先修好 warp 脚本（参照 OT-5 的 <code>set_alpha_mode</code> 恢复）。注意：本批 OT-3 5 辆返工已按原值逐材质恢复 alphaMode，未新增丢失。</li>
+<li><b>✅ OT-3 5 辆已推（2026-11-27 14:51）</b>（#434 sendai-sub-2000 <code>52aefb7e</code>、#435 sendai-sub-3000 <code>47426c87</code>、#437 shizuoka-a3000 <code>6ae050c0</code>、#442 sotetsu-10000 <code>ff311303</code>、#443 sotetsu-11000 <code>d144eb3d</code>）：MC 14:34 fresh 授权后由续做专员从头做完再推（原专员被拦截时 0 改动、0 提交）。#435 不扩编（3200/3600 无图，补不齐）；另 #435 图纸把单臂受电弓画在 3100 车顶（实车只有 3200 有弓），属图纸错误，待 MC 定夺是否另修贴图。</li>
 <li><b>#478 tokyometro-18000 跟进选项</b>：6 辆中间车可建（图纸 batch251 g13 artwork，p2 普通中间车、p3 受电弓中间车；中间车实车长 19.5 m，非 20.005 m），但 18500 Tc1 / 18600 Tc2 司机端净片缺失；是否另行派发待定夺，不建议无图虚构司机端。</li>
 <li><b>#469 tobu-90000 端件 pepar.net 水印</b>清不清待定夺（本次原样保留）。</li>
 <li><b>#520 yokohamasub-10000 左缘胶耳</b>未修，留待以后单独处理（见上）。</li>
-<li><b>#407 sagano-de10</b>：图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了，需重绘/改色，或请 MC 重新确认他看到的“颠倒”具体指哪一面。</li>
-<li><b>无图 4 辆是否接受 rail-trainpdf 以外图纸</b>：#423 seibu-001、#432 senboku-9300、#472 toei-5500、#476 tokyometro-13000，均因缺中间车图纸未推。</li>
+<li><b>#407 sagano-de10——暂缓不做</b>：图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做。</li>
+<li><b>无图 4 辆——先接受现有子集</b>：#423 seibu-001、#432 senboku-9300、#472 toei-5500、#476 tokyometro-13000，均因缺中间车图纸未推；MC 14:34 授权决断：先接受现有子集，等有图再说（不再另找 rail-trainpdf 以外图纸）。</li>
 <li><b>#506 tukubaexp-tx2000 3 辆子集</b>接不接受（缺 2400/2500/2600 无图，不扩编）；#521 yokohamasub-3000v 辆数 2 vs 实车 6（3612–3615 无图）；#486 tokyu-5000 4 辆子集（6 辆中部车无图，已是图纸允许的最大编组）。</li>
 <li><b>#480 tokyotoei-10300 car3 车顶双受电弓</b>（纸模原图问题，实车每辆至多 1 副单臂弓），本次未修（新车已避开该源、只克隆 car2）。</li>
 <li><b>#506 TX-2000 车号牌</b>：三辆侧面均为“TX-2153”（应为 2153/2253/2353），既存缺陷，MC 本次只点く头型、未授权改，不修。</li>
@@ -149,8 +149,8 @@ h3{font-size:16px;margin:18px 0 8px}
 <h2>#407 sagano-de10 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
 <p><b>MC 原话：</b>贴图颠倒</p>
 <p><b>根因：</b>MC 判贴图颠倒，但全部 16 张贴图逐面核查均正立，无可翻贴图；肉眼可见的两处毛病是图纸内容错误——机车罩画成黑色（实车 DE10 1104 红色）、SK200 驾驶端玻璃画成黑色菱形网纹板（实车为全景玻璃）；侧面头徽正立，竖翻会翻倒。<br>
-<b>修法：</b>未推（图纸内容错误、翻转修不了）：需重绘/改色（建模重做范畴），或请 MC 重新确认他看到的“颠倒”具体指哪一面。详见 tx-1/REPORT_sagano-de10.md。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了，需重绘/改色或 MC 重新确认</p>
+<b>修法：</b>未推（图纸内容错误、翻转修不了）：机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃；需重绘/改色（建模重做范畴）。MC 14:34 指令先不做（暂缓）。详见 tx-1/REPORT_sagano-de10.md.<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</p>
 <div class="cmp"><figure><img src="img/sagano-de10_before.png" alt="sagano-de10 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
 </div><div class="card" id="n411">
 <h2>#411 sanki-801 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
@@ -192,7 +192,7 @@ h3{font-size:16px;margin:18px 0 8px}
 <p><b>MC 原话：</b>编组错误</p>
 <p><b>根因：</b>实车 8 辆，模型仅 1 辆 Tc1（クハ001-01）。<br>
 <b>修法：</b>未推（无图）：rail-trainpdf 全库 8197 个文件里 001 系只有 1 份图纸（1 辆完整头车＋截断的第 2 辆＋中间车车顶小件），缺 7 辆且中间车（M/T 各型窗门布局不同）与司机车不是同型，无法按图纸补；镜像 Tc1 得 [Tc1,Tc2] 也仍是 2/8 错编组。故不虚构、不硬拼，模型/consist/index/map 均未动。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补）</p>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
 <div class="cmp"><figure><img src="img/seibu-001_before.png" alt="seibu-001 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
 </div><div class="card" id="n425">
 <h2>#425 seibu-2000 <span style="color:#666">—— 其他（ot-2）</span></h2>
@@ -219,8 +219,8 @@ h3{font-size:16px;margin:18px 0 8px}
 <h2>#432 senboku-9300 <span style="color:#666">—— 其他（ot-2）</span></h2>
 <p><b>MC 原话：</b>其他：这个没有其他车厢了吗</p>
 <p><b>根因：</b>实车 4 辆编成（9301F），模型仅 1 辆 Mc1，缺 3 辆。<br>
-<b>修法：</b>未推（无图）：rail-trainpdf、pepar.net、南海官网纸模页三处均无 9300/8300 图纸，无法补车。是否接受 rail-trainpdf 以外图纸仍待 MC 定夺。car1 本身无问题（11,126 tris，0/0/0），自审图已存档。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图）</p>
+<b>修法：</b>未推（无图）：rail-trainpdf、pepar.net、南海官网纸模页三处均无 9300/8300 图纸，无法补车。MC 14:34 授权决断：先接受现有子集，等有图再说。car1 本身无问题（11,126 tris，0/0/0），自审图已存档.<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
 <div class="cmp"><figure><img src="img/senboku-9300_before.png" alt="senboku-9300 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
 </div><div class="card" id="n433">
 <h2>#433 sendai-sub-1000 <span style="color:#666">—— 其他（ot-2）</span></h2>
@@ -233,23 +233,23 @@ h3{font-size:16px;margin:18px 0 8px}
 <h2>#434 sendai-sub-2000 <span style="color:#666">—— 其他（ot-3）</span></h2>
 <p><b>MC 原话：</b>其他：小く</p>
 <p><b>根因：</b>小く——前脸以伊达政宗兜前立三日月线为界，上部平面、下部曲面，く在下部曲面、幅度小；实车 4 辆、模型 2 辆子集。<br>
-<b>修法：</b>未推（OT-3 执行风险检查阻塞，等 MC fresh 确认后由续做专员做）：只修く、不扩编；另有待核实疑点：consist 车长 16.25 与实车先头车 16,750 mm/中间车 16,500 mm 对不上，续做时以远端 GLB 包围盒实测为准。初拟 warp R≈0.12＋edge_back 小量（须图纸复核）。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</p>
-<div class="cmp"><figure><img src="img/sendai-sub-2000_before.png" alt="sendai-sub-2000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：实车风挡顶与三日月线基本同一垂直面、裙板底部后缩约 0.26 m，标准 R（顶部后移）是反的形状，改用双侧 profile——Y_TIP=1.35 m、R_TOP=0.06（仅车顶圆角）、R_BOT=0.25（裙板底部后缩）、edge_back F=−0.06；只动两头司机端（car1 HI、car2 LO），贯通端未动；不扩编。alphaMode 按原 GLB JSON 逐材质恢复，前后一致。遗留（未修，待 MC 审核时定）：贴图三日月弧画在 y≈1.82 m（实车约 1.3 m）、风挡仅 0.74 m 高。<br>
+<b>推送：</b>提交 <code>52aefb7e</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>52aefb7e4329ebd2ab24a1ed74748f2005d0a824</code></span></p>
+<div class="cmp"><figure><img src="img/sendai-sub-2000_before.png" alt="sendai-sub-2000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sendai-sub-2000_after.png" alt="sendai-sub-2000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n435">
 <h2>#435 sendai-sub-3000 <span style="color:#666">—— 其他（ot-3）</span></h2>
 <p><b>MC 原话：</b>其他：小く并且还要检查编组齐了没</p>
 <p><b>根因：</b>小く（先头形状为 1000N 系传承的くの字形，折角明确）；编组不齐——实车 4 辆（3100 Tc1—3200 M1—3300 M2—3600 Tc2），模型只有 2 辆，缺 3200/3300 中间车。<br>
-<b>修法：</b>未推（OT-3 执行风险检查阻塞）：是否扩成 4 辆全编组须 MC 定夺，续做先只修く、不先扩编。初拟 warp R≈0.15–0.20＋centre_back/edge_back（须图纸复核）。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：OT-3 执行风险检查阻塞；另编组不齐（缺 2 辆中间车，是否扩编待 MC 定夺）</p>
-<div class="cmp"><figure><img src="img/sendai-sub-3000_before.png" alt="sendai-sub-3000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：只动 car1（3100形 Tc1）唯一司机端 HI，く warp R=0.18、edge_back F=−0.15；只修く、不扩编——car2 实为 3300形 M2 中间车（非 Tc2），缺 3200 M1 与 3600 Tc2，且 3200/3600 无图（全库只有 sendai_sub_3000.pdf 一份，2 辆），补不齐。alphaMode 恢复后前后一致。另：图纸把单臂受电弓画在 3100 车顶（实车只有 3200 有弓），属图纸错误，未修，待 MC 定夺是否另修贴图。<br>
+<b>推送：</b>提交 <code>47426c87</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>47426c870d7ae04b733d0869f7128d09669b44f7</code></span></p>
+<div class="cmp"><figure><img src="img/sendai-sub-3000_before.png" alt="sendai-sub-3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sendai-sub-3000_after.png" alt="sendai-sub-3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n437">
 <h2>#437 shizuoka-a3000 <span style="color:#666">—— 其他（ot-3）</span></h2>
 <p><b>MC 原话：</b>其他：く</p>
 <p><b>根因：</b>く（FRP 前头、前面非贯通，车端隅柱断面一辺 45°＋风挡后倾，两角向后收）；编组齐全（实车 2 辆，模型 2 辆）。<br>
-<b>修法：</b>未推（OT-3 执行风险检查阻塞）：只修头型、不动编组。初拟 warp R≈0.15–0.20＋edge_back（45° 隅柱，须图纸复核）。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</p>
-<div class="cmp"><figure><img src="img/shizuoka-a3000_before.png" alt="shizuoka-a3000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）く warp，R=0.18、edge_back F=−0.15；classify_ends 曾把 4 端全误判 CAB，贴图目视核定后才定端。编组齐全（2/2），未动编组/贴图/车号。alphaMode 前后一致。<br>
+<b>推送：</b>提交 <code>6ae050c0</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>6ae050c04134143944ac02297d03ad3322f6939d</code></span></p>
+<div class="cmp"><figure><img src="img/shizuoka-a3000_before.png" alt="shizuoka-a3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/shizuoka-a3000_after.png" alt="shizuoka-a3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n440">
 <h2>#440 sinano-sr1 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
 <p><b>MC 原话：</b>贴图颠倒</p>
@@ -268,16 +268,16 @@ h3{font-size:16px;margin:18px 0 8px}
 <h2>#442 sotetsu-10000 <span style="color:#666">—— 其他（ot-3）</span></h2>
 <p><b>MC 原话：</b>其他：く</p>
 <p><b>根因：</b>く（E231 系基础，圆滑曲面鼻锥，非折线く）；实车 8/10 辆、模型 2 辆子集。<br>
-<b>修法：</b>未推（OT-3 执行风险检查阻塞）：只修く、不扩编。变体注意：部分编成灯位上移成“11000 系脸”、另有 YNB/赤带涂装，本次只修几何、不改灯位涂装。初拟 warp R≈0.15–0.20＋edge_back（须图纸复核）。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</p>
-<div class="cmp"><figure><img src="img/sotetsu-10000_before.png" alt="sotetsu-10000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）圆滑曲面鼻锥 warp，R=0.17、edge_back F=−0.12（图纸实测鼻锥中高最前、车顶与裙板各后收约 0.17 m）；只修几何，未动灯位（原始版腰部灯）、涂装（标准蓝框＋SOTETSU 标志＋橙带）、贴图、车号、编组。alphaMode 前后一致。<br>
+<b>推送：</b>提交 <code>ff311303</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>ff31130367a28f83dbf20475d9bd4a95949f5507</code></span></p>
+<div class="cmp"><figure><img src="img/sotetsu-10000_before.png" alt="sotetsu-10000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-10000_after.png" alt="sotetsu-10000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n443">
 <h2>#443 sotetsu-11000 <span style="color:#666">—— 其他（ot-3）</span></h2>
 <p><b>MC 原话：</b>其他：く</p>
 <p><b>根因：</b>く（E233 系基础，前面意匠与 10000 相近，HID 前照灯在车体上部）；实车 10 辆（6M4T）、模型 3 辆子集。<br>
-<b>修法：</b>未推（OT-3 执行风险检查阻塞）：只修く、不扩编。初拟 warp R≈0.15–0.20＋edge_back（须图纸复核）。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：OT-3 执行风险检查阻塞（等 MC fresh 确认后由续做专员做）</p>
-<div class="cmp"><figure><img src="img/sotetsu-11000_before.png" alt="sotetsu-11000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：car1 HI、car3 LO 两头司机端く warp，R=0.15、edge_back F=−0.15（侧面贴图顶端内收实测 0.14–0.15 m）；car2 中间车未动；不动贴图、车号、灯位、涂装、编组（实车 10 辆，模型 3 辆子集，不扩编）。alphaMode 前后一致。<br>
+<b>推送：</b>提交 <code>d144eb3d</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>d144eb3db9d654be11c09ef87383ba33407350f6</code></span></p>
+<div class="cmp"><figure><img src="img/sotetsu-11000_before.png" alt="sotetsu-11000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-11000_after.png" alt="sotetsu-11000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n444">
 <h2>#444 sotetsu-12000 <span style="color:#666">—— 其他（ot-4）</span></h2>
 <p><b>MC 原话：</b>其他：く</p>
@@ -381,7 +381,7 @@ h3{font-size:16px;margin:18px 0 8px}
 <p><b>MC 原话：</b>编组错误</p>
 <p><b>根因：</b>实车 8 辆，模型 2 辆子集 [5501-1 M1c][5501-8 M8c]，缺 6 辆中间车。<br>
 <b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；另一份 tokyotoei_5500_kidou.pdf 是 1954 年都電 PCC 有轨电车，与都营 5500形无关。2 辆子集方向本身正确（diag plain OK / site OK），错只在缺车。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片）</p>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
 <div class="cmp"><figure><img src="img/toei-5500_before.png" alt="toei-5500 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
 </div><div class="card" id="n473">
 <h2>#473 tokyometro-05 <span style="color:#666">—— 其他（ot-4）</span></h2>
@@ -409,7 +409,7 @@ h3{font-size:16px;margin:18px 0 8px}
 <p><b>MC 原话：</b>编组错误</p>
 <p><b>根因：</b>实车 7 辆，模型 2 辆子集 [CM2][CM1]，缺 5 辆中间车。<br>
 <b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；PDF 的 p2/p3 是 03系，不可用。2 辆子集方向本身正确。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片）</p>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
 <div class="cmp"><figure><img src="img/tokyometro-13000_before.png" alt="tokyometro-13000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
 </div><div class="card" id="n477">
 <h2>#477 tokyometro-17000 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
