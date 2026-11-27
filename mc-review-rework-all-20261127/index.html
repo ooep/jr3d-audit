@@ -143,11 +143,12 @@ code{font-size:12px;word-break:break-all}
 <section class="card" id="car-5" data-num="5" data-slug="fujikyu-8500" data-orig="第一批 #26" data-pushed="pushed">
   <div class="chead"><span class="num">#5</span> <span class="orig">第一批 #26</span> <span class="slug">fujikyu-8500</span>
   <span class="badge ok">✅ 已推</span></div>
-  <div class="cmeta">其他（ot-6）</div>
+  <div class="cmeta">其他（ot-6·第二轮）</div>
   <div class="cquote">💬 MC 原话：其他：司机是这个贴图 按照目前这个形态 就是这个形状是没问题的 但是然后上下颠倒一下</div>
-  <div class="cinfo"><b>根因：</b>司机室鼻部贴图上下颠倒（形态本身没问题）。<br><b>修法：</b>car1 鼻部贴图上下翻转。<br><b>提交：</b><code>f32c37b8</code></div>
+  <div class="cinfo"><b>根因：</b>纸模图纸的鼻部根本没画全景风挡（实车前脸风挡占 ~40%，模型鼻部只有小灯带＋“2016”在中部＋红鼻在下，特征上下错位），只翻转修不好，必须重画；side 贴图黑楔方向本来就是对的（上宽下尖，与实车一致）。第一轮 OT-6 的翻转已在远端且端面正确，但斜视角里几乎看不见（差仅 0.057）。<br><b>修法：</b>只重画 car1 的 nose 贴图（480×372，按实车照片：红前额＋金徽 → 大全景风挡带雨刮 → 灯带双前灯＋行先表示＋金徽 → 红鼻金字 → 底部金色“2016”），几何/UV/编组没动；手术式换图（只换 nose 图片字节，其余 38 个 bufferView 字节全同，alphaMode MASK 全保留）。<br><b>提交：</b><code>a5c431b0</code></div>
   
-  <div class="cimg"><img loading="lazy" src="../mc-review-rework-20261127/img/fujikyu-8500_after.png" alt="fujikyu-8500" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="ccap">修后</div></div>
+  <div class="cimg"><img loading="lazy" src="img/fujikyu-8500_after.png" alt="fujikyu-8500 返工后斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">返工后——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 端面正视图（返工后）</div><img loading="lazy" src="img/fujikyu-8500_after_end.png" alt="fujikyu-8500 返工后端面正视图"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
