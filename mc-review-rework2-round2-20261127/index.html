@@ -2,69 +2,262 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MC 快速审核第二批返工·第二轮 — 3 辆（2026-11-27）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>第二轮返工复核（3辆）</title>
 <style>
-body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f4f4f4;color:#222}
-.wrap{max-width:900px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:22px;margin:8px 0 4px}
-.sub{color:#666;font-size:14px;line-height:1.7;margin:0 0 18px}
-.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;margin:0 0 18px}
-.card h2{font-size:17px;margin:0 0 8px}
-.card p{font-size:14px;line-height:1.7;color:#444;margin:0 0 10px}
-img{width:100%;height:auto;display:block;border:1px solid #ccc;border-radius:6px}
-.note{font-size:13px;color:#888;line-height:1.7}
-.warn{background:#fff3cd;border:1px solid #e6c200;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
-.ok{background:#e6f4ea;border:1px solid #34a853;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
-.cmp figure{margin:0}
-.cmp figcaption{font-size:13px;color:#666;text-align:center;margin-top:4px}
-code{font-size:12px;word-break:break-all}
-a{color:#0b5cad}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f4f5;color:#222;padding-bottom:120px}
+header{background:#1f2937;color:#fff;padding:14px 16px 12px} header h1{margin:0 0 6px;font-size:19px} header p{margin:4px 0;font-size:14px;line-height:1.5;color:#d1d5db}
+header .stat b{color:#fff} .hl{color:#fbbf24}
+.warn{background:#fff3cd;border:1px solid #e6c200;border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.6;margin:10px 10px 0;color:#5b4a00}
+.filters{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #ddd;padding:8px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.filters button{border:1px solid #ccc;background:#fff;border-radius:16px;padding:6px 12px;font-size:14px} .filters button.on{background:#1f2937;color:#fff;border-color:#1f2937}
+.filters input[type=search]{flex:1;min-width:120px;padding:7px 10px;font-size:15px;border:1px solid #ccc;border-radius:8px}
+.card{background:#fff;margin:10px;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px}
+.card.mark-pass{border:2px solid #16a34a} .card.mark-rework{border:2px solid #dc2626}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap} .num{font-weight:700;font-size:17px} .slug{font-size:15px;word-break:break-all}
+.badge{margin-left:auto;font-size:13px;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.badge.ok{background:#dcfce7;color:#166534}
+.csub{font-size:13px;color:#666;margin:4px 0 2px}
+.cinfo{font-size:14px;line-height:1.65;color:#444;margin:6px 0 8px} .cinfo p{margin:4px 0} .cinfo b{color:#222}
+.cimg img{width:100%;display:block;border-radius:8px;background:#eee} .noimg{padding:36px 0;text-align:center;color:#999;background:#f3f4f6;border-radius:8px}
+.cap{font-size:13px;color:#666;text-align:center;margin-top:4px}
+.cev{margin-top:8px} .cevlab{font-size:13px;color:#92400e;font-weight:700;margin-bottom:4px} .cev img{width:100%;display:block;border-radius:8px;background:#eee}
+.cbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cbtns button{flex:1 1 30%;min-width:96px;padding:11px 4px;font-size:15px;border-radius:9px;border:1px solid #d1d5db;background:#f9fafb}
+.cbtns button.pb{background:#dcfce7;border-color:#86efac;font-weight:700}
+.cbtns button.sel-pass{background:#16a34a;color:#fff;border-color:#16a34a}
+.cbtns button.sel-rework{background:#dc2626;color:#fff;border-color:#dc2626}
+.cother{display:none;margin-top:8px} .cother input{width:100%;padding:9px 10px;font-size:15px;border:1px solid #f59e0b;border-radius:8px}
+.card.show-other .cother{display:block}
+.cmark{font-size:14px;font-weight:700;margin-top:8px;min-height:0} .cmark:empty{display:none}
+.cmark.pass{color:#15803d} .cmark.rework{color:#b91c1c}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#111827;color:#fff;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#bar .prog{font-size:14px;white-space:nowrap} #bar .prog b{color:#fbbf24}
+#jump{display:flex;gap:6px;align-items:center} #jump input{width:74px;padding:9px 8px;font-size:16px;border-radius:8px;border:1px solid #555;background:#fff;color:#111;text-align:center}
+#jump button, #copyBtn, #clearBtn{padding:10px 14px;font-size:15px;border-radius:9px;border:none}
+#jump button{background:#374151;color:#fff} #autoJumpBtn{background:#7c3aed;color:#fff} #autoJumpBtn.off{background:#374151;color:#d1d5db} #copyBtn{background:#16a34a;color:#fff;font-weight:700;flex:1;min-width:120px} #clearBtn{background:transparent;color:#9ca3af;border:1px solid #4b5563!important}
+#toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 18px;border-radius:20px;font-size:15px;display:none;z-index:40;white-space:nowrap}
+.jump-flash{animation:fl 1.2s ease} @keyframes fl{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}50%{box-shadow:0 0 0 5px rgba(220,38,38,.55)}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>MC 快速审核第二批返工·第二轮 — 3 辆（2026-11-27）</h1>
-<p class="sub">MC 2026-11-27 14:31 微信点名两辆（#391、#404，第一轮返工已推、他看了仍不满意）；另 #392 odakyu-70000 与 #404 同一辆实车 GSE（异名重复 slug）、同病更重，按 MC 14:34 授权同法重建，共三辆。第二批返工页：<a href="../mc-review-rework2-20261127/">mc-review-rework2-20261127</a>（三辆的卡片已同步更新为第二轮修法与修后图）；快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>。每辆一卡：号码、MC 原话、根因、修法、commit SHA、第一轮修后 vs 第二轮修后对比图（斜视角＋鼻锥特写）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663。</p>
-
-<div class="ok"><b>汇总：3/3 已推。</b>#391 odakyu-60000（f307c96f）、#404 osakyu-70000（删 73b796d0＋建 ccb413d8）与 #392 odakyu-70000（删 8f76cc1a＋建 2de32a62）均已推上 models-pipeline，远端 blob 逐字节核实，index 663。三辆的 under/skirt alphaMode 均已恢复 MASK/0.5（第一轮 warp 丢的已补回）。</div>
-
-<div class="warn"><b>注意：#392 odakyu-70000 与 #404 osakyu-70000 是同一辆实车 GSE 的异名重复 slug。</b>两份模型现几何/纹理逐像素相同，仅内嵌模型名不同；是否合并为一个 slug（index 663→662、映射影响）留待 MC 定夺，本轮不动。</div>
-
-<div class="card" id="n391">
-<h2>#391 odakyu-60000 <span style="color:#666">—— 小田急60000形 MSE</span></h2>
-<p><b>MC 原话：</b>（14:31）“这个还是不行，重新做。”</p>
-<p><b>根因：</b>第一轮 OT-1 的 GLB warp（R=0.55）不够：原版前盖是以扇心 (0, 3.113) 为顶点的 29 三角平面扇形，位置 warp 只能移动已有顶点，扇心与外框拉回量不同 → 扇形顶成带硬折的帐篷，拱形折线就是扇形边，加大 R 永远修不好；且前脸/裙板贴图就是纸模端件 1:1，折叠拱线、白粘贴耳、中央矩形门原样进了 front 与 skirt_cab1 两张贴图，warp 动不了图上的线；侧面贴图鼻端还带纸模折叠引导线（对角斜线、左上白三角、顶部深色包边），司机侧窗画成尖底三角形。<br>
-<b>修法：</b>第二轮从原版 GLB 重做（OT-1 的 warp GLB 已弃用）：25 列×15 断面层分级网格新前盖（625 tris）取代扇形，边界顶点取车体前缘环满精度值，前盖平面取前缘环 z；平滑 warp（C1）：车顶后移 0.50 m、裙底 0.30 m、最前点 y≈1.90，平面圆收 0.18 m，D=1.5 m 融合；贴图按实车重画（front 双片风挡 y 1.60..2.80、外上圆角 r=0.30 m、中柱、雨刮、左片 LED 行显、发丝门缝；skirt_cab 车钩凹口＋前灯白＋红＋门缝延续；sideL/R 鼻端楔形区涂蓝、司机侧窗重画为四边形、红带按实测逐列中心线原像素恢复）；under/skirt alphaMode 恢复 MASK/0.5。<br>
-<b>推送：</b>提交 <code>f307c96f</code>（models-pipeline，一车一 commit）<br><span class="note">完整 SHA：<code>f307c96f07f7d3d24bcc6d017af282d788dcd323</code>；父提交 47426c87，一次成功</span></p>
-<div class="cmp"><figure><img src="img/odakyu-60000_before_oblique.png" alt="odakyu-60000 第一轮修后斜视角（MC 判不行）"><figcaption>第一轮修后（MC 14:31 判不行）——斜视角</figcaption></figure>
-<figure><img src="img/odakyu-60000_after_oblique.png" alt="odakyu-60000 第二轮修后斜视角"><figcaption>第二轮修后——斜视角</figcaption></figure></div>
-<div class="cmp"><figure><img src="img/odakyu-60000_before_nose.png" alt="odakyu-60000 第一轮鼻锥特写"><figcaption>第一轮修后（MC 14:31 判不行）——鼻锥特写</figcaption></figure>
-<figure><img src="img/odakyu-60000_after_nose.png" alt="odakyu-60000 第二轮鼻锥特写"><figcaption>第二轮修后——鼻锥特写</figcaption></figure></div>
-</div><div class="card" id="n392">
-<h2>#392 odakyu-70000 <span style="color:#666">—— 小田急70000形 GSE</span></h2>
-<p><b>MC 原话：</b>（#392 由 MC 14:34 授权追加）MC 14:31 点名的是同车 #404；#392 是同一辆 GSE 的异名重复 slug，核查发现同病更重（front 贴图上下颠倒），按 MC 14:34“其他的，你根据实际情况做决断”授权同法删后重建。</p>
-<p><b>根因：</b>与 #404 同一辆小田急70000形 GSE（异名重复 slug），front 贴图是同一张鼻锥件但上下颠倒（逐像素比对：翻转后平均绝对差 20.9、不翻转 57.6），同样有空矩形框＋2 红圆点“控制面板”＋空白显示器状风挡＋下方大块灰平板；另是更老的纸模建法（car_length_m 20.8 m、车高 3.7 m、alphaMode 全丢）。第一轮 OT-1 只做了楔形 warp R=0.55，没修贴图问题。<br>
-<b>修法：</b>第二轮删后重建（与 #404 同法）：删前核实线上确为纸模（11,846 tris，无高精度版）；删 commit 8f76cc1a（index 663→662）；再从同一张图纸从头重建：loft 鼻锥（不用 warp）、前脸按实车照片重画（整块连续全景玻璃到 y=1.15 m、无电脑面板、无横线）、后倾前裙板、鼻锥下部封闭；车长 20.8→21.3 m、车高 3.7→4.057 m 按实车纠正；consist 改用现行写法（file 键、[21.3, 21.3]、gap 0.3，与 #404 相同）；under/skirt alphaMode 恢复 MASK/0.5。重建 commit 2de32a62（index 662→663）。两份模型现几何/纹理逐像素相同，仅内嵌模型名不同；异名重复 slug 是否合并留待 MC 定夺，本轮不动。<br>
-<b>推送：</b>删 <code>8f76cc1a</code>＋建 <code>2de32a62</code>（models-pipeline，各单 commit）<br><span class="note">完整 SHA：删 <code>8f76cc1a71846ec7775596cf25ab2ed0c2a8a715</code>；建 <code>2de32a6232ed57f4735057ed1860bb0a50a58c19</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-70000_before_oblique.png" alt="odakyu-70000 第一轮修后斜视角（MC 判不行）"><figcaption>第一轮修后——斜视角</figcaption></figure>
-<figure><img src="img/odakyu-70000_after_oblique.png" alt="odakyu-70000 第二轮修后斜视角"><figcaption>第二轮修后——斜视角</figcaption></figure></div>
-<div class="cmp"><figure><img src="img/odakyu-70000_before_nose.png" alt="odakyu-70000 第一轮鼻锥特写"><figcaption>第一轮修后——鼻锥特写</figcaption></figure>
-<figure><img src="img/odakyu-70000_after_nose.png" alt="odakyu-70000 第二轮鼻锥特写"><figcaption>第二轮修后——鼻锥特写</figcaption></figure></div>
-</div><div class="card" id="n404">
-<h2>#404 osakyu-70000 <span style="color:#666">—— 小田急70000形 GSE</span></h2>
-<p><b>MC 原话：</b>（14:31）“这个司机是贴图上下都是电脑的，而且他现在头型也不对。删掉，重新做。”</p>
-<p><b>根因：</b>第一轮 OT-1 只修了编组（car2 重建为 Tc）＋尖头 warp R=0.55，但前脸仍错：“电脑”不是颠倒、不是取错件——纸模鼻锥件是折叠展开图不是立面图，拍平到平板端盖上，红色司机室面板成空矩形框＋2 红圆点（读作控制面板/屏幕）、全景风挡成无反光无座椅无立柱的深色梯形（读作空白显示器）、折叠线＋端盖/裙板接缝把风挡切成上下两段、warp 又加一道折痕；头型也不对：平板＋warp 折角楔形 vs 实车光滑连续曲面。<br>
-<b>修法：</b>第二轮删后重建：删前核实线上确为纸模（OT-1 产物，11,846 tris，无高精度版）；删 commit 73b796d0（index 663→662）；再从同一张图纸从头重建：loft 鼻锥（不用 warp；前脸 UV 高度式 v=(Y_TOP−y)/Y_TOP），底边从 1.59 m 下探到 1.15 m（配套封闭下部＋后倾前裙板），前脸按实车照片重画正视立面（波尔多红车顶、司机窗 y 3.20–3.90、素红带无目的地显示、整块连续全景玻璃 y 1.15–2.95、下红鼻带 y 0.60–1.15、银裙 y 0–0.60）；under/skirt alphaMode 恢复 MASK/0.5；consist [21.3, 21.3] 不变。重建 commit ccb413d8（index 662→663）。<br>
-<b>推送：</b>删 <code>73b796d0</code>＋建 <code>ccb413d8</code>（models-pipeline，各单 commit）<br><span class="note">完整 SHA：删 <code>73b796d02bf86e4ef725656a01ae4c14a2e1d105</code>；建 <code>ccb413d8909c6f05ff9e3e6f9027561ac0b6bb93</code></span></p>
-<div class="cmp"><figure><img src="img/osakyu-70000_before_oblique.png" alt="osakyu-70000 第一轮修后斜视角（MC 判不行）"><figcaption>第一轮修后（MC 14:31 判不行）——斜视角</figcaption></figure>
-<figure><img src="img/osakyu-70000_after_oblique.png" alt="osakyu-70000 第二轮修后斜视角"><figcaption>第二轮修后——斜视角</figcaption></figure></div>
-<div class="cmp"><figure><img src="img/osakyu-70000_before_nose.png" alt="osakyu-70000 第一轮鼻锥特写"><figcaption>第一轮修后（MC 14:31 判不行）——鼻锥特写</figcaption></figure>
-<figure><img src="img/osakyu-70000_after_nose.png" alt="osakyu-70000 第二轮鼻锥特写"><figcaption>第二轮修后——鼻锥特写</figcaption></figure></div>
+<header>
+<h1>🎸 第二轮返工复核 <span class="hl">3辆</span></h1>
+<p>用法：每辆只放返工后的图（斜视角＋鼻锥特写），看图点 <b>✅ 通过</b> 或一个返工原因（可改选，再点一次取消）；<b>其他</b>点后在下方填备注。底部栏可<b>跳转到号码</b>、看进度、<b>复制结果</b>后粘贴到微信发我。标记存在本机浏览器里，刷新不丢。</p>
+<p class="stat">汇总：<b>3/3 已推</b> · index <b>663</b> · models-pipeline（2026-11-27）</p>
+</header>
+<div class="warn"><b>注意：#392 odakyu-70000 与 #404 osakyu-70000 是同一辆实车 GSE 的异名重复 slug。</b>两份模型现几何/纹理逐像素相同，仅内嵌模型名不同；是否合并为一个 slug 留待 MC 定夺，本轮不动。</div>
+<div class="filters" id="filters">
+<button data-f="all" class="on">全部 3</button>
+<button data-f="reviewed">已审</button>
+<button data-f="unreviewed">未审</button>
+<input type="search" id="q" placeholder="搜 slug，如 odakyu-70000">
 </div>
-
-<p class="note">说明：修前图为第一轮 OT-1 渲染；修后图为第二轮 R2 渲染。工作目录：~/workspace/jr3d/work/mc-review-rework2-round2-20261127/（DISPATCH.md＋r2-60000/REPORT.md、r2-70000/REPORT.md、r2-70000-392/REPORT.md）；建页脚本：rework-page/build_page.py。建模 skill 已升到 v1.2.40（#404 的 7 条见 1.2.38、#391 的 6 条见 1.2.39、#392 的 5 条见 1.2.40）。</p>
+<main id="list">
+<section class="card" id="car-391" data-num="391" data-slug="odakyu-60000">
+  <div class="chead"><span class="num">#391</span> <span class="slug">odakyu-60000</span>
+  <span class="badge ok">✅ 已推</span></div>
+  <div class="csub">—— 小田急60000形 MSE</div>
+  <div class="cinfo">
+  <p><b>MC 原话：</b>（14:31）“这个还是不行，重新做。”</p>
+  <p><b>根因：</b>第一轮 warp 不够：前盖是 29 三角平面扇形，warp 只能移顶点，扇心与外框拉回量不同，拱线成硬折；贴图折叠线、白粘贴耳也进图，warp 动不了。</p>
+  <p><b>修法：</b>第二轮重做前盖：25×15 分级网格新前盖，平滑 warp 融合；贴图按实车重画双片风挡、雨刮、LED、车钩凹口，鼻端楔形涂蓝，侧窗改四边形。</p>
+  <p><b>推送：</b>建 f307c96f（models-pipeline）</p>
+  </div>
+  <div class="cimg"><img loading="lazy" src="img/odakyu-60000_after_oblique.png" alt="odakyu-60000 返工后斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">返工后——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 鼻锥特写（返工后）</div><img loading="lazy" src="img/odakyu-60000_after_nose.png" alt="odakyu-60000 返工后鼻锥特写"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-392" data-num="392" data-slug="odakyu-70000">
+  <div class="chead"><span class="num">#392</span> <span class="slug">odakyu-70000</span>
+  <span class="badge ok">✅ 已推</span></div>
+  <div class="csub">—— 小田急70000形 GSE</div>
+  <div class="cinfo">
+  <p><b>MC 原话：</b>（#392 由 MC 14:34 授权追加）（#392 由 MC 14:34 授权追加）MC 14:31 点名的是同车 #404；#392 是同一辆 GSE 的异名重复 slug，核查发现同病更重（front 贴图上下颠倒），按 MC 14:34“其他的，你根据实际情况做决断”授权同法删后重建。</p>
+  <p><b>根因：</b>与 #404 同一辆 GSE，front 贴图上下颠倒（翻转后差 20.9、不翻 57.6），同样有电脑面板+空白显示器风挡；另车长 20.8 m、车高 3.7 m 均错。</p>
+  <p><b>修法：</b>与 #404 同法删后重建：loft 鼻锥、前脸重画整块全景玻璃到 y=1.15 m；车长 20.8→21.3 m、车高 3.7→4.057 m 纠正，consist 与 #404 相同。</p>
+  <p><b>推送：</b>删 8f76cc1a＋建 2de32a62（models-pipeline）</p>
+  </div>
+  <div class="cimg"><img loading="lazy" src="img/odakyu-70000_after_oblique.png" alt="odakyu-70000 返工后斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">返工后——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 鼻锥特写（返工后）</div><img loading="lazy" src="img/odakyu-70000_after_nose.png" alt="odakyu-70000 返工后鼻锥特写"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-404" data-num="404" data-slug="osakyu-70000">
+  <div class="chead"><span class="num">#404</span> <span class="slug">osakyu-70000</span>
+  <span class="badge ok">✅ 已推</span></div>
+  <div class="csub">—— 小田急70000形 GSE</div>
+  <div class="cinfo">
+  <p><b>MC 原话：</b>（14:31）“这个司机是贴图上下都是电脑的，而且他现在头型也不对。删掉，重新做。”</p>
+  <p><b>根因：</b>纸模鼻锥件是折叠展开图非立面：红面板成空框+2 红点像电脑，全景风挡像空白显示器，折叠线把风挡切两段；平板+warp 头型也不对。</p>
+  <p><b>修法：</b>删后重建：loft 鼻锥不用 warp，前脸按实车重画整块全景玻璃到 y=1.15 m，底边下探 1.59→1.15 m，配后倾前裙板；车长/编组不变。</p>
+  <p><b>推送：</b>删 73b796d0＋建 ccb413d8（models-pipeline）</p>
+  </div>
+  <div class="cimg"><img loading="lazy" src="img/osakyu-70000_after_oblique.png" alt="osakyu-70000 返工后斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">返工后——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 鼻锥特写（返工后）</div><img loading="lazy" src="img/osakyu-70000_after_nose.png" alt="osakyu-70000 返工后鼻锥特写"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+</main>
+<div id="bar">
+  <div id="jump"><span>#</span><input id="jumpN" type="number" min="391" max="404" inputmode="numeric" placeholder="391/392/404"><button id="jumpBtn">跳转</button></div>
+  <div class="prog" id="prog">已审 0/3 · 通过 0 · 返工 0</div>
+  <button id="autoJumpBtn">⏭ 自动跳下一题：开</button>
+  <button id="copyBtn">📋 复制结果</button>
+  <button id="clearBtn">清空</button>
 </div>
+<div id="toast"></div>
+<script>
+const KEY='r2-20261127';
+let state={}; try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+const cards=[...document.querySelectorAll('.card')];
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function mark(card,st){ // st: null | {t:'pass'} | {t:'rework',reason,note}
+  const slug=card.dataset.slug;
+  if(!st) delete state[slug]; else state[slug]=st;
+  save();
+}
+function render(){
+  let done=0,pass=0,rw=0;
+  cards.forEach(c=>{
+    const st=state[c.dataset.slug];
+    c.classList.toggle('mark-pass',!!st&&st.t==='pass');
+    c.classList.toggle('mark-rework',!!st&&st.t==='rework');
+    c.classList.toggle('show-other',!!st&&st.t==='rework'&&st.reason==='其他');
+    c.querySelectorAll('.cbtns button').forEach(b=>{
+      b.classList.remove('sel-pass','sel-rework');
+      if(st&&st.t==='pass'&&b.dataset.act==='pass') b.classList.add('sel-pass');
+      if(st&&st.t==='rework'&&b.dataset.reason===st.reason) b.classList.add('sel-rework');
+    });
+    const mk=c.querySelector('.cmark');
+    if(st&&st.t==='pass'){mk.textContent='✅ 通过';mk.className='cmark pass';pass++;done++}
+    else if(st&&st.t==='rework'){mk.textContent='🔧 返工：'+st.reason+(st.note?'（'+st.note+'）':'');mk.className='cmark rework';rw++;done++}
+    else {mk.textContent='';mk.className='cmark'}
+    const inp=c.querySelector('.cother input');
+    if(st&&st.t==='rework'&&st.reason==='其他') inp.value=st.note||'';
+  });
+  document.getElementById('prog').textContent=`已审 ${done}/3 · 通过 ${pass} · 返工 ${rw}`;
+}
+// ---- 自动跳下一题（多邻国式，默认开；开关存在本机）----
+const AJKEY='r2-20261127_autojump';
+let autoJump=true; try{const v=localStorage.getItem(AJKEY); if(v!==null) autoJump=(v==='1')}catch(e){}
+function setAutoJump(on){autoJump=on; try{localStorage.setItem(AJKEY,on?'1':'0')}catch(e){}
+  const b=document.getElementById('autoJumpBtn');
+  b.textContent=on?'⏭ 自动跳下一题：开':'⏭ 自动跳下一题：关'; b.classList.toggle('off',!on);}
+function nextUnreviewed(afterNum){
+  let wrap=null;
+  for(const c of cards){
+    const n=+c.dataset.num;
+    if(!state[c.dataset.slug]){
+      if(n>afterNum) return c;
+      if(!wrap) wrap=c;
+    }
+  }
+  return wrap; // null = 已全部审完
+}
+function jumpToCard(el){
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+}
+function maybeAutoJump(card){
+  if(!autoJump) return;
+  const next=nextUnreviewed(+card.dataset.num);
+  if(next) setTimeout(()=>jumpToCard(next),350);
+  else { toast('🎉 已全部审完！'); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+document.getElementById('autoJumpBtn').addEventListener('click',()=>setAutoJump(!autoJump));
+document.getElementById('list').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const card=e.target.closest('.card'); if(!card) return;
+  const slug=card.dataset.slug, cur=state[slug];
+  if(b.dataset.act==='pass'){
+    mark(card,(cur&&cur.t==='pass')?null:{t:'pass'});
+  }else if(b.dataset.reason){
+    const r=b.dataset.reason;
+    if(cur&&cur.t==='rework'&&cur.reason===r) mark(card,null);
+    else mark(card,{t:'rework',reason:r,note:''});
+  } else return;
+  maybeAutoJump(card);
+});
+document.getElementById('list').addEventListener('input',e=>{
+  const inp=e.target.closest('.cother input'); if(!inp) return;
+  const card=inp.closest('.card'), st=state[card.dataset.slug];
+  if(st&&st.t==='rework'&&st.reason==='其他'){st.note=inp.value;save()}
+});
+function ranges(nums){ // [391,392,404] -> "#391-#392、#404"
+  if(!nums.length) return '无';
+  nums=[...nums].sort((a,b)=>a-b); const out=[]; let s=nums[0],p=nums[0];
+  for(let i=1;i<=nums.length;i++){ if(nums[i]===p+1){p=nums[i];continue} out.push(s===p?('#'+s):('#'+s+'-#'+p)); s=nums[i]; p=nums[i]; }
+  return out.join('、');
+}
+function copyText(){
+  const pass=[], rw=[], un=[];
+  cards.forEach(c=>{
+    const n=+c.dataset.num, st=state[c.dataset.slug];
+    if(!st) un.push(n);
+    else if(st.t==='pass') pass.push('#'+n+' '+c.dataset.slug);
+    else rw.push('#'+n+' '+c.dataset.slug+'（'+st.reason+(st.note?'：'+st.note:'')+'）');
+  });
+  const lines=['第二轮返工复核（2026-11-27，共3辆）',
+    '通过（'+pass.length+'辆）：'+(pass.length?pass.join('、'):'无'),
+    '返工（'+rw.length+'辆）：'+(rw.length?'':'无')];
+  rw.forEach(r=>lines.push(r));
+  lines.push('未审（'+un.length+'辆）：'+ranges(un));
+  return lines.join('\n');
+}
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const t=copyText();
+  try{await navigator.clipboard.writeText(t); toast('已复制，去微信粘贴')}catch(e){
+    const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy'); toast('已复制，去微信粘贴')}catch(e2){toast('复制失败，请长按全选复制')} ta.remove();
+  }
+});
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+document.getElementById('jumpBtn').addEventListener('click',()=>{
+  const n=+document.getElementById('jumpN').value;
+  const el=document.getElementById('car-'+n);
+  if(!el){toast('本页只有 #391、#392、#404');return}
+  showAll();
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+});
+document.getElementById('jumpN').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('jumpBtn').click()});
+document.getElementById('clearBtn').addEventListener('click',()=>{
+  if(!Object.keys(state).length){toast('还没有任何标记');return}
+  if(confirm('清空全部 '+Object.keys(state).length+' 条标记？')){state={};save();toast('已清空')}
+});
+let curF='all';
+function showAll(){curF='all';document.querySelectorAll('#filters button').forEach(b=>b.classList.toggle('on',b.dataset.f==='all'));applyFilter()}
+function applyFilter(){
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  cards.forEach(c=>{
+    let ok=true;
+    if(curF==='unreviewed') ok=!state[c.dataset.slug];
+    else if(curF==='reviewed') ok=!!state[c.dataset.slug];
+    if(ok&&q) ok=c.dataset.slug.toLowerCase().includes(q);
+    c.style.display=ok?'':'none';
+  });
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  curF=b.dataset.f; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b)); applyFilter();
+});
+document.getElementById('q').addEventListener('input',applyFilter);
+setAutoJump(autoJump);
+render();
+</script>
 </body>
 </html>

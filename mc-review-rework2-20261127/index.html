@@ -2,552 +2,1338 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MC 快速审核第二批返工 — 70 辆（2026-11-27）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>第二批返工复核（70辆）</title>
 <style>
-body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f4f4f4;color:#222}
-.wrap{max-width:900px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:22px;margin:8px 0 4px}
-.sub{color:#666;font-size:14px;line-height:1.7;margin:0 0 18px}
-.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;margin:0 0 18px}
-.card h2{font-size:17px;margin:0 0 8px}
-.card p{font-size:14px;line-height:1.7;color:#444;margin:0 0 10px}
-img{width:100%;height:auto;display:block;border:1px solid #ccc;border-radius:6px}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f4f5;color:#222;padding-bottom:120px}
+header{background:#1f2937;color:#fff;padding:14px 16px 12px} header h1{margin:0 0 6px;font-size:19px} header p{margin:4px 0;font-size:14px;line-height:1.5;color:#d1d5db}
+header .stat b{color:#fff} .hl{color:#fbbf24}
+.filters{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #ddd;padding:8px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.filters button{border:1px solid #ccc;background:#fff;border-radius:16px;padding:6px 12px;font-size:14px} .filters button.on{background:#1f2937;color:#fff;border-color:#1f2937}
+.filters input[type=search]{flex:1;min-width:120px;padding:7px 10px;font-size:15px;border:1px solid #ccc;border-radius:8px}
+.card{background:#fff;margin:10px;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px}
+.card.unpushed-card{border:2px solid #dc2626}
+.card.mark-pass{border:2px solid #16a34a} .card.mark-rework{border:2px solid #dc2626}
+.card.mark-pass.unpushed-card{border:2px solid #16a34a}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap} .num{font-weight:700;font-size:17px} .slug{font-size:15px;word-break:break-all}
+.badge{margin-left:auto;font-size:13px;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.badge.pushed{background:#dcfce7;color:#166534} .badge.unpushed{background:#fee2e2;color:#991b1b}
+.cnote{font-size:13px;color:#444;margin:6px 0 8px;line-height:1.45;min-height:0} .cnote:empty{display:none}
+.cmeta{font-size:13px;color:#666;margin:6px 0;line-height:1.45}
+.pushline{font-size:14px;line-height:1.6;margin:6px 0} .pushline.un{color:#991b1b;font-weight:700}
+.warnline{font-size:13px;color:#92400e;background:#fef3c7;border-radius:6px;padding:6px 8px;margin:6px 0;line-height:1.5}
+.cimg img{width:100%;display:block;border-radius:8px;background:#eee} .noimg{padding:36px 0;text-align:center;color:#999;background:#f3f4f6;border-radius:8px}
+.cap{font-size:13px;color:#666;text-align:center;margin-top:4px}
+.cbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cbtns button{flex:1 1 30%;min-width:96px;padding:11px 4px;font-size:15px;border-radius:9px;border:1px solid #d1d5db;background:#f9fafb}
+.cbtns button.pb{background:#dcfce7;border-color:#86efac;font-weight:700}
+.cbtns button.sel-pass{background:#16a34a;color:#fff;border-color:#16a34a}
+.cbtns button.sel-rework{background:#dc2626;color:#fff;border-color:#dc2626}
+.cother{display:none;margin-top:8px} .cother input{width:100%;padding:9px 10px;font-size:15px;border:1px solid #f59e0b;border-radius:8px}
+.card.show-other .cother{display:block}
+.cmark{font-size:14px;font-weight:700;margin-top:8px;min-height:0} .cmark:empty{display:none}
+.cmark.pass{color:#15803d} .cmark.rework{color:#b91c1c}
 .note{font-size:13px;color:#888;line-height:1.7}
-.warn{background:#fff3cd;border:1px solid #e6c200;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
-.ok{background:#e6f4ea;border:1px solid #34a853;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 4px}
-.cmp figure{margin:0}
-.cmp figcaption{font-size:13px;color:#666;text-align:center;margin-top:4px}
-.noimg{display:flex;align-items:center;justify-content:center;min-height:120px;background:#f4f4f4;border:1px dashed #bbb;border-radius:6px;color:#888;font-size:14px}
 code{font-size:12px;word-break:break-all}
-a{color:#0b5cad}
-ul{margin:6px 0}
-li{font-size:14px;line-height:1.7}
-h3{font-size:16px;margin:18px 0 8px}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#111827;color:#fff;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#bar .prog{font-size:14px;white-space:nowrap} #bar .prog b{color:#fbbf24}
+#jump{display:flex;gap:6px;align-items:center} #jump input{width:74px;padding:9px 8px;font-size:16px;border-radius:8px;border:1px solid #555;background:#fff;color:#111;text-align:center}
+#jump button, #copyBtn, #clearBtn{padding:10px 14px;font-size:15px;border-radius:9px;border:none}
+#jump button{background:#374151;color:#fff} #autoJumpBtn{background:#7c3aed;color:#fff} #autoJumpBtn.off{background:#374151;color:#d1d5db} #copyBtn{background:#16a34a;color:#fff;font-weight:700;flex:1;min-width:120px} #clearBtn{background:transparent;color:#9ca3af;border:1px solid #4b5563!important}
+#toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 18px;border-radius:20px;font-size:15px;display:none;z-index:40;white-space:nowrap}
+.jump-flash{animation:fl 1.2s ease} @keyframes fl{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}50%{box-shadow:0 0 0 5px rgba(220,38,38,.55)}}
+ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>MC 快速审核第二批返工 — 70 辆（2026-11-27）</h1>
-<p class="sub">MC 2026-11-27 12:06 微信审核结果的第二批返工（#387–#521），只放这 70 辆。MC 原话“自己该重建，重建。该修复修复，不要问我了，全部弄好以后再给我审批”（09:29 放行）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663 个模型（本批全是已有 slug，不增新车型）。第一批返工页：<a href="../rework-batch1-20261127/">rework-batch1-20261127</a>；快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>。每辆一卡：号码、类别、MC 原话、根因、修法、commit SHA、返工前后斜视角对比图。</p>
-
-<div class="ok"><b>汇总：已推 64/70、未推 6 辆。</b>未推 6 辆＝无图 4 辆（先接受现有子集，MC 14:34 授权决断）＋暂缓 1 辆（sagano-de10，MC 14:34 指令先不做）＋无错 1 辆：
-<ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul>
-<b>第二轮：</b>#391 odakyu-60000 与 #404 osakyu-70000 经 MC 14:31 点名重做、#392 odakyu-70000（与 #404 同车、同病更重）按 MC 14:34 授权同法重做，均已重做并推上（卡片为第二轮修法与修后图）；另见第二轮返工页 <a href="../mc-review-rework2-round2-20261127/">mc-review-rework2-round2-20261127</a>。</div>
-
-<div class="warn"><b>特别标注：</b><br>
-⚠️ <b>#520 yokohamasub-10000 左缘胶耳未修（已推，耳未修）</b>：x 0–43、约 12.8% 宽白竖带；任务定本车只修贴图颠倒，无干净的裁切-重标方案（风挡宽已正确 1.96 m，拉伸会变 2.33 m），留待以后单独处理。<br>
-⚠️ <b>#469 tobu-90000 水印原样保留</b>：端件 pepar.net 水印清不清仍待 MC 定夺，本次未另做水印清理（只随被去掉的耳瓣一起消失了耳上的字）。<br>
-⚠️ <b>#478 tokyometro-18000 可补 6 辆中间车的跟进选项</b>：同一份图纸实际是三张净片并排，6 辆中间车可用净片建，但 18500/18600 司机端净片缺失，补了也得不到 10 辆全编组；是否另行派发见下方“待定夺事项”。</div>
-
-<div class="card"><h3 style="margin-top:0">待定夺事项（需 MC 定夺）</h3>
+<header>
+<h1>🎸 第二批返工复核 <span class="hl">70辆</span></h1>
+<p>用法：每辆只留一张图——已推的车是<b>返工后图</b>，未返工的 6 辆是<b>现状图（未返工）</b>。看图点 <b>✅ 通过</b> 或一个返工原因（可改选，再点一次取消）；<b>其他</b>点后在下方填备注。底部栏可<b>跳转到号码</b>、看进度、<b>复制结果</b>后粘贴到微信发我。标记存在本机浏览器里，刷新不丢。</p>
+<p class="stat">共 <b>70</b> 辆 · ✅ 已推 <b>64</b> · ⛔ 未返工 <b>6</b> · index <b>663</b> 个模型（2026-11-27）</p>
+<p>未返工 6 辆：</p>
 <ul>
-<li><b>alphaMode 丢失 16 辆 34 个 GLB——已决断回补，正在回补</b>：第一批 OT-3 7 辆 11 个 GLB＋本批 OT-1 5 辆 10 个 GLB＋本批 OT-2 4 辆 13 个 GLB。凡经 <code>model.write_glb</code> 重写或新建脚本建出的 GLB，若不显式恢复 alphaMode，under/skirt 材质的 MASK 就会丢成 OPAQUE（缺省），裙板/底盘贴图透明区域可能错显。MC 14:34 授权“按实际情况做决断”后已决断回补（只恢复 alphaMode 字段，不动几何/贴图，一车一 commit）；回补前先修好 warp 脚本（参照 OT-5 的 <code>set_alpha_mode</code> 恢复）。注意：本批 OT-3 5 辆返工已按原值逐材质恢复 alphaMode，未新增丢失。</li>
-<li><b>✅ OT-3 5 辆已推（2026-11-27 14:51）</b>（#434 sendai-sub-2000 <code>52aefb7e</code>、#435 sendai-sub-3000 <code>47426c87</code>、#437 shizuoka-a3000 <code>6ae050c0</code>、#442 sotetsu-10000 <code>ff311303</code>、#443 sotetsu-11000 <code>d144eb3d</code>）：MC 14:34 fresh 授权后由续做专员从头做完再推（原专员被拦截时 0 改动、0 提交）。#435 不扩编（3200/3600 无图，补不齐）；另 #435 图纸把单臂受电弓画在 3100 车顶（实车只有 3200 有弓），属图纸错误，待 MC 定夺是否另修贴图。</li>
-<li><b>#478 tokyometro-18000 跟进选项</b>：6 辆中间车可建（图纸 batch251 g13 artwork，p2 普通中间车、p3 受电弓中间车；中间车实车长 19.5 m，非 20.005 m），但 18500 Tc1 / 18600 Tc2 司机端净片缺失；是否另行派发待定夺，不建议无图虚构司机端。</li>
-<li><b>#469 tobu-90000 端件 pepar.net 水印</b>清不清待定夺（本次原样保留）。</li>
-<li><b>#520 yokohamasub-10000 左缘胶耳</b>未修，留待以后单独处理（见上）。</li>
-<li><b>#407 sagano-de10——暂缓不做</b>：图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做。</li>
-<li><b>无图 4 辆——先接受现有子集</b>：#423 seibu-001、#432 senboku-9300、#472 toei-5500、#476 tokyometro-13000，均因缺中间车图纸未推；MC 14:34 授权决断：先接受现有子集，等有图再说（不再另找 rail-trainpdf 以外图纸）。</li>
-<li><b>#506 tukubaexp-tx2000 3 辆子集</b>接不接受（缺 2400/2500/2600 无图，不扩编）；#521 yokohamasub-3000v 辆数 2 vs 实车 6（3612–3615 无图）；#486 tokyu-5000 4 辆子集（6 辆中部车无图，已是图纸允许的最大编组）。</li>
-<li><b>#480 tokyotoei-10300 car3 车顶双受电弓</b>（纸模原图问题，实车每辆至多 1 副单臂弓），本次未修（新车已避开该源、只克隆 car2）。</li>
-<li><b>#506 TX-2000 车号牌</b>：三辆侧面均为“TX-2153”（应为 2153/2253/2353），既存缺陷，MC 本次只点く头型、未授权改，不修。</li>
-</ul></div>
-
-<div class="card" id="n387">
-<h2>#387 odakyu-1000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面宽约 70%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌贴图，几何逐字节未动。car2 共用 car1 全部 4 张贴图，同改。<br>
-<b>推送：</b>提交 <code>0881229e</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>0881229e37e50e7c97bd52bdf19210922a474e64</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-1000_before.png" alt="odakyu-1000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-1000_after.png" alt="odakyu-1000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n388">
-<h2>#388 odakyu-30000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。6 辆编组。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2–car5 的 end1 与各自 front 共用，同改。<br>
-<b>推送：</b>提交 <code>8f1183f1</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>8f1183f133ae6ff68bf69f99018ee4ebe976377c</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-30000_before.png" alt="odakyu-30000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-30000_after.png" alt="odakyu-30000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n389">
-<h2>#389 odakyu-4000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。单辆车。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；司机端裙板梯形窄耳改 fill 逐行填邻近面色（crop 会拉伸车钩罩）。<br>
-<b>推送：</b>提交 <code>c9da609d</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>c9da609db2c94fd31ee79e70a7f50e173520aec3</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-4000_before.png" alt="odakyu-4000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-4000_after.png" alt="odakyu-4000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n390">
-<h2>#390 odakyu-5000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 共用 car1 全部 4 张贴图，同改；裙板窄耳 fill。<br>
-<b>推送：</b>提交 <code>bc575a8a</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>bc575a8a334c7742333aba10aaea1b68eef1425f</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-5000_before.png" alt="odakyu-5000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-5000_after.png" alt="odakyu-5000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n391">
-<h2>#391 odakyu-60000 <span style="color:#666">—— 其他（ot-1）</span></h2>
-<p><b>MC 原话：</b>其他：这个车是楔形的</p>
-<p><b>根因：</b>第一轮 OT-1 的 GLB warp（R=0.55）不够：原版前盖是 29 三角扇形，warp 只能把它顶成带硬折的帐篷（拱形折线就是扇形边）；且前脸/裙板贴图就是纸模端件 1:1，折叠拱线、白耳、矩形贯通门全在图上，warp 去不掉。MC 14:31 看后判“还是不行，重新做”。<br>
-<b>修法：</b>第二轮从原版 GLB 重做：25×15 分级网格新前盖（625 tris）＋C1 平滑 warp（车顶后移 0.50 m）＋前脸/裙板/侧面鼻端贴图按实车重画（双片圆角风挡、雨刮、LED 行显、车钩凹口、前灯）；under/skirt alphaMode 恢复 MASK/0.5。<br>
-<b>推送：</b>提交 <code>f307c96f</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>f307c96f07f7d3d24bcc6d017af282d788dcd323</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-60000_before.png" alt="odakyu-60000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-60000_after.png" alt="odakyu-60000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n392">
-<h2>#392 odakyu-70000 <span style="color:#666">—— 其他（ot-1）</span></h2>
-<p><b>MC 原话：</b>其他：这个车是楔形的</p>
-<p><b>根因：</b>与 #404 同一辆小田急70000形 GSE（异名重复 slug）；front 贴图是同一张鼻锥件但上下颠倒（翻转后平均绝对差 20.9、不翻转 57.6），同样有空矩形框＋2 红圆点“控制面板”＋空白显示器状风挡＋下方大块灰平板；另是更老的纸模建法（car_length_m 20.8 m、车高 3.7 m、alphaMode 全丢）。第一轮 OT-1 只做了楔形 warp R=0.55，没修贴图问题。<br>
-<b>修法：</b>第二轮删后重建（与 #404 同法，MC 14:34 授权“按实际情况做决断”）：删 commit 8f76cc1a（index 663→662），再从同一张图纸从头重建（loft 光滑流线展望头，前脸按实车重画：整块全景风挡到 y=1.15 m、无电脑面板、无横线）；车长 20.8→21.3 m、车高 3.7→4.057 m 按实车纠正；consist 改用现行写法（与 #404 相同）；under/skirt alphaMode 恢复 MASK/0.5。重建 commit 2de32a62（index 662→663）。两份模型现几何/纹理逐像素相同，仅内嵌模型名不同；异名重复 slug 是否合并留待 MC 定夺，本轮不动。<br>
-<b>推送：</b>提交 <code>2de32a62</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>2de32a6232ed57f4735057ed1860bb0a50a58c19</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-70000_before.png" alt="odakyu-70000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-70000_after.png" alt="odakyu-70000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n393">
-<h2>#393 odakyu-8000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。3 辆编组。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 end1 共用 car2 front、car3 front/skirt 共用 car1。诚实说明：front/end1 高带白占比残留 0.056–0.073 为车顶圆弧上方行（端盖上不渲染区），中带仅 0.001–0.019，端面正视图确认面部已铺满，判通过。<br>
-<b>推送：</b>提交 <code>c5aade98</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>c5aade98676fcc203317ea73f318de79dd86588d</code></span></p>
-<div class="cmp"><figure><img src="img/odakyu-8000_before.png" alt="odakyu-8000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-8000_after.png" alt="odakyu-8000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n397">
-<h2>#397 osakametro-30000 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面约 72–73%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌 PNG，不重建，几何零改动（三角数 11,126 不变）。共享贴图同改一次（car2 front＝end1）。<br>
-<b>推送：</b>提交 <code>75f28263</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>75f28263d3e4743caa999c32d8285046fb02b473</code></span></p>
-<div class="cmp"><figure><img src="img/osakametro-30000_before.png" alt="osakametro-30000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakametro-30000_after.png" alt="osakametro-30000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n398">
-<h2>#398 osakametro-70 <span style="color:#666">—— 其他（ot-1）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
-<b>修法：</b>く warp R≈0.29（图纸车顶后收 0.56 m 有夸大，照片折角较缓，取照片值；车顶中心 −0.276、边缘 −0.293、裙板 −0.013）。<br>
-<b>推送：</b>提交 <code>1e167d99</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>1e167d99739dbd0d53f6de8e207b461db939154e</code></span></p>
-<div class="cmp"><figure><img src="img/osakametro-70_before.png" alt="osakametro-70 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakametro-70_after.png" alt="osakametro-70 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n399">
-<h2>#399 osakamono-3000 <span style="color:#666">—— 编组错误（fm-1）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 4 辆，模型只有 2 辆，缺 3300 中间车与 3400 尾端司机车。<br>
-<b>修法：</b>补 car3（3300 中间车）、car4（3400 翻转司机车），2→4 辆；原 car_length_m 是列表 [15.76, 14.48]（站内 lenOf 取到列表会变 NaN），改为标量 15.76＋middle 14.48＋逐辆 length。<br>
-<b>推送：</b>提交 <code>65b82278</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>65b8227892cde41cb20b104abb9ad0417c579fde</code></span></p>
-<div class="cmp"><figure><img src="img/osakamono-3000_before.png" alt="osakamono-3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakamono-3000_after.png" alt="osakamono-3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n400">
-<h2>#400 osakanewtram-200 <span style="color:#666">—— 其他（ot-1）</span></h2>
-<p><b>MC 原话：</b>其他：斜车头</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，斜头只画在侧面贴图里。<br>
-<b>修法：</b>斜头 warp R＝0.50（图纸斜度仅 0.10 m、远小于照片，按照片取；车顶中心 0.499、边缘 0.549、腰线边缘 0.378、裙板边缘 0.192）；内端（贯通端）不动。模型 8.03 m/辆 vs 实车 7.60 m（＋5.7%），只修头型、不动尺寸。<br>
-<b>推送：</b>提交 <code>7a5e3f26</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>7a5e3f26e0d245e4ffa95814c3fce96c5fc2b959</code></span></p>
-<div class="cmp"><figure><img src="img/osakanewtram-200_before.png" alt="osakanewtram-200 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakanewtram-200_after.png" alt="osakanewtram-200 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n404">
-<h2>#404 osakyu-70000 <span style="color:#666">—— 其他（ot-1）</span></h2>
-<p><b>MC 原话：</b>其他：编组错误 而且是尖头车</p>
-<p><b>根因：</b>第一轮 OT-1 只修了编组（car2 重建为 Tc）＋尖头 warp R=0.55，但前脸仍错：纸模鼻锥件是折叠展开图不是立面图，拍平后红司机面板（空矩形框＋2 圆点）像控制面板、大块深色梯形像空白显示器，折叠线横切风挡；头型是平板楔形而非实车光滑曲面。MC 14:31 看后判“司机贴图上下都是电脑，头型也不对，删掉，重新做”。<br>
-<b>修法：</b>第二轮删后重建：删 commit 73b796d0（index 663→662），再从图纸从头重建（loft 光滑流线展望头，底边下探到 y=1.15 m＋后倾前裙板，前脸按实车重画：整块全景风挡、无电脑面板、无横线切断玻璃）；under/skirt alphaMode 恢复 MASK/0.5；consist [21.3, 21.3] 不变。重建 commit ccb413d8（index 662→663）。<br>
-<b>推送：</b>提交 <code>ccb413d8</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>ccb413d8909c6f05ff9e3e6f9027561ac0b6bb93</code></span></p>
-<div class="cmp"><figure><img src="img/osakyu-70000_before.png" alt="osakyu-70000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakyu-70000_after.png" alt="osakyu-70000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n405">
-<h2>#405 oumi-900 <span style="color:#666">—— 其他（ot-2）</span></h2>
-<p><b>MC 原话：</b>其他：斜头车</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，斜头只画在侧面贴图里；辆数对（2 辆编成）。<br>
-<b>修法：</b>斜头 warp R＝0.30 纯后倾（无 plan 折角，ja.wikipedia 西武101系「前面单平面后倾」核实），两端头车。涂装旧「淡海号」深蓝未动（MC 只判斜头）。<br>
-<b>推送：</b>提交 <code>99545895</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>99545895bdcd7e6ad53605ce57e6956adb7f5424</code></span></p>
-<div class="cmp"><figure><img src="img/oumi-900_before.png" alt="oumi-900 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/oumi-900_after.png" alt="oumi-900 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n407">
-<h2>#407 sagano-de10 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>MC 判贴图颠倒，但全部 16 张贴图逐面核查均正立，无可翻贴图；肉眼可见的两处毛病是图纸内容错误——机车罩画成黑色（实车 DE10 1104 红色）、SK200 驾驶端玻璃画成黑色菱形网纹板（实车为全景玻璃）；侧面头徽正立，竖翻会翻倒。<br>
-<b>修法：</b>未推（图纸内容错误、翻转修不了）：机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃；需重绘/改色（建模重做范畴）。MC 14:34 指令先不做（暂缓）。详见 tx-1/REPORT_sagano-de10.md.<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</p>
-<div class="cmp"><figure><img src="img/sagano-de10_before.png" alt="sagano-de10 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n411">
-<h2>#411 sanki-801 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。贯通门耳是黄色的（RGB≈233,196,109），判据是轮廓线外＋无面部内容＋翻折线，不是颜色。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。共享贴图同改一次（car2 front＝end1）。<br>
-<b>推送：</b>提交 <code>575f1fe1</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>575f1fe1f1050f3d8dda9fa6a0392e1b0368bade</code></span></p>
-<div class="cmp"><figure><img src="img/sanki-801_before.png" alt="sanki-801 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sanki-801_after.png" alt="sanki-801 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n413">
-<h2>#413 sanyo-3000 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 80%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 skirt_gang_top2 有一条预存全宽横向白带（贴图 22–61 行），不是胶耳，在内侧端面，原样保留。<br>
-<b>推送：</b>提交 <code>61c27863</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>61c27863f833d883348d10700e36117441d1c842</code></span></p>
-<div class="cmp"><figure><img src="img/sanyo-3000_before.png" alt="sanyo-3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sanyo-3000_after.png" alt="sanyo-3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n414">
-<h2>#414 sanyo-5000 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 65%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；梯形裙板（skirt_cab_top1）裁切＋按行填色 2,783 px；手术式 GLB 补丁。共享贴图同改（car2/car3 裙板）。<br>
-<b>推送：</b>提交 <code>32a31aa3</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>32a31aa302a0a77f89cafa4000ecc31044a03126</code></span></p>
-<div class="cmp"><figure><img src="img/sanyo-5000_before.png" alt="sanyo-5000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sanyo-5000_after.png" alt="sanyo-5000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n415">
-<h2>#415 sanyo-5030 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 71–72%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；裙板比面窄（[89,439) vs 面 [75,451)），按裙板自己边界裁，梯形裙板按行填色各 1,200 px；手术式 GLB 补丁。car1＝car2 全 8 图共享，同改。<br>
-<b>推送：</b>提交 <code>a6205cfe</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>a6205cfe19c04952c7d0d8805be6fad415134e0b</code></span></p>
-<div class="cmp"><figure><img src="img/sanyo-5030_before.png" alt="sanyo-5030 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sanyo-5030_after.png" alt="sanyo-5030 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n416">
-<h2>#416 sanyo-6000 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 72.6–73.2%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓（面 72.6–73.2%→100%）、裙板逐行边白填充；手术式 GLB 补丁，只换内嵌贴图，几何逐字节未变。<br>
-<b>推送：</b>提交 <code>246ea4a3</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>246ea4a3af13614b33fb1943f01fde7748210651</code></span></p>
-<div class="cmp"><figure><img src="img/sanyo-6000_before.png" alt="sanyo-6000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sanyo-6000_after.png" alt="sanyo-6000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n423">
-<h2>#423 seibu-001 <span style="color:#666">—— 编组错误（fm-1）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 8 辆，模型仅 1 辆 Tc1（クハ001-01）。<br>
-<b>修法：</b>未推（无图）：rail-trainpdf 全库 8197 个文件里 001 系只有 1 份图纸（1 辆完整头车＋截断的第 2 辆＋中间车车顶小件），缺 7 辆且中间车（M/T 各型窗门布局不同）与司机车不是同型，无法按图纸补；镜像 Tc1 得 [Tc1,Tc2] 也仍是 2/8 错编组。故不虚构、不硬拼，模型/consist/index/map 均未动。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
-<div class="cmp"><figure><img src="img/seibu-001_before.png" alt="seibu-001 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n425">
-<h2>#425 seibu-2000 <span style="color:#666">—— 其他（ot-2）</span></h2>
-<p><b>MC 原话：</b>其他：这个你自行核查一下编组是否正确</p>
-<p><b>根因：</b>辆数对（8 辆编成），但两端司机面朝内（修前 plain FAIL / site FAIL，2 处司机面↔贯通面错接）。<br>
-<b>修法：</b>car1/car8 各绕 Y 转 180°，修后 plain OK / site OK。附带：模型无车号、无受电弓（M1/M3/M5 应有）是图纸/模型既有缺失，不属 verdict 范围，未擅自加。<br>
-<b>推送：</b>提交 <code>d9e18da6</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>d9e18da641b158dc0b5c9ae70ea61f5ced0f637c</code></span></p>
-<div class="cmp"><figure><img src="img/seibu-2000_before.png" alt="seibu-2000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/seibu-2000_after.png" alt="seibu-2000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n426">
-<h2>#426 seibu-20000 <span style="color:#666">—— 其他（ot-2）</span></h2>
-<p><b>MC 原话：</b>其他：这个没有其他车厢了吗</p>
-<p><b>根因：</b>原仅 1 辆 Tc1；MC 问“这个没有其他车厢了吗”——实车 8 辆编成 20151F。<br>
-<b>修法：</b>补 car2–car8 成 8 辆编成（中間车 car2–7 按立面图手术：司机门→窄窗、去 logo/轮椅标/左端蓝竖条；car8＝car1 绕 Y 镜像；consist.json＋car2–8）。6 辆中間车共用同一 GLB（无受电弓，图纸与 car1 均无）；car8 前脸仍显示「本川越」，按 FM-2 先例写明、不手改。<br>
-<b>推送：</b>提交 <code>12c2df8d</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>12c2df8dc07fc382f40683c1278b4e3d3a9a4bff</code></span></p>
-<div class="cmp"><figure><img src="img/seibu-20000_before.png" alt="seibu-20000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/seibu-20000_after.png" alt="seibu-20000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n430">
-<h2>#430 seibu-9000 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。司机面＋贯通端双侧黄色梯形耳（与车身同色）＋裙板白楔，面 69.2% / 75.8–76.0%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、裙板逐行边白填充；手术式 GLB 补丁。耳片与车身同为黄色，只看“白不白”会漏掉——判据是“面轮廓线之外＋无面部内容＋带翻折线”，不是颜色。<br>
-<b>推送：</b>提交 <code>17bf14ba</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>17bf14bad1c8d3e8a5d708d6ba0c035bf782cb9a</code></span></p>
-<div class="cmp"><figure><img src="img/seibu-9000_before.png" alt="seibu-9000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/seibu-9000_after.png" alt="seibu-9000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n432">
-<h2>#432 senboku-9300 <span style="color:#666">—— 其他（ot-2）</span></h2>
-<p><b>MC 原话：</b>其他：这个没有其他车厢了吗</p>
-<p><b>根因：</b>实车 4 辆编成（9301F），模型仅 1 辆 Mc1，缺 3 辆。<br>
-<b>修法：</b>未推（无图）：rail-trainpdf、pepar.net、南海官网纸模页三处均无 9300/8300 图纸，无法补车。MC 14:34 授权决断：先接受现有子集，等有图再说。car1 本身无问题（11,126 tris，0/0/0），自审图已存档.<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
-<div class="cmp"><figure><img src="img/senboku-9300_before.png" alt="senboku-9300 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n433">
-<h2>#433 sendai-sub-1000 <span style="color:#666">—— 其他（ot-2）</span></h2>
-<p><b>MC 原话：</b>其他：小く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，小く只画在侧面贴图里；辆数对（4 辆编成：1100 Tc1＋1200 M1＋1300 M2＋1600 Tc2）。<br>
-<b>修法：</b>小く warp R＝0.12＋centre_back F＝＋0.12（浅 V＋顶部后倾），两端头车。<br>
-<b>推送：</b>提交 <code>34316112</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>34316112290da63643b631defd64d3e559b7e92d</code></span></p>
-<div class="cmp"><figure><img src="img/sendai-sub-1000_before.png" alt="sendai-sub-1000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sendai-sub-1000_after.png" alt="sendai-sub-1000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n434">
-<h2>#434 sendai-sub-2000 <span style="color:#666">—— 其他（ot-3）</span></h2>
-<p><b>MC 原话：</b>其他：小く</p>
-<p><b>根因：</b>小く——前脸以伊达政宗兜前立三日月线为界，上部平面、下部曲面，く在下部曲面、幅度小；实车 4 辆、模型 2 辆子集。<br>
-<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：实车风挡顶与三日月线基本同一垂直面、裙板底部后缩约 0.26 m，标准 R（顶部后移）是反的形状，改用双侧 profile——Y_TIP=1.35 m、R_TOP=0.06（仅车顶圆角）、R_BOT=0.25（裙板底部后缩）、edge_back F=−0.06；只动两头司机端（car1 HI、car2 LO），贯通端未动；不扩编。alphaMode 按原 GLB JSON 逐材质恢复，前后一致。遗留（未修，待 MC 审核时定）：贴图三日月弧画在 y≈1.82 m（实车约 1.3 m）、风挡仅 0.74 m 高。<br>
-<b>推送：</b>提交 <code>52aefb7e</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>52aefb7e4329ebd2ab24a1ed74748f2005d0a824</code></span></p>
-<div class="cmp"><figure><img src="img/sendai-sub-2000_before.png" alt="sendai-sub-2000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sendai-sub-2000_after.png" alt="sendai-sub-2000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n435">
-<h2>#435 sendai-sub-3000 <span style="color:#666">—— 其他（ot-3）</span></h2>
-<p><b>MC 原话：</b>其他：小く并且还要检查编组齐了没</p>
-<p><b>根因：</b>小く（先头形状为 1000N 系传承的くの字形，折角明确）；编组不齐——实车 4 辆（3100 Tc1—3200 M1—3300 M2—3600 Tc2），模型只有 2 辆，缺 3200/3300 中间车。<br>
-<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：只动 car1（3100形 Tc1）唯一司机端 HI，く warp R=0.18、edge_back F=−0.15；只修く、不扩编——car2 实为 3300形 M2 中间车（非 Tc2），缺 3200 M1 与 3600 Tc2，且 3200/3600 无图（全库只有 sendai_sub_3000.pdf 一份，2 辆），补不齐。alphaMode 恢复后前后一致。另：图纸把单臂受电弓画在 3100 车顶（实车只有 3200 有弓），属图纸错误，未修，待 MC 定夺是否另修贴图。<br>
-<b>推送：</b>提交 <code>47426c87</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>47426c870d7ae04b733d0869f7128d09669b44f7</code></span></p>
-<div class="cmp"><figure><img src="img/sendai-sub-3000_before.png" alt="sendai-sub-3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sendai-sub-3000_after.png" alt="sendai-sub-3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n437">
-<h2>#437 shizuoka-a3000 <span style="color:#666">—— 其他（ot-3）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>く（FRP 前头、前面非贯通，车端隅柱断面一辺 45°＋风挡后倾，两角向后收）；编组齐全（实车 2 辆，模型 2 辆）。<br>
-<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）く warp，R=0.18、edge_back F=−0.15；classify_ends 曾把 4 端全误判 CAB，贴图目视核定后才定端。编组齐全（2/2），未动编组/贴图/车号。alphaMode 前后一致。<br>
-<b>推送：</b>提交 <code>6ae050c0</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>6ae050c04134143944ac02297d03ad3322f6939d</code></span></p>
-<div class="cmp"><figure><img src="img/shizuoka-a3000_before.png" alt="shizuoka-a3000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/shizuoka-a3000_after.png" alt="shizuoka-a3000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n440">
-<h2>#440 sinano-sr1 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>car1＋car2 前脸整面全倒（行先/X 盒在顶、金带在风挡上、红灯在底角、小字倒置在左）。<br>
-<b>修法：</b>ROTATE_180（竖翻会把小字留左侧，实车小字在右下）；修后行先顶、灯顶角、风挡居中、金带风挡下、小字正立右下、车钩底，与实车 S102 一致。<br>
-<b>推送：</b>提交 <code>8d6cb0c4</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>8d6cb0c41bd2193b6b1b623e4f123fef4e9557a5</code></span></p>
-<div class="cmp"><figure><img src="img/sinano-sr1_before.png" alt="sinano-sr1 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sinano-sr1_after.png" alt="sinano-sr1 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n441">
-<h2>#441 sinkeisei-80000 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 72.3–73.4%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓（面 72.3–73.4%→100%）、裙板逐行边白填充；手术式 GLB 补丁，几何逐字节未变。<br>
-<b>推送：</b>提交 <code>db0dc483</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>db0dc4830e622c3a6dbf4a8c67ce5e09927fc05f</code></span></p>
-<div class="cmp"><figure><img src="img/sinkeisei-80000_before.png" alt="sinkeisei-80000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sinkeisei-80000_after.png" alt="sinkeisei-80000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n442">
-<h2>#442 sotetsu-10000 <span style="color:#666">—— 其他（ot-3）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>く（E231 系基础，圆滑曲面鼻锥，非折线く）；实车 8/10 辆、模型 2 辆子集。<br>
-<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）圆滑曲面鼻锥 warp，R=0.17、edge_back F=−0.12（图纸实测鼻锥中高最前、车顶与裙板各后收约 0.17 m）；只修几何，未动灯位（原始版腰部灯）、涂装（标准蓝框＋SOTETSU 标志＋橙带）、贴图、车号、编组。alphaMode 前后一致。<br>
-<b>推送：</b>提交 <code>ff311303</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>ff31130367a28f83dbf20475d9bd4a95949f5507</code></span></p>
-<div class="cmp"><figure><img src="img/sotetsu-10000_before.png" alt="sotetsu-10000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-10000_after.png" alt="sotetsu-10000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n443">
-<h2>#443 sotetsu-11000 <span style="color:#666">—— 其他（ot-3）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>く（E233 系基础，前面意匠与 10000 相近，HID 前照灯在车体上部）；实车 10 辆（6M4T）、模型 3 辆子集。<br>
-<b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：car1 HI、car3 LO 两头司机端く warp，R=0.15、edge_back F=−0.15（侧面贴图顶端内收实测 0.14–0.15 m）；car2 中间车未动；不动贴图、车号、灯位、涂装、编组（实车 10 辆，模型 3 辆子集，不扩编）。alphaMode 前后一致。<br>
-<b>推送：</b>提交 <code>d144eb3d</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>d144eb3db9d654be11c09ef87383ba33407350f6</code></span></p>
-<div class="cmp"><figure><img src="img/sotetsu-11000_before.png" alt="sotetsu-11000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-11000_after.png" alt="sotetsu-11000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n444">
-<h2>#444 sotetsu-12000 <span style="color:#666">—— 其他（ot-4）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。<br>
-<b>修法：</b>平头 loft 重建为鼻锥几何（top/bot 折线＋鼻尖半宽比 0.92＋鼻尖下 slit panel＋斜裙板；风挡约 20°、鼻尖 y≈2.0）。附带修既存贴图颠倒：car1 front 上下颠倒＋左右镜像，ROTATE_180 修正（只翻上下仍会镜像标志，必须 180° 旋转）。<br>
-<b>推送：</b>提交 <code>808920f3</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>808920f33f4810dec3af8b1535eb467e1f1767b4</code></span></p>
-<div class="cmp"><figure><img src="img/sotetsu-12000_before.png" alt="sotetsu-12000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-12000_after.png" alt="sotetsu-12000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n445">
-<h2>#445 sotetsu-13000 <span style="color:#666">—— 其他（ot-4）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。<br>
-<b>修法：</b>平头 loft 重建为鼻锥几何（top/bot 折线＋鼻尖半宽比 0.88＋鼻尖下 slit panel＋斜裙板；风挡约 30° 最陡、鼻尖 y≈1.9）。<br>
-<b>推送：</b>提交 <code>7aac7034</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>7aac7034d973ddb90ab9b48f9d4d5d2412ffea72</code></span></p>
-<div class="cmp"><figure><img src="img/sotetsu-13000_before.png" alt="sotetsu-13000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-13000_after.png" alt="sotetsu-13000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n446">
-<h2>#446 sotetsu-21000 <span style="color:#666">—— 其他（ot-4）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。<br>
-<b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.90、风挡约 22°、鼻尖 y≈2.0）；swap_caps 修复：car3 的 front 是贯通门、司机面在 end1，交换后重建并核实前脸确为司机面。<br>
-<b>推送：</b>提交 <code>c7cecd64</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>c7cecd641ce857f14cc54ed7df5cadcd11a22cb5</code></span></p>
-<div class="cmp"><figure><img src="img/sotetsu-21000_before.png" alt="sotetsu-21000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/sotetsu-21000_after.png" alt="sotetsu-21000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n454">
-<h2>#454 titibu-7800 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 76.1–76.3%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓（面 76.1–76.3%→100%）、裙板逐行边白填充；手术式 GLB 补丁，几何逐字节未变。<br>
-<b>推送：</b>提交 <code>94f6af56</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>94f6af5628e8cd39dc63c386138b1a6d297523dd</code></span></p>
-<div class="cmp"><figure><img src="img/titibu-7800_before.png" alt="titibu-7800 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/titibu-7800_after.png" alt="titibu-7800 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n455">
-<h2>#455 tizukyu-hot3500 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两端共用一张端面图，仅左侧白耳、面整体右偏约 8%＋裙板单侧白纸，面 84.6%。<br>
-<b>修法：</b>裁切 [70,456) 一次修掉左耳并纠正右偏＋裙板填补；两端共用同一张端面图，一次裁切两端同修。手术式 GLB 补丁，几何逐字节未变。<br>
-<b>推送：</b>提交 <code>7664dff0</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>7664dff0ac2d7dd4f27f6d3ed5bcfd524c1f68f2</code></span></p>
-<div class="cmp"><figure><img src="img/tizukyu-hot3500_before.png" alt="tizukyu-hot3500 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tizukyu-hot3500_after.png" alt="tizukyu-hot3500 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n456">
-<h2>#456 tizukyu-hot7000 <span style="color:#666">—— 编组错误（fm-1）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 5 辆，模型 3 辆，缺 7050 中间车与 7010 尾端司机车。<br>
-<b>修法：</b>补 car4（7050 中间车）、car5（7010 翻转司机车），3→5 辆；7050 绿车厢段图纸两张中间车净片均无绿带/绿标，只能按普通中间车建。<br>
-<b>推送：</b>提交 <code>2af9319a</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>2af9319ad3813eefdfe3424eb0a38fc5c6b4e7b0</code></span></p>
-<div class="cmp"><figure><img src="img/tizukyu-hot7000_before.png" alt="tizukyu-hot7000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tizukyu-hot7000_after.png" alt="tizukyu-hot7000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n457">
-<h2>#457 tobu-100 <span style="color:#666">—— 编组错误（fm-1）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 6 辆，模型 3 辆，缺 3 辆中间车。<br>
-<b>修法：</b>补 car4（M2，p3 新建）、car5/car6（M3/M4，复制 p2），3→6 辆；M2 图纸按 20.2 m 画、实车 20.5 m，模型短 0.3 m。<br>
-<b>推送：</b>提交 <code>4ddc1c30</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>4ddc1c30aadb42b523ef36b614811907ece18c51</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-100_before.png" alt="tobu-100 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-100_after.png" alt="tobu-100 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n458">
-<h2>#458 tobu-10000 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 70.5%→100%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌贴图，POSITION 逐字节与 v1 一致。<br>
-<b>推送：</b>提交 <code>be6b140a</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>be6b140a7be2872e5c033d8f3ca55bd2a4288ff0</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-10000_before.png" alt="tobu-10000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-10000_after.png" alt="tobu-10000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n459">
-<h2>#459 tobu-10030 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 65.5–69.7%→100%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，POSITION 逐字节与 v1 一致。<br>
-<b>推送：</b>提交 <code>3e596d1b</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>3e596d1b0b53aa0778c45fc8e7fec65fbf6f764e</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-10030_before.png" alt="tobu-10030 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-10030_after.png" alt="tobu-10030 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n460">
-<h2>#460 tobu-200 <span style="color:#666">—— 编组错误（fm-1）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 6 辆，模型 3 辆，缺 3 辆中间车。<br>
-<b>修法：</b>补 car4/car6（M2/M4，复制 p2）、car5（M3，p3 新建），3→6 辆。<br>
-<b>推送：</b>提交 <code>54c90b22</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>54c90b2276fa9d525e61c73427a33c1ab5c5b243</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-200_before.png" alt="tobu-200 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-200_after.png" alt="tobu-200 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n461">
-<h2>#461 tobu-20000 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 72.1–73.3%→100%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、裙板白纸残留同步清；手术式 GLB 补丁。接替专员修正了原 v2 的裁切错误：贯通端面原 (0,574) 等于没裁（右耳全留）、裙板按面轮廓 86 px 裁错（真耳界 176–182 px），修正为端面 [0,477–482)、裙板 [0/176–182, 660/481)；司机面原 (86,660) 误把耳片折线当面轮廓，修正为 [184,660)，重渲后白竖条消失、红带通到边。<br>
-<b>推送：</b>提交 <code>7201611b</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>7201611bbfe7776720b64c632cc175247bfbca5b</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-20000_before.png" alt="tobu-20000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-20000_after.png" alt="tobu-20000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n465">
-<h2>#465 tobu-60000 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>单辆 car1 前脸整面全倒。<br>
-<b>修法：</b>FLIP_TOP_BOTTOM＋车号“00009”块 vregion 反翻回正立（车号画的是 00009，属图纸画法，不改数字）；旋转 180° 会把灯簇红点换到外侧，故不用。修后行先上、风挡、蓝带＋车号正立、灯带在蓝带下、裙板底，与实车 66601 一致。<br>
-<b>推送：</b>提交 <code>75d101bc</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>75d101bc625f57eea54a1852c0a58e2597304b54</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-60000_before.png" alt="tobu-60000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-60000_after.png" alt="tobu-60000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n469">
-<h2>#469 tobu-90000 <span style="color:#666">—— 其他（tx-2）</span></h2>
-<p><b>MC 原话：</b>其他：贴图颠倒 而且胶耳没有清理</p>
-<p><b>根因：</b>整面前脸倒置（蓝在上、表示在裙板里）＋两侧白胶耳。<br>
-<b>修法：</b>整图上下翻转（表示/白灯上、风挡中、蓝面下）；重建司机端裙板（蓝尖＋黑联挂框＋暗灰填充）；两侧耳按柱色填补，前脸内部 0 像素改动。⚠️ pepar.net 水印原样保留（只随被去掉的耳瓣一起消失了耳上的字，未另做水印清理；清不清仍待 MC 定夺）。<br>
-<b>推送：</b>提交 <code>3372c6dd</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>3372c6dde485aac0bc8fc1d136bbf64ecc49a68f</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-90000_before.png" alt="tobu-90000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-90000_after.png" alt="tobu-90000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n470">
-<h2>#470 tobu-n100 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 6 辆（4M2T），模型只有 1 辆 Tc；另全量胶耳检查判该车胶耳确认（旧 tabclean 没修掉）。<br>
-<b>修法：</b>做 2 辆子集 [Tc][Tc]（(b) 方案，car2＝net1＋FLIP_Y180）；同趟修胶耳（端件框收紧＋clean_tight 银柱色填，右缘白像素 8259→29）；实车 6 辆无图补不满。<br>
-<b>推送：</b>提交 <code>61e9b103</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>61e9b103281be319fb2927a05bb40f56f8946cde</code></span></p>
-<div class="cmp"><figure><img src="img/tobu-n100_before.png" alt="tobu-n100 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tobu-n100_after.png" alt="tobu-n100 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n472">
-<h2>#472 toei-5500 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 8 辆，模型 2 辆子集 [5501-1 M1c][5501-8 M8c]，缺 6 辆中间车。<br>
-<b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；另一份 tokyotoei_5500_kidou.pdf 是 1954 年都電 PCC 有轨电车，与都营 5500形无关。2 辆子集方向本身正确（diag plain OK / site OK），错只在缺车。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
-<div class="cmp"><figure><img src="img/toei-5500_before.png" alt="toei-5500 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n473">
-<h2>#473 tokyometro-05 <span style="color:#666">—— 其他（ot-4）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。<br>
-<b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.93、风挡约 20°、鼻尖 y≈2.4 蓝带顶部）。car3 既存缺陷：原两端皆贯通门、无司机面，用 tex_from 借 car1 司机面＋司机裙板重建为远端司机车（同第一批 nankai-30000 先例）。已知局限：car3 侧面仍是中间车侧面（远端无司机侧门），无图纸可补。<br>
-<b>推送：</b>提交 <code>a181a229</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>a181a229b606eaeeb5fe624b2a9f15f8b3d1cfd9</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-05_before.png" alt="tokyometro-05 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-05_after.png" alt="tokyometro-05 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n474">
-<h2>#474 tokyometro-07 <span style="color:#666">—— 其他（ot-4）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。<br>
-<b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.95、风挡约 11° 最缓、鼻尖 y≈1.9）；swap_caps 修复：car2 司机面在 end1，交换后重建并核实。<br>
-<b>推送：</b>提交 <code>f0f3fce5</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>f0f3fce5ea46db9f4e7fa17941b424d1fca79e21</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-07_before.png" alt="tokyometro-07 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-07_after.png" alt="tokyometro-07 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n475">
-<h2>#475 tokyometro-10000 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 10 辆，模型 3 辆。<br>
-<b>修法：</b>补成 10 辆满编（net2 素中间车＋net3 带弓中间车；car10＝原 car3 改名）。3/9 号車受电弓 1 架 vs 实车 2 架的轻微偏差已注明（有弓优于无弓）。<br>
-<b>推送：</b>提交 <code>68ec9742</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>68ec974271190caaa896ee4c69bd95980c5762bd</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-10000_before.png" alt="tokyometro-10000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-10000_after.png" alt="tokyometro-10000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n476">
-<h2>#476 tokyometro-13000 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 7 辆，模型 2 辆子集 [CM2][CM1]，缺 5 辆中间车。<br>
-<b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；PDF 的 p2/p3 是 03系，不可用。2 辆子集方向本身正确。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</p>
-<div class="cmp"><figure><img src="img/tokyometro-13000_before.png" alt="tokyometro-13000 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n477">
-<h2>#477 tokyometro-17000 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>实车 10 辆，模型 2 辆。<br>
-<b>修法：</b>补成 10 辆满编（p2 素中间车＋p3 带弓中间车；先头车复用远端返工版字节，圆角く形鼻锥＋真实比例司机面，v1 重建会回退；car2 同名替换为 p2 中间车）。<br>
-<b>推送：</b>提交 <code>8ca5e890</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>8ca5e8900d8bb32de883adacbd93b6cd375ed8fe</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-17000_before.png" alt="tokyometro-17000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-17000_after.png" alt="tokyometro-17000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n478">
-<h2>#478 tokyometro-18000 <span style="color:#666">—— 其他（ot-5）</span></h2>
-<p><b>MC 原话：</b>其他：く，然后检查一下编组齐了没</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里；另 MC 要求检查编组齐了没。<br>
-<b>修法：</b>く warp R＝0.22、edge_back F＝−0.18，两头先头车。编组核查：实车 10 辆、现模型 2 辆子集；原建模 REPORT 称“图纸只有先头车 1 张净片”是错的——同一份图纸（Vayashi tokyometro_18000_hanzomon.pdf）实际是三张完整净片并排（先头车＋普通中间车＋带受电弓中间车）。本次不补中间车：6 辆可用净片建，但 18500 Tc1 / 18600 Tc2 的司机端净片图纸里没有，补了也得不到 10 辆全编组，且补 6 辆超出本任务范围。⚠️ 跟进选项：若另行派发，图纸在 batch251 g13 artwork（p2 普通中间车、p3 受电弓中间车），中间车实车长 19.5 m（非 20.005 m），18500/18600 需另找带司机端图纸或等 MC 定夺；不建议无图虚构司机端。<br>
-<b>推送：</b>提交 <code>d8601806</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>d86018069dd5f99cf1fcd6c1165b7c0886277eee</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-18000_before.png" alt="tokyometro-18000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-18000_after.png" alt="tokyometro-18000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n479">
-<h2>#479 tokyometro-9000 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>旧 3 辆本身方向正确，只缺 3 辆中间车（实车 6 辆）。<br>
-<b>修法：</b>新 car4/5/6 克隆 car2，3→6 辆；car3 本身已是翻转到位的尾端司机车，不另翻（硬翻反而修坏）。克隆＝字节复制＋mesh/node 改名，几何/UV/贴图全不动。<br>
-<b>推送：</b>提交 <code>4ca9521f</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>4ca9521f606a2c569d100474304ed0147ba7d0b2</code></span></p>
-<div class="cmp"><figure><img src="img/tokyometro-9000_before.png" alt="tokyometro-9000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyometro-9000_after.png" alt="tokyometro-9000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n480">
-<h2>#480 tokyotoei-10300 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>旧 3 辆外端 −Z 是贯通端 FAIL（实车 10 辆）。<br>
-<b>修法：</b>补 6 辆中间车＋翻转 car1 作尾端 Tc2，3→10 辆；新中间车一律只克隆 car2——car3 车顶贴图印有两副受电弓（纸模原图问题，实车每辆至多 1 副单臂弓），不扩散；car3 本体未动，留待 MC 定夺。<br>
-<b>推送：</b>提交 <code>4cb55e82</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>4cb55e82b25be4c183f2b1914a64a0be47c7f3bb</code></span></p>
-<div class="cmp"><figure><img src="img/tokyotoei-10300_before.png" alt="tokyotoei-10300 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyotoei-10300_after.png" alt="tokyotoei-10300 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n481">
-<h2>#481 tokyotoei-12000 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>旧 2 辆外端 −Z 是贯通端 FAIL（实车 8 辆）。<br>
-<b>修法：</b>补 5 辆中间车＋翻转 car1 作尾端 M2c，2→8 辆；楔形头随翻转落到远端。克隆＝字节复制＋mesh/node 改名；翻转＝纯几何绕 Y 轴 180°、UV 与贴图不动。<br>
-<b>推送：</b>提交 <code>33be43e6</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>33be43e6cdf27b197f65c48d3c961696cf59e646</code></span></p>
-<div class="cmp"><figure><img src="img/tokyotoei-12000_before.png" alt="tokyotoei-12000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyotoei-12000_after.png" alt="tokyotoei-12000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n483">
-<h2>#483 tokyu-2020 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>仅 car1 前脸整面全倒。<br>
-<b>修法：</b>flip_band，只翻 rows [0,265)——整幅竖翻会把灯/微笑弧/X 盒/橙角翻到采样区（v∈[0,0.68]）之下、前脸全黑。修后风挡上、灯在风挡下、微笑弧在灯下、X 盒在底，与实车 2121F 一致。<br>
-<b>推送：</b>提交 <code>092e3a82</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>092e3a827410828fd0407696bccde5f749736007</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-2020_before.png" alt="tokyu-2020 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-2020_after.png" alt="tokyu-2020 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n484">
-<h2>#484 tokyu-300 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>MC 判编组错误，但单 GLB 长 24.006 m＝实车 2 辆铰接全编组（23.98 m），两端均为司机面，plain/site 均 OK；“1 个文件”不是“1 辆车”，无缺车、无错。<br>
-<b>修法：</b>未推（无错）：不修不推。<br>
-<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</p>
-<div class="cmp"><figure><img src="img/tokyu-300_before.png" alt="tokyu-300 返工前斜视角"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
-</div><div class="card" id="n485">
-<h2>#485 tokyu-3020 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>旧 3 辆外端 −Z 是贯通端 FAIL（实车 8 辆）。<br>
-<b>修法：</b>补 4 辆中间车（car4–6 克隆 car2、car7 克隆 car3）＋翻转 car1 作尾端 Tc1，3→8 辆。<br>
-<b>推送：</b>提交 <code>4d353e19</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>4d353e19854970c2618e737868acb74bad536196</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-3020_before.png" alt="tokyu-3020 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-3020_after.png" alt="tokyu-3020 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n486">
-<h2>#486 tokyu-5000 <span style="color:#666">—— 编组错误（fm-4）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>整列只有一端司机面：car3 名义デハ5000、实际是中部 T 车（两端贯通端件）；实车 10 辆。<br>
-<b>修法：</b>新增 car4＝net1 翻转先头车（デハ5000形 5002，Tc1），3→4 辆；两头风挡车号均为“5102”（图纸只有 5102 司机端片）；实车 10 辆、模型 4 辆子集——6 辆中部车无图纸，4 辆已是图纸允许的最大编组。<br>
-<b>推送：</b>提交 <code>4c008674</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>4c00867487c3da241e150699ca65daea87875860</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-5000_before.png" alt="tokyu-5000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-5000_after.png" alt="tokyu-5000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n487">
-<h2>#487 tokyu-5080 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 77.5–79.5%→100%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，POSITION 逐字节与 v1 一致。<br>
-<b>推送：</b>提交 <code>c8d4b8d4</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>c8d4b8d41ef84f6f313cf52c4fbc0da5be364c23</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-5080_before.png" alt="tokyu-5080 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-5080_after.png" alt="tokyu-5080 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n488">
-<h2>#488 tokyu-6000 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。贯通端面仅 28.6–28.8% 宽，司机面 73.8%→100%。<br>
-<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；手术式 GLB 补丁。接替专员修正了原 v2 的裁切错误：贯通端面（car1 end1、car2 front/end1、car3 front）原按司机面比例 (48–52, 327–346) 裁，窄面两侧各留约 84 px 白耳，修正为 [136,244)/[142,257)。<br>
-<b>推送：</b>提交 <code>e901004a</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>e901004a0a5c4106fc2cb9fabf5a9219046b6427</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-6000_before.png" alt="tokyu-6000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-6000_after.png" alt="tokyu-6000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n489">
-<h2>#489 tokyu-6020 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>仅 car1 前脸整面全倒（与 2020 同款）。<br>
-<b>修法：</b>flip_band，只翻 rows [0,292)；修后与实车 6721 一致，橙角左下可见。car2/car3 贯通端不动。<br>
-<b>推送：</b>提交 <code>e266d63b</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>e266d63bd07c7779128e5f614d38c643d473f023</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-6020_before.png" alt="tokyu-6020 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-6020_after.png" alt="tokyu-6020 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n490">
-<h2>#490 tokyu-7000 <span style="color:#666">—— 编组错误（fm-4）</span></h2>
-<p><b>MC 原话：</b>编组错误</p>
-<p><b>根因：</b>辆数、两端司机面均对；错在 car1 的 −X 壁、car3 的 ＋X 壁司机门落在贯通端（全车共用一张 side 贴图，两壁 UV 方向相反，司机门在 u≈0）。<br>
-<b>修法：</b>只对错的那面做 U 镜像（U→1−U，逐顶点，只动 side 图元独立的 TEXCOORD_0，V 不动；side 贴图无文字/logo，镜像安全）。数值验证：两车两壁 u＝0（司机门）均落在司机端；目检四面壁司机门均紧邻司机端。<br>
-<b>推送：</b>提交 <code>64882f15</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>64882f15165071c2c7fc51920732941a90d96510</code></span></p>
-<div class="cmp"><figure><img src="img/tokyu-7000_before.png" alt="tokyu-7000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tokyu-7000_after.png" alt="tokyu-7000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n500">
-<h2>#500 toyamatihou-9000 <span style="color:#666">—— 其他（ot-5）</span></h2>
-<p><b>MC 原话：</b>其他：楔形</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，楔形只画在侧面贴图里。<br>
-<b>修法：</b>楔形 warp R＝0.50、edge_back F＝−0.15，两端。<br>
-<b>推送：</b>提交 <code>ad2dc24c</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>ad2dc24ccf81f8b471c35edcf011e0d6cf2fefbc</code></span></p>
-<div class="cmp"><figure><img src="img/toyamatihou-9000_before.png" alt="toyamatihou-9000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/toyamatihou-9000_after.png" alt="toyamatihou-9000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n506">
-<h2>#506 tukubaexp-tx2000 <span style="color:#666">—— 其他（ot-5）</span></h2>
-<p><b>MC 原话：</b>其他：く</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
-<b>修法：</b>く warp R＝0.30、centre_back F＝＋0.18（2面折れ），仅 car1；只修く头型，不扩编（图纸只有 3 张净片，缺 2400/2500/2600 无图）。三辆侧面车号牌均为“TX-2153”（应为 2153/2253/2353，既存缺陷，MC 本次只点く头型、未授权改，不修）。<br>
-<b>推送：</b>提交 <code>71bc8b20</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>71bc8b206fdb1d8b369e38c78202d43ed94ec298</code></span></p>
-<div class="cmp"><figure><img src="img/tukubaexp-tx2000_before.png" alt="tukubaexp-tx2000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/tukubaexp-tx2000_after.png" alt="tukubaexp-tx2000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n512">
-<h2>#512 wakayama-2270 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两司机面各一侧白色梯形耳（带斜折线），面偏心、车灯偏左，面 79.8% / 79.2%。<br>
-<b>修法：</b>两框收紧（car1 0..384、car2 98..479）＋两裙板同裁；面心回正、车灯回正、联挂器不移位。分两 commit（car1、car2 各一）。<br>
-<b>推送：</b>提交 <code>fbbdbedc + ce6eee44</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>fbbdbedc96ded317ed7cee93615262e7facdbc71（car1）／ce6eee444d83a90960293ffb3b263e3a29c985b5（car2）</code></span></p>
-<div class="cmp"><figure><img src="img/wakayama-2270_before.png" alt="wakayama-2270 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/wakayama-2270_after.png" alt="wakayama-2270 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n515">
-<h2>#515 yakuri-ko1 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
-<p><b>MC 原话：</b>胶耳未清</p>
-<p><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两端同形，风挡区以上两侧浅灰梯形耳（带斜折线），面约 69%（风挡区）。<br>
-<b>修法：</b>按图纸实测面轮廓线（框内竖线列 26/145 → 贴图列 67/370），行 0..163 的耳逐行向内填色（风挡区填框深色、橙面区填橙色），行 ≥164 一字不动；frontf 取新 front 水平镜像。<br>
-<b>推送：</b>提交 <code>101bd111</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>101bd111e9d660f05ba939ae71b680b43e3506ef</code></span></p>
-<div class="cmp"><figure><img src="img/yakuri-ko1_before.png" alt="yakuri-ko1 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/yakuri-ko1_after.png" alt="yakuri-ko1 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n520">
-<h2>#520 yokohamasub-10000 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
-<p><b>MC 原话：</b>贴图颠倒</p>
-<p><b>根因：</b>前脸本身正立，是端盖 UV 取值错了（v 0–0.847 把屋顶受电弓条框进端盖顶部 32%、前脸压扁）。<br>
-<b>修法：</b>裁切前脸行（rows 202–610）＋UV v/0.847，前脸占满端盖：表示/头灯上、风挡、青绿带、银板、橙尾灯下。⚠️ 左缘胶耳未修（x 0–43，约 12.8% 宽白竖带）：任务定本车只修贴图颠倒，无干净的裁切-重标方案（风挡宽已正确 1.96 m，拉伸会变 2.33 m），留待以后单独处理。<br>
-<b>推送：</b>提交 <code>36ff81a3</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>36ff81a3d6a9ce2a327bbb5f1403a63a254caaa2</code></span></p>
-<div class="cmp"><figure><img src="img/yokohamasub-10000_before.png" alt="yokohamasub-10000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/yokohamasub-10000_after.png" alt="yokohamasub-10000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
-</div><div class="card" id="n521">
-<h2>#521 yokohamasub-3000v <span style="color:#666">—— 编组错误（fm-4）</span></h2>
-<p><b>MC 原话：</b>编组错误（MC 写 yokohamasub-3000，实为 yokohamasub-3000v，index 已核实）</p>
-<p><b>根因：</b>翻转车 car2 侧面帆形三角朝向贯通端，与 car1 相向（“&gt;&lt;”）；实车三组照片核实各车三角统一朝あざみ野端（“&gt;&gt;&gt;”）。<br>
-<b>修法：</b>两侧面贴图每面帆的浅蓝楔以双叶门中心镜像；海鸥剪影先 inpaint 再原位重画（暗蓝像素与原图完全一致，无重影）。辆数 2 vs 实车 6，3612–3615 中部车无图纸，修不了。<br>
-<b>推送：</b>提交 <code>7b9761dc</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>7b9761dc17126cd55df464afb0031b7f33ea12f7</code></span></p>
-<div class="cmp"><figure><img src="img/yokohamasub-3000v_before.png" alt="yokohamasub-3000v 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/yokohamasub-3000v_after.png" alt="yokohamasub-3000v 返工后斜视角"><figcaption>修后</figcaption></figure></div>
+<li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li>
+</ul>
+<p>第二轮：#391 odakyu-60000、#392 odakyu-70000、#404 osakyu-70000 的修后图已是第二轮重建的渲染。</p>
+</header>
+<div class="filters" id="filters">
+<button data-f="all" class="on">全部 70</button>
+<button data-f="pushed">✅已推 64</button>
+<button data-f="unpushed">⛔未返工 6</button>
+<button data-f="unreviewed">未审</button>
+<button data-f="reviewed">已审</button>
+<input type="search" id="q" placeholder="搜 slug，如 odakyu-60000">
 </div>
-
-<p class="note">说明：修前图优先取各组同相机 v1/orig 渲染；组内无修前渲染的车，修前图取快速审核页原斜视角图（img/ev/）或批次审核页原图（jr3d-audit batch*/…/user_oblique.png）。未推车无修后图。工作目录：~/workspace/jr3d/work/mc-review-rework2-20261127/（DISPATCH.md＋各组 SUMMARY.md/REPORT.md）；建页脚本：rework-page/build_page.py。</p>
+<main id="list">
+<section class="card" id="car-387" data-num="387" data-slug="odakyu-1000" data-status="pushed">
+  <div class="chead"><span class="num">#387</span> <span class="slug">odakyu-1000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>0881229e</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-1）　<span class="note">完整 SHA：<code>0881229e37e50e7c97bd52bdf19210922a474e64</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面宽约 70%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌贴图，几何逐字节未动。car2 共用 car1 全部 4 张贴图，同改。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/odakyu-1000_after.png" alt="odakyu-1000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-388" data-num="388" data-slug="odakyu-30000" data-status="pushed">
+  <div class="chead"><span class="num">#388</span> <span class="slug">odakyu-30000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>8f1183f1</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-1）　<span class="note">完整 SHA：<code>8f1183f133ae6ff68bf69f99018ee4ebe976377c</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。6 辆编组。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2–car5 的 end1 与各自 front 共用，同改。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/odakyu-30000_after.png" alt="odakyu-30000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-389" data-num="389" data-slug="odakyu-4000" data-status="pushed">
+  <div class="chead"><span class="num">#389</span> <span class="slug">odakyu-4000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>c9da609d</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-1）　<span class="note">完整 SHA：<code>c9da609db2c94fd31ee79e70a7f50e173520aec3</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。单辆车。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；司机端裙板梯形窄耳改 fill 逐行填邻近面色（crop 会拉伸车钩罩）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/odakyu-4000_after.png" alt="odakyu-4000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-390" data-num="390" data-slug="odakyu-5000" data-status="pushed">
+  <div class="chead"><span class="num">#390</span> <span class="slug">odakyu-5000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>bc575a8a</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-1）　<span class="note">完整 SHA：<code>bc575a8a334c7742333aba10aaea1b68eef1425f</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 共用 car1 全部 4 张贴图，同改；裙板窄耳 fill。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/odakyu-5000_after.png" alt="odakyu-5000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-391" data-num="391" data-slug="odakyu-60000" data-status="pushed">
+  <div class="chead"><span class="num">#391</span> <span class="slug">odakyu-60000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>f307c96f</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-1）　<span class="note">完整 SHA：<code>f307c96f07f7d3d24bcc6d017af282d788dcd323</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：这个车是楔形的</div>
+  <div class="cnote"><b>根因：</b>第一轮 OT-1 的 GLB warp（R=0.55）不够：原版前盖是 29 三角扇形，warp 只能把它顶成带硬折的帐篷（拱形折线就是扇形边）；且前脸/裙板贴图就是纸模端件 1:1，折叠拱线、白耳、矩形贯通门全在图上，warp 去不掉。…</div>
+  <div class="cnote"><b>修法：</b>第二轮从原版 GLB 重做：25×15 分级网格新前盖（625 tris）＋C1 平滑 warp（车顶后移 0.50 m）＋前脸/裙板/侧面鼻端贴图按实车重画（双片圆角风挡、雨刮、LED 行显、车钩凹口、前灯）；…</div>
+  <div class="warnline">🔁 第二轮重建：修后图为第二轮重建渲染（非第一轮 OT-1 旧渲染）。</div>
+  <div class="cimg"><img loading="lazy" src="img/odakyu-60000_after.png" alt="odakyu-60000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-392" data-num="392" data-slug="odakyu-70000" data-status="pushed">
+  <div class="chead"><span class="num">#392</span> <span class="slug">odakyu-70000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>2de32a62</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-1）　<span class="note">完整 SHA：<code>2de32a6232ed57f4735057ed1860bb0a50a58c19</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：这个车是楔形的</div>
+  <div class="cnote"><b>根因：</b>与 #404 同一辆小田急70000形 GSE（异名重复 slug）；front 贴图是同一张鼻锥件但上下颠倒（翻转后平均绝对差 20.9、不翻转 57.6），同样有空矩形框＋2 红圆点“控制面板”＋空白显示器状风挡＋下方大块灰平板；…</div>
+  <div class="cnote"><b>修法：</b>第二轮删后重建（与 #404 同法，MC 14:34 授权“按实际情况做决断”）：删 commit 8f76cc1a（index 663→662），再从同一张图纸从头重建（loft 光滑流线展望头，…</div>
+  <div class="warnline">🔁 第二轮重建：修后图为第二轮重建渲染（非第一轮 OT-1 旧渲染）。</div>
+  <div class="cimg"><img loading="lazy" src="img/odakyu-70000_after.png" alt="odakyu-70000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-393" data-num="393" data-slug="odakyu-8000" data-status="pushed">
+  <div class="chead"><span class="num">#393</span> <span class="slug">odakyu-8000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>c5aade98</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-1）　<span class="note">完整 SHA：<code>c5aade98676fcc203317ea73f318de79dd86588d</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。3 辆编组。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 end1 共用 car2 front、car3 front/skirt 共用 car1。…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/odakyu-8000_after.png" alt="odakyu-8000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-397" data-num="397" data-slug="osakametro-30000" data-status="pushed">
+  <div class="chead"><span class="num">#397</span> <span class="slug">osakametro-30000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>75f28263</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-2）　<span class="note">完整 SHA：<code>75f28263d3e4743caa999c32d8285046fb02b473</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面约 72–73%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌 PNG，不重建，几何零改动（三角数 11,126 不变）。共享贴图同改一次（car2 front＝end1）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/osakametro-30000_after.png" alt="osakametro-30000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-398" data-num="398" data-slug="osakametro-70" data-status="pushed">
+  <div class="chead"><span class="num">#398</span> <span class="slug">osakametro-70</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>1e167d99</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-1）　<span class="note">完整 SHA：<code>1e167d99739dbd0d53f6de8e207b461db939154e</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>く warp R≈0.29（图纸车顶后收 0.56 m 有夸大，照片折角较缓，取照片值；车顶中心 −0.276、边缘 −0.293、裙板 −0.013）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/osakametro-70_after.png" alt="osakametro-70 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-399" data-num="399" data-slug="osakamono-3000" data-status="pushed">
+  <div class="chead"><span class="num">#399</span> <span class="slug">osakamono-3000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>65b82278</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-1）　<span class="note">完整 SHA：<code>65b8227892cde41cb20b104abb9ad0417c579fde</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 4 辆，模型只有 2 辆，缺 3300 中间车与 3400 尾端司机车。</div>
+  <div class="cnote"><b>修法：</b>补 car3（3300 中间车）、car4（3400 翻转司机车），2→4 辆；原 car_length_m 是列表 [15.76, 14.48]（站内 lenOf 取到列表会变 NaN），…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/osakamono-3000_after.png" alt="osakamono-3000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-400" data-num="400" data-slug="osakanewtram-200" data-status="pushed">
+  <div class="chead"><span class="num">#400</span> <span class="slug">osakanewtram-200</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7a5e3f26</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-1）　<span class="note">完整 SHA：<code>7a5e3f26e0d245e4ffa95814c3fce96c5fc2b959</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：斜车头</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，斜头只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>斜头 warp R＝0.50（图纸斜度仅 0.10 m、远小于照片，按照片取；车顶中心 0.499、边缘 0.549、腰线边缘 0.378、裙板边缘 0.192）；内端（贯通端）不动。…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/osakanewtram-200_after.png" alt="osakanewtram-200 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-404" data-num="404" data-slug="osakyu-70000" data-status="pushed">
+  <div class="chead"><span class="num">#404</span> <span class="slug">osakyu-70000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>ccb413d8</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-1）　<span class="note">完整 SHA：<code>ccb413d8909c6f05ff9e3e6f9027561ac0b6bb93</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：编组错误 而且是尖头车</div>
+  <div class="cnote"><b>根因：</b>第一轮 OT-1 只修了编组（car2 重建为 Tc）＋尖头 warp R=0.55，但前脸仍错：纸模鼻锥件是折叠展开图不是立面图，拍平后红司机面板（空矩形框＋2 圆点）像控制面板、大块深色梯形像空白显示器，折叠线横切风挡；…</div>
+  <div class="cnote"><b>修法：</b>第二轮删后重建：删 commit 73b796d0（index 663→662），再从图纸从头重建（loft 光滑流线展望头，底边下探到 y=1.15 m＋后倾前裙板，前脸按实车重画：整块全景风挡、无电脑面板、无横线切断玻璃）；…</div>
+  <div class="warnline">🔁 第二轮重建：修后图为第二轮重建渲染（非第一轮 OT-1 旧渲染）。</div>
+  <div class="cimg"><img loading="lazy" src="img/osakyu-70000_after.png" alt="osakyu-70000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-405" data-num="405" data-slug="oumi-900" data-status="pushed">
+  <div class="chead"><span class="num">#405</span> <span class="slug">oumi-900</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>99545895</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-2）　<span class="note">完整 SHA：<code>99545895bdcd7e6ad53605ce57e6956adb7f5424</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：斜头车</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，斜头只画在侧面贴图里；辆数对（2 辆编成）。</div>
+  <div class="cnote"><b>修法：</b>斜头 warp R＝0.30 纯后倾（无 plan 折角，ja.wikipedia 西武101系「前面单平面后倾」核实），两端头车。涂装旧「淡海号」深蓝未动（MC 只判斜头）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/oumi-900_after.png" alt="oumi-900 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-407" data-num="407" data-slug="sagano-de10" data-status="unpushed">
+  <div class="chead"><span class="num">#407</span> <span class="slug">sagano-de10</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</div><div class="cmeta">类别：贴图颠倒（tx-1）</div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>MC 判贴图颠倒，但全部 16 张贴图逐面核查均正立，无可翻贴图；肉眼可见的两处毛病是图纸内容错误——机车罩画成黑色（实车 DE10 1104 红色）、SK200 驾驶端玻璃画成黑色菱形网纹板（实车为全景玻璃）；侧面头徽正立，竖翻会翻倒。</div>
+  <div class="cnote"><b>修法：</b>未推（图纸内容错误、翻转修不了）：机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃；需重绘/改色（建模重做范畴）。MC 14:34 指令先不做（暂缓）。详见 tx-1/REPORT_sagano-de10.md.</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sagano-de10_before.png" alt="sagano-de10 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-411" data-num="411" data-slug="sanki-801" data-status="pushed">
+  <div class="chead"><span class="num">#411</span> <span class="slug">sanki-801</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>575f1fe1</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-2）　<span class="note">完整 SHA：<code>575f1fe1f1050f3d8dda9fa6a0392e1b0368bade</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。贯通门耳是黄色的（RGB≈233,196,109），判据是轮廓线外＋无面部内容＋翻折线，不是颜色。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。共享贴图同改一次（car2 front＝end1）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sanki-801_after.png" alt="sanki-801 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-413" data-num="413" data-slug="sanyo-3000" data-status="pushed">
+  <div class="chead"><span class="num">#413</span> <span class="slug">sanyo-3000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>61c27863</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-2）　<span class="note">完整 SHA：<code>61c27863f833d883348d10700e36117441d1c842</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 80%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁。car2 skirt_gang_top2 有一条预存全宽横向白带（贴图 22–61 行），不是胶耳，在内侧端面，原样保留。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sanyo-3000_after.png" alt="sanyo-3000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-414" data-num="414" data-slug="sanyo-5000" data-status="pushed">
+  <div class="chead"><span class="num">#414</span> <span class="slug">sanyo-5000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>32a31aa3</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-2）　<span class="note">完整 SHA：<code>32a31aa302a0a77f89cafa4000ecc31044a03126</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 65%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；梯形裙板（skirt_cab_top1）裁切＋按行填色 2,783 px；手术式 GLB 补丁。共享贴图同改（car2/car3 裙板）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sanyo-5000_after.png" alt="sanyo-5000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-415" data-num="415" data-slug="sanyo-5030" data-status="pushed">
+  <div class="chead"><span class="num">#415</span> <span class="slug">sanyo-5030</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>a6205cfe</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-2）　<span class="note">完整 SHA：<code>a6205cfe19c04952c7d0d8805be6fad415134e0b</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。面约 71–72%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；裙板比面窄（[89,439) vs 面 [75,451)），按裙板自己边界裁，梯形裙板按行填色各 1,200 px；手术式 GLB 补丁。car1＝car2 全 8 图共享，同改。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sanyo-5030_after.png" alt="sanyo-5030 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-416" data-num="416" data-slug="sanyo-6000" data-status="pushed">
+  <div class="chead"><span class="num">#416</span> <span class="slug">sanyo-6000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>246ea4a3</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-3）　<span class="note">完整 SHA：<code>246ea4a3af13614b33fb1943f01fde7748210651</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 72.6–73.2%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓（面 72.6–73.2%→100%）、裙板逐行边白填充；手术式 GLB 补丁，只换内嵌贴图，几何逐字节未变。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sanyo-6000_after.png" alt="sanyo-6000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-423" data-num="423" data-slug="seibu-001" data-status="unpushed">
+  <div class="chead"><span class="num">#423</span> <span class="slug">seibu-001</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</div><div class="cmeta">类别：编组错误（fm-1）</div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 8 辆，模型仅 1 辆 Tc1（クハ001-01）。</div>
+  <div class="cnote"><b>修法：</b>未推（无图）：rail-trainpdf 全库 8197 个文件里 001 系只有 1 份图纸（1 辆完整头车＋截断的第 2 辆＋中间车车顶小件），缺 7 辆且中间车（M/T 各型窗门布局不同）与司机车不是同型，无法按图纸补；…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/seibu-001_before.png" alt="seibu-001 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-425" data-num="425" data-slug="seibu-2000" data-status="pushed">
+  <div class="chead"><span class="num">#425</span> <span class="slug">seibu-2000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>d9e18da6</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-2）　<span class="note">完整 SHA：<code>d9e18da641b158dc0b5c9ae70ea61f5ced0f637c</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：这个你自行核查一下编组是否正确</div>
+  <div class="cnote"><b>根因：</b>辆数对（8 辆编成），但两端司机面朝内（修前 plain FAIL / site FAIL，2 处司机面↔贯通面错接）。</div>
+  <div class="cnote"><b>修法：</b>car1/car8 各绕 Y 转 180°，修后 plain OK / site OK。附带：模型无车号、无受电弓（M1/M3/M5 应有）是图纸/模型既有缺失，不属 verdict 范围，未擅自加。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/seibu-2000_after.png" alt="seibu-2000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-426" data-num="426" data-slug="seibu-20000" data-status="pushed">
+  <div class="chead"><span class="num">#426</span> <span class="slug">seibu-20000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>12c2df8d</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-2）　<span class="note">完整 SHA：<code>12c2df8dc07fc382f40683c1278b4e3d3a9a4bff</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：这个没有其他车厢了吗</div>
+  <div class="cnote"><b>根因：</b>原仅 1 辆 Tc1；MC 问“这个没有其他车厢了吗”——实车 8 辆编成 20151F。</div>
+  <div class="cnote"><b>修法：</b>补 car2–car8 成 8 辆编成（中間车 car2–7 按立面图手术：司机门→窄窗、去 logo/轮椅标/左端蓝竖条；car8＝car1 绕 Y 镜像；consist.json＋car2–8）。6 辆中間车共用同一 GLB（无受电弓…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/seibu-20000_after.png" alt="seibu-20000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-430" data-num="430" data-slug="seibu-9000" data-status="pushed">
+  <div class="chead"><span class="num">#430</span> <span class="slug">seibu-9000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>17bf14ba</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-3）　<span class="note">完整 SHA：<code>17bf14bad1c8d3e8a5d708d6ba0c035bf782cb9a</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高竖条；贴图问题，非几何。司机面＋贯通端双侧黄色梯形耳（与车身同色）＋裙板白楔，面 69.2% / 75.8–76.0%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、裙板逐行边白填充；手术式 GLB 补丁。耳片与车身同为黄色，只看“白不白”会漏掉——判据是“面轮廓线之外＋无面部内容＋带翻折线”，不是颜色。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/seibu-9000_after.png" alt="seibu-9000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-432" data-num="432" data-slug="senboku-9300" data-status="unpushed">
+  <div class="chead"><span class="num">#432</span> <span class="slug">senboku-9300</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</div><div class="cmeta">类别：其他（ot-2）</div>
+  <div class="cnote"><b>MC 原话：</b>其他：这个没有其他车厢了吗</div>
+  <div class="cnote"><b>根因：</b>实车 4 辆编成（9301F），模型仅 1 辆 Mc1，缺 3 辆。</div>
+  <div class="cnote"><b>修法：</b>未推（无图）：rail-trainpdf、pepar.net、南海官网纸模页三处均无 9300/8300 图纸，无法补车。MC 14:34 授权决断：先接受现有子集，等有图再说。car1 本身无问题（11,126 tris，0/0/0），…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/senboku-9300_before.png" alt="senboku-9300 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-433" data-num="433" data-slug="sendai-sub-1000" data-status="pushed">
+  <div class="chead"><span class="num">#433</span> <span class="slug">sendai-sub-1000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>34316112</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-2）　<span class="note">完整 SHA：<code>34316112290da63643b631defd64d3e559b7e92d</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：小く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，小く只画在侧面贴图里；辆数对（4 辆编成：1100 Tc1＋1200 M1＋1300 M2＋1600 Tc2）。</div>
+  <div class="cnote"><b>修法：</b>小く warp R＝0.12＋centre_back F＝＋0.12（浅 V＋顶部后倾），两端头车。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sendai-sub-1000_after.png" alt="sendai-sub-1000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-434" data-num="434" data-slug="sendai-sub-2000" data-status="pushed">
+  <div class="chead"><span class="num">#434</span> <span class="slug">sendai-sub-2000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>52aefb7e</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-3）　<span class="note">完整 SHA：<code>52aefb7e4329ebd2ab24a1ed74748f2005d0a824</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：小く</div>
+  <div class="cnote"><b>根因：</b>小く——前脸以伊达政宗兜前立三日月线为界，上部平面、下部曲面，く在下部曲面、幅度小；实车 4 辆、模型 2 辆子集。</div>
+  <div class="cnote"><b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：实车风挡顶与三日月线基本同一垂直面、裙板底部后缩约 0.26 m，标准 R（顶部后移）是反的形状，…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sendai-sub-2000_after.png" alt="sendai-sub-2000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-435" data-num="435" data-slug="sendai-sub-3000" data-status="pushed">
+  <div class="chead"><span class="num">#435</span> <span class="slug">sendai-sub-3000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>47426c87</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-3）　<span class="note">完整 SHA：<code>47426c870d7ae04b733d0869f7128d09669b44f7</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：小く并且还要检查编组齐了没</div>
+  <div class="cnote"><b>根因：</b>小く（先头形状为 1000N 系传承的くの字形，折角明确）；编组不齐——实车 4 辆（3100 Tc1—3200 M1—3300 M2—3600 Tc2），模型只有 2 辆，缺 3200/3300 中间车。</div>
+  <div class="cnote"><b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：只动 car1（3100形 Tc1）唯一司机端 HI，く warp R=0.18、edge_back F=−0.15；只修く、…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sendai-sub-3000_after.png" alt="sendai-sub-3000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-437" data-num="437" data-slug="shizuoka-a3000" data-status="pushed">
+  <div class="chead"><span class="num">#437</span> <span class="slug">shizuoka-a3000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>6ae050c0</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-3）　<span class="note">完整 SHA：<code>6ae050c04134143944ac02297d03ad3322f6939d</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>く（FRP 前头、前面非贯通，车端隅柱断面一辺 45°＋风挡后倾，两角向后收）；编组齐全（实车 2 辆，模型 2 辆）。</div>
+  <div class="cnote"><b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）く warp，R=0.18、edge_back F=−0.15；…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/shizuoka-a3000_after.png" alt="shizuoka-a3000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-440" data-num="440" data-slug="sinano-sr1" data-status="pushed">
+  <div class="chead"><span class="num">#440</span> <span class="slug">sinano-sr1</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>8d6cb0c4</code>（models-pipeline）</div><div class="cmeta">类别：贴图颠倒（tx-1）　<span class="note">完整 SHA：<code>8d6cb0c41bd2193b6b1b623e4f123fef4e9557a5</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>car1＋car2 前脸整面全倒（行先/X 盒在顶、金带在风挡上、红灯在底角、小字倒置在左）。</div>
+  <div class="cnote"><b>修法：</b>ROTATE_180（竖翻会把小字留左侧，实车小字在右下）；修后行先顶、灯顶角、风挡居中、金带风挡下、小字正立右下、车钩底，与实车 S102 一致。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sinano-sr1_after.png" alt="sinano-sr1 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-441" data-num="441" data-slug="sinkeisei-80000" data-status="pushed">
+  <div class="chead"><span class="num">#441</span> <span class="slug">sinkeisei-80000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>db0dc483</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-3）　<span class="note">完整 SHA：<code>db0dc4830e622c3a6dbf4a8c67ce5e09927fc05f</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 72.3–73.4%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓（面 72.3–73.4%→100%）、裙板逐行边白填充；手术式 GLB 补丁，几何逐字节未变。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sinkeisei-80000_after.png" alt="sinkeisei-80000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-442" data-num="442" data-slug="sotetsu-10000" data-status="pushed">
+  <div class="chead"><span class="num">#442</span> <span class="slug">sotetsu-10000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>ff311303</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-3）　<span class="note">完整 SHA：<code>ff31130367a28f83dbf20475d9bd4a95949f5507</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>く（E231 系基础，圆滑曲面鼻锥，非折线く）；实车 8/10 辆、模型 2 辆子集。</div>
+  <div class="cnote"><b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：两头司机端（car1 HI、car2 LO）圆滑曲面鼻锥 warp，R=0.17、edge_back F=−0.12（图纸实测鼻锥中高最前、…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sotetsu-10000_after.png" alt="sotetsu-10000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-443" data-num="443" data-slug="sotetsu-11000" data-status="pushed">
+  <div class="chead"><span class="num">#443</span> <span class="slug">sotetsu-11000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>d144eb3d</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-3）　<span class="note">完整 SHA：<code>d144eb3db9d654be11c09ef87383ba33407350f6</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>く（E233 系基础，前面意匠与 10000 相近，HID 前照灯在车体上部）；实车 10 辆（6M4T）、模型 3 辆子集。</div>
+  <div class="cnote"><b>修法：</b>从头重做（原 OT-3 专员被拦截，0 改动；凭 MC 14:34 fresh 授权续做）：car1 HI、car3 LO 两头司机端く warp，R=0.15、…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sotetsu-11000_after.png" alt="sotetsu-11000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-444" data-num="444" data-slug="sotetsu-12000" data-status="pushed">
+  <div class="chead"><span class="num">#444</span> <span class="slug">sotetsu-12000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>808920f3</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-4）　<span class="note">完整 SHA：<code>808920f33f4810dec3af8b1535eb467e1f1767b4</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>平头 loft 重建为鼻锥几何（top/bot 折线＋鼻尖半宽比 0.92＋鼻尖下 slit panel＋斜裙板；风挡约 20°、鼻尖 y≈2.0）。附带修既存贴图颠倒：car1 front 上下颠倒＋左右镜像，…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sotetsu-12000_after.png" alt="sotetsu-12000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-445" data-num="445" data-slug="sotetsu-13000" data-status="pushed">
+  <div class="chead"><span class="num">#445</span> <span class="slug">sotetsu-13000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7aac7034</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-4）　<span class="note">完整 SHA：<code>7aac7034d973ddb90ab9b48f9d4d5d2412ffea72</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>平头 loft 重建为鼻锥几何（top/bot 折线＋鼻尖半宽比 0.88＋鼻尖下 slit panel＋斜裙板；风挡约 30° 最陡、鼻尖 y≈1.9）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sotetsu-13000_after.png" alt="sotetsu-13000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-446" data-num="446" data-slug="sotetsu-21000" data-status="pushed">
+  <div class="chead"><span class="num">#446</span> <span class="slug">sotetsu-21000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>c7cecd64</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-4）　<span class="note">完整 SHA：<code>c7cecd641ce857f14cc54ed7df5cadcd11a22cb5</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.90、风挡约 22°、鼻尖 y≈2.0）；swap_caps 修复：car3 的 front 是贯通门、司机面在 end1，交换后重建并核实前脸确为司机面。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/sotetsu-21000_after.png" alt="sotetsu-21000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-454" data-num="454" data-slug="titibu-7800" data-status="pushed">
+  <div class="chead"><span class="num">#454</span> <span class="slug">titibu-7800</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>94f6af56</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-3）　<span class="note">完整 SHA：<code>94f6af5628e8cd39dc63c386138b1a6d297523dd</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。司机面＋贯通端双侧空白梯形耳＋裙板白楔，面 76.1–76.3%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓（面 76.1–76.3%→100%）、裙板逐行边白填充；手术式 GLB 补丁，几何逐字节未变。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/titibu-7800_after.png" alt="titibu-7800 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-455" data-num="455" data-slug="tizukyu-hot3500" data-status="pushed">
+  <div class="chead"><span class="num">#455</span> <span class="slug">tizukyu-hot3500</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7664dff0</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-3）　<span class="note">完整 SHA：<code>7664dff0ac2d7dd4f27f6d3ed5bcfd524c1f68f2</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两端共用一张端面图，仅左侧白耳、面整体右偏约 8%＋裙板单侧白纸，面 84.6%。</div>
+  <div class="cnote"><b>修法：</b>裁切 [70,456) 一次修掉左耳并纠正右偏＋裙板填补；两端共用同一张端面图，一次裁切两端同修。手术式 GLB 补丁，几何逐字节未变。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tizukyu-hot3500_after.png" alt="tizukyu-hot3500 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-456" data-num="456" data-slug="tizukyu-hot7000" data-status="pushed">
+  <div class="chead"><span class="num">#456</span> <span class="slug">tizukyu-hot7000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>2af9319a</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-1）　<span class="note">完整 SHA：<code>2af9319ad3813eefdfe3424eb0a38fc5c6b4e7b0</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 5 辆，模型 3 辆，缺 7050 中间车与 7010 尾端司机车。</div>
+  <div class="cnote"><b>修法：</b>补 car4（7050 中间车）、car5（7010 翻转司机车），3→5 辆；7050 绿车厢段图纸两张中间车净片均无绿带/绿标，只能按普通中间车建。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tizukyu-hot7000_after.png" alt="tizukyu-hot7000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-457" data-num="457" data-slug="tobu-100" data-status="pushed">
+  <div class="chead"><span class="num">#457</span> <span class="slug">tobu-100</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4ddc1c30</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-1）　<span class="note">完整 SHA：<code>4ddc1c30aadb42b523ef36b614811907ece18c51</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 6 辆，模型 3 辆，缺 3 辆中间车。</div>
+  <div class="cnote"><b>修法：</b>补 car4（M2，p3 新建）、car5/car6（M3/M4，复制 p2），3→6 辆；M2 图纸按 20.2 m 画、实车 20.5 m，模型短 0.3 m。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-100_after.png" alt="tobu-100 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-458" data-num="458" data-slug="tobu-10000" data-status="pushed">
+  <div class="chead"><span class="num">#458</span> <span class="slug">tobu-10000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>be6b140a</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-4）　<span class="note">完整 SHA：<code>be6b140a7be2872e5c033d8f3ca55bd2a4288ff0</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 70.5%→100%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，只换内嵌贴图，POSITION 逐字节与 v1 一致。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-10000_after.png" alt="tobu-10000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-459" data-num="459" data-slug="tobu-10030" data-status="pushed">
+  <div class="chead"><span class="num">#459</span> <span class="slug">tobu-10030</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>3e596d1b</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-4）　<span class="note">完整 SHA：<code>3e596d1b0b53aa0778c45fc8e7fec65fbf6f764e</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 65.5–69.7%→100%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，POSITION 逐字节与 v1 一致。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-10030_after.png" alt="tobu-10030 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-460" data-num="460" data-slug="tobu-200" data-status="pushed">
+  <div class="chead"><span class="num">#460</span> <span class="slug">tobu-200</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>54c90b22</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-1）　<span class="note">完整 SHA：<code>54c90b2276fa9d525e61c73427a33c1ab5c5b243</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 6 辆，模型 3 辆，缺 3 辆中间车。</div>
+  <div class="cnote"><b>修法：</b>补 car4/car6（M2/M4，复制 p2）、car5（M3，p3 新建），3→6 辆。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-200_after.png" alt="tobu-200 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-461" data-num="461" data-slug="tobu-20000" data-status="pushed">
+  <div class="chead"><span class="num">#461</span> <span class="slug">tobu-20000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7201611b</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-4）　<span class="note">完整 SHA：<code>7201611bbfe7776720b64c632cc175247bfbca5b</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 72.1–73.3%→100%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、裙板白纸残留同步清；手术式 GLB 补丁。接替专员修正了原 v2 的裁切错误：贯通端面原 (0,574) 等于没裁（右耳全留）、裙板按面轮廓 86 px 裁错（真耳界 176–182 px），…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-20000_after.png" alt="tobu-20000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-465" data-num="465" data-slug="tobu-60000" data-status="pushed">
+  <div class="chead"><span class="num">#465</span> <span class="slug">tobu-60000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>75d101bc</code>（models-pipeline）</div><div class="cmeta">类别：贴图颠倒（tx-1）　<span class="note">完整 SHA：<code>75d101bc625f57eea54a1852c0a58e2597304b54</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>单辆 car1 前脸整面全倒。</div>
+  <div class="cnote"><b>修法：</b>FLIP_TOP_BOTTOM＋车号“00009”块 vregion 反翻回正立（车号画的是 00009，属图纸画法，不改数字）；旋转 180° 会把灯簇红点换到外侧，故不用。修后行先上、风挡、蓝带＋车号正立、灯带在蓝带下、裙板底，…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-60000_after.png" alt="tobu-60000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-469" data-num="469" data-slug="tobu-90000" data-status="pushed">
+  <div class="chead"><span class="num">#469</span> <span class="slug">tobu-90000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>3372c6dd</code>（models-pipeline）</div><div class="cmeta">类别：其他（tx-2）　<span class="note">完整 SHA：<code>3372c6dde485aac0bc8fc1d136bbf64ecc49a68f</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：贴图颠倒 而且胶耳没有清理</div>
+  <div class="cnote"><b>根因：</b>整面前脸倒置（蓝在上、表示在裙板里）＋两侧白胶耳。</div>
+  <div class="cnote"><b>修法：</b>整图上下翻转（表示/白灯上、风挡中、蓝面下）；重建司机端裙板（蓝尖＋黑联挂框＋暗灰填充）；两侧耳按柱色填补，前脸内部 0 像素改动。⚠️ pepar.net 水印原样保留（只随被去掉的耳瓣一起消失了耳上的字，未另做水印清理；…</div>
+  <div class="warnline">⚠️ 端件 pepar.net 水印原样保留，清不清仍待 MC 定夺。</div>
+  <div class="cimg"><img loading="lazy" src="img/tobu-90000_after.png" alt="tobu-90000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-470" data-num="470" data-slug="tobu-n100" data-status="pushed">
+  <div class="chead"><span class="num">#470</span> <span class="slug">tobu-n100</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>61e9b103</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-2）　<span class="note">完整 SHA：<code>61e9b103281be319fb2927a05bb40f56f8946cde</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 6 辆（4M2T），模型只有 1 辆 Tc；另全量胶耳检查判该车胶耳确认（旧 tabclean 没修掉）。</div>
+  <div class="cnote"><b>修法：</b>做 2 辆子集 [Tc][Tc]（(b) 方案，car2＝net1＋FLIP_Y180）；同趟修胶耳（端件框收紧＋clean_tight 银柱色填，右缘白像素 8259→29）；实车 6 辆无图补不满。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tobu-n100_after.png" alt="tobu-n100 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-472" data-num="472" data-slug="toei-5500" data-status="unpushed">
+  <div class="chead"><span class="num">#472</span> <span class="slug">toei-5500</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</div><div class="cmeta">类别：编组错误（fm-2）</div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 8 辆，模型 2 辆子集 [5501-1 M1c][5501-8 M8c]，缺 6 辆中间车。</div>
+  <div class="cnote"><b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；另一份 tokyotoei_5500_kidou.pdf 是 1954 年都電 PCC 有轨电车，与都营 5500形无关。2 辆子集方向本身正确（diag plain OK / site OK）…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/toei-5500_before.png" alt="toei-5500 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-473" data-num="473" data-slug="tokyometro-05" data-status="pushed">
+  <div class="chead"><span class="num">#473</span> <span class="slug">tokyometro-05</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>a181a229</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-4）　<span class="note">完整 SHA：<code>a181a229b606eaeeb5fe624b2a9f15f8b3d1cfd9</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.93、风挡约 20°、鼻尖 y≈2.4 蓝带顶部）。car3 既存缺陷：原两端皆贯通门、无司机面，用 tex_from 借 car1 司机面＋司机裙板重建为远端司机车（同第一批 nankai…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-05_after.png" alt="tokyometro-05 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-474" data-num="474" data-slug="tokyometro-07" data-status="pushed">
+  <div class="chead"><span class="num">#474</span> <span class="slug">tokyometro-07</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>f0f3fce5</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-4）　<span class="note">完整 SHA：<code>f0f3fce5ea46db9f4e7fa17941b424d1fca79e21</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，鼻锥只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>平头 loft 重建为鼻锥几何（鼻尖半宽比 0.95、风挡约 11° 最缓、鼻尖 y≈1.9）；swap_caps 修复：car2 司机面在 end1，交换后重建并核实。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-07_after.png" alt="tokyometro-07 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-475" data-num="475" data-slug="tokyometro-10000" data-status="pushed">
+  <div class="chead"><span class="num">#475</span> <span class="slug">tokyometro-10000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>68ec9742</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-2）　<span class="note">完整 SHA：<code>68ec974271190caaa896ee4c69bd95980c5762bd</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 10 辆，模型 3 辆。</div>
+  <div class="cnote"><b>修法：</b>补成 10 辆满编（net2 素中间车＋net3 带弓中间车；car10＝原 car3 改名）。3/9 号車受电弓 1 架 vs 实车 2 架的轻微偏差已注明（有弓优于无弓）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-10000_after.png" alt="tokyometro-10000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-476" data-num="476" data-slug="tokyometro-13000" data-status="unpushed">
+  <div class="chead"><span class="num">#476</span> <span class="slug">tokyometro-13000</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</div><div class="cmeta">类别：编组错误（fm-2）</div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 7 辆，模型 2 辆子集 [CM2][CM1]，缺 5 辆中间车。</div>
+  <div class="cnote"><b>修法：</b>未推（无图）：图纸库只有 1 张先头车净片；PDF 的 p2/p3 是 03系，不可用。2 辆子集方向本身正确。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-13000_before.png" alt="tokyometro-13000 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-477" data-num="477" data-slug="tokyometro-17000" data-status="pushed">
+  <div class="chead"><span class="num">#477</span> <span class="slug">tokyometro-17000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>8ca5e890</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-2）　<span class="note">完整 SHA：<code>8ca5e8900d8bb32de883adacbd93b6cd375ed8fe</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>实车 10 辆，模型 2 辆。</div>
+  <div class="cnote"><b>修法：</b>补成 10 辆满编（p2 素中间车＋p3 带弓中间车；先头车复用远端返工版字节，圆角く形鼻锥＋真实比例司机面，v1 重建会回退；car2 同名替换为 p2 中间车）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-17000_after.png" alt="tokyometro-17000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-478" data-num="478" data-slug="tokyometro-18000" data-status="pushed">
+  <div class="chead"><span class="num">#478</span> <span class="slug">tokyometro-18000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>d8601806</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-5）　<span class="note">完整 SHA：<code>d86018069dd5f99cf1fcd6c1165b7c0886277eee</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く，然后检查一下编组齐了没</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里；另 MC 要求检查编组齐了没。</div>
+  <div class="cnote"><b>修法：</b>く warp R＝0.22、edge_back F＝−0.18，两头先头车。编组核查：实车 10 辆、现模型 2 辆子集；原建模 REPORT 称“图纸只有先头车 1 张净片”是错的——同一份图纸（Vayashi tokyometro_1…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-18000_after.png" alt="tokyometro-18000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-479" data-num="479" data-slug="tokyometro-9000" data-status="pushed">
+  <div class="chead"><span class="num">#479</span> <span class="slug">tokyometro-9000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4ca9521f</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-3）　<span class="note">完整 SHA：<code>4ca9521f606a2c569d100474304ed0147ba7d0b2</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>旧 3 辆本身方向正确，只缺 3 辆中间车（实车 6 辆）。</div>
+  <div class="cnote"><b>修法：</b>新 car4/5/6 克隆 car2，3→6 辆；car3 本身已是翻转到位的尾端司机车，不另翻（硬翻反而修坏）。克隆＝字节复制＋mesh/node 改名，几何/UV/贴图全不动。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-9000_after.png" alt="tokyometro-9000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-480" data-num="480" data-slug="tokyotoei-10300" data-status="pushed">
+  <div class="chead"><span class="num">#480</span> <span class="slug">tokyotoei-10300</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4cb55e82</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-3）　<span class="note">完整 SHA：<code>4cb55e82b25be4c183f2b1914a64a0be47c7f3bb</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>旧 3 辆外端 −Z 是贯通端 FAIL（实车 10 辆）。</div>
+  <div class="cnote"><b>修法：</b>补 6 辆中间车＋翻转 car1 作尾端 Tc2，3→10 辆；新中间车一律只克隆 car2——car3 车顶贴图印有两副受电弓（纸模原图问题，实车每辆至多 1 副单臂弓），不扩散；car3 本体未动，留待 MC 定夺。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyotoei-10300_after.png" alt="tokyotoei-10300 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-481" data-num="481" data-slug="tokyotoei-12000" data-status="pushed">
+  <div class="chead"><span class="num">#481</span> <span class="slug">tokyotoei-12000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>33be43e6</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-3）　<span class="note">完整 SHA：<code>33be43e6cdf27b197f65c48d3c961696cf59e646</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>旧 2 辆外端 −Z 是贯通端 FAIL（实车 8 辆）。</div>
+  <div class="cnote"><b>修法：</b>补 5 辆中间车＋翻转 car1 作尾端 M2c，2→8 辆；楔形头随翻转落到远端。克隆＝字节复制＋mesh/node 改名；翻转＝纯几何绕 Y 轴 180°、UV 与贴图不动。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyotoei-12000_after.png" alt="tokyotoei-12000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-483" data-num="483" data-slug="tokyu-2020" data-status="pushed">
+  <div class="chead"><span class="num">#483</span> <span class="slug">tokyu-2020</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>092e3a82</code>（models-pipeline）</div><div class="cmeta">类别：贴图颠倒（tx-1）　<span class="note">完整 SHA：<code>092e3a827410828fd0407696bccde5f749736007</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>仅 car1 前脸整面全倒。</div>
+  <div class="cnote"><b>修法：</b>flip_band，只翻 rows [0,265)——整幅竖翻会把灯/微笑弧/X 盒/橙角翻到采样区（v∈[0,0.68]）之下、前脸全黑。修后风挡上、灯在风挡下、微笑弧在灯下、X 盒在底，与实车 2121F 一致。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-2020_after.png" alt="tokyu-2020 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card unpushed-card" id="car-484" data-num="484" data-slug="tokyu-300" data-status="unpushed">
+  <div class="chead"><span class="num">#484</span> <span class="slug">tokyu-300</span>
+  <span class="badge unpushed">⛔ 未返工</span></div>
+  <div class="pushline un">⛔ <b>未返工</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</div><div class="cmeta">类别：编组错误（fm-3）</div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>MC 判编组错误，但单 GLB 长 24.006 m＝实车 2 辆铰接全编组（23.98 m），两端均为司机面，plain/site 均 OK；“1 个文件”不是“1 辆车”，无缺车、无错。</div>
+  <div class="cnote"><b>修法：</b>未推（无错）：不修不推。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-300_before.png" alt="tokyu-300 现状图（未返工）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工）</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-485" data-num="485" data-slug="tokyu-3020" data-status="pushed">
+  <div class="chead"><span class="num">#485</span> <span class="slug">tokyu-3020</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4d353e19</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-3）　<span class="note">完整 SHA：<code>4d353e19854970c2618e737868acb74bad536196</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>旧 3 辆外端 −Z 是贯通端 FAIL（实车 8 辆）。</div>
+  <div class="cnote"><b>修法：</b>补 4 辆中间车（car4–6 克隆 car2、car7 克隆 car3）＋翻转 car1 作尾端 Tc1，3→8 辆。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-3020_after.png" alt="tokyu-3020 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-486" data-num="486" data-slug="tokyu-5000" data-status="pushed">
+  <div class="chead"><span class="num">#486</span> <span class="slug">tokyu-5000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4c008674</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-4）　<span class="note">完整 SHA：<code>4c00867487c3da241e150699ca65daea87875860</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>整列只有一端司机面：car3 名义デハ5000、实际是中部 T 车（两端贯通端件）；实车 10 辆。</div>
+  <div class="cnote"><b>修法：</b>新增 car4＝net1 翻转先头车（デハ5000形 5002，Tc1），3→4 辆；两头风挡车号均为“5102”（图纸只有 5102 司机端片）；实车 10 辆、模型 4 辆子集——6 辆中部车无图纸，4 辆已是图纸允许的最大编组。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-5000_after.png" alt="tokyu-5000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-487" data-num="487" data-slug="tokyu-5080" data-status="pushed">
+  <div class="chead"><span class="num">#487</span> <span class="slug">tokyu-5080</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>c8d4b8d4</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-4）　<span class="note">完整 SHA：<code>c8d4b8d41ef84f6f313cf52c4fbc0da5be364c23</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。面 77.5–79.5%→100%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁，POSITION 逐字节与 v1 一致。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-5080_after.png" alt="tokyu-5080 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-488" data-num="488" data-slug="tokyu-6000" data-status="pushed">
+  <div class="chead"><span class="num">#488</span> <span class="slug">tokyu-6000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>e901004a</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-4）　<span class="note">完整 SHA：<code>e901004a0a5c4106fc2cb9fabf5a9219046b6427</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。贯通端面仅 28.6–28.8% 宽，司机面 73.8%→100%。</div>
+  <div class="cnote"><b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身；手术式 GLB 补丁。接替专员修正了原 v2 的裁切错误：贯通端面（car1 end1、car2 front/end1、car3 front）原按司机面比例 (48–52, 327–346) 裁，…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-6000_after.png" alt="tokyu-6000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-489" data-num="489" data-slug="tokyu-6020" data-status="pushed">
+  <div class="chead"><span class="num">#489</span> <span class="slug">tokyu-6020</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>e266d63b</code>（models-pipeline）</div><div class="cmeta">类别：贴图颠倒（tx-1）　<span class="note">完整 SHA：<code>e266d63bd07c7779128e5f614d38c643d473f023</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>仅 car1 前脸整面全倒（与 2020 同款）。</div>
+  <div class="cnote"><b>修法：</b>flip_band，只翻 rows [0,292)；修后与实车 6721 一致，橙角左下可见。car2/car3 贯通端不动。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-6020_after.png" alt="tokyu-6020 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-490" data-num="490" data-slug="tokyu-7000" data-status="pushed">
+  <div class="chead"><span class="num">#490</span> <span class="slug">tokyu-7000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>64882f15</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-4）　<span class="note">完整 SHA：<code>64882f15165071c2c7fc51920732941a90d96510</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误</div>
+  <div class="cnote"><b>根因：</b>辆数、两端司机面均对；错在 car1 的 −X 壁、car3 的 ＋X 壁司机门落在贯通端（全车共用一张 side 贴图，两壁 UV 方向相反，司机门在 u≈0）。</div>
+  <div class="cnote"><b>修法：</b>只对错的那面做 U 镜像（U→1−U，逐顶点，只动 side 图元独立的 TEXCOORD_0，V 不动；side 贴图无文字/logo，镜像安全）。数值验证：两车两壁 u＝0（司机门）均落在司机端；目检四面壁司机门均紧邻司机端。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tokyu-7000_after.png" alt="tokyu-7000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-500" data-num="500" data-slug="toyamatihou-9000" data-status="pushed">
+  <div class="chead"><span class="num">#500</span> <span class="slug">toyamatihou-9000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>ad2dc24c</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-5）　<span class="note">完整 SHA：<code>ad2dc24ccf81f8b471c35edcf011e0d6cf2fefbc</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：楔形</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，楔形只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>楔形 warp R＝0.50、edge_back F＝−0.15，两端。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/toyamatihou-9000_after.png" alt="toyamatihou-9000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-506" data-num="506" data-slug="tukubaexp-tx2000" data-status="pushed">
+  <div class="chead"><span class="num">#506</span> <span class="slug">tukubaexp-tx2000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>71bc8b20</code>（models-pipeline）</div><div class="cmeta">类别：其他（ot-5）　<span class="note">完整 SHA：<code>71bc8b206fdb1d8b369e38c78202d43ed94ec298</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>其他：く</div>
+  <div class="cnote"><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。</div>
+  <div class="cnote"><b>修法：</b>く warp R＝0.30、centre_back F＝＋0.18（2面折れ），仅 car1；只修く头型，不扩编（图纸只有 3 张净片，缺 2400/2500/2600 无图）。…</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/tukubaexp-tx2000_after.png" alt="tukubaexp-tx2000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-512" data-num="512" data-slug="wakayama-2270" data-status="pushed">
+  <div class="chead"><span class="num">#512</span> <span class="slug">wakayama-2270</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>fbbdbedc + ce6eee44</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-5）　<span class="note">完整 SHA：<code>fbbdbedc96ded317ed7cee93615262e7facdbc71（car1）／ce6eee444d83a90960293ffb3b263e3a29c985b5（car2）</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两司机面各一侧白色梯形耳（带斜折线），面偏心、车灯偏左，面 79.8% / 79.2%。</div>
+  <div class="cnote"><b>修法：</b>两框收紧（car1 0..384、car2 98..479）＋两裙板同裁；面心回正、车灯回正、联挂器不移位。分两 commit（car1、car2 各一）。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/wakayama-2270_after.png" alt="wakayama-2270 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-515" data-num="515" data-slug="yakuri-ko1" data-status="pushed">
+  <div class="chead"><span class="num">#515</span> <span class="slug">yakuri-ko1</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>101bd111</code>（models-pipeline）</div><div class="cmeta">类别：胶耳未清（ge-5）　<span class="note">完整 SHA：<code>101bd111e9d660f05ba939ae71b680b43e3506ef</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>胶耳未清</div>
+  <div class="cnote"><b>根因：</b>端件裁切框把纸模粘贴耳框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。两端同形，风挡区以上两侧浅灰梯形耳（带斜折线），面约 69%（风挡区）。</div>
+  <div class="cnote"><b>修法：</b>按图纸实测面轮廓线（框内竖线列 26/145 → 贴图列 67/370），行 0..163 的耳逐行向内填色（风挡区填框深色、橙面区填橙色），行 ≥164 一字不动；frontf 取新 front 水平镜像。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/yakuri-ko1_after.png" alt="yakuri-ko1 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-520" data-num="520" data-slug="yokohamasub-10000" data-status="pushed">
+  <div class="chead"><span class="num">#520</span> <span class="slug">yokohamasub-10000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>36ff81a3</code>（models-pipeline）</div><div class="cmeta">类别：贴图颠倒（tx-2）　<span class="note">完整 SHA：<code>36ff81a3d6a9ce2a327bbb5f1403a63a254caaa2</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>贴图颠倒</div>
+  <div class="cnote"><b>根因：</b>前脸本身正立，是端盖 UV 取值错了（v 0–0.847 把屋顶受电弓条框进端盖顶部 32%、前脸压扁）。</div>
+  <div class="cnote"><b>修法：</b>裁切前脸行（rows 202–610）＋UV v/0.847，前脸占满端盖：表示/头灯上、风挡、青绿带、银板、橙尾灯下。⚠️ 左缘胶耳未修（x 0–43，约 12.8% 宽白竖带）：任务定本车只修贴图颠倒，…</div>
+  <div class="warnline">⚠️ 左缘胶耳未修（x 0–43，约 12.8% 宽白竖带），留待以后单独处理。</div>
+  <div class="cimg"><img loading="lazy" src="img/yokohamasub-10000_after.png" alt="yokohamasub-10000 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-521" data-num="521" data-slug="yokohamasub-3000v" data-status="pushed">
+  <div class="chead"><span class="num">#521</span> <span class="slug">yokohamasub-3000v</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7b9761dc</code>（models-pipeline）</div><div class="cmeta">类别：编组错误（fm-4）　<span class="note">完整 SHA：<code>7b9761dc17126cd55df464afb0031b7f33ea12f7</code></span></div>
+  <div class="cnote"><b>MC 原话：</b>编组错误（MC 写 yokohamasub-3000，实为 yokohamasub-3000v，index 已核实）</div>
+  <div class="cnote"><b>根因：</b>翻转车 car2 侧面帆形三角朝向贯通端，与 car1 相向（“&gt;&lt;”）；实车三组照片核实各车三角统一朝あざみ野端（“&gt;&gt;&gt;”）。</div>
+  <div class="cnote"><b>修法：</b>两侧面贴图每面帆的浅蓝楔以双叶门中心镜像；海鸥剪影先 inpaint 再原位重画（暗蓝像素与原图完全一致，无重影）。辆数 2 vs 实车 6，3612–3615 中部车无图纸，修不了。</div>
+  
+  <div class="cimg"><img loading="lazy" src="img/yokohamasub-3000v_after.png" alt="yokohamasub-3000v 修后" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后</div></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button>
+    <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="裙板问题">裙板问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="车号/涂装不对">车号/涂装不对</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+</main>
+<div id="bar">
+  <div id="jump"><span>#</span><input id="jumpN" type="number" min="387" max="521" inputmode="numeric" placeholder="号码"><button id="jumpBtn">跳转</button></div>
+  <div class="prog" id="prog">已审 0/70 · 通过 0 · 返工 0</div>
+  <button id="autoJumpBtn">⏭ 自动跳下一题：开</button>
+  <button id="copyBtn">📋 复制结果</button>
+  <button id="clearBtn">清空</button>
 </div>
+<div id="toast"></div>
+<script>
+const KEY='rw2-20261127';
+let state={}; try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+const cards=[...document.querySelectorAll('.card')];
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function mark(card,st){ // st: null | {t:'pass'} | {t:'rework',reason,note}
+  const slug=card.dataset.slug;
+  if(!st) delete state[slug]; else state[slug]=st;
+  save();
+}
+function render(){
+  let done=0,pass=0,rw=0;
+  cards.forEach(c=>{
+    const st=state[c.dataset.slug];
+    c.classList.toggle('mark-pass',!!st&&st.t==='pass');
+    c.classList.toggle('mark-rework',!!st&&st.t==='rework');
+    c.classList.toggle('show-other',!!st&&st.t==='rework'&&st.reason==='其他');
+    c.querySelectorAll('.cbtns button').forEach(b=>{
+      b.classList.remove('sel-pass','sel-rework');
+      if(st&&st.t==='pass'&&b.dataset.act==='pass') b.classList.add('sel-pass');
+      if(st&&st.t==='rework'&&b.dataset.reason===st.reason) b.classList.add('sel-rework');
+    });
+    const mk=c.querySelector('.cmark');
+    if(st&&st.t==='pass'){mk.textContent='✅ 通过';mk.className='cmark pass';pass++;done++}
+    else if(st&&st.t==='rework'){mk.textContent='🔧 返工：'+st.reason+(st.note?'（'+st.note+'）':'');mk.className='cmark rework';rw++;done++}
+    else {mk.textContent='';mk.className='cmark'}
+    const inp=c.querySelector('.cother input');
+    if(st&&st.t==='rework'&&st.reason==='其他') inp.value=st.note||'';
+  });
+  document.getElementById('prog').textContent=`已审 ${done}/70 · 通过 ${pass} · 返工 ${rw}`;
+}
+// ---- 自动跳下一题（多邻国式，默认开；开关存在本机）----
+const AJKEY='rw2-20261127_autojump';
+let autoJump=true; try{const v=localStorage.getItem(AJKEY); if(v!==null) autoJump=(v==='1')}catch(e){}
+function setAutoJump(on){autoJump=on; try{localStorage.setItem(AJKEY,on?'1':'0')}catch(e){}
+  const b=document.getElementById('autoJumpBtn');
+  b.textContent=on?'⏭ 自动跳下一题：开':'⏭ 自动跳下一题：关'; b.classList.toggle('off',!on);}
+function nextUnreviewed(afterNum){
+  let wrap=null;
+  for(const c of cards){
+    const n=+c.dataset.num;
+    if(!state[c.dataset.slug]){
+      if(n>afterNum) return c;
+      if(!wrap) wrap=c;
+    }
+  }
+  return wrap; // null = 已全部审完
+}
+function jumpToCard(el){
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+}
+function maybeAutoJump(card){
+  if(!autoJump) return;
+  const next=nextUnreviewed(+card.dataset.num);
+  if(next) setTimeout(()=>jumpToCard(next),350);
+  else { toast('🎉 已全部审完！'); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+document.getElementById('autoJumpBtn').addEventListener('click',()=>setAutoJump(!autoJump));
+document.getElementById('list').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const card=e.target.closest('.card'); if(!card) return;
+  const slug=card.dataset.slug, cur=state[slug];
+  if(b.dataset.act==='pass'){
+    mark(card,(cur&&cur.t==='pass')?null:{t:'pass'});
+  }else if(b.dataset.reason){
+    const r=b.dataset.reason;
+    if(cur&&cur.t==='rework'&&cur.reason===r) mark(card,null);
+    else mark(card,{t:'rework',reason:r,note:''});
+  } else return;
+  maybeAutoJump(card);
+});
+document.getElementById('list').addEventListener('input',e=>{
+  const inp=e.target.closest('.cother input'); if(!inp) return;
+  const card=inp.closest('.card'), st=state[card.dataset.slug];
+  if(st&&st.t==='rework'&&st.reason==='其他'){st.note=inp.value;save()}
+});
+function ranges(nums){ // [1,2,3,5,8,9] -> "#1-#3、#5、#8-#9"
+  if(!nums.length) return '无';
+  nums=[...nums].sort((a,b)=>a-b); const out=[]; let s=nums[0],p=nums[0];
+  for(let i=1;i<=nums.length;i++){ if(nums[i]===p+1){p=nums[i];continue} out.push(s===p?('#'+s):('#'+s+'-#'+p)); s=nums[i]; p=nums[i]; }
+  return out.join('、');
+}
+function copyText(){
+  const pass=[], rw=[], un=[];
+  cards.forEach(c=>{
+    const n=+c.dataset.num, st=state[c.dataset.slug];
+    if(!st) un.push(n);
+    else if(st.t==='pass') pass.push('#'+n+' '+c.dataset.slug);
+    else rw.push('#'+n+' '+c.dataset.slug+'（'+st.reason+(st.note?'：'+st.note:'')+'）');
+  });
+  const lines=['第二批返工复核（2026-11-27，共70辆）',
+    '通过（'+pass.length+'辆）：'+(pass.length?pass.join('、'):'无'),
+    '返工（'+rw.length+'辆）：'+(rw.length?'':'无')];
+  rw.forEach(r=>lines.push(r));
+  lines.push('未审（'+un.length+'辆）：'+ranges(un));
+  return lines.join('\n');
+}
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const t=copyText();
+  try{await navigator.clipboard.writeText(t); toast('已复制，去微信粘贴')}catch(e){
+    const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy'); toast('已复制，去微信粘贴')}catch(e2){toast('复制失败，请长按全选复制')} ta.remove();
+  }
+});
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+document.getElementById('jumpBtn').addEventListener('click',()=>{
+  const n=+document.getElementById('jumpN').value;
+  if(!n||n<387||n>521){toast('请输入 #387–#521 的号码');return}
+  const el=document.getElementById('car-'+n);
+  if(!el){toast('该号码不在本批（#387–#521 不连续）');return}
+  showAll();
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+});
+document.getElementById('jumpN').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('jumpBtn').click()});
+document.getElementById('clearBtn').addEventListener('click',()=>{
+  if(!Object.keys(state).length){toast('还没有任何标记');return}
+  if(confirm('清空全部 '+Object.keys(state).length+' 条标记？')){state={};save();toast('已清空')}
+});
+let curF='all';
+function showAll(){curF='all';document.querySelectorAll('#filters button').forEach(b=>b.classList.toggle('on',b.dataset.f==='all'));applyFilter()}
+function applyFilter(){
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  cards.forEach(c=>{
+    let ok=true;
+    if(curF==='pushed'||curF==='unpushed') ok=c.dataset.status===curF;
+    else if(curF==='unreviewed') ok=!state[c.dataset.slug];
+    else if(curF==='reviewed') ok=!!state[c.dataset.slug];
+    if(ok&&q) ok=c.dataset.slug.toLowerCase().includes(q);
+    c.style.display=ok?'':'none';
+  });
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  curF=b.dataset.f; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b)); applyFilter();
+});
+document.getElementById('q').addEventListener('input',applyFilter);
+setAutoJump(autoJump);
+render();
+</script>
 </body>
 </html>
