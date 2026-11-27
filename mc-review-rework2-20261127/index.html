@@ -34,7 +34,7 @@ h3{font-size:16px;margin:18px 0 8px}
 
 <div class="ok"><b>汇总：已推 64/70、未推 6 辆。</b>未推 6 辆＝无图 4 辆（先接受现有子集，MC 14:34 授权决断）＋暂缓 1 辆（sagano-de10，MC 14:34 指令先不做）＋无错 1 辆：
 <ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul>
-<b>第二轮：</b>#391 odakyu-60000 与 #404 osakyu-70000 经 MC 14:31 点名重做，已重做并推上（卡片为第二轮修法与修后图）；另见第二轮返工页 <a href="../mc-review-rework2-round2-20261127/">mc-review-rework2-round2-20261127</a>。</div>
+<b>第二轮：</b>#391 odakyu-60000 与 #404 osakyu-70000 经 MC 14:31 点名重做、#392 odakyu-70000（与 #404 同车、同病更重）按 MC 14:34 授权同法重做，均已重做并推上（卡片为第二轮修法与修后图）；另见第二轮返工页 <a href="../mc-review-rework2-round2-20261127/">mc-review-rework2-round2-20261127</a>。</div>
 
 <div class="warn"><b>特别标注：</b><br>
 ⚠️ <b>#520 yokohamasub-10000 左缘胶耳未修（已推，耳未修）</b>：x 0–43、约 12.8% 宽白竖带；任务定本车只修贴图颠倒，无干净的裁切-重标方案（风挡宽已正确 1.96 m，拉伸会变 2.33 m），留待以后单独处理。<br>
@@ -93,9 +93,9 @@ h3{font-size:16px;margin:18px 0 8px}
 </div><div class="card" id="n392">
 <h2>#392 odakyu-70000 <span style="color:#666">—— 其他（ot-1）</span></h2>
 <p><b>MC 原话：</b>其他：这个车是楔形的</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，楔形只画在侧面贴图里。<br>
-<b>修法：</b>GLB 级 warp，楔形 R＝0.55、edge_back F＝−0.35（车顶中心 −0.551、边缘 −0.822、裙板边缘 −0.355）。鼻锥特写前脸顶角有极细黑白斜纹条（侧面贴图鼻尖折叠引导线被 warp 折到前脸角上），用户三视图不可见。<br>
-<b>推送：</b>提交 <code>c8b48d74</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>c8b48d74bd0ab5de7ee5387a46bcb87566eed57c</code></span></p>
+<p><b>根因：</b>与 #404 同一辆小田急70000形 GSE（异名重复 slug）；front 贴图是同一张鼻锥件但上下颠倒（翻转后平均绝对差 20.9、不翻转 57.6），同样有空矩形框＋2 红圆点“控制面板”＋空白显示器状风挡＋下方大块灰平板；另是更老的纸模建法（car_length_m 20.8 m、车高 3.7 m、alphaMode 全丢）。第一轮 OT-1 只做了楔形 warp R=0.55，没修贴图问题。<br>
+<b>修法：</b>第二轮删后重建（与 #404 同法，MC 14:34 授权“按实际情况做决断”）：删 commit 8f76cc1a（index 663→662），再从同一张图纸从头重建（loft 光滑流线展望头，前脸按实车重画：整块全景风挡到 y=1.15 m、无电脑面板、无横线）；车长 20.8→21.3 m、车高 3.7→4.057 m 按实车纠正；consist 改用现行写法（与 #404 相同）；under/skirt alphaMode 恢复 MASK/0.5。重建 commit 2de32a62（index 662→663）。两份模型现几何/纹理逐像素相同，仅内嵌模型名不同；异名重复 slug 是否合并留待 MC 定夺，本轮不动。<br>
+<b>推送：</b>提交 <code>2de32a62</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>2de32a6232ed57f4735057ed1860bb0a50a58c19</code></span></p>
 <div class="cmp"><figure><img src="img/odakyu-70000_before.png" alt="odakyu-70000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-70000_after.png" alt="odakyu-70000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n393">
 <h2>#393 odakyu-8000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
