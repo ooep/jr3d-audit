@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC 快速审核第一批返工 — 132 辆（2026-11-27）</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f4f4f4;color:#222}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;margin:8px 0 4px}
+.sub{color:#666;font-size:14px;line-height:1.7;margin:0 0 18px}
+.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;margin:0 0 18px}
+.card h2{font-size:17px;margin:0 0 8px}
+.card p{font-size:14px;line-height:1.7;color:#444;margin:0 0 10px}
+img{width:100%;height:auto;display:block;border:1px solid #ccc;border-radius:6px}
+.note{font-size:13px;color:#888;line-height:1.7}
+.warn{background:#fff3cd;border:1px solid #e6c200;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
+.ok{background:#e6f4ea;border:1px solid #34a853;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 4px}
+.cmp figure{margin:0}
+.cmp figcaption{font-size:13px;color:#666;text-align:center;margin-top:4px}
+.noimg{display:flex;align-items:center;justify-content:center;min-height:120px;background:#f4f4f4;border:1px dashed #bbb;border-radius:6px;color:#888;font-size:14px}
+code{font-size:12px;word-break:break-all}
+a{color:#0b5cad}
+ul{margin:6px 0}
+li{font-size:14px;line-height:1.7}
+h3{font-size:16px;margin:18px 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>MC 快速审核第一批返工 — 132 辆（2026-11-27）</h1>
+<p class="sub">MC 2026-11-27 09:01 微信审核结果的第一批返工（#1–#525 中判返工的 132 辆），只放这 132 辆。MC 原话“自己该重建，重建。该修复修复，不要问我了，全部弄好以后再给我审批”（09:29 放行）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663 个模型。快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>；第二批返工页：<a href="../mc-review-rework2-20261127/">mc-review-rework2-20261127</a>。每辆一卡：号码、slug、类别、MC 原话、根因、修法、commit SHA、返工前后对比图。</p>
+
+<div class="ok"><b>汇总：MC 2026-11-27 09:01 审核（通过 241＋返工 132＋未审 152＝525）；已推 127/132、诊断未推 5 辆；远端 HEAD <code>3496094d</code>、index 663、skill v1.2.36。</b>未推 5 辆：
+<ul><li><b>#2 aidu-at400</b>——未推：对照实车全对，图纸画法局限（前脸深色玻璃在斜视角读成黑板，纸模做不到透视），不重建、不推送。</li><li><b>#114 jr-east-e261</b>——未推：无图缺车——图纸仅 2 辆，实车 8 辆；缺的 6 辆（含另一先头车クロE261 与餐车サシE261）车型不同、无图，镜像硬拼属伪造，不硬凑。</li><li><b>#249 keio-8000</b>——未推：无图缺车——图纸仅 1 辆先头 Tc，实车 8/10 辆；keio_8000_f.pdf 是绿色复刻色版同一辆先头车，不是中间车图纸。</li><li><b>#277 kintetsu-3200</b>——未推：已修好、MC 看的是过期证据图——胶耳已在 2026-11-25 返工 12af34e9 修好，远端现行版即返工版；用原始版 GLB（440b78b0）同相机重渲，与全检证据图像素完全一致（平均绝对差 0.0），即 MC 的 #277 判定依据是过期证据。线上模型本身已无胶耳，重复推等于空推。请 MC 用本图（现行版重渲图）复核。</li><li><b>#361 nankai-10000</b>——未推：修法待 MC 定夺——胶耳已量测排除。“头型く”定位到两个候选成因，均属结构性画法：①车顶-前脸 90° 直角（实车圆润过渡）；②鼻侧蓝/橙带直线斜切与横带成锐角折弯（实车平滑弧线）；另缺前脸红行先表示与车号。修法四选一：斜带改弧线 / 车顶前缘倒圆 / 补行先表示 / 维持现状。</li></ul></div>
+
+<div class="warn"><b>⚠️ 特别说明：#150 jr-kyusyu-783 黑风挡缺失（待 MC 定夺）</b><br>
+实车司机面是黑色全景风挡，但 Vayashi 原图 net 里没有黑风挡司机面件（两端件均为银色贯通端脸，黑风挡只在完成见本插图里）；按 skill“贴图必须是图纸的像素、不要重画”，同一张图纸重建无法变出。本次返工范围（镂空车底＋去车顶空调）已修完并推上（<code>0f1da846</code>）。是否接受 Vayashi 简化画法，或另寻带黑风挡的图纸重做司机面，待 MC 定夺。</div>
+
+<div class="warn"><b>图片说明：</b><br>
+修前图优先取各组同相机 v1/orig 渲染；组内无修前渲染的车，修前图取快速审核页原斜视角图（img/ev/）或批次审核页原图（jr3d-audit batch*/…/user_oblique.png）。<br>
+修后图优先取各组修后渲染；ge-2（7 辆）、tx-4（6 辆）、ot-7（6 辆）、ge-5 5200/5820（2 辆）共 21 辆组内无修后整列图，修后图为建页时用与各组相同的斜视角相机、按远端 HEAD <code>3496094d</code> 已推 GLB 现渲（卡片注明“建页时按已推模型现渲”），非伪造、非修前图冒充。<br>
+未推车无修后图；#277 kintetsu-3200 与 #2 aidu-at400 各附一张现行版重渲图（模型未动）。</div>
+
+<div class="card" id="n2">
+<h2>#2 aidu-at400 <span style="color:#666">—— 其他（ot-1）</span></h2>
+<p><b>MC 原话：</b>其他：这个车现实中长这样么？怎么怪怪的</p>
+<p><b>根因：</b>MC 问“这个车现实中长这样么？怎么怪怪的”。逐项对照实车照片全部正确（圆顶、涂装、车长、前脸风挡/雨刮/车灯/AIZU 标志、侧窗、转向架）；“怪”最可能是前脸两块深色玻璃在斜视角读成黑板，属图纸画法局限（玻璃色值与侧窗同级，纸模做不到透视）。<br>
+<b>修法：</b>不重建、不推送。初版重渲取景偏是渲染脚本假设问题（本车 GLB 局部坐标 z 0..+21.3 与他车相反），已修正重渲，可供刷新审核页。<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：对照实车全对，图纸画法局限（前脸深色玻璃在斜视角读成黑板，纸模做不到透视），不重建、不推送。</p>
+<div class="cmp"><figure class="noimg">无修前图</figure><figure><img src="img/aidu-at400_after.png" alt="aidu-at400 返工后"><figcaption>现行版重渲图（模型未动，取景已修正）</figcaption></figure></div>
+</div><div class="card" id="n4">
+<h2>#4 ainokaze-521 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：头型为く。。</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>GLB 级 warp（R=0.20），中央贯通门前凸 +0.12；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>f72dc610</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/ainokaze-521_before.png" alt="ainokaze-521 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/ainokaze-521_after.png" alt="ainokaze-521 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n12">
+<h2>#12 aonami-1000 <span style="color:#666">—— 端面方向反了（ms-1）</span></h2>
+<p><b>MC 原话：</b>端面方向反了</p>
+<p><b>根因：</b>图纸端面片镜像印、司机端面抄反，两端显示反字。<br>
+<b>修法：</b>两端 front/frontf 各水平翻转一次；car1+car4。站内两端正确显示“01”＋正向“あおなみ線”。<br>
+<b>推送：</b>已推，提交 <code>8ebb67b6</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/aonami-1000_before.png" alt="aonami-1000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/aonami-1000_after.png" alt="aonami-1000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n20">
+<h2>#20 eizan-800 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く车头</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>两头 warp R=0.38；前脸绿/蓝带由单向斜线改对称 V；car1+car2。小遗憾：えいでん标志被 V 腿下缘轻压。<br>
+<b>推送：</b>已推，提交 <code>ba13085a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/eizan-800_before.png" alt="eizan-800 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/eizan-800_after.png" alt="eizan-800 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n26">
+<h2>#26 fujikyu-8500 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：司机是这个贴图 按照目前这个形态 就是这个形状是没问题的 但是然后上下颠倒一下</p>
+<p><b>根因：</b>司机室鼻部贴图上下颠倒（形态本身没问题）。<br>
+<b>修法：</b>car1 鼻部贴图上下翻转。<br>
+<b>推送：</b>已推，提交 <code>f32c37b8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/fujikyu-8500_before.png" alt="fujikyu-8500 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/fujikyu-8500_after.png" alt="fujikyu-8500 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n28">
+<h2>#28 fukushimakotu-1000 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>car1 front 与 car2 frontf 原位 v 翻转（v'=0.96-v）；裙板、end1、侧面不动。<br>
+<b>推送：</b>已推，提交 <code>e069a25a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/fukushimakotu-1000_before.png" alt="fukushimakotu-1000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/fukushimakotu-1000_after.png" alt="fukushimakotu-1000 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n34">
+<h2>#34 hankai-701 <span style="color:#666">—— 转向架问题（ms-1）</span></h2>
+<p><b>MC 原话：</b>转向架问题</p>
+<p><b>根因：</b>转向架问题：转向架画两次＋车底白板，裙板印着转向架图案。<br>
+<b>修法：</b>裙板转向架图案清改素白、under 白底 flood-clear 透明 19,964 px；car1。<br>
+<b>推送：</b>已推，提交 <code>e2d702af</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hankai-701_before.png" alt="hankai-701 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hankai-701_after.png" alt="hankai-701 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n42">
+<h2>#42 hankyu-8200 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件上下角白三角逐行填白，顶/底带 66%~89%→0~4%；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>ad9a570e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hankyu-8200_before.png" alt="hankyu-8200 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hankyu-8200_after.png" alt="hankyu-8200 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n44">
+<h2>#44 hankyu-9300 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>与 8200 同法（端件上下角白三角逐行填白）；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>91fae17b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hankyu-9300_before.png" alt="hankyu-9300 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hankyu-9300_after.png" alt="hankyu-9300 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n46">
+<h2>#46 hansin-5001 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>3ac80f1e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hansin-5001_before.png" alt="hansin-5001 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hansin-5001_after.png" alt="hansin-5001 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n48">
+<h2>#48 hansin-5700 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，cab 179→130 px；car1-4。残留：贴图顶带余白为屋顶圆角白三角（穹顶裁切后不显）。<br>
+<b>推送：</b>已推，提交 <code>2ca9cf99</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hansin-5700_before.png" alt="hansin-5700 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hansin-5700_after.png" alt="hansin-5700 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n50">
+<h2>#50 hansin-9000 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧；car1-3。残留：贴图顶带余白为屋顶圆角白三角（穹顶裁切后不显）。<br>
+<b>推送：</b>已推，提交 <code>1c32f9d3</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hansin-9000_before.png" alt="hansin-9000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hansin-9000_after.png" alt="hansin-9000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n59">
+<h2>#59 hiroden-3900 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：三辆车在模型里是 X 向横置，站内应为 Z 向编组。<br>
+<b>修法：</b>三辆 X 向车烘焙 +90° Y 旋转为 Z 向车；car1/2/3.glb + consist.json。<br>
+<b>推送：</b>已推，提交 <code>52a7de7c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hiroden-3900_before.png" alt="hiroden-3900 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hiroden-3900_after.png" alt="hiroden-3900 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n68">
+<h2>#68 hokuriku-7700 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机面 v'=1-v；裙板重映射至灰段；car2 裙板暗区棕→灰；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>7dd7084b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hokuriku-7700_before.png" alt="hokuriku-7700 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hokuriku-7700_after.png" alt="hokuriku-7700 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n69">
+<h2>#69 hokuso-7300 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>c83bc627</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hokuso-7300_before.png" alt="hokuso-7300 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hokuso-7300_after.png" alt="hokuso-7300 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n71">
+<h2>#71 hukuokasub-1000 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：这个司机是这里面的贴图 怎么是黑的，是不是编组方向搞错了</p>
+<p><b>根因：</b>编组方向搞错：两端车司机端朝内、黑端朝外。<br>
+<b>修法：</b>car1+car6 各绕 Y 转 180°。<br>
+<b>推送：</b>已推，提交 <code>794fe07d</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hukuokasub-1000_before.png" alt="hukuokasub-1000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hukuokasub-1000_after.png" alt="hukuokasub-1000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n73">
+<h2>#73 hukuokasub-3000 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：编组顺序不对。<br>
+<b>修法：</b>只改 consist.json 为 [car6,car5,car2,car1]；GLB 未动。<br>
+<b>推送：</b>已推，提交 <code>192dbfe8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/hukuokasub-3000_before.png" alt="hukuokasub-3000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/hukuokasub-3000_after.png" alt="hukuokasub-3000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n77">
+<h2>#77 iga-860 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，cab 248→179 px；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>2cf1f067</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/iga-860_before.png" alt="iga-860 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/iga-860_after.png" alt="iga-860 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n79">
+<h2>#79 irishikawa-ir521 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：特殊 司机室那一面的贴图 它是く的形状贴在司机室端面绿色挂耳保持和车侧面一个平面</p>
+<p><b>根因：</b>司机室端面绿色挂耳应为く形折翼，与车侧面保持一个平面。<br>
+<b>修法：</b>car1+car2 侧面绿挂耳改浅蓝く形折翼。<br>
+<b>推送：</b>已推，提交 <code>1d5ce171</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/irishikawa-ir521_before.png" alt="irishikawa-ir521 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/irishikawa-ir521_after.png" alt="irishikawa-ir521 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n86">
+<h2>#86 iyotetu-3000 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く头型</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>GLB 级 warp R=0.14；car1+car3。<br>
+<b>推送：</b>已推，提交 <code>36fe4a88</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/iyotetu-3000_before.png" alt="iyotetu-3000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/iyotetu-3000_after.png" alt="iyotetu-3000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n90">
+<h2>#90 izuhakone-7000 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>car1 warp R=0.21 + 中央凹 −0.18；car2 中间车未动。<br>
+<b>推送：</b>已推，提交 <code>86a26a4e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/izuhakone-7000_before.png" alt="izuhakone-7000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/izuhakone-7000_after.png" alt="izuhakone-7000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n91">
+<h2>#91 jnr-155 <span style="color:#666">—— 胶耳未清（ge-1）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧；car1-4。残留：贴图顶带余白为屋顶圆角白三角（穹顶裁切后不显）。<br>
+<b>推送：</b>已推，提交 <code>60578f22</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jnr-155_before.png" alt="jnr-155 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jnr-155_after.png" alt="jnr-155 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n93">
+<h2>#93 jnr-kiha181 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，司机面 176→133 px；car1。<br>
+<b>推送：</b>已推，提交 <code>c76c5734</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jnr-kiha181_before.png" alt="jnr-kiha181 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jnr-kiha181_after.png" alt="jnr-kiha181 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n94">
+<h2>#94 jnr-kiha58 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>米色耳（201）用折线暗线定位，端件框收紧；裙板填 2686 px；car1。<br>
+<b>推送：</b>已推，提交 <code>bdca7d7a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jnr-kiha58_before.png" alt="jnr-kiha58 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jnr-kiha58_after.png" alt="jnr-kiha58 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n99">
+<h2>#99 jr-east-165 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，司机面 186→139 px；贯通端按墙裁（非门宽）；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>553c6be8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-165_before.png" alt="jr-east-165 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-165_after.png" alt="jr-east-165 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n100">
+<h2>#100 jr-east-183 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>car1+car2 front 原位 v 翻转。残留：绿块翻后细绿带与侧面不对齐（图纸局限）。<br>
+<b>推送：</b>已推，提交 <code>15ffd5dd</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-183_before.png" alt="jr-east-183 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-183_after.png" alt="jr-east-183 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n101">
+<h2>#101 jr-east-251 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：实车 5 辆，模型只有 4 辆，缺クロ250 端车。<br>
+<b>修法：</b>新建 car5（クハ251 不翻转充当クロ250 端），编组 [car5,car1,car2,car3,car4]，car_length_m 20.0→20.5。已知不完美：car5 无绿车标、车门有窗。<br>
+<b>推送：</b>已推，提交 <code>c2c3a738</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-251_before.png" alt="jr-east-251 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-251_after.png" alt="jr-east-251 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n102">
+<h2>#102 jr-east-255 <span style="color:#666">—— 编组错误（fm-2）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：实车 3 辆，模型只有 2 辆，缺クハ254 端车。<br>
+<b>修法：</b>新建 car3（クハ255 充当クハ254 端），编组 [car3,car1,car2]，长度字段纠正 20.5→21.0 / 21.0→20.5。已知不完美：car3 有 2 扇门（实车 1 扇）。<br>
+<b>推送：</b>已推，提交 <code>e5f6e980</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-255_before.png" alt="jr-east-255 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-255_after.png" alt="jr-east-255 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n103">
+<h2>#103 jr-east-415 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，6 端件 160–182→135–139 px；car1-4。<br>
+<b>推送：</b>已推，提交 <code>d02aa8a4</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-415_before.png" alt="jr-east-415 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-415_after.png" alt="jr-east-415 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n105">
+<h2>#105 jr-east-485 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>正面本就对，只有两颗红点位置错（不在车灯下方）。<br>
+<b>修法：</b>不翻面、两颗红点像素搬移到车灯下方，涂装未动；car1+car2。未找到平头“白鳥”正面照，定案依据 189 系顺序。<br>
+<b>推送：</b>已推，提交 <code>192bac48</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-485_before.png" alt="jr-east-485 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-485_after.png" alt="jr-east-485 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n107">
+<h2>#107 jr-east-719 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，4 端件 236–239→177–179 px；裙板填 2305 px；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>a7200dbd</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-719_before.png" alt="jr-east-719 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-719_after.png" alt="jr-east-719 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n111">
+<h2>#111 jr-east-e131 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>(B) 批只填银灰（196）与黑司机面反差仍大，胶耳视觉未除。<br>
+<b>修法：</b>二次返工：收紧框 205→136 px，两侧带 196→82/90；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>6ebac32d</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-e131_before.png" alt="jr-east-e131 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-e131_after.png" alt="jr-east-e131 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n112">
+<h2>#112 jr-east-e233-5000 <span style="color:#666">—— 胶耳未清（ge-2）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，6 端件 189–190→135–143 px；裙板填 16784 px；car1-4。<br>
+<b>推送：</b>已推，提交 <code>d37a22fe</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-e233-5000_before.png" alt="jr-east-e233-5000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-e233-5000_after.png" alt="jr-east-e233-5000 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n113">
+<h2>#113 jr-east-e253-1000 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>car1 车顶设备带填红 + front 原位 v 翻转；car2 无司机面。残留：面右缘一小黑楔。<br>
+<b>推送：</b>已推，提交 <code>4caf2f5c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-e253-1000_before.png" alt="jr-east-e253-1000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-e253-1000_after.png" alt="jr-east-e253-1000 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n114">
+<h2>#114 jr-east-e261 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：图纸仅 2 辆，实车 8 辆；缺的 6 辆（含另一先头车クロE261 与餐车サシE261）车型不同、无图，car2 最可能是 7 号車モロE261-200（存疑）。<br>
+<b>修法：</b>不硬凑（见未推原因）。<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图缺车——图纸仅 2 辆，实车 8 辆；缺的 6 辆（含另一先头车クロE261 与餐车サシE261）车型不同、无图，镜像硬拼属伪造，不硬凑。</p>
+<div class="cmp"><figure><img src="img/jr-east-e261_before.png" alt="jr-east-e261 返工前"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+</div><div class="card" id="n123">
+<h2>#123 jr-east-hbe300 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：他这个头型是有点楔形的那一种 而且编组也不太对</p>
+<p><b>根因：</b>头型是楔形的那一种，而且编组也不对（实车 4 辆、模型 2 辆）。<br>
+<b>修法：</b>2 辆→4 辆编组 [car1,car2,car3,car4]，两端楔形鼻；car1+car3+car4+consist.json（car2 与 car3 字节相同，car3 复用既有中间车 GLB）。<br>
+<b>推送：</b>已推，提交 <code>f90e538b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-east-hbe300_before.png" alt="jr-east-hbe300 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-east-hbe300_after.png" alt="jr-east-hbe300 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n130">
+<h2>#130 jr-hokkaido-721 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，cab 224→180、gang 230→179 px；car1/2/3。<br>
+<b>推送：</b>已推，提交 <code>7e1f225a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-721_before.png" alt="jr-hokkaido-721 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-hokkaido-721_after.png" alt="jr-hokkaido-721 返工后"><figcaption>修后（斜视角）</figcaption></figure></div>
+</div><div class="card" id="n134">
+<h2>#134 jr-hokkaido-737 <span style="color:#666">—— 其他（ot-1）</span></h2>
+<p><b>MC 原话：</b>其他：这个看不清 再检查一下</p>
+<p><b>根因：</b>前脸看不清，粉竖条待查。<br>
+<b>修法：</b>car1 前脸裁切框右移、粉竖条清零。<br>
+<b>推送：</b>已推，提交 <code>9d167b7b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-737_before.png" alt="jr-hokkaido-737 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-737_after.png" alt="jr-hokkaido-737 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n135">
+<h2>#135 jr-hokkaido-785 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>正面本就对，只 cab 裙板倒了。<br>
+<b>修法：</b>不翻 front、只翻 cab 裙板；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>5961c274</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-785_before.png" alt="jr-hokkaido-785 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-785_after.png" alt="jr-hokkaido-785 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n137">
+<h2>#137 jr-hokkaido-h100 <span style="color:#666">—— 贴图颠倒（tx-1）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>正面本就对，左侧壁 DECMO 文字段镜像了。<br>
+<b>修法：</b>不翻 front、左侧壁 DECMO 文字段原位 u 镜像；car1。残留：文字段内绿带斜纹小段略有不连续。<br>
+<b>推送：</b>已推，提交 <code>84202a8e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-h100_before.png" alt="jr-hokkaido-h100 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-h100_after.png" alt="jr-hokkaido-h100 返工后"><figcaption>修后（司机车 3/4 视角）</figcaption></figure></div>
+</div><div class="card" id="n140">
+<h2>#140 jr-hokkaido-kiha183 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：头型不对参考 jr-hokkaido-789，编组也不对</p>
+<p><b>根因：</b>头型不对（参考 jr-hokkaido-789），编组也不对；缺キロ182-0 绿车（无图，不补）。<br>
+<b>修法：</b>car1 按 789 R1 里折重建。编组仍 3 辆，缺キロ182-0 绿车待取得图纸（试验涂装）后再补。<br>
+<b>推送：</b>已推，提交 <code>ff7dd150</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-kiha183_before.png" alt="jr-hokkaido-kiha183 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-kiha183_after.png" alt="jr-hokkaido-kiha183 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n141">
+<h2>#141 jr-hokkaido-kiha201 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正；car1+car3。<br>
+<b>推送：</b>已推，提交 <code>743540c2</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-kiha201_before.png" alt="jr-hokkaido-kiha201 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-hokkaido-kiha201_after.png" alt="jr-hokkaido-kiha201 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n142">
+<h2>#142 jr-hokkaido-kiha261 <span style="color:#666">—— 编组错误（fm-261）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：第二辆是中间车，两头应都有驾驶室（(b) 方案）。<br>
+<b>修法：</b>car2 按第 1 页重建为司机车，编组 [car2,car1] 两头驾驶室；双口径验证通过，三张用户图边距全过。另含根 tree 修复 bf39000（7c33bc8b 根 tree 事故后恢复 31 个条目）。<br>
+<b>推送：</b>已推，提交 <code>7c33bc8b</code>、<code>bf39000</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-kiha261_before.png" alt="jr-hokkaido-kiha261 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-kiha261_after.png" alt="jr-hokkaido-kiha261 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n143">
+<h2>#143 jr-hokkaido-kiha283 <span style="color:#666">—— 其他（ot-2）</span></h2>
+<p><b>MC 原话：</b>其他：重做</p>
+<p><b>根因：</b>删了重建；原编组顺序在站内是错的——两端外侧都是贯通端/平板端、司机面在中间接缝处面对面。<br>
+<b>修法：</b>删后重建（删 8b043261 → 重建 d2896074），consist 只倒序为 [car3,car2,car1]，GLB 不动；站内模拟验证两端外侧均为司机面、中间接缝贯通端相对。<br>
+<b>推送：</b>已推，提交 <code>d2896074</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-hokkaido-kiha283_before.png" alt="jr-hokkaido-kiha283 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-hokkaido-kiha283_after.png" alt="jr-hokkaido-kiha283 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n147">
+<h2>#147 jr-kyusyu-303 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>car1 warp R=0.15 + car3 由中间车重建成 Tc，车号“303”→“302”。小遗憾：小铭牌小号仍读“303”（主车号“302”正确）。<br>
+<b>推送：</b>已推，提交 <code>af10d2d8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-303_before.png" alt="jr-kyusyu-303 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-303_after.png" alt="jr-kyusyu-303 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n150">
+<h2>#150 jr-kyusyu-783 <span style="color:#666">—— 其他（ot-2）</span></h2>
+<p><b>MC 原话：</b>其他：删了重做</p>
+<p><b>根因：</b>删了重做：镂空车底＋去车顶空调；原编组顺序错（司机面在中间接缝处面对面）。<br>
+<b>修法：</b>删后重建（删 ed545e03 → 重建 0f1da846），consist 只倒序为 [car2,car1]，GLB 不动。⚠️ 黑风挡缺失待 MC 定夺（见页顶特别说明）。<br>
+<b>推送：</b>已推，提交 <code>0f1da846</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<p><b>⚠️ 黑风挡缺失（待 MC 定夺，见页顶特别说明）：</b>实车司机面是黑色全景风挡，但 Vayashi 原图 net 里没有黑风挡司机面件，按 skill“贴图必须是图纸的像素、不要重画”无法变出；本次返工范围（镂空车底＋去车顶空调）已修完并推上。</p><div class="cmp"><figure><img src="img/jr-kyusyu-783_before.png" alt="jr-kyusyu-783 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-783_after.png" alt="jr-kyusyu-783 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n152">
+<h2>#152 jr-kyusyu-811 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：贴图再调整一下司机是这一面的贴图往上面放一点</p>
+<p><b>根因：</b>司机室那一面的贴图往上面放一点。<br>
+<b>修法：</b>car1 front + car3 end1 司机面贴图上移约 0.15 m。<br>
+<b>推送：</b>已推，提交 <code>4879fc2c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-811_before.png" alt="jr-kyusyu-811 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-811_after.png" alt="jr-kyusyu-811 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n153">
+<h2>#153 jr-kyusyu-815 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>“518”翻回正立（未改 815）；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>2df3315a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-815_before.png" alt="jr-kyusyu-815 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-kyusyu-815_after.png" alt="jr-kyusyu-815 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n154">
+<h2>#154 jr-kyusyu-817 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>手术贴图重裁；car1/2。<br>
+<b>推送：</b>已推，提交 <code>6d38151c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-817_before.png" alt="jr-kyusyu-817 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-kyusyu-817_after.png" alt="jr-kyusyu-817 返工后"><figcaption>修后（斜视角）</figcaption></figure></div>
+</div><div class="card" id="n156">
+<h2>#156 jr-kyusyu-883 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正；car1+car2（car2 侧面“sonic”镜像字顺手修）。<br>
+<b>推送：</b>已推，提交 <code>71f7a214</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-883_before.png" alt="jr-kyusyu-883 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-kyusyu-883_after.png" alt="jr-kyusyu-883 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n158">
+<h2>#158 jr-kyusyu-bec819 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>b1342f32</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-bec819_before.png" alt="jr-kyusyu-bec819 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-kyusyu-bec819_after.png" alt="jr-kyusyu-bec819 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n165">
+<h2>#165 jr-kyusyu-kiha40 <span style="color:#666">—— 转向架问题（ms-1）</span></h2>
+<p><b>MC 原话：</b>转向架问题</p>
+<p><b>根因：</b>转向架问题：4 个平板灰圆片盖车轮＋后转向架偏出 0.88 m。<br>
+<b>修法：</b>前转向架换 0.86 m 真轮、后转向架移到规格位（心盘距 14.40 m）；car1。已知轻微偏差：前转向架右缘 4 px 白线（已收窄，正侧面不可见）；全长 20.8 m vs 实车 21,300 mm 不在本次范围。<br>
+<b>推送：</b>已推，提交 <code>6d6823fe</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-kiha40_before.png" alt="jr-kyusyu-kiha40 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-kiha40_after.png" alt="jr-kyusyu-kiha40 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n167">
+<h2>#167 jr-kyusyu-kiha71 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：实车 4 辆，模型只有 2 辆。<br>
+<b>修法：</b>补成实车 4 辆 [71-1][70-2][70-1][71-2]；只改 car3.glb、car4.glb、consist.json（car1/car2 与已推逐字节一致未重推）。<br>
+<b>推送：</b>已推，提交 <code>d8ced44a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-kiha71_before.png" alt="jr-kyusyu-kiha71 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-kiha71_after.png" alt="jr-kyusyu-kiha71 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n168">
+<h2>#168 jr-kyusyu-kiha72 <span style="color:#666">—— 其他（ot-6）</span></h2>
+<p><b>MC 原话：</b>其他：设计师贴图好像不太对 上下颠倒了 而且编组有问题</p>
+<p><b>根因：</b>设计师贴图上下颠倒了，而且编组有问题；缺キサハ72 4 与キハ72 5（无图，不补）。<br>
+<b>修法：</b>car2 侧面 3 处镜像“2”字框翻回正立。编组仍 3 辆，缺キサハ72 4 与キハ72 5 待取得图纸后再补。<br>
+<b>推送：</b>已推，提交 <code>eeb0f772</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-kiha72_before.png" alt="jr-kyusyu-kiha72 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-kyusyu-kiha72_after.png" alt="jr-kyusyu-kiha72 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n169">
+<h2>#169 jr-kyusyu-yc1 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，四框 181→132/133 px；car1/2。脸缘白色圆点边框是设计涂装，已保留。<br>
+<b>推送：</b>已推，提交 <code>e7c28a05</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-kyusyu-yc1_before.png" alt="jr-kyusyu-yc1 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-kyusyu-yc1_after.png" alt="jr-kyusyu-yc1 返工后"><figcaption>修后（斜视角）</figcaption></figure></div>
+</div><div class="card" id="n171">
+<h2>#171 jr-shikoku-1200 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，170→135 px；car1。<br>
+<b>推送：</b>已推，提交 <code>707bf8b2</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-shikoku-1200_before.png" alt="jr-shikoku-1200 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-shikoku-1200_after.png" alt="jr-shikoku-1200 返工后"><figcaption>修后（司机端特写）</figcaption></figure></div>
+</div><div class="card" id="n173">
+<h2>#173 jr-shikoku-2000 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：这个车是楔形的而且司机是的图上下颠倒了</p>
+<p><b>根因：</b>这个车是楔形的，而且司机室的图上下颠倒了。<br>
+<b>修法：</b>car1 正脸翻正 + 两端楔形鼻；car1+car3（car2 对照车不推）。<br>
+<b>推送：</b>已推，提交 <code>2525c72a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-shikoku-2000_before.png" alt="jr-shikoku-2000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-shikoku-2000_after.png" alt="jr-shikoku-2000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n180">
+<h2>#180 jr-shikoku-8000 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他：头型和贴图都有点问题</p>
+<p><b>根因：</b>头型和贴图都有点问题。<br>
+<b>修法：</b>car1 前脸重排＋流线鼻锥 3.0 m/顶 2.90 m；car3 8400 不动。<br>
+<b>推送：</b>已推，提交 <code>c0ce32d7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-shikoku-8000_before.png" alt="jr-shikoku-8000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-shikoku-8000_after.png" alt="jr-shikoku-8000 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n183">
+<h2>#183 jr-shikoku-kiha32 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，176→137 px；car1。<br>
+<b>推送：</b>已推，提交 <code>89c048b3</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-shikoku-kiha32_before.png" alt="jr-shikoku-kiha32 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-shikoku-kiha32_after.png" alt="jr-shikoku-kiha32 返工后"><figcaption>修后（司机端特写）</figcaption></figure></div>
+</div><div class="card" id="n185">
+<h2>#185 jr-tokai-117 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他：注意车头头型贴图上下颠倒</p>
+<p><b>根因：</b>车头头型贴图上下颠倒（风挡带雨刮）。<br>
+<b>修法：</b>car1+car4 只翻风挡带雨刮 Λ→V。<br>
+<b>推送：</b>已推，提交 <code>b49bd614</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-117_before.png" alt="jr-tokai-117 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-tokai-117_after.png" alt="jr-tokai-117 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n188">
+<h2>#188 jr-tokai-371 <span style="color:#666">—— 其他（ot-1）</span></h2>
+<p><b>MC 原话：</b>其他：看不清等会在审核</p>
+<p><b>根因：</b>看不清，等会再审核：鼻锥黑块＋裙板待查。<br>
+<b>修法：</b>car1（af1dacc6）+ car7（bba999cb）：鼻锥黑块改白、裙板改白。<br>
+<b>推送：</b>已推，提交 <code>af1dacc6</code>、<code>bba999cb</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-371_before.png" alt="jr-tokai-371 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-tokai-371_after.png" alt="jr-tokai-371 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n189">
+<h2>#189 jr-tokai-373 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，cab 163→129、gang 163→122 px；car1/2（c1/c2 共用同一组端件框，已两车同修）。<br>
+<b>推送：</b>已推，提交 <code>99d4305e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-373_before.png" alt="jr-tokai-373 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-tokai-373_after.png" alt="jr-tokai-373 返工后"><figcaption>修后（司机端特写）</figcaption></figure></div>
+</div><div class="card" id="n190">
+<h2>#190 jr-tokai-383 <span style="color:#666">—— 胶耳未清（ge-3）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，cab 205→128/129、gang 148→82 px；car1/2。<br>
+<b>推送：</b>已推，提交 <code>385935b7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-383_before.png" alt="jr-tokai-383 返工前"><figcaption>修前（司机端特写）</figcaption></figure><figure><img src="img/jr-tokai-383_after.png" alt="jr-tokai-383 返工后"><figcaption>修后（司机端特写）</figcaption></figure></div>
+</div><div class="card" id="n195">
+<h2>#195 jr-tokai-kiya95 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>9748a4c7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-kiya95_before.png" alt="jr-tokai-kiya95 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-tokai-kiya95_after.png" alt="jr-tokai-kiya95 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n196">
+<h2>#196 jr-tokai-kiya97 <span style="color:#666">—— 其他（ot-2）</span></h2>
+<p><b>MC 原话：</b>其他：删掉重做</p>
+<p><b>根因：</b>删掉重做；原编组顺序错（司机面在中间接缝处面对面）。<br>
+<b>修法：</b>删后重建（删 b7ad004e → 重建 3496094d，即当前远端 HEAD），consist 只倒序为 [car2,car1]，GLB 不动。<br>
+<b>推送：</b>已推，提交 <code>3496094d</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-tokai-kiya97_before.png" alt="jr-tokai-kiya97 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-tokai-kiya97_after.png" alt="jr-tokai-kiya97 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n197">
+<h2>#197 jr-west-105 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正，涂装未动；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>0bad8253</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-105_before.png" alt="jr-west-105 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-west-105_after.png" alt="jr-west-105 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n210">
+<h2>#210 jr-west-381 <span style="color:#666">—— 其他（ot-1）</span></h2>
+<p><b>MC 原话：</b>其他：司机是贴图 再检查一下怎么可能没窗呢</p>
+<p><b>根因：</b>司机室是贴图，再检查一下怎么可能没窗呢——图纸漏画风挡。<br>
+<b>修法：</b>car1（20ca7fdf）+ car4（416ce548）端面重组：按实车补两扇风挡＋V＋行先表示＋车灯。<br>
+<b>推送：</b>已推，提交 <code>20ca7fdf</code>、<code>416ce548</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-381_before.png" alt="jr-west-381 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-west-381_after.png" alt="jr-west-381 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n211">
+<h2>#211 jr-west-521 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>01254321</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-521_before.png" alt="jr-west-521 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/jr-west-521_after.png" alt="jr-west-521 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n212">
+<h2>#212 jr-west-681 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：那这个是属于那种尖鼻子的车型吧 重新弄一下</p>
+<p><b>根因：</b>尖鼻子的车型，重新弄一下。<br>
+<b>修法：</b>car1+car2 刀刃鼻 2.0 m + 去鼻裙（初版鼻裙悬空已去掉）。<br>
+<b>推送：</b>已推，提交 <code>ee242cc4</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-681_before.png" alt="jr-west-681 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-west-681_after.png" alt="jr-west-681 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n213">
+<h2>#213 jr-west-683 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：这个也是尖鼻子</p>
+<p><b>根因：</b>这个也是尖鼻子。<br>
+<b>修法：</b>car1+car2 长刀刃鼻 3.9 m。<br>
+<b>推送：</b>已推，提交 <code>654e00c7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-683_before.png" alt="jr-west-683 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/jr-west-683_after.png" alt="jr-west-683 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n222">
+<h2>#222 jr-west-kiha126 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>21e5de3f</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-kiha126_before.png" alt="jr-west-kiha126 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/jr-west-kiha126_after.png" alt="jr-west-kiha126 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n223">
+<h2>#223 jr-west-kiha127 <span style="color:#666">—— 贴图颠倒（tx-2）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>6680d1ed</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jr-west-kiha127_before.png" alt="jr-west-kiha127 返工前"><figcaption>修前（司机端面）</figcaption></figure><figure><img src="img/jr-west-kiha127_after.png" alt="jr-west-kiha127 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n228">
+<h2>#228 jrw227-0 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>5769c22c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/jrw227-0_before.png" alt="jrw227-0 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/jrw227-0_after.png" alt="jrw227-0 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n234">
+<h2>#234 keihan-700 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧＋裙板白纸残留同步清；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>355e4d5c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keihan-700_before.png" alt="keihan-700 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/keihan-700_after.png" alt="keihan-700 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n238">
+<h2>#238 keihan-8000 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面 corr −1.00 对照实车翻正（car1 ROTATE_180、car3 FLIP_TOP_BOTTOM）；car1+car3。<br>
+<b>推送：</b>已推，提交 <code>6bf95151</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keihan-8000_before.png" alt="keihan-8000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keihan-8000_after.png" alt="keihan-8000 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n241">
+<h2>#241 keihuku-611 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧；car1（奶油色柱子保留）。<br>
+<b>推送：</b>已推，提交 <code>4682f7df</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keihuku-611_before.png" alt="keihuku-611 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/keihuku-611_after.png" alt="keihuku-611 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n244">
+<h2>#244 keikyu-600 <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く。</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>car1+car4 warp R=0.19 + 边缘圆收 −0.30。残留：consist_side 右端边距 1.0% 略紧（未裁切）。<br>
+<b>推送：</b>已推，提交 <code>f17f22fa</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keikyu-600_before.png" alt="keikyu-600 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keikyu-600_after.png" alt="keikyu-600 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n245">
+<h2>#245 keikyu-n1000-al-4c <span style="color:#666">—— 其他（ot-3）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>纸模端盖是全平直竖板，く只画在侧面贴图里。<br>
+<b>修法：</b>car1+car4 warp R=0.18 + 边缘轻圆收 −0.10。<br>
+<b>推送：</b>已推，提交 <code>9d015b80</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keikyu-n1000-al-4c_before.png" alt="keikyu-n1000-al-4c 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keikyu-n1000-al-4c_after.png" alt="keikyu-n1000-al-4c 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n246">
+<h2>#246 keio-1000 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（只 FLIP_TB）；car1+car5。<br>
+<b>推送：</b>已推，提交 <code>5e53e7e7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keio-1000_before.png" alt="keio-1000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keio-1000_after.png" alt="keio-1000 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n247">
+<h2>#247 keio-5000 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：这个司机室的贴图你要注意让他切合左右两侧的那个头型的形状</p>
+<p><b>根因：</b>司机室的贴图要注意让它切合左右两侧的头型形状。<br>
+<b>修法：</b>car1 斜鼻（司机面贴合头型）。<br>
+<b>推送：</b>已推，提交 <code>6b37d396</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keio-5000_before.png" alt="keio-5000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keio-5000_after.png" alt="keio-5000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n249">
+<h2>#249 keio-8000 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：图纸仅 1 辆先头 Tc，实车 8/10 辆；keio_8000_f.pdf 是绿色复刻色版同一辆先头车，不是中间车图纸。<br>
+<b>修法：</b>不硬凑（见未推原因）。<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：无图缺车——图纸仅 1 辆先头 Tc，实车 8/10 辆；keio_8000_f.pdf 是绿色复刻色版同一辆先头车，不是中间车图纸。</p>
+<div class="cmp"><figure><img src="img/keio-8000_before.png" alt="keio-8000 返工前"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+</div><div class="card" id="n252">
+<h2>#252 keisei-3200 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>头型く。<br>
+<b>修法：</b>car1+car2 平头 loft 重建为鼻锥几何（top/bot 折线＋鼻尖半宽比＋鼻尖下 slit panel＋斜裙板）。<br>
+<b>推送：</b>已推，提交 <code>9b7d72b8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keisei-3200_before.png" alt="keisei-3200 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/keisei-3200_after.png" alt="keisei-3200 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n254">
+<h2>#254 keisei-3600 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1+car2+car3。<br>
+<b>推送：</b>已推，提交 <code>1089c571</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/keisei-3600_before.png" alt="keisei-3600 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/keisei-3600_after.png" alt="keisei-3600 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n258">
+<h2>#258 kintetsu-1200 <span style="color:#666">—— 胶耳未清（ge-4）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧（耳片是绛红色不是白色）；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>8920c5e1</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-1200_before.png" alt="kintetsu-1200 返工前"><figcaption>修前（整列斜视角）</figcaption></figure><figure><img src="img/kintetsu-1200_after.png" alt="kintetsu-1200 返工后"><figcaption>修后（司机端斜视角放大）</figcaption></figure></div>
+</div><div class="card" id="n259">
+<h2>#259 kintetsu-1220 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（ROTATE_180）；car1+car2。裙板伴生改色（绛红→白+灰）。<br>
+<b>推送：</b>已推，提交 <code>3d6888f8</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-1220_before.png" alt="kintetsu-1220 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-1220_after.png" alt="kintetsu-1220 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n264">
+<h2>#264 kintetsu-1440 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（FLIP_TB）；car1+car2。裙板伴生改色。残留：两车同号 1423（画师重复，不改）。<br>
+<b>推送：</b>已推，提交 <code>b1973c29</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-1440_before.png" alt="kintetsu-1440 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-1440_after.png" alt="kintetsu-1440 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n266">
+<h2>#266 kintetsu-1620 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（ROTATE_180）；car1+car4。裙板伴生改色。<br>
+<b>推送：</b>已推，提交 <code>ac5ee62c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-1620_before.png" alt="kintetsu-1620 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-1620_after.png" alt="kintetsu-1620 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n269">
+<h2>#269 kintetsu-21020 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：楔形</p>
+<p><b>根因：</b>楔形。<br>
+<b>修法：</b>car1+car6 平头 loft 重建为鼻锥几何（风挡约 32°、鼻尖 3 cm 薄刃）。残留：diag 特写边距 FAIL（6 辆 126 m、fov 45° 框不下，属补充特写，不影响交付）。<br>
+<b>推送：</b>已推，提交 <code>e1091e0b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-21020_before.png" alt="kintetsu-21020 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-21020_after.png" alt="kintetsu-21020 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n270">
+<h2>#270 kintetsu-22000 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧（耳是浅灰）；car1-4。<br>
+<b>推送：</b>已推，提交 <code>388d5552</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-22000_before.png" alt="kintetsu-22000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-22000_after.png" alt="kintetsu-22000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n271">
+<h2>#271 kintetsu-22600 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（FLIP_TB）；car1。残留：car3 无司机端面（编组错误，待另派编组组处理或报 MC）。<br>
+<b>推送：</b>已推，提交 <code>6f2fba22</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-22600_before.png" alt="kintetsu-22600 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-22600_after.png" alt="kintetsu-22600 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n273">
+<h2>#273 kintetsu-26000 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>头型く。<br>
+<b>修法：</b>car1+car4 平头 loft 重建为鼻锥几何（风挡约 23°）。<br>
+<b>推送：</b>已推，提交 <code>07499d9c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-26000_before.png" alt="kintetsu-26000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-26000_after.png" alt="kintetsu-26000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n275">
+<h2>#275 kintetsu-2800 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框过宽 + 裙板暗色中位 bleed；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>d75966b5</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-2800_before.png" alt="kintetsu-2800 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-2800_after.png" alt="kintetsu-2800 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n277">
+<h2>#277 kintetsu-3200 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>已修好（见未推原因）。<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：已修好、MC 看的是过期证据图——胶耳已在 2026-11-25 返工 12af34e9 修好，远端现行版即返工版；用原始版 GLB（440b78b0）同相机重渲，与全检证据图像素完全一致（平均绝对差 0.0），即 MC 的 #277 判定依据是过期证据。线上模型本身已无胶耳，重复推等于空推。请 MC 用本图（现行版重渲图）复核。</p>
+<div class="cmp"><figure class="noimg">无修前图</figure><figure><img src="img/kintetsu-3200_after.png" alt="kintetsu-3200 返工后"><figcaption>现行版重渲图（模型未动）</figcaption></figure></div>
+</div><div class="card" id="n279">
+<h2>#279 kintetsu-5200 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>a5f73ff4</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-5200_before.png" alt="kintetsu-5200 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-5200_after.png" alt="kintetsu-5200 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n280">
+<h2>#280 kintetsu-5800 <span style="color:#666">—— 贴图颠倒（tx-3）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正（ROTATE_180）；car1+car4。裙板伴生改色。残留：长野线映射错误不动。<br>
+<b>推送：</b>已推，提交 <code>96dca7e7</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-5800_before.png" alt="kintetsu-5800 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-5800_after.png" alt="kintetsu-5800 返工后"><figcaption>修后（司机端面）</figcaption></figure></div>
+</div><div class="card" id="n281">
+<h2>#281 kintetsu-5820 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>8f830528</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-5820_before.png" alt="kintetsu-5820 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-5820_after.png" alt="kintetsu-5820 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n282">
+<h2>#282 kintetsu-6400 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，三框全含白纸耳 + 裙板底角白三角；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>795ca343</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-6400_before.png" alt="kintetsu-6400 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-6400_after.png" alt="kintetsu-6400 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n285">
+<h2>#285 kintetsu-6a <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机端面翻正，风挡在上、LED 带 V 形、裙板改素深灰；car1+car4。<br>
+<b>推送：</b>已推，提交 <code>88bbbd89</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-6a_before.png" alt="kintetsu-6a 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-6a_after.png" alt="kintetsu-6a 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n287">
+<h2>#287 kintetsu-7020 <span style="color:#666">—— 胶耳未清（ge-5）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，梯形耳含黑折线；car1-6。（推送时重试循环未停，多推 2 个空 commit 50111a3c、f00b21c3，无文件改动，index 不变；按“不用 force”不改写历史，留着无害。）<br>
+<b>推送：</b>已推，提交 <code>857c823e</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-7020_before.png" alt="kintetsu-7020 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-7020_after.png" alt="kintetsu-7020 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n288">
+<h2>#288 kintetsu-8000 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白，UV 采样行内操作）；car1-4。<br>
+<b>推送：</b>已推，提交 <code>630c0796</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-8000_before.png" alt="kintetsu-8000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-8000_after.png" alt="kintetsu-8000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n290">
+<h2>#290 kintetsu-8600 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1-4。<br>
+<b>推送：</b>已推，提交 <code>55a6e815</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-8600_before.png" alt="kintetsu-8600 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-8600_after.png" alt="kintetsu-8600 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n293">
+<h2>#293 kintetsu-9020 <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>司机面旋 180°，行先顶中、红标左、圆灯右；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>be802303</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kintetsu-9020_before.png" alt="kintetsu-9020 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kintetsu-9020_after.png" alt="kintetsu-9020 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n300">
+<h2>#300 kitaosaka-9000 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1-3。<br>
+<b>推送：</b>已推，提交 <code>41358978</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kitaosaka-9000_before.png" alt="kitaosaka-9000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kitaosaka-9000_after.png" alt="kitaosaka-9000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n305">
+<h2>#305 kobesinkotu-portliner8000 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：头型</p>
+<p><b>根因：</b>头型：平头应为双平面折面。<br>
+<b>修法：</b>car1+car6 双平面折面（初版折面漏唇边 20 开边 + 1 非流形，已重写密封逻辑、现 0 开边）。<br>
+<b>推送：</b>已推，提交 <code>e732a5cb</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kobesinkotu-portliner8000_before.png" alt="kobesinkotu-portliner8000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kobesinkotu-portliner8000_after.png" alt="kobesinkotu-portliner8000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n309">
+<h2>#309 kodomonokuni-y000 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他：你这个车顶好像太高了 比司机室那个贴图都高出来一截</p>
+<p><b>根因：</b>车顶好像太高了，比司机室那个贴图都高出来一截。<br>
+<b>修法：</b>car1 前脸裁顶白带 33 行、v0 0.757→0.704；+ consist.json。<br>
+<b>推送：</b>已推，提交 <code>9cdb24b1</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kodomonokuni-y000_before.png" alt="kodomonokuni-y000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kodomonokuni-y000_after.png" alt="kodomonokuni-y000 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n312">
+<h2>#312 kotoden-1080 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1+car2（共享贴图陷阱：car1 front 与 car2 end1 共用司机面图，同一张图同一操作）。<br>
+<b>推送：</b>已推，提交 <code>e60eaf77</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kotoden-1080_before.png" alt="kotoden-1080 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kotoden-1080_after.png" alt="kotoden-1080 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n318">
+<h2>#318 kumamotosi-9700 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1。附带定性：梳状伪影是眼高 9 m 渲染器掠角混叠（眼高 6.5 m 时消失），非模型缺陷，审核页渲染须降眼高至 ≤6.5 m。<br>
+<b>推送：</b>已推，提交 <code>b8ce151a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/kumamotosi-9700_before.png" alt="kumamotosi-9700 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/kumamotosi-9700_after.png" alt="kumamotosi-9700 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n325">
+<h2>#325 matuura-mr600 <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>end1 MR 标志去镜像 + 裙板重裁蓝带；car1。<br>
+<b>推送：</b>已推，提交 <code>caa65182</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/matuura-mr600_before.png" alt="matuura-mr600 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/matuura-mr600_after.png" alt="matuura-mr600 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n328">
+<h2>#328 meitetsu-1200 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1-4。<br>
+<b>推送：</b>已推，提交 <code>80483952</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-1200_before.png" alt="meitetsu-1200 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-1200_after.png" alt="meitetsu-1200 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n329">
+<h2>#329 meitetsu-1700 <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>全景风挡翻正 + 司机裙板改红；car1。<br>
+<b>推送：</b>已推，提交 <code>059bb707</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-1700_before.png" alt="meitetsu-1700 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-1700_after.png" alt="meitetsu-1700 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n330">
+<h2>#330 meitetsu-1800 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他：头型く而且转向架下面怎么还多了一个轮子</p>
+<p><b>根因：</b>头型く，而且转向架下面怎么还多了一个轮子。<br>
+<b>修法：</b>car1+car2 侧板裁手绘底架带＋鼻锥 2.0 m/顶 3.55 m（多余轮子随底架带裁掉）。<br>
+<b>推送：</b>已推，提交 <code>22db411a</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-1800_before.png" alt="meitetsu-1800 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-1800_after.png" alt="meitetsu-1800 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n332">
+<h2>#332 meitetsu-2200 <span style="color:#666">—— 其他（ot-5）</span></h2>
+<p><b>MC 原话：</b>其他：这个注意头型要贴合的好一点</p>
+<p><b>根因：</b>注意头型要贴合的好一点。<br>
+<b>修法：</b>car1 前脸重裁（贴合头型）。<br>
+<b>推送：</b>已推，提交 <code>ff203676</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-2200_before.png" alt="meitetsu-2200 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-2200_after.png" alt="meitetsu-2200 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n333">
+<h2>#333 meitetsu-2300 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他：这个也是注意头型要贴合的好一点</p>
+<p><b>根因：</b>这个也是注意头型要贴合的好一点。<br>
+<b>修法：</b>car1 前脸裁顶深灰带 22 行、v0 0.819→0.796。<br>
+<b>推送：</b>已推，提交 <code>c57666ed</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-2300_before.png" alt="meitetsu-2300 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-2300_after.png" alt="meitetsu-2300 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n336">
+<h2>#336 meitetsu-3700 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1-4（共享贴图陷阱：中部车前后共用贯通面图，同一张图同一操作）。<br>
+<b>推送：</b>已推，提交 <code>742a986c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-3700_before.png" alt="meitetsu-3700 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-3700_after.png" alt="meitetsu-3700 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n338">
+<h2>#338 meitetsu-5000 <span style="color:#666">—— 胶耳未清（ge-6）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>只换内嵌贴图 PNG（裁切收紧到面轮廓 / 逐行填白）；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>aa79f85c</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-5000_before.png" alt="meitetsu-5000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-5000_after.png" alt="meitetsu-5000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n340">
+<h2>#340 meitetsu-mo880 <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>风挡在上、行先框在下；car1。<br>
+<b>推送：</b>已推，提交 <code>2cda4af3</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/meitetsu-mo880_before.png" alt="meitetsu-mo880 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/meitetsu-mo880_after.png" alt="meitetsu-mo880 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n342">
+<h2>#342 minamiaso-mt3000 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：头型く</p>
+<p><b>根因：</b>头型く。<br>
+<b>修法：</b>car1 平头 loft 重建为鼻锥几何，两端司机室。残留：仍为 MT-3000 代打 MT-4000（代打定夺待 MC 定，本次只修头型）。<br>
+<b>推送：</b>已推，提交 <code>357d84ab</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/minamiaso-mt3000_before.png" alt="minamiaso-mt3000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/minamiaso-mt3000_after.png" alt="minamiaso-mt3000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n343">
+<h2>#343 minatomirai-y500 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，4 框 183–197→141/142 px；car1/2/3（纠正原专员半成品的方向倒退——以远端 47c0295f 版 GLB 为基线 rot=True，逐像素核对方向一致）。<br>
+<b>推送：</b>已推，提交 <code>968cc302</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/minatomirai-y500_before.png" alt="minatomirai-y500 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/minatomirai-y500_after.png" alt="minatomirai-y500 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n344">
+<h2>#344 mitaketozan <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，两端框 160/161→129 px；car1。<br>
+<b>推送：</b>已推，提交 <code>40c0990b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/mitaketozan_before.png" alt="mitaketozan 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/mitaketozan_after.png" alt="mitaketozan 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n349">
+<h2>#349 nagano-3000 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1/2/3（原专员已推，本批核实未重做；MC 判 P0 返工）。<br>
+<b>推送：</b>已推，提交 <code>771ab31b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nagano-3000_before.png" alt="nagano-3000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nagano-3000_after.png" alt="nagano-3000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n350">
+<h2>#350 nagara-300 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，两端框 177→128 px；car1。<br>
+<b>推送：</b>已推，提交 <code>19fbc001</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nagara-300_before.png" alt="nagara-300 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nagara-300_after.png" alt="nagara-300 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n352">
+<h2>#352 nagasakidenki-3000 <span style="color:#666">—— 编组错误（fm-3）</span></h2>
+<p><b>MC 原话：</b>编组错误</p>
+<p><b>根因：</b>编组错误：顺序反了。<br>
+<b>修法：</b>只改 consist.json 为 [car3,car2,car1]；GLB 未动。<br>
+<b>推送：</b>已推，提交 <code>0f8ae3e1</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nagasakidenki-3000_before.png" alt="nagasakidenki-3000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nagasakidenki-3000_after.png" alt="nagasakidenki-3000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n355">
+<h2>#355 nagoyasub-2000 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：头型く</p>
+<p><b>根因：</b>头型く。<br>
+<b>修法：</b>car1 平头 loft 重建为鼻锥几何（风挡约 21°）；car2 中间车不动。<br>
+<b>推送：</b>已推，提交 <code>92ac8089</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nagoyasub-2000_before.png" alt="nagoyasub-2000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nagoyasub-2000_after.png" alt="nagoyasub-2000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n357">
+<h2>#357 nagoyasub-7000 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：く</p>
+<p><b>根因：</b>头型く。<br>
+<b>修法：</b>car1+car4 平头 loft 重建为鼻锥几何。<br>
+<b>推送：</b>已推，提交 <code>f4ef4a53</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nagoyasub-7000_before.png" alt="nagoyasub-7000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nagoyasub-7000_after.png" alt="nagoyasub-7000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n361">
+<h2>#361 nankai-10000 <span style="color:#666">—— 其他（ot-1）</span></h2>
+<p><b>MC 原话：</b>其他：头型く 而且我看不清楚 是不是胶耳没有抠干净</p>
+<p><b>根因：</b>头型く，而且看不清楚，是不是胶耳没有抠干净——胶耳已量测排除；两个候选成因均属结构性画法：①车顶-前脸 90° 直角（实车圆润过渡）；②鼻侧蓝/橙带直线斜切与横带成锐角折弯（实车平滑弧线）；另缺前脸红行先表示与车号（侧面贴图里有，可补）。<br>
+<b>修法：</b>修法四选一待 MC 定（见未推原因）。<br>
+<b>推送：</b><span style="color:#b00"><b>未推</b></span>——未推：修法待 MC 定夺——胶耳已量测排除。“头型く”定位到两个候选成因，均属结构性画法：①车顶-前脸 90° 直角（实车圆润过渡）；②鼻侧蓝/橙带直线斜切与横带成锐角折弯（实车平滑弧线）；另缺前脸红行先表示与车号。修法四选一：斜带改弧线 / 车顶前缘倒圆 / 补行先表示 / 维持现状。</p>
+<div class="cmp"><figure><img src="img/nankai-10000_before.png" alt="nankai-10000 返工前"><figcaption>修前（未修，无修后图）</figcaption></figure><figure class="noimg">无修后图</figure></div>
+</div><div class="card" id="n362">
+<h2>#362 nankai-11000 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1-4（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>070a9fff</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-11000_before.png" alt="nankai-11000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-11000_after.png" alt="nankai-11000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n363">
+<h2>#363 nankai-12000 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1-4（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>1cf24084</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-12000_before.png" alt="nankai-12000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-12000_after.png" alt="nankai-12000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n364">
+<h2>#364 nankai-2000 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框横向收紧到端面轮廓、只取端面本身，裙板白纸残留同步清；手术式 GLB 补丁；car1-4（原专员已推，本批核实未重做）。<br>
+<b>推送：</b>已推，提交 <code>5b2bd4cf</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-2000_before.png" alt="nankai-2000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-2000_after.png" alt="nankai-2000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n365">
+<h2>#365 nankai-30000 <span style="color:#666">—— 其他（ot-4）</span></h2>
+<p><b>MC 原话：</b>其他：楔形</p>
+<p><b>根因：</b>楔形。<br>
+<b>修法：</b>car1+car3 平头 loft 重建为鼻锥几何（风挡约 22°）；附带修 car3 原版缺陷——两端贴图都是贯通面，司机面与红鼻裙板全无，已用 car1 对应贴图补正。<br>
+<b>推送：</b>已推，提交 <code>bc098fb2</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-30000_before.png" alt="nankai-30000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-30000_after.png" alt="nankai-30000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n366">
+<h2>#366 nankai-31000 <span style="color:#666">—— 胶耳未清（ge-7）</span></h2>
+<p><b>MC 原话：</b>胶耳未清</p>
+<p><b>根因：</b>端件裁切框把纸模粘贴耳（のりしろ）框进贴图，端盖 UV 拉满车宽后在司机面两侧形成通高白竖条；贴图问题，非几何。<br>
+<b>修法：</b>端件框收紧，司机端框 170→136 px，白占比 0.150/0.087→0.043/0.018；car1（car2/car3 与 v1 逐字节相同未推）。<br>
+<b>推送：</b>已推，提交 <code>0607026b</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-31000_before.png" alt="nankai-31000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-31000_after.png" alt="nankai-31000 返工后"><figcaption>修后</figcaption></figure></div>
+</div><div class="card" id="n370">
+<h2>#370 nankai-8000 <span style="color:#666">—— 其他（ot-7）</span></h2>
+<p><b>MC 原话：</b>其他</p>
+<p><b>根因：</b>其他：贯通门蓝板错＋门窗太小＋前脸浅色底。<br>
+<b>修法：</b>car1+car2 自诊修复：贯通门蓝板错＋门窗太小＋前脸浅色底向侧面银靠拢。<br>
+<b>推送：</b>已推，提交 <code>24364c56</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nankai-8000_before.png" alt="nankai-8000 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nankai-8000_after.png" alt="nankai-8000 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div><div class="card" id="n374">
+<h2>#374 nipporitoneri-330 <span style="color:#666">—— 贴图颠倒（tx-4）</span></h2>
+<p><b>MC 原话：</b>贴图颠倒</p>
+<p><b>根因：</b>司机端面贴图上下颠倒，与实车照片的特征上下顺序相反。<br>
+<b>修法：</b>银杏左下、条纹右下 + 胶耳白边条改银；car1+car2。<br>
+<b>推送：</b>已推，提交 <code>9dc11951</code>（models-pipeline，一车一 commit；多 commit 的车见修法）</p>
+<div class="cmp"><figure><img src="img/nipporitoneri-330_before.png" alt="nipporitoneri-330 返工前"><figcaption>修前</figcaption></figure><figure><img src="img/nipporitoneri-330_after.png" alt="nipporitoneri-330 返工后"><figcaption>修后（建页时按已推模型现渲）</figcaption></figure></div>
+</div>
+
+<p class="note">说明：22 组全部完成并核实（127 辆已推、5 辆诊断未推），每辆 commit SHA 均已在远端 models-pipeline 最近 200 提交内核对。工作目录：~/workspace/jr3d/work/mc-review-rework-20261127/（DISPATCH.md＋各组 SUMMARY.md/REPORT.md）；建页脚本与数据：rework-page/build_page.py、data.json；现渲脚本：rework-page/render_fresh.py（GLB 取自远端 HEAD 3496094d）。</p>
+</div>
+</body>
+</html>
