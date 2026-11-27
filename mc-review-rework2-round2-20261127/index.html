@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC 快速审核第二批返工·第二轮 — 2 辆（2026-11-27）</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;background:#f4f4f4;color:#222}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;margin:8px 0 4px}
+.sub{color:#666;font-size:14px;line-height:1.7;margin:0 0 18px}
+.card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;margin:0 0 18px}
+.card h2{font-size:17px;margin:0 0 8px}
+.card p{font-size:14px;line-height:1.7;color:#444;margin:0 0 10px}
+img{width:100%;height:auto;display:block;border:1px solid #ccc;border-radius:6px}
+.note{font-size:13px;color:#888;line-height:1.7}
+.warn{background:#fff3cd;border:1px solid #e6c200;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
+.ok{background:#e6f4ea;border:1px solid #34a853;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.7;margin:0 0 18px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
+.cmp figure{margin:0}
+.cmp figcaption{font-size:13px;color:#666;text-align:center;margin-top:4px}
+code{font-size:12px;word-break:break-all}
+a{color:#0b5cad}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>MC 快速审核第二批返工·第二轮 — 2 辆（2026-11-27）</h1>
+<p class="sub">MC 2026-11-27 14:31 微信点名两辆（第一轮返工已推、他看了仍不满意），只放这两辆。第二批返工页：<a href="../mc-review-rework2-20261127/">mc-review-rework2-20261127</a>（两辆的卡片已同步更新为第二轮修法与修后图）；快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>。每辆一卡：号码、MC 原话（14:31）、根因、修法、commit SHA、第一轮修后 vs 第二轮修后对比图（斜视角＋鼻锥特写）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663。</p>
+
+<div class="ok"><b>汇总：2/2 已推。</b>#391 odakyu-60000（f307c96f）与 #404 osakyu-70000（删 73b796d0＋建 ccb413d8）均已推上 models-pipeline，远端 blob 逐字节核实，index 663。两辆的 under/skirt alphaMode 均已恢复 MASK/0.5（第一轮 warp 丢的已补回）。</div>
+
+<div class="warn"><b>另请注意：#392 odakyu-70000（与 #404 同一辆实车 GSE 的异名重复 slug）有同样的“电脑”问题，而且更严重。</b>经核实：它的 front 贴图是同一张鼻锥件但<b>上下颠倒</b>（翻转后像素差 20.9 vs 不翻转 57.6），另是一套更老建法（car_length_m 20.8、alphaMode 全丢）。本轮未动，<b>已另派重建</b>（工作目录 r2-70000-392/，进行中）。</div>
+
+<div class="card" id="n391">
+<h2>#391 odakyu-60000 <span style="color:#666">—— 小田急60000形 MSE</span></h2>
+<p><b>MC 原话（14:31）：</b>“这个还是不行，重新做。”</p>
+<p><b>根因：</b>第一轮 OT-1 的 GLB warp（R=0.55）不够：原版前盖是以扇心 (0, 3.113) 为顶点的 29 三角平面扇形，位置 warp 只能移动已有顶点，扇心与外框拉回量不同 → 扇形顶成带硬折的帐篷，拱形折线就是扇形边，加大 R 永远修不好；且前脸/裙板贴图就是纸模端件 1:1，折叠拱线、白粘贴耳、中央矩形门原样进了 front 与 skirt_cab1 两张贴图，warp 动不了图上的线；侧面贴图鼻端还带纸模折叠引导线（对角斜线、左上白三角、顶部深色包边），司机侧窗画成尖底三角形。<br>
+<b>修法：</b>第二轮从原版 GLB 重做（OT-1 的 warp GLB 已弃用）：25 列×15 断面层分级网格新前盖（625 tris）取代扇形，边界顶点取车体前缘环满精度值，前盖平面取前缘环 z；平滑 warp（C1）：车顶后移 0.50 m、裙底 0.30 m、最前点 y≈1.90，平面圆收 0.18 m，D=1.5 m 融合；贴图按实车重画（front 双片风挡 y 1.60..2.80、外上圆角 r=0.30 m、中柱、雨刮、左片 LED 行显、发丝门缝；skirt_cab 车钩凹口＋前灯白＋红＋门缝延续；sideL/R 鼻端楔形区涂蓝、司机侧窗重画为四边形、红带按实测逐列中心线原像素恢复）；under/skirt alphaMode 恢复 MASK/0.5。<br>
+<b>推送：</b>提交 <code>f307c96f</code>（models-pipeline，一车一 commit）<br><span class="note">完整 SHA：<code>f307c96f07f7d3d24bcc6d017af282d788dcd323</code>；父提交 47426c87，一次成功</span></p>
+<div class="cmp"><figure><img src="img/odakyu-60000_before_oblique.png" alt="odakyu-60000 第一轮修后斜视角（MC 判不行）"><figcaption>第一轮修后（MC 14:31 判不行）——斜视角</figcaption></figure>
+<figure><img src="img/odakyu-60000_after_oblique.png" alt="odakyu-60000 第二轮修后斜视角"><figcaption>第二轮修后——斜视角</figcaption></figure></div>
+<div class="cmp"><figure><img src="img/odakyu-60000_before_nose.png" alt="odakyu-60000 第一轮鼻锥特写"><figcaption>第一轮修后——鼻锥特写</figcaption></figure>
+<figure><img src="img/odakyu-60000_after_nose.png" alt="odakyu-60000 第二轮鼻锥特写"><figcaption>第二轮修后——鼻锥特写</figcaption></figure></div>
+</div><div class="card" id="n404">
+<h2>#404 osakyu-70000 <span style="color:#666">—— 小田急70000形 GSE</span></h2>
+<p><b>MC 原话（14:31）：</b>“这个司机是贴图上下都是电脑的，而且他现在头型也不对。删掉，重新做。”</p>
+<p><b>根因：</b>第一轮 OT-1 只修了编组（car2 重建为 Tc）＋尖头 warp R=0.55，但前脸仍错：“电脑”不是颠倒、不是取错件——纸模鼻锥件是折叠展开图不是立面图，拍平到平板端盖上，红色司机室面板成空矩形框＋2 红圆点（读作控制面板/屏幕）、全景风挡成无反光无座椅无立柱的深色梯形（读作空白显示器）、折叠线＋端盖/裙板接缝把风挡切成上下两段、warp 又加一道折痕；头型也不对：平板＋warp 折角楔形 vs 实车光滑连续曲面。<br>
+<b>修法：</b>第二轮删后重建：删前核实线上确为纸模（OT-1 产物，11,846 tris，无高精度版）；删 commit 73b796d0（index 663→662）；再从同一张图纸从头重建：loft 鼻锥（不用 warp；前脸 UV 高度式 v=(Y_TOP−y)/Y_TOP），底边从 1.59 m 下探到 1.15 m（配套封闭下部＋后倾前裙板），前脸按实车照片重画正视立面（波尔多红车顶、司机窗 y 3.20–3.90、素红带无目的地显示、整块连续全景玻璃 y 1.15–2.95、下红鼻带 y 0.60–1.15、银裙 y 0–0.60）；under/skirt alphaMode 恢复 MASK/0.5；consist [21.3, 21.3] 不变。重建 commit ccb413d8（index 662→663）。<br>
+<b>推送：</b>删 <code>73b796d0</code>＋建 <code>ccb413d8</code>（models-pipeline，各单 commit）<br><span class="note">完整 SHA：删 <code>73b796d02bf86e4ef725656a01ae4c14a2e1d105</code>；建 <code>ccb413d8909c6f05ff9e3e6f9027561ac0b6bb93</code></span></p>
+<div class="cmp"><figure><img src="img/osakyu-70000_before_oblique.png" alt="osakyu-70000 第一轮修后斜视角（MC 判不行）"><figcaption>第一轮修后（MC 14:31 判不行）——斜视角</figcaption></figure>
+<figure><img src="img/osakyu-70000_after_oblique.png" alt="osakyu-70000 第二轮修后斜视角"><figcaption>第二轮修后——斜视角</figcaption></figure></div>
+<div class="cmp"><figure><img src="img/osakyu-70000_before_nose.png" alt="osakyu-70000 第一轮鼻锥特写"><figcaption>第一轮修后——鼻锥特写</figcaption></figure>
+<figure><img src="img/osakyu-70000_after_nose.png" alt="osakyu-70000 第二轮鼻锥特写"><figcaption>第二轮修后——鼻锥特写</figcaption></figure></div>
+</div>
+
+<p class="note">说明：修前图为第一轮 OT-1 渲染（MC 14:31 看到的版本）；修后图为第二轮 R2 渲染。工作目录：~/workspace/jr3d/work/mc-review-rework2-round2-20261127/（DISPATCH.md＋r2-60000/REPORT.md、r2-70000/REPORT.md）；建页脚本：rework-page/build_page.py。建模 skill 已升到 v1.2.39（#391 的 6 条＋#404 的 7 条，见 SKILL.md 变更记录 1.2.39 / 1.2.38）。</p>
+</div>
+</body>
+</html>

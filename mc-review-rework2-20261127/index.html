@@ -33,7 +33,8 @@ h3{font-size:16px;margin:18px 0 8px}
 <p class="sub">MC 2026-11-27 12:06 微信审核结果的第二批返工（#387–#521），只放这 70 辆。MC 原话“自己该重建，重建。该修复修复，不要问我了，全部弄好以后再给我审批”（09:29 放行）。模型在 ooep/floral-salad-8734 的 models-pipeline 分支，index 663 个模型（本批全是已有 slug，不增新车型）。第一批返工页：<a href="../rework-batch1-20261127/">rework-batch1-20261127</a>；快速审核页：<a href="../quick-review-20261127/">quick-review-20261127</a>。每辆一卡：号码、类别、MC 原话、根因、修法、commit SHA、返工前后斜视角对比图。</p>
 
 <div class="ok"><b>汇总：已推 64/70、未推 6 辆。</b>未推 6 辆＝无图 4 辆（先接受现有子集，MC 14:34 授权决断）＋暂缓 1 辆（sagano-de10，MC 14:34 指令先不做）＋无错 1 辆：
-<ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul></div>
+<ul><li><b>#407 sagano-de10</b>——未推：无可翻贴图，图纸内容错误（机车罩画黑 vs 实车红、驾驶端玻璃画黑菱形网纹 vs 实车全景玻璃），翻转修不了；MC 14:34 指令先不做（暂缓）</li><li><b>#423 seibu-001</b>——未推：无图（实车 8 辆、模型仅 1 辆；全库只有 1 份图纸，缺 7 辆无法补；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#432 senboku-9300</b>——未推：无图（实车 4 辆、模型仅 1 辆；三处图纸来源均无 9300/8300 图；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#472 toei-5500</b>——未推：无图（实车 8 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#476 tokyometro-13000</b>——未推：无图（实车 7 辆、模型 2 辆；图纸库只有 1 张先头车净片；MC 14:34 授权决断：先接受现有子集，等有图再说）</li><li><b>#484 tokyu-300</b>——未推：无错（单 GLB 即 2 辆铰接全编组，两端均为司机面）</li></ul>
+<b>第二轮：</b>#391 odakyu-60000 与 #404 osakyu-70000 经 MC 14:31 点名重做，已重做并推上（卡片为第二轮修法与修后图）；另见第二轮返工页 <a href="../mc-review-rework2-round2-20261127/">mc-review-rework2-round2-20261127</a>。</div>
 
 <div class="warn"><b>特别标注：</b><br>
 ⚠️ <b>#520 yokohamasub-10000 左缘胶耳未修（已推，耳未修）</b>：x 0–43、约 12.8% 宽白竖带；任务定本车只修贴图颠倒，无干净的裁切-重标方案（风挡宽已正确 1.96 m，拉伸会变 2.33 m），留待以后单独处理。<br>
@@ -85,9 +86,9 @@ h3{font-size:16px;margin:18px 0 8px}
 </div><div class="card" id="n391">
 <h2>#391 odakyu-60000 <span style="color:#666">—— 其他（ot-1）</span></h2>
 <p><b>MC 原话：</b>其他：这个车是楔形的</p>
-<p><b>根因：</b>纸模端盖是全平直竖板，楔形只画在侧面贴图里。<br>
-<b>修法：</b>GLB 级 warp（dz＝out·(−R·r(y)＋F·g(x))·f(d)，D＝1.2 m），楔形 R＝0.55、edge_back F＝−0.30（车顶中心 −0.551、边缘 −0.780、裙板边缘 −0.307）；侧面贴图是满幅矩形，后倾量按实车照片定。<br>
-<b>推送：</b>提交 <code>d797d028</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>d797d028c4427460ceaf708accc504821e50fafc</code></span></p>
+<p><b>根因：</b>第一轮 OT-1 的 GLB warp（R=0.55）不够：原版前盖是 29 三角扇形，warp 只能把它顶成带硬折的帐篷（拱形折线就是扇形边）；且前脸/裙板贴图就是纸模端件 1:1，折叠拱线、白耳、矩形贯通门全在图上，warp 去不掉。MC 14:31 看后判“还是不行，重新做”。<br>
+<b>修法：</b>第二轮从原版 GLB 重做：25×15 分级网格新前盖（625 tris）＋C1 平滑 warp（车顶后移 0.50 m）＋前脸/裙板/侧面鼻端贴图按实车重画（双片圆角风挡、雨刮、LED 行显、车钩凹口、前灯）；under/skirt alphaMode 恢复 MASK/0.5。<br>
+<b>推送：</b>提交 <code>f307c96f</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>f307c96f07f7d3d24bcc6d017af282d788dcd323</code></span></p>
 <div class="cmp"><figure><img src="img/odakyu-60000_before.png" alt="odakyu-60000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/odakyu-60000_after.png" alt="odakyu-60000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n392">
 <h2>#392 odakyu-70000 <span style="color:#666">—— 其他（ot-1）</span></h2>
@@ -134,9 +135,9 @@ h3{font-size:16px;margin:18px 0 8px}
 </div><div class="card" id="n404">
 <h2>#404 osakyu-70000 <span style="color:#666">—— 其他（ot-1）</span></h2>
 <p><b>MC 原话：</b>其他：编组错误 而且是尖头车</p>
-<p><b>根因：</b>编组错误＋尖头车：car2 原为两端贯通门＋司机室风挡朝内＋20.0 m 的错误车。<br>
-<b>修法：</b>以 car1 绕 Y 旋 180° 重建 car2 为第二辆 Tc（21.3 m，旋转非镜像），再尖头 warp R＝0.55、F＝−0.35；consist 改为 [21.3, 21.3]。与 #392 是同一辆车（GSE）的异名重复 slug，本批不合并；实车 7 辆编组的中 5 辆无图纸，不补。<br>
-<b>推送：</b>提交 <code>452bbd56</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>452bbd56770e63cefdf57019bd38d6a4f73b3654</code></span></p>
+<p><b>根因：</b>第一轮 OT-1 只修了编组（car2 重建为 Tc）＋尖头 warp R=0.55，但前脸仍错：纸模鼻锥件是折叠展开图不是立面图，拍平后红司机面板（空矩形框＋2 圆点）像控制面板、大块深色梯形像空白显示器，折叠线横切风挡；头型是平板楔形而非实车光滑曲面。MC 14:31 看后判“司机贴图上下都是电脑，头型也不对，删掉，重新做”。<br>
+<b>修法：</b>第二轮删后重建：删 commit 73b796d0（index 663→662），再从图纸从头重建（loft 光滑流线展望头，底边下探到 y=1.15 m＋后倾前裙板，前脸按实车重画：整块全景风挡、无电脑面板、无横线切断玻璃）；under/skirt alphaMode 恢复 MASK/0.5；consist [21.3, 21.3] 不变。重建 commit ccb413d8（index 662→663）。<br>
+<b>推送：</b>提交 <code>ccb413d8</code>（models-pipeline，一车一 commit；wakayama-2270 为两 commit）<br><span class="note">完整 SHA：<code>ccb413d8909c6f05ff9e3e6f9027561ac0b6bb93</code></span></p>
 <div class="cmp"><figure><img src="img/osakyu-70000_before.png" alt="osakyu-70000 返工前斜视角"><figcaption>修前</figcaption></figure><figure><img src="img/osakyu-70000_after.png" alt="osakyu-70000 返工后斜视角"><figcaption>修后</figcaption></figure></div>
 </div><div class="card" id="n405">
 <h2>#405 oumi-900 <span style="color:#666">—— 其他（ot-2）</span></h2>
