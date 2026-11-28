@@ -53,8 +53,8 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <body>
 <header>
 <h1>🎸 第五轮司机端返工复核 <span class="hl">24辆</span></h1>
-<p>用法：MC 2026-11-28 16:25 复核第五轮 37 辆：8 辆通过、29 辆未审；18:09 再复核这 29 辆：4 辆通过、25 辆未审。本页只放这 24 辆的司机端返工后图（斜视角＋司机端端面），号码为<b>汇总页号（#5–#201，不连续）</b>，每卡同时标原批次＋原号码。每辆只看修后图，不放修前／对比图；点 <b>✅ 通过</b> 或一个返工原因（可改选，再点一次取消）；<b>其他</b>点后在下方填备注。底部栏可<b>跳转到汇总页号码</b>、看进度、<b>复制结果</b>后粘贴到微信发我。标记存在本机浏览器里，刷新不丢。8 辆无新推的车放的是 live 现状图，卡片已标“live 合规”或“未返工”。</p>
-<p class="stat">共 <b>24</b> 辆 · ✅ 已推 <b>16</b> · ✅ live 合规无新推 <b>7</b> · ⛔ 未返工 <b>1</b> · index <b>687</b> 个模型（models-pipeline <b>1010b48</b>，2026-11-28）</p>
+<p>用法：MC 2026-11-28 16:25 复核第五轮 37 辆：8 辆通过、29 辆未审；18:09 再复核这 29 辆：4 辆通过、25 辆未审；19:48 MC 指令 25 辆的头全部重做，20:10 #30 jr-east-485 通过毕业，本批剩 24 辆。本页只放这 24 辆的司机端重做后图（斜视角＋两端端面），号码为<b>汇总页号（#5–#201，不连续）</b>，每卡同时标原批次＋原号码。每辆只看修后图，不放修前／对比图；点 <b>✅ 通过</b> 或一个返工原因（可改选，再点一次取消）；<b>其他</b>点后在下方填备注。底部栏可<b>跳转到汇总页号码</b>、看进度、<b>复制结果</b>后粘贴到微信发我。标记存在本机浏览器里，刷新不丢。16 辆合规无新推的车放的是 live 现状图，卡片已标“live 合规”。</p>
+<p class="stat">共 <b>24</b> 辆 · ✅ 已推 <b>8</b> · ✅ live 合规无新推 <b>16</b> · index <b>687</b> 个模型（models-pipeline <b>0005c19</b>，2026-11-28）</p>
 <p>已通过的 8 辆（只在下方文字里，不出卡）：</p>
 <ul>
 <li><b>#111 meitetsu-1800、#115 meitetsu-5000、#117 minamiaso-mt3000、#129 nankai-30000、#165 sotetsu-12000、#181 tokyometro-07、#189 tokyu-2020、#195 tokyu-6020</b>——MC 2026-11-28 16:25 复核通过，以后不用显示在页面里。</li>
@@ -67,30 +67,31 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <ul>
 <li><b>#30 jr-east-485</b>——MC 2026-11-28 20:10 复核通过毕业（满幅修复 1171f85/1010b48；圆灯横椭圆一并接受，不回 382 px 版）。</li>
 </ul>
-<p>本批 24 辆：14 辆本批修复推送＋2 辆并行轨道修复推送（#34 jr-east-e253-1000、#44 jr-hokkaido-kiha283）＋7 辆像素核实合规不推＋1 辆 #46 jr-kyusyu-783 停下未推（楔形须动几何，由 783-windshield 轨道承接）。#30 jr-east-485 已于 20:10 通过毕业，不再出卡。汇总页（205 辆，本批 29 张卡已刷新）：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">mc-review-rework-all-20261127</a>。卡片上的“MC 返工原因”是第四轮复核（2026-11-28 01:09）的 verdict；第一批／第二批原始理由与它不同时，卡上另注“原始理由”，仅供参考。</p>
+<p>本批 24 辆：8 辆修复推送（11 个 commit：yokohamasub-10000 b126ccf、kintetsu-5800 7ed5b47、nagoyasub-7000 6db18ca、jr-kyusyu-kiha71 772bf96、keihan-8000 0ae69bc、jr-east-251 57f2ab6／e42d482、jr-kyusyu-783 b45e4e0／70d5d76、jr-hokkaido-kiha283 49262cd／0005c19）＋16 辆像素核实合规不推。#30 jr-east-485 已于 20:10 通过毕业，不再出卡。汇总页（205 辆，本批 24 张卡已刷新）：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">mc-review-rework-all-20261127</a>。卡片上的“MC 返工原因”是第四轮复核（2026-11-28 01:09）的 verdict；第一批／第二批原始理由与它不同时，卡上另注“原始理由”，仅供参考。</p>
 </header>
 <div class="lessons"><h2>📝 第五轮返工经验总结（10 条）</h2><p>这 37 辆返工里总结出来的要点，下次建模、返工直接对照：</p><ol><li><b>纸模脸件普遍无风挡，须按实车重画（CAB1 共性）：</b>183／251／485／kiha183／kiha283 的脸件本身没有风挡——风挡是图纸另件或根本没有，建模时从未贴上脸。按实车照片重画双风挡＋中柱＋雨刮，灯按实车米制定位（183 绿灯块上移 0.3 m、485 灯上移 0.25 m）；头标／行先框无文字是共用贴图镜像所限，不是漏画。</li><li><b>贴图翻转≠头型修复，头型须重建几何（HEAD）：</b>R4 只翻贴图，几何仍是长方体盒子（侧面轮廓顶部／底部／半宽全恒定，屋顶线水平到端面再直角下折＝MC 看到的 く）。分级网格前盖（25×15＝648 三角替 29 扇形三角）＋分段 profile warp 重建真头型，鼻尖回到中低部（2020／6020 在 y 1.88–2.48，y10000 下脸垂直至 y 1.61 再约 10° 后倾）；mt3000 按图纸实测轮廓 loft 重建（鼻长 0.62 m，17° 直面＋Hermite 屋顶）。</li><li><b>R4 平色常数填法就是 MC 禁的纯色块（GLUE1）：</b>105 用平色常数 (228,182,70) 把蓝腰带涂成平黄，正是 MC 01:10 点名的纯色块。胶耳填充须逐行跟踪边缘色融合——轮廓暗线旁 10 px 窄窗众数取面色＋5 行中位平滑，玻璃行填玻璃色、带行填带色；带包绕规则与玻璃规则已删（前者曾把腰带涂黄，后者曾把玻璃行涂绛红留竖纹）。</li><li><b>同色胶耳：只测白色会漏（GLUE1／GLUE2）：</b>105 黄耳、700 深绿耳、7000 灰绿／深绿竖条——白色指标通过 ≠ 胶耳已清，须按色带分段查。耳色“接近”判定须用外缘 12 px（远离轮廓）＋±15 行稳定性：整条外缘中值会读到折痕阴影带（22600）或暗折痕（07 右耳）而误判；黑灯带是通宽面板，耳也不能把它传播掉（5800 keep_dark）。</li><li><b>转向架验收须查侧架＋设备箱，不能只数轮子（BOGIE）：</b>R4“每辆正好 4 只轮盘、车底设备完整”是错的——live under 只有 4 只轮盘、不透明度仅 ~20%，侧架＋设备箱全是原始建模漏画（与原始建模提交逐像素相同，非返工误删）。补后不透明度 ~47–51%（侧架＋带边框／门缝／搭扣／通风口的设备箱）；轮盘原位不动（真圆、轮位与图纸吻合 ≤0.14 m）。</li><li><b>编组拼法 23:27 再确认（FORM）：</b>缺车是对面先头车镜像或相同中间车才能补。名古屋 2000 补成完整 6 辆（中间车克隆＋尾车 Y180 翻转）；相鉄 12000 补成完整 10 辆（中间车截断重建＋另一头翻转，编组顺序须首车未翻转、尾车翻转，否则两端都是贯通门）；e261 只拼出 1 辆缺车（6 号车与 7 号车同 5 大窗＋门在高号端，克隆＋去弓）成 3 辆子集 [1, 6, 7]。</li><li><b>8500 拼不了有证伪证据（FORM）：</b>8501 9 窗 vs 8551 7 展望窗 vs 8601 8 窗；9 窗按 183 px 间距需 1,604 px 窗带、现有仅 1,233 px，拼接须把门位间距全重排、按照片重设计整张侧面——属虚构新车侧面、超红线，不做。缺的图已列清：KuMoHa 8501 的 net（库里唯一的 8500 PDF 只有 8551＋8601 两张 net）。</li><li><b>电锅头参照 kiha261，司机面贴图从图纸重截＋对照实车（CAB2）：</b>783／kiha71／8000 属电锅头型，照已通过的 kiha261（#43）画法做。kiha71 错在裙板不在脸——司机室件转 90° 取错源，裙板须从侧立面正视图取；330 风挡按每行实测亮度填成连续玻璃（固定深色会让玻璃看起来更小）；90000 行先表示移到顶部中央、风挡用真实玻璃拉宽到 88%，水印一字未动。</li><li><b>朝向／位置错要修几何或索引，不要只动贴图（MISC）：</b>21020 尾车 Y180 烘焙旋转＋贴图索引对调（front↔end1），刚体运动、贴图像素一字未动；keio-1000 前盖贴图纵横比失真 1.53 倍，须按 135.6 px/m 等比重大建（脸部 332 行零重采样平移）＋补白裙板；05 车钩从脑门移到裙板底部中央（图纸原画移植，不是重画示意块）。</li><li><b>动手前先核 live：图旧还是模型错（GLUE1／GLUE2）：</b>11 辆 live 真有耳，不是旧页图——R4 页图与 R4 修后源渲染 MD5 一致，MC 看到的就是修后模型，第四轮修得不彻底（锚点错、带包绕涂错带、玻璃规则留竖纹、只修裙板没修脸）。先对 live 渲染比对再动手；sendai 29 个内翻三角与 live 相同（R4 warp 零面积遗留，总面积 ~1e-7 m²，渲染不可见），不动几何；每辆车头都要查耳、有耳必删，斜视角放大目检验收。</li></ol></div>
 <div class="filters" id="filters">
 <button data-f="all" class="on">全部 24</button>
-<button data-f="pushed">✅已推 16</button>
-<button data-f="unpushed">未推 8</button>
+<button data-f="pushed">✅已推 8</button>
+<button data-f="unpushed">未推 16</button>
 <button data-f="unreviewed">未审</button>
 <button data-f="reviewed">已审</button>
 <input type="search" id="q" placeholder="搜 slug，如 toei-5500">
 </div>
 <main id="list">
-<section class="card" id="car-5" data-num="5" data-slug="fujikyu-8500" data-orig="第一批 #26" data-status="pushed">
+<section class="card" id="car-5" data-num="5" data-slug="fujikyu-8500" data-orig="第一批 #26" data-status="unpushed">
   <div class="chead"><span class="num">#5</span> <span class="orig">汇总页 #5 · 第一批 #26</span> <span class="slug">fujikyu-8500</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>d2aa8f9</code>（car1，models-pipeline）</div><div class="cmeta">类别：编组错误（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>d2aa8f9</code>（R5 #5，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>编组错误</div>
   <div class="cnote"><b>原始理由：</b>其他：司机是这个贴图 按照目前这个形态 就是这个形状是没问题的 但是然后上下颠倒一下</div>
   <div class="cnote"><b>根因：</b>编组错误：实车 3 辆，模型 2 辆，缺 KuMoHa 8501（富士急端司机车，21.0 m、60 席、1 弓）。库里唯一的 fujikyu-8500 PDF 只有 2 张 net（8551＋8601），全库无其他 8500 图纸。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>鼻端重绘改回图纸鼻件 (601,310,761,434) 旋转 180° 重裁，“2016”正读、风挡在上；边界白纸 858 px 边缘延展。</div>
-  <div class="cnote"><b>像素证据：</b>car1 单文件推送；car2（MoHa 8601）根本没有司机端（中间车两端贯通端），未动；编组仍 2 辆（缺 KuMoHa 8501 无图）。</div>
-  <div class="warnline">⚠️ 编组仍 2 辆子集（实车 3 辆），缺 KuMoHa 8501 图纸，等 MC 定夺。</div>
-  <div class="cimg"><img loading="lazy" src="img/fujikyu-8500_cab6_1.png" alt="fujikyu-8500 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/fujikyu-8500_cab6_2.png" alt="fujikyu-8500 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：鼻子已有坡度（直平面，水平面上 42.8°，y 1.69–3.94 m，后缩 2.43 m），与图纸侧立面一致；鼻件真裁切（160×124 px 旋 180°），奶油 0.19%≈0，858 px 边界延展定性为邻接深红延展、不清；图纸上无鼻侧头标牌件，不虚构。</div>
+  <div class="cnote"><b>像素证据：</b>侧带对角线比 0.95–1.25 vs 模型 1.08，在误差内；鼻件四角深红 (151,43,41)、奶油 0.000%、白 0.000%；各向异性约 2%（55 vs 56 px／m）。</div>
+  <div class="warnline">⚠️ 待 MC 定：编组 2 辆 vs 实车 3 辆（缺 KuMoHa 8501，无图纸，镜像／克隆已证伪）。</div>
+  <div class="cimg"><img loading="lazy" src="img/fujikyu-8500_h25_1.png" alt="fujikyu-8500 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/fujikyu-8500_h25_2.png" alt="fujikyu-8500 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/fujikyu-8500_h25_3.png" alt="fujikyu-8500 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -101,15 +102,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-26" data-num="26" data-slug="jr-east-183" data-orig="第一批 #100" data-status="unpushed">
   <div class="chead"><span class="num">#26</span> <span class="orig">汇总页 #26 · 第一批 #100</span> <span class="slug">jr-east-183</span>
   <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b>　末触 <code>46a75b7</code>（末触（183-A 风挡重贴），models-pipeline）</div><div class="cmeta">类别：其他：你这个司机是贴图绝对是错的 重新去图纸上面看 重新搞（第五轮）</div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>46a75b7</code>（183-A 风挡重贴，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机是贴图绝对是错的 重新去图纸上面看 重新搞</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>纸模脸件本身没有风挡：脸顶是灰色屋顶设备带（两黑方块＋中央 X 盒），风挡是图纸左上单独的深色梯形件，建模时从未贴上脸；另绿灯块＋行先框整体偏低约 0.3 m，裙全白、无绿细带、无深灰裙、无车钩。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。R5 四项根因中裙板 3 项 live 已有；“绿灯块＋行先框偏低 0.3 m”是图纸原样 1:1，不修。</div>
-  <div class="cnote"><b>像素证据：</b>独立重建与 live front 206,460/206,460 px 相同（NCC 1.0000）。</div>
-  <div class="warnline">⚠️ 深灰裙＋车钩盒是否为图纸裁切本次未验证（只核了脸），不可称“图纸原图”。待 MC 定：玻璃顶角绿三角、灯块／行先框是否接受图纸原样。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-east-183_cab6_1.png" alt="jr-east-183 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-east-183_cab6_2.png" alt="jr-east-183 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：脸 29 批独立重裁 NCC 1.0000、md5 9befd9eb，采样区四边奶油色占比 0.000；头型前脸竖直平面 z=0、y 1.23–3.48 m，与图纸侧立面一致。</div>
+  <div class="cnote"><b>像素证据：</b>live front 与已验证的图纸重算逐字节相同（6 波段 NCC 全 1.00000）；脸盖满整脸 2.94 m × 2.25 m，无缺口；各向异性 4.5%（158 vs 165 px／m）。</div>
+  <div class="warnline">⚠️ 待 MC 定：脸下部近白：贴图行 298–371 占 83.7% 近白，但图纸脸件原生行 120–149 本身 78–83% 纯白（纸边还是脸身色，等 MC 定）；裙板＋车钩盒三选一（R5 按实车照片重画，图纸上无专用裙板件）；玻璃顶角绿三角、灯块／行先框抬高约 0.3 m、车顶浅拱＋颊片。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-183_h25_1.png" alt="jr-east-183 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-east-183_h25_2.png" alt="jr-east-183 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-east-183_h25_3.png" alt="jr-east-183 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -117,18 +119,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-27" data-num="27" data-slug="jr-east-251" data-orig="第一批 #101" data-status="unpushed">
+<section class="card" id="car-27" data-num="27" data-slug="jr-east-251" data-orig="第一批 #101" data-status="pushed">
   <div class="chead"><span class="num">#27</span> <span class="orig">汇总页 #27 · 第一批 #101</span> <span class="slug">jr-east-251</span>
-  <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b>　末触 <code>d05967e</code>（末触（251-B4 胶耳），models-pipeline）</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图（第五轮）</div>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>57f2ab6</code>＋<code>e42d482</code>（car4＋car5 鼻锥 A1 重建，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图</div>
   <div class="cnote"><b>原始理由：</b>编组错误</div>
   <div class="cnote"><b>根因：</b>R4 只翻 UV：翻转后玻璃（贴图 rows 296–429）落在 v 0.69 之外、根本不被采样——脸面实际没有玻璃，只有深色弧＋3 灯；行先框落在脸底，实车在黑带上。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。行先框已在黑带内 y2.16–2.36 m。</div>
-  <div class="cnote"><b>像素证据：</b>live front md5 与已验证的图纸重算逐字节相同（6 波段 NCC 全 1.00000）。</div>
-  <div class="warnline">⚠️ 待 MC 定：是否接受分带重排比例（或授权按正射照片标定后微调三带下移 0.1–0.2 m）。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-east-251_cab6_1.png" alt="jr-east-251 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-east-251_cab6_2.png" alt="jr-east-251 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>两端鼻锥按图纸侧立面 A1 重建：前脸→直纹网格、侧壁压轮廓、车顶截断至 d≥3.89 m、肩填充片；鼻尖 y1.75 m、顶缘后缩 3.88 m；脸贴图未动（front f02625db）。</div>
+  <div class="cnote"><b>像素证据：</b>轮廓 vs 图纸轮廓表最差 |dz| 0.0037 m（≤0.05 m）；开边 0、非流形 0；8 张贴图 md5 与 live 全同；3／4 视图车顶线连续下降、无平顶折点；两端鼻锥均下倾。</div>
+  <div class="warnline">⚠️ 待 MC 定：三带比例是否接受（或授权按正射照片标定后微调三带下移 0.1–0.2 m）；脸 24% 各向异性（横向 130.2 vs 纵向 105.0 px／m，图纸脸件纵横比 1.30 vs 模型脸 1.05，图纸自身纵横比）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-251_h25_1.png" alt="jr-east-251 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-east-251_h25_2.png" alt="jr-east-251 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-east-251_h25_3.png" alt="jr-east-251 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -136,18 +139,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-34" data-num="34" data-slug="jr-east-e253-1000" data-orig="第一批 #113" data-status="pushed">
+<section class="card" id="car-34" data-num="34" data-slug="jr-east-e253-1000" data-orig="第一批 #113" data-status="unpushed">
   <div class="chead"><span class="num">#34</span> <span class="orig">汇总页 #34 · 第一批 #113</span> <span class="slug">jr-east-e253-1000</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>50a7a5c</code>（car1 D2 空调盒下沉；另 0f62147 car1 D1、7a2b9d4 car2，models-pipeline）</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>50a7a5c</code>（car1 D2 空调盒下沉，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>R4 只裁切＋翻 JR 标志：行先框仍是大方块压玻璃、黑带过低、灰槽浮在红脸上、裙顶 X 带未动。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>D1 鼻端坡度（脸顶 3.28→3.06 m）＋D2 空调盒（凸出 0.22 m）＋脸按修正比例重贴（黑带缩至 1.60×2.38 m）＋裙板车钩盒上移 0.40 m；另发现 car2 整辆在编组里装反，consist flip 纠正。</div>
-  <div class="cnote"><b>像素证据：</b>3 commit 已推（0f62147、7a2b9d4、50a7a5c）；D1 原 0.90 m 带高方案已作废（带高实为 1.82 m，模型米 1.58 m）；鼻端顶实为 3.03 m、名义 3.06 m。</div>
-  <div class="warnline">⚠️ 遗留：玻璃发黄未改（须 MC 明示授权）、car2 立体受电弓另派、car2 裙板高度未按照片重核。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-east-e253-1000_cab6_1.png" alt="jr-east-e253-1000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-east-e253-1000_cab6_2.png" alt="jr-east-e253-1000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推（重审计）：D1 鼻端坡度 7 点偏差 ≤0.010 m；脸 y 1.00–3.06、黑带 y1.22–2.80；D2 空调盒顶 y3.50、car1 盒底已密封；car2 flip 已在 consist；图纸 D 件无独立头标牌件，现状正确。</div>
+  <div class="cnote"><b>像素证据：</b>鼻端坡度目标 3.06／3.09／3.15／3.20／3.25／3.26／3.28，实测 3.060／3.090／3.152／3.204／3.248／3.260／3.280；黑带高 1.58 m（目标 1.60 m）；红下颌 0.20 m、顶边 0.26 m；脸 D 全黑裁切，无填色、无奶油边。</div>
+  <div class="warnline">⚠️ 待 MC 定：风挡玻璃发黄（须 MC 明示授权，本批不动）；car2 立体受电弓另派；car2 裙板高度未按照片重核。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-e253-1000_h25_1.png" alt="jr-east-e253-1000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-east-e253-1000_h25_2.png" alt="jr-east-e253-1000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-east-e253-1000_h25_3.png" alt="jr-east-e253-1000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -158,15 +162,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-44" data-num="44" data-slug="jr-hokkaido-kiha283" data-orig="第一批 #143" data-status="pushed">
   <div class="chead"><span class="num">#44</span> <span class="orig">汇总页 #44 · 第一批 #143</span> <span class="slug">jr-hokkaido-kiha283</span>
   <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>16e7469</code>（car3；另 45039ea car1，models-pipeline）</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对整个删掉重新做 你能不能结合现实中的看一下呀 他（第五轮）</div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>49262cd</code>＋<code>0005c19</code>（car1＋car3 穹顶鼻锥 loft＋头标牌，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对整个删掉重新做 你能不能结合现实中的看一下呀 他</div>
   <div class="cnote"><b>原始理由：</b>其他：重做</div>
   <div class="cnote"><b>根因：</b>R4 只改中央带颜色：脸仍是平蓝墙（无风挡、无门、无灯）、头标牌横置 90°、两侧灰机械条未清。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>脸换成图纸真正脸件（net x889–1020、y577–754，翻转一次）裁切；第五轮“图纸无正脸件、必须重画”是错的。</div>
-  <div class="cnote"><b>像素证据：</b>风挡居顶、门居中、大雪两端正读、无白胶耳；脸横向 +13.7% 是图纸自身各向异性。</div>
-  <div class="warnline">⚠️ 脸上无头标牌（牌在鼻侧件，实车亦然）；鼻锥仍平顶盖，圆弧鼻锥＋鼻侧头标牌恢复须 loft，另派等定。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-hokkaido-kiha283_cab6_1.png" alt="jr-hokkaido-kiha283 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-hokkaido-kiha283_cab6_2.png" alt="jr-hokkaido-kiha283 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>PCHIP 圆弧穹顶鼻锥按图纸侧立面重建：鼻长 4.73 m、峰 3.84 m（高出车体顶约 0.46 m，与图纸“约 0.5 m”相符）；脸保持真脸件 1122×717；鼻侧头标牌横牌：car1 TAISETSU、car3 OZORA，两端正读（对比报告“竖牌”是错的）。</div>
+  <div class="cnote"><b>像素证据：</b>穹顶峰 3.84 m；bbox [2.84, 3.84, 21.31]；tris 12240、壳体内翻 0、开边 0、非流形 0；头标牌正读已双重核实（decal 纹理内正读、渲染图与纹理左右一致、UV 回归牌 u→屏右 +0.51）；斜视角穹顶圆润、整列入镜；under alphaMode MASK 已恢复。</div>
+  <div class="warnline">⚠️ 待 MC 定：车顶风挡保护板（プロテクタ）未建——实车除キロ282 外各车连结面车顶都有，但图纸侧立面无凸起、网内未定位到该件，形状／位置无法确认，须另派专项调查；PCHIP 峰 3.84 m vs 条带直测 3.88–3.90 m（不确定度内）；贴片 12 mm 外凸。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-hokkaido-kiha283_h25_1.png" alt="jr-hokkaido-kiha283 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-hokkaido-kiha283_h25_2.png" alt="jr-hokkaido-kiha283 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-hokkaido-kiha283_h25_3.png" alt="jr-hokkaido-kiha283 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -174,18 +179,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card unpushed-card" id="car-46" data-num="46" data-slug="jr-kyusyu-783" data-orig="第一批 #150" data-status="unpushed">
+<section class="card" id="car-46" data-num="46" data-slug="jr-kyusyu-783" data-orig="第一批 #150" data-status="pushed">
   <div class="chead"><span class="num">#46</span> <span class="orig">汇总页 #46 · 第一批 #150</span> <span class="slug">jr-kyusyu-783</span>
-  <span class="badge unpushed">⛔ 未返工</span></div>
-  <div class="pushline un">⛔ <b>未返工</b>——已停下：楔形成立须动几何，由 783-windshield 轨道承接；无新 commit。</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图（第五轮）</div>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>b45e4e0</code>＋<code>70d5d76</code>（car1＋car2 楔形风挡 40.7°＋脸重裁，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图</div>
   <div class="cnote"><b>原始理由：</b>其他：删了重做</div>
   <div class="cnote"><b>根因：</b>R4 拼贴脸两侧有纸模侧面粘贴耳（FACE_T 件侧缘整块框进贴图）；风挡玻璃下有一条约 15% 脸高的黑带（拼贴嫌疑）；底部中央大黑矩形（行先表示器）读起来像黑洞，实车前脸底部不是黑盒。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——已停下：楔形成立，贴图重裁是错的修法，须动几何（49.7° 斜面风挡＋脸下移贴地，类比 485），由 783-windshield 轨道承接。</div>
-  <div class="cnote"><b>像素证据：</b>风挡 49.7°（图纸侧件与竖直夹角 40.28°／40.29°，左右镜像对称）；live 端盖 z 纵深仅 0.013 m、竖直平面无斜面。live 脸 5 类缺陷实锤：重绘 flood-fill 74,057 px、填色立柱 37,800 px 平色、row 420 跳变 37→210、颜色拉长 tone 30.7 vs 53.1、拉图净各向异性 1.34。</div>
-  <div class="warnline">⚠️ 裁切规格已交 783-windshield 调查组（玻璃源 300 dpi 页 1 x1280–1570、y770–~960，底缘弧形）。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-783_cab6_1.png" alt="jr-kyusyu-783 现状图（未返工，live）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（未返工，live）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-kyusyu-783_cab6_2.png" alt="jr-kyusyu-783 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>楔形风挡建成：真角 40.7°（高于水平面；G2 的 49.7° 是两角写反，作废）；斜面长 2.216 m、底缘 y2.22、顶缘后移 1.68 m；脸＝FACE_T 原图 rot180（NCC 1.0），玻璃＝WINDSHIELD 原图整张（186 px vs 脸面板 190 px＝98%，BUILD-SPEC 的 72% 是错分母）；脸底 y=0 贴地；无奶油边、无填色。</div>
+  <div class="cnote"><b>像素证据：</b>风挡面法线 (0,−0.758,0.652)、40.70°（验收 40.7°±1°内）；脸 y 0–2.22、顶缘后移 1.69 m、斜面长 2.23 m；tris 9180、开边 0、非流形 0；6 张贴图奶油均为 0.000%；端面三片深玻璃＋竖框＋雨刮、琥珀灯在外、圆灯在中、脸底贴地、无白竖条。</div>
+  <div class="warnline">⚠️ 待 MC 定：风挡弧下角部图纸浅灰（最浅 232）vs 脸银 193 色差——图纸原样，未填；若 MC 觉得碍眼须他定夺（不得自行填色）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-783_h25_1.png" alt="jr-kyusyu-783 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-kyusyu-783_h25_2.png" alt="jr-kyusyu-783 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-kyusyu-783_h25_3.png" alt="jr-kyusyu-783 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -196,15 +202,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-51" data-num="51" data-slug="jr-kyusyu-bec819" data-orig="第一批 #158" data-status="unpushed">
   <div class="chead"><span class="num">#51</span> <span class="orig">汇总页 #51 · 第一批 #158</span> <span class="slug">jr-kyusyu-bec819</span>
   <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b>　末触 <code>b8d7bc2</code>（末触，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>b8d7bc2</code>（末触，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 确有耳（第四轮修法锚点错误导致）：右侧纯白梯形耳约 15% 宽＋裙板斜纹三角；R4 页图与 R4 修后源渲染 MD5 一致，MC 看到的就是修后模型——第四轮修得不彻底。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。脸中央区 NCC 0.709 是 R4 tone 加深＋放大所致，要素位置／形态与图纸一致，无重绘证据。</div>
-  <div class="cnote"><b>像素证据：</b>live == R5 tex_fixed，0 像素差异；角区白像素 0/0、裙板白像素 0/0。</div>
-  <div class="warnline">⚠️ 遗留：中部无设备（原始建模遗漏）未动。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-bec819_cab6_1.png" alt="jr-kyusyu-bec819 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-kyusyu-bec819_cab6_2.png" alt="jr-kyusyu-bec819 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>头合规不推：脸 == R5 tex_fixed，0 px 差，NCC 0.709；前盖 z 纵深 0.000（平面）；DENCHA 蓝钻在脸；skirt_front 白 0。</div>
+  <div class="cnote"><b>像素证据：</b>脸中央区 NCC 0.709 是 R4 tone 加深＋放大所致，要素位置／形态与图纸一致，无重绘证据；角区白像素 0／0、裙板白像素 0／0。</div>
+  <div class="warnline">⚠️ 新发现待 MC 定：−x 侧 DENCHA／KYUSHU RAILWAY COMPANY 文字全部镜像（修法已备：−x 壁 u → 1−u，只改 UV；属头外范围，本批未推：另派一单修或并入下一批）；中段设备缺失（原始遗漏，非头范围）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-bec819_h25_1.png" alt="jr-kyusyu-bec819 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-kyusyu-bec819_h25_2.png" alt="jr-kyusyu-bec819 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-kyusyu-bec819_h25_3.png" alt="jr-kyusyu-bec819 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -215,15 +222,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-53" data-num="53" data-slug="jr-kyusyu-kiha71" data-orig="第一批 #167" data-status="pushed">
   <div class="chead"><span class="num">#53</span> <span class="orig">汇总页 #53 · 第一批 #167</span> <span class="slug">jr-kyusyu-kiha71</span>
   <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>1e37ca4</code>（car1＋car4，models-pipeline）</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图（第五轮）</div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>772bf96</code>（car2＋car3 裙板白胶耳清除，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图</div>
   <div class="cnote"><b>原始理由：</b>编组错误</div>
   <div class="cnote"><b>根因：</b>司机面本身是对的（R4 rotCW 后全景风挡、金字、圆灯、金方块俱全）；错的是裙板：上面是一条脸面特征条（黑矩＋金框＋圆灯＋金矩），而不是实车下部（绿裙板＋中央黑联挂器口袋）。根因：司机室件是逆时针转 90° 画的，裙板源取成了脸的右侧条。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>脸合规（独立重裁 rotCW，NCC 0.9945）；裙板左缘白带 1,438 px 逐行重填同行面板内 tone 中位。</div>
-  <div class="cnote"><b>像素证据：</b>白像素 1,440 → 2；car1＋car4 同换（裙板贴图字节相同）。</div>
-  <div class="warnline">⚠️ 遗留：金方块左右未改动（三方证据冲突）；中车 car2／car3 裙板白像素（贯通端）未动，司机端范围外。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-kiha71_cab6_1.png" alt="jr-kyusyu-kiha71 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-kyusyu-kiha71_cab6_2.png" alt="jr-kyusyu-kiha71 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>car2／car3 贯通端裙板白胶耳逐行同行面板中位数填充（绿 67,145,113；row 28 黑线 35,31,32）；脸／头型／头标牌合规不动。</div>
+  <div class="cnote"><b>像素证据：</b>裙板白像素 rows 0–28：car2 1,673→0、car3 1,643→0；渲染裙带浅灰 1,544 px → 0（4 端）；每车仅 2 张裙板贴图变，其余逐字节相同；水密 0／0／0。</div>
+  <div class="warnline">⚠️ 待 MC 定：金色方块左右：图纸脸件左侧有、右侧无（＝live），实车照片两侧皆有，补第二块属无图纸依据的发明，等 MC 定；实车风挡后倾 vs 图纸平面，以图纸为准。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-kyusyu-kiha71_h25_1.png" alt="jr-kyusyu-kiha71 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 贯通端端面 car2（修后）</div><img loading="lazy" src="img/jr-kyusyu-kiha71_h25_2.png" alt="jr-kyusyu-kiha71 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 贯通端端面 car3（修后）</div><img loading="lazy" src="img/jr-kyusyu-kiha71_h25_3.png" alt="jr-kyusyu-kiha71 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -231,17 +239,18 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-58" data-num="58" data-slug="jr-shikoku-8000" data-orig="第一批 #180" data-status="pushed">
+<section class="card" id="car-58" data-num="58" data-slug="jr-shikoku-8000" data-orig="第一批 #180" data-status="unpushed">
   <div class="chead"><span class="num">#58</span> <span class="orig">汇总页 #58 · 第一批 #180</span> <span class="slug">jr-shikoku-8000</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>f190769</code>（car1，models-pipeline）</div><div class="cmeta">类别：其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>f190769</code>（car1，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你这个司机端的这个贴图一看就不对的去图纸上面重新截重新搞结合现实中的图</div>
   <div class="cnote"><b>原始理由：</b>其他：头型和贴图都有点问题</div>
   <div class="cnote"><b>根因：</b>只错脸部贴图，鼻锥几何不动：风挡玻璃是灰色（~100–190 渐变），不是黑色；玻璃下有一条黑带，实车玻璃下直接是银鼻锥；裙板有圆灯＋深色竖条，实车下鼻是素银＋联挂器凹口。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>顶带 rows 0–29 过暗（tone ~70.7），用图纸屋顶前缘银灰重裁（源 PDF 页 1 x1150–1375、y965–995，均色 150.1/153.0/159.0），只改 rows 0–29。</div>
-  <div class="cnote"><b>像素证据：</b>R6 修复验证属实（live == R6 fix，0 像素差异）；银带 rows 400–475 平色保留（图纸银 ~207、实车照片证实素银鼻锥）。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-shikoku-8000_cab6_1.png" alt="jr-shikoku-8000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-shikoku-8000_cab6_2.png" alt="jr-shikoku-8000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：鼻锥真实曲面（z 纵深 1.412 m、风挡 53.5°、弧长 2.106 m），与实车照片一致，不重建；car3 脸特征行与图纸第 3 页脸件对齐（rot180，误差 <3%）。</div>
+  <div class="cnote"><b>像素证据：</b>car3 脸 NCC 0.21–0.28 系 ~×0.5 非线性暗化（同 car1 已接受做法）＋UV 死像素行所致，非重画；布局／元素全对。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-shikoku-8000_h25_1.png" alt="jr-shikoku-8000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-shikoku-8000_h25_2.png" alt="jr-shikoku-8000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-shikoku-8000_h25_3.png" alt="jr-shikoku-8000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -252,15 +261,15 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-66" data-num="66" data-slug="jr-west-105" data-orig="第一批 #197" data-status="unpushed">
   <div class="chead"><span class="num">#66</span> <span class="orig">汇总页 #66 · 第一批 #197</span> <span class="slug">jr-west-105</span>
   <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b>　末触 <code>c44fe0a</code>（末触，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>c44fe0a</code>（末触，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 确有耳：司机面＋连挂端两侧，黄色梯形耳通高带折线；第四轮填了平色常数 (228,182,70)，把蓝腰带涂成平黄——正是 MC 点名的纯色块；前几轮只测白色，漏掉了与车身同色的耳。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。黄耳已清（侧带白像素 0）；蓝腰带已恢复 (44,98,145)，与图纸蓝吻合。</div>
-  <div class="cnote"><b>像素证据：</b>live == R5 tex_fixed，0 像素差异；图纸用福塩線黄涂装（另三张已排除）。</div>
-  <div class="warnline">⚠️ 遗留：脸 vs 图纸 NCC 仅 0.30（R4 重建所致），布局／颜色／要素全对，无六类缺陷；像素级重裁须另派。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-west-105_cab6_1.png" alt="jr-west-105 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-west-105_cab6_2.png" alt="jr-west-105 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：105 NCC 之谜已解——真框 (536,633,711,762) 重裁 vs live NCC 0.7006（对齐后 0.7976）；live 是图纸裁切＋提亮配平侧面（脸黄 201→227，与侧黄 227 一致）；原始重裁会致脸／侧色调失配，属倒退；蓝带比图纸脸件位置低约 8 px（2% 高），容差内，不处理。</div>
+  <div class="cnote"><b>像素证据：</b>真框纵横比 1.357 vs live 1.352；头型平面、前盖 z 纵深 0.000；JR 标两侧正读；蓝腰带 (44,98,145) 位置 54–65%。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-west-105_h25_1.png" alt="jr-west-105 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-west-105_h25_2.png" alt="jr-west-105 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-west-105_h25_3.png" alt="jr-west-105 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -271,15 +280,15 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-72" data-num="72" data-slug="jr-west-kiha127" data-orig="第一批 #223" data-status="unpushed">
   <div class="chead"><span class="num">#72</span> <span class="orig">汇总页 #72 · 第一批 #223</span> <span class="slug">jr-west-kiha127</span>
   <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b></div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 确有耳（司机面＋裙板两处）：R4 翻转修法在 live，但胶耳是另一处残留缺陷，不是翻转问题。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。R5“耳区白像素 20555→0”已证实；裙板镜像延展精确。</div>
-  <div class="cnote"><b>像素证据：</b>front／end1 边缘带白像素 0/0、接缝 median 0；裙板镜像差 median 0、p90 0、max 0.0。</div>
-  <div class="warnline">⚠️ 脸 vs 图纸 NCC 仅 0.39（复合贴图干扰），但脸部全部特征均为图纸内容，方向已按实车照片核实。</div>
-  <div class="cimg"><img loading="lazy" src="img/jr-west-kiha127_cab6_1.png" alt="jr-west-kiha127 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/jr-west-kiha127_cab6_2.png" alt="jr-west-kiha127 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：脸 NCC 0.916（rot180，拉伸 1.017）；29 批“NCC 0.39”已推翻（行范围错：应取采样 rows 0–450 对整件）；方向正确（R4 实车照片核实）；脸奶油带 rows 274–291 是图纸涂装带色，保留。</div>
+  <div class="cnote"><b>像素证据：</b>29 批 kiha127 NCC 0.39 作废，重跑 0.916；头型平面，图纸亦平。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-west-kiha127_h25_1.png" alt="jr-west-kiha127 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/jr-west-kiha127_h25_2.png" alt="jr-west-kiha127 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/jr-west-kiha127_h25_3.png" alt="jr-west-kiha127 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -287,17 +296,18 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-74" data-num="74" data-slug="keihan-700" data-orig="第一批 #234" data-status="pushed">
+<section class="card" id="car-74" data-num="74" data-slug="keihan-700" data-orig="第一批 #234" data-status="unpushed">
   <div class="chead"><span class="num">#74</span> <span class="orig">汇总页 #74 · 第一批 #234</span> <span class="slug">keihan-700</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>a7a2f80</code>（car1＋car2，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>a7a2f80</code>（car1＋car2，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>根因：</b>live 确有耳：司机面＋连挂端两侧，深绿梯形耳通高；第四轮把玻璃色误传到侧带，只修裙板、“脸干净”是亮度判据失明。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>front 底行 rows 349–351 边缘带白像素逐列延展（各列最近干净行 row 348 带色填充，L 186／R 118）。</div>
-  <div class="cnote"><b>像素证据：</b>350 px；修后带区白像素（≥230）0；car1 与 car2 front 贴图逐字节相同、一次修复两 GLB 同换。</div>
-  <div class="warnline">⚠️ 面内 rows 343–351 白矩形为原始建模内容（图纸脸件顶带位置），不动。</div>
-  <div class="cimg"><img loading="lazy" src="img/keihan-700_cab6_1.png" alt="keihan-700 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keihan-700_cab6_2.png" alt="keihan-700 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推（附注拉伸）：方向 rot180（行先框定：图纸右下→live 左上）；脸 NCC 0.827；白矩形 rows 343–348 是图纸内容，不动；头型平面，图纸亦平。</div>
+  <div class="cnote"><b>像素证据：</b>行先框图纸右下（件内 x103–139、rows 128–135）→ live 左上（x111–199、rows 30–56），下→上且右→左 ＝ 旋转 180°；vflip 会把框留在右侧，不符。</div>
+  <div class="warnline">⚠️ 待 MC 定：约 10% 竖向拉伸（米制）是否重贴（须重推 UV＋补缺口；本组建议接受现状，小于 485 先例 21.7%）。</div>
+  <div class="cimg"><img loading="lazy" src="img/keihan-700_h25_1.png" alt="keihan-700 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keihan-700_h25_2.png" alt="keihan-700 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/keihan-700_h25_3.png" alt="keihan-700 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -308,15 +318,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-75" data-num="75" data-slug="keihan-8000" data-orig="第一批 #238" data-status="pushed">
   <div class="chead"><span class="num">#75</span> <span class="orig">汇总页 #75 · 第一批 #238</span> <span class="slug">keihan-8000</span>
   <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>316267c</code>（car1＋car3，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>0ae69bc</code>（car1＋car3 鸽徽复位＋白耳清除，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 确有耳（两端司机面各一处）：第四轮修法在 live，但两端修法互换过（鸽徽渲染在脸宽 0.422，实车 8051 应为 0.57），胶耳是另一处残留。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>裙板底部 rows 537–569 白纸逐列延展（各列 rows 510–528 裙板灰中值 155 填充，竖纹保留）。</div>
-  <div class="cnote"><b>像素证据：</b>12,641 px／辆；修后 rows 537–569 白像素（≥230）0；car1 front＋skirt_front、car3 front＋skirt_end1_f 共 4 图项同换。</div>
-  <div class="warnline">⚠️ R5“y=550 整行白是裙板底缘以下的纸、不在面内”是错的（UV 证实裙板底约 0.16 m 为纯白纸）。鸽徽位置偏＋缺雨刮是原图纸问题，未动。</div>
-  <div class="cimg"><img loading="lazy" src="img/keihan-8000_cab6_1.png" alt="keihan-8000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keihan-8000_cab6_2.png" alt="keihan-8000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>鸽徽重裁图纸（300 dpi，翻转一次）贴回图纸位置 rows 250–316、x156–264（原偏低 40 行／0.25 m、偏宽 20%）；腾空区邻接橙色填；白耳 rows 55–78 邻接黑色填；裙板斜纹 rows 528–537 邻接灰填；car1／car3 同换。</div>
+  <div class="cnote"><b>像素证据：</b>front 白耳白像素 rows 55–78：129→0；鸽徽目检已复位（居中于黑拱／橙交界、白鸽正读，与实车 8051 照片一致）；两端一致（雨刮都在观察者右侧），白耳已清，裙板无斜纹。</div>
+  <div class="warnline">⚠️ 待 MC 定：头灯偏低约 20 行（0.13 m）是否移（live 约 rows 370–410，图纸应为 rows 354–382；移头灯须重贴橙带，风险大于收益，建议暂留）；脸整体约 8% 竖向拉伸是否重贴（建议接受现状，小于 485 先例 21.7%）。</div>
+  <div class="cimg"><img loading="lazy" src="img/keihan-8000_h25_1.png" alt="keihan-8000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keihan-8000_h25_2.png" alt="keihan-8000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/keihan-8000_h25_3.png" alt="keihan-8000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -324,17 +335,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-79" data-num="79" data-slug="keio-1000" data-orig="第一批 #246" data-status="pushed">
+<section class="card" id="car-79" data-num="79" data-slug="keio-1000" data-orig="第一批 #246" data-status="unpushed">
   <div class="chead"><span class="num">#79</span> <span class="orig">汇总页 #79 · 第一批 #246</span> <span class="slug">keio-1000</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>cf1bd39</code>（car1，车号 1757→1707，models-pipeline）</div><div class="cmeta">类别：其他：你把它变形挤压到那个上面干什么怎么可能 人家图纸上的图不够贴的不然怎么做成模型（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>cf1bd39</code>（car1 车号 1757→1707，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你把它变形挤压到那个上面干什么怎么可能 人家图纸上的图不够贴的不然怎么做成模型</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>司机面贴图被变形／挤压贴到前盖上：前盖贴图是图纸脸片整片 2.98 倍均匀缩放＋154 行制作者补的纯色 aqua 垫底，横向 135.6 px/m、纵向 207 px/m，纵横比失真 1.53 倍（脸被纵向压扁）；图纸脸片本身倒着印，制作者转了 180° 却把整片（含车钩盒）都贴上前盖——车钩盒落在脸中部；前盖底部 0.72 m 是纯色 aqua 垫底；前盖以下（y&lt;0.84）是黑带（无裙板，dark 底盘外露）。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>车号由 1757 改为 1707（同字体／同色／同框重绘第 3 位数字；旧 cap 银带恢复底色）。</div>
-  <div class="cnote"><b>像素证据：</b>仅改 363 px；KEIO 0 px 差异；GLB 模型检查与 live 完全相同（8,818 tris，0/0/0）。</div>
-  <div class="cimg"><img loading="lazy" src="img/keio-1000_cab6_1.png" alt="keio-1000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keio-1000_cab6_2.png" alt="keio-1000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：头型完全平面 cap（z=0），与实车垂直前面一致；脸真裁切 NCC 0.9644；29 批已修错号（cf1bd39，1757→1707）。</div>
+  <div class="cnote"><b>像素证据：</b>脸 NCC 0.9644；car1 已改“1707”。</div>
+  <div class="warnline">⚠️ 待 MC 定：car1“1707”仍是重绘字：(A) 接受现状（数字已正确、观感与实车一致）(B) 留空无号（删掉重绘字，车号位空白）——二者择一，不要再重画一遍数字。</div>
+  <div class="cimg"><img loading="lazy" src="img/keio-1000_h25_1.png" alt="keio-1000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/keio-1000_h25_2.png" alt="keio-1000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/keio-1000_h25_3.png" alt="keio-1000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -342,18 +355,18 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-85" data-num="85" data-slug="kintetsu-1220" data-orig="第一批 #259" data-status="pushed">
+<section class="card" id="car-85" data-num="85" data-slug="kintetsu-1220" data-orig="第一批 #259" data-status="unpushed">
   <div class="chead"><span class="num">#85</span> <span class="orig">汇总页 #85 · 第一批 #259</span> <span class="slug">kintetsu-1220</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>1e38137</code>（car1，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>1e38137</code>（car1，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 确有耳（顶角＋底角白纸）：第四轮修法在 live；脸正确（行先绿左、1223 右上、右雨刮均与实车 1321 一致），错在司机端裙板白围裙＋纸模梯形折线。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>car1 脸底 rows 385–401 白纸逐列延展（各列最近干净行颜色填充：中心底缘浅灰带 197、两缘 213/225）。</div>
-  <div class="cnote"><b>像素证据：</b>3,477 px；修后 rows 385–401 白像素（≥230）0；只改 car1 front 一张贴图；旧绛红竖纹已查无残留。</div>
-  <div class="warnline">⚠️ 存疑未动：car2_end1 底部带区浅灰 (225,221,220) vs 中部深色（贯通端、编组内隐藏）。</div>
-  <div class="cimg"><img loading="lazy" src="img/kintetsu-1220_cab6_1.png" alt="kintetsu-1220 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-1220_cab6_2.png" alt="kintetsu-1220 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：脸 NCC 0.943（rot180，拉伸 0.979）；方向正确（1223 右上、绿框左上）；car2_end1 底部浅灰带 rows 231–296 是图纸内容（贯通端件白色下带＋车门下半），非白纸；头型平面，图纸亦平。</div>
+  <div class="cnote"><b>像素证据：</b>脸 NCC 0.943；风挡／行先／雨刮位置与实车一致。</div>
+  <div class="cimg"><img loading="lazy" src="img/kintetsu-1220_h25_1.png" alt="kintetsu-1220 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-1220_h25_2.png" alt="kintetsu-1220 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/kintetsu-1220_h25_3.png" alt="kintetsu-1220 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -361,18 +374,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-90" data-num="90" data-slug="kintetsu-22600" data-orig="第一批 #271" data-status="pushed">
+<section class="card" id="car-90" data-num="90" data-slug="kintetsu-22600" data-orig="第一批 #271" data-status="unpushed">
   <div class="chead"><span class="num">#90</span> <span class="orig">汇总页 #90 · 第一批 #271</span> <span class="slug">kintetsu-22600</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>a0a78a8</code>（car1，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>a0a78a8</code>（car1，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 司机面确实有耳（白锯齿纸条，两侧各三处＋底角），不是旧页图；R4 只修了司机端裙板白围裙，未动司机面贴图。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>脸两带按逐行邻接面色重填（R5 v7 玻璃行填橙 (238,149,84) 是错的，邻接面是深玻璃 63–87／黑带 25–69）；裙板白角逐行向内延展最近非白像素。</div>
-  <div class="cnote"><b>像素证据：</b>脸 33,924 px、裙板 4,553 px；修后白像素 0；风挡现占渲染脸宽 ~97%（图纸 97.2%，修前仅 73.4%）。</div>
-  <div class="warnline">⚠️ 遗留：脸底黑带＋车钩盒与裙板车钩盒上下叠加（双车钩盒），须 MC 定夺，不属本次。</div>
-  <div class="cimg"><img loading="lazy" src="img/kintetsu-22600_cab6_1.png" alt="kintetsu-22600 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-22600_cab6_2.png" alt="kintetsu-22600 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推（双车钩盒除外）：脸 NCC 0.985（vflip，拉伸 1.017）；风挡 97% ＝ 图纸 97.2%；无鼻侧头标牌（Ace 本无）；头型平面，图纸亦平。</div>
+  <div class="cnote"><b>像素证据：</b>脸 NCC 0.985；端面正视图双车钩盒清晰可见（上下两只车钩盒叠加）。</div>
+  <div class="warnline">⚠️ 待 MC 定：双车钩盒：删脸底黑带＋车钩盒，或改裙板？（脸底黑带＋车钩盒 front rows ~380–447、y1.12–1.56 与下方真实裙板车钩盒上下叠加；端面＋3／4 视角均可见，非相机伪影）；编组 3 辆子集 vs 实车 4 辆（缺ク22900）。</div>
+  <div class="cimg"><img loading="lazy" src="img/kintetsu-22600_h25_1.png" alt="kintetsu-22600 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-22600_h25_2.png" alt="kintetsu-22600 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/kintetsu-22600_h25_3.png" alt="kintetsu-22600 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -383,14 +397,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-95" data-num="95" data-slug="kintetsu-5800" data-orig="第一批 #280" data-status="pushed">
   <div class="chead"><span class="num">#95</span> <span class="orig">汇总页 #95 · 第一批 #280</span> <span class="slug">kintetsu-5800</span>
   <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>fee64c5</code>（car1＋car4，models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7ed5b47</code>（car1＋car4 脸 ROT180 重建，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>live 两司机面确实有耳（顶肩白楔＋底角白三角），不是旧页图；R4 只修了裙板白围裙，司机面贴图未动。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>顶角白楔 4,171 px 按行内邻接品红延展、底行白点 593 px 按行内邻接灰延展（未用单色块）。</div>
-  <div class="cnote"><b>像素证据：</b>共改 4,764 px；修后残留填块 0 px、白点 0 px；黑灯带完整保留。</div>
-  <div class="cimg"><img loading="lazy" src="img/kintetsu-5800_cab6_1.png" alt="kintetsu-5800 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-5800_cab6_2.png" alt="kintetsu-5800 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>脸整件 ROT180 重建（车号旋 180° 读“5800”，V-flip 读“0085”）；恢复灰顶板＋完整圆灯＋5800 车号＋绿左行先盒＋右侧 L／C logo；推翻 G4 fee64c5 品红顶角——银灰是图纸屋顶角板本色。</div>
+  <div class="cnote"><b>像素证据：</b>ROT180 全 6 带 NCC 胜 V-flip（band2 0.42 vs 0.03）；车号放大读“5800”清晰；顶角直翻图纸 [175,174,182] vs 修前 live [176,175,182]；端面目检灰顶板＋完整圆灯＋“5800”＋绿左行先盒＋右侧 logo 均在位。</div>
+  <div class="warnline">⚠️ 待 MC 定：片件横向挤压约 7.4%（图纸自身各向异性，片件纵横比 1.086 vs 盖面 1.011）；行先盒保持图纸白左／绿右。</div>
+  <div class="cimg"><img loading="lazy" src="img/kintetsu-5800_h25_1.png" alt="kintetsu-5800 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/kintetsu-5800_h25_2.png" alt="kintetsu-5800 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/kintetsu-5800_h25_3.png" alt="kintetsu-5800 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -398,18 +414,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-108" data-num="108" data-slug="matuura-mr600" data-orig="第一批 #325" data-status="pushed">
+<section class="card" id="car-108" data-num="108" data-slug="matuura-mr600" data-orig="第一批 #325" data-status="unpushed">
   <div class="chead"><span class="num">#108</span> <span class="orig">汇总页 #108 · 第一批 #325</span> <span class="slug">matuura-mr600</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>01f1ce0</code>（car1，方案 A 图纸原样，models-pipeline）</div><div class="cmeta">类别：其他：司机室的贴图重新截 重新贴（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>01f1ce0</code>（car1 方案 A，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：司机室的贴图重新截 重新贴</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>图纸风挡画得比实车高约 0.5 m，脸下部被压缩，MR 标志落在脸面最底缘（实车 y~1.71–2.01，模型 y~1.19–1.34）；MR 标志压在深色玻璃上（右窗深色下部延伸进白带区）。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>方案 A 图纸原样贴、不拉伸——脸件轮廓 (534–662, 1490–1640) 均匀缩放 s=2.7907 至 360×421，纵横比仅 0.09% 取整差。</div>
-  <div class="cnote"><b>像素证据：</b>定稿与图纸 NCC=1.0；风挡回图纸高度（灰部 y2.34–3.32）、MR 标志回原位 y2.18–2.28、右窗斜楔已清。</div>
-  <div class="warnline">⚠️ 底带（灰＋蓝）未贴上脸（防双蓝带，逐列白脸邻接延展）；实车偏差：风挡顶约 +0.32 m（整体上移约 0.3 m，方案 A 已知代价）。</div>
-  <div class="cimg"><img loading="lazy" src="img/matuura-mr600_cab6_1.png" alt="matuura-mr600 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/matuura-mr600_cab6_2.png" alt="matuura-mr600 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：live 脸与 Plan A 定稿 md5 一致；脸件 vs 前立面自洽（风挡 y2.34–3.32 vs 2.22–3.27）；分带 NCC 0.94／0.77／0.85／0.93，低分带系已披露未贴底带（Plan A 已知代价）。</div>
+  <div class="cnote"><b>像素证据：</b>Plan A 定稿与图纸 NCC＝1.0；风挡回图纸高度。</div>
+  <div class="warnline">⚠️ 待 MC 定：约 0.3 m 实车高度偏差（不按实车重排）；Plan A 之外三项——脸整体上移、底带补贴、end1 专用贴图、灰设备带。</div>
+  <div class="cimg"><img loading="lazy" src="img/matuura-mr600_h25_1.png" alt="matuura-mr600 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/matuura-mr600_h25_2.png" alt="matuura-mr600 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/matuura-mr600_h25_3.png" alt="matuura-mr600 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -420,14 +437,16 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-123" data-num="123" data-slug="nagoyasub-2000" data-orig="第一批 #355" data-status="unpushed">
   <div class="chead"><span class="num">#123</span> <span class="orig">汇总页 #123 · 第一批 #355</span> <span class="slug">nagoyasub-2000</span>
   <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b></div><div class="cmeta">类别：其他：补编组（第五轮）</div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：补编组</div>
   <div class="cnote"><b>原始理由：</b>其他：头型く</div>
   <div class="cnote"><b>根因：</b>编组不全：实车 6 辆固定编组，模型 2 辆，缺 4 辆。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——live 合规。car6 翻转几何＋贴图均正确，6 辆完整。</div>
-  <div class="cnote"><b>像素证据：</b>脸 vflip 精修窗口 NCC 0.9429（长宽比偏差 0.3%，分带 0.88–0.99），直接裁切。</div>
-  <div class="cimg"><img loading="lazy" src="img/nagoyasub-2000_cab6_1.png" alt="nagoyasub-2000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/nagoyasub-2000_cab6_2.png" alt="nagoyasub-2000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：头型下部垂直、上部大斜面（折点 y1.78，后倾至 z −0.80…−1.15 m），与实车一致；脸图纸真裁切 NCC 0.9429。</div>
+  <div class="cnote"><b>像素证据：</b>脸 vflip 精修窗口 NCC 0.9429（长宽比偏差 0.3%，分带 0.88–0.99），直接裁切。 car6 翻转几何＋贴图均正确。</div>
+  <div class="warnline">⚠️ 待 MC 定：顶带布局图纸 vs 实车 2127 编成不符（图纸：圆形 logo 左、灰色行先框中右；实车：行先“金山 Kanayama”居中、logo 右、左侧小框为编成号）——接受图纸布局，或按实车照片重排顶带，等 MC 定。</div>
+  <div class="cimg"><img loading="lazy" src="img/nagoyasub-2000_h25_1.png" alt="nagoyasub-2000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/nagoyasub-2000_h25_2.png" alt="nagoyasub-2000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/nagoyasub-2000_h25_3.png" alt="nagoyasub-2000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -435,17 +454,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-124" data-num="124" data-slug="nagoyasub-7000" data-orig="第一批 #357" data-status="unpushed">
+<section class="card" id="car-124" data-num="124" data-slug="nagoyasub-7000" data-orig="第一批 #357" data-status="pushed">
   <div class="chead"><span class="num">#124</span> <span class="orig">汇总页 #124 · 第一批 #357</span> <span class="slug">nagoyasub-7000</span>
-  <span class="badge pushed">✅ live 合规</span></div>
-  <div class="pushline">✅ <b>live 合规、无新 commit</b></div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>6db18ca</code>（car1＋car4 前盖 UV 重映射，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>其他：く</div>
   <div class="cnote"><b>根因：</b>live 两司机面确实有耳——且是体色耳（非白耳：左侧灰绿、右侧深绿／深灰），另司机端裙板底角有白三角；白耳指标测不出（体色耳与车身同色）。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>未返工——复诊合规。R5 v7 填充干净。</div>
-  <div class="cnote"><b>像素证据：</b>R5 报告“最差行差 ~150”为口径假象，本次已推翻。</div>
-  <div class="cimg"><img loading="lazy" src="img/nagoyasub-7000_cab6_1.png" alt="nagoyasub-7000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面（live）</div><img loading="lazy" src="img/nagoyasub-7000_cab6_2.png" alt="nagoyasub-7000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>只改前盖 UV（v 0.036..0.804 → 0..0.804），贴图未动；粉色“W”logo＋目的地黑框恢复可见；仅 271 字节变，JSON／几何不变。</div>
+  <div class="cnote"><b>像素证据：</b>logo 332 px、94% 原在 UV 范围外；UV 重映射后端面顶部放大：目的地框（黑矩带边）与粉色“W”logo 均已现身，live 版两者皆无；全部变化在 front UV accessor（acc 18）内。</div>
+  <div class="warnline">⚠️ 待 MC 定：全脸纵向拉伸 +4.7%（风挡顶下移约 0.12 m）；logo 保留右侧（builder 位置）。</div>
+  <div class="cimg"><img loading="lazy" src="img/nagoyasub-7000_h25_1.png" alt="nagoyasub-7000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/nagoyasub-7000_h25_2.png" alt="nagoyasub-7000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/nagoyasub-7000_h25_3.png" alt="nagoyasub-7000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -453,18 +474,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-132" data-num="132" data-slug="nipporitoneri-330" data-orig="第一批 #374" data-status="pushed">
+<section class="card" id="car-132" data-num="132" data-slug="nipporitoneri-330" data-orig="第一批 #374" data-status="unpushed">
   <div class="chead"><span class="num">#132</span> <span class="orig">汇总页 #132 · 第一批 #374</span> <span class="slug">nipporitoneri-330</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>45ff6e9</code>（car1＋car2，models-pipeline）</div><div class="cmeta">类别：其他：司机室的图不行你给人家浓缩这么小干嘛（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>45ff6e9</code>（car1＋car2，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：司机室的图不行你给人家浓缩这么小干嘛</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>R4 逐行填充把风挡两侧填成黑色，风挡读起来仍是 62% 灰玻璃＋两侧黑板——看起来被“浓缩”了；X 盒（联挂器）位置错，在脸纹理 y1.39–1.57，约高出 1 m；裙板黑得太多（上 37% 浅灰＋下 63% 纯黑，实车保险杠只占底部约 36%）。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>整脸图纸重建——TL 脸件旋转 180°、均匀重缩 7.697×（1347×1239），玻璃恢复图纸原图（分片亮度＋白立柱＋雨刮）；X 盒改从修前脸裁（260×80）均匀放大至 371×114 贴回裙板黑保险杠中央。</div>
-  <div class="cnote"><b>像素证据：</b>楔形＋5 灯＋银杏＋条纹均为图纸像素（NCC 0.8392）；R5“按每行亮度填玻璃带”是程序填色、“X 盒重着为保险杠黑”是重绘改色，均已纠正。</div>
-  <div class="warnline">⚠️ 裙板 UV 各向异性（横 400 px/m、纵 537 px/m），X 盒纵横比保持优先于物理高度；若要精确物理高度须重推裙板 UV，另派。</div>
-  <div class="cimg"><img loading="lazy" src="img/nipporitoneri-330_cab6_1.png" alt="nipporitoneri-330 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/nipporitoneri-330_cab6_2.png" alt="nipporitoneri-330 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：live 脸 ＝ G4 TL 件均匀 7.697× 重建（md5 一致）；渲染目检风挡／5 灯／银杏标／绿粉条／裙板 X 盒均在位；TL 件 NCC 失真是窗口白边所致。</div>
+  <div class="cnote"><b>像素证据：</b>live 脸与 G4 TL 件 md5 一致；端面目检 5 灯＋银杏标＋绿粉条＋裙板 X 盒均在位。</div>
+  <div class="warnline">⚠️ 待 MC 定：玻璃按图纸 57%（实车约 82%）；裙板 UV 各向异性致 X 盒物理高度 0.21 m vs 图纸 0.26 m。</div>
+  <div class="cimg"><img loading="lazy" src="img/nipporitoneri-330_h25_1.png" alt="nipporitoneri-330 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/nipporitoneri-330_h25_2.png" alt="nipporitoneri-330 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/nipporitoneri-330_h25_3.png" alt="nipporitoneri-330 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -472,18 +494,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-159" data-num="159" data-slug="sendai-sub-3000" data-orig="第二批 #435" data-status="pushed">
+<section class="card" id="car-159" data-num="159" data-slug="sendai-sub-3000" data-orig="第二批 #435" data-status="unpushed">
   <div class="chead"><span class="num">#159</span> <span class="orig">汇总页 #159 · 第二批 #435</span> <span class="slug">sendai-sub-3000</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>7069f54</code>（car1＋car4（详见 G4 报告），models-pipeline）</div><div class="cmeta">类别：胶耳未清（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>7069f54</code>（car1＋car4，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>胶耳未清</div>
   <div class="cnote"><b>原始理由：</b>其他：小く并且还要检查编组齐了没</div>
   <div class="cnote"><b>根因：</b>live 两司机面确实有耳（中部白梯形＋底角白矩形），不是旧页图；R4 声称“无白条”是错的——耳是梯形／矩形，不是竖条。另司机端裙板顶角有白矩形。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>827 px 按修前图纸像素原样恢复（仅限 live 为 v7 平白 [234]±6 且修前 &lt;200 的像素）。</div>
-  <div class="cnote"><b>像素证据：</b>修后 y358 各列均为 [118,107,103]、y360 为 [91,78,72]/[88,75,70]；残留 0 px。</div>
-  <div class="warnline">⚠️ 3100 车顶错弓描边未动（定夺未决）；29 个内翻三角未动几何。</div>
-  <div class="cimg"><img loading="lazy" src="img/sendai-sub-3000_cab6_1.png" alt="sendai-sub-3000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/sendai-sub-3000_cab6_2.png" alt="sendai-sub-3000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：脸与图纸脸件并排一致（黑 X 盒、绿带＋S、风挡、白带、黑条、裙板 X 盒）；鼻锥 0.31 m 曲面与图纸侧条斜切一致；行轮廓相关 0.37 是纵横比／侧翼污染假象。</div>
+  <div class="cnote"><b>像素证据：</b>并排目检才是决定性证据；脸要素与图纸逐项一致。</div>
+  <div class="warnline">⚠️ 待 MC 定：3100 错受电弓、29 批内翻三角（车顶／网格，另案）。</div>
+  <div class="cimg"><img loading="lazy" src="img/sendai-sub-3000_h25_1.png" alt="sendai-sub-3000 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/sendai-sub-3000_h25_2.png" alt="sendai-sub-3000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/sendai-sub-3000_h25_3.png" alt="sendai-sub-3000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -491,18 +514,19 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
   <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
   <div class="cmark"></div>
 </section>
-<section class="card" id="car-180" data-num="180" data-slug="tokyometro-05" data-orig="第二批 #473" data-status="pushed">
+<section class="card" id="car-180" data-num="180" data-slug="tokyometro-05" data-orig="第二批 #473" data-status="unpushed">
   <div class="chead"><span class="num">#180</span> <span class="orig">汇总页 #180 · 第二批 #473</span> <span class="slug">tokyometro-05</span>
-  <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>1edc2ee</code>（car1＋car3，models-pipeline）</div><div class="cmeta">类别：其他：你把车钩贴人家脑门上干嘛？哪有车钩在上面的车钩给它移到下面来呀。（第五轮）</div>
+  <span class="badge pushed">✅ live 合规</span></div>
+  <div class="pushline">✅ <b>live 合规、无新 commit</b>　本次审计合规（2026-11-28 司机端全部重做批，合规无新推）；末触 <code>1edc2ee</code>（car1＋car3，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>其他：你把车钩贴人家脑门上干嘛？哪有车钩在上面的车钩给它移到下面来呀。</div>
   <div class="cnote"><b>原始理由：</b>其他：く</div>
   <div class="cnote"><b>根因：</b>前脸贴图顶部有一块灰板（行 11–87，x 38–460）：中央是柴田式车钩头、右侧有梯子、左侧有小方盒，UV 落在 y≈3.5–3.96——正贴在脑门上。灰板是纸模图纸司机面片顶部的车钩组件翻折片，制作者把整片直接映射到前脸，车钩就上了脑门。实车脑门是素面不锈钢，车钩在底部中央、裙板黑色开口内。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>风挡颠倒纠正——玻璃块 cols 37–425、rows 150–395 原地 rot180，行先椭圆到顶；裙板车钩头换翻折片真头紧裁 (99,33,142,72) → 62×56，居裙板开口中心。</div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>合规不推：头型轻微凸形（顶部后收 0.26 m），与实车一致；脸真裁切；29 批已翻正风挡（1edc2ee）＋换真折叠件车钩头（NCC 1.0）；LED 在风挡顶部内侧，与实车一致。</div>
   <div class="cnote"><b>像素证据：</b>角部外 94,742 像素往返翻转逐像素相等；新头 vs 翻折片头 NCC 1.0；实车照片证实行先在风挡顶部、头灯在下方蓝带。</div>
-  <div class="warnline">⚠️ 顶行 rows 0–96 面白填色（渲染不可见）未动，已定接受现状。</div>
-  <div class="cimg"><img loading="lazy" src="img/tokyometro-05_cab6_1.png" alt="tokyometro-05 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/tokyometro-05_cab6_2.png" alt="tokyometro-05 特写"></div>
+  <div class="warnline">⚠️ 待 MC 定：脸顶 rows 0–96 白填残留：R5 程序白填（无图纸来源）；29 批已定接受现状（渲染不可见），本批不再动；按 MC 新规则（不纯色填充）请他裁决。</div>
+  <div class="cimg"><img loading="lazy" src="img/tokyometro-05_h25_1.png" alt="tokyometro-05 现状图（live 合规，未返工）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">现状图（live 合规，未返工）——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/tokyometro-05_h25_2.png" alt="tokyometro-05 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/tokyometro-05_h25_3.png" alt="tokyometro-05 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
@@ -513,14 +537,15 @@ ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
 <section class="card" id="car-201" data-num="201" data-slug="yokohamasub-10000" data-orig="第二批 #520" data-status="pushed">
   <div class="chead"><span class="num">#201</span> <span class="orig">汇总页 #201 · 第二批 #520</span> <span class="slug">yokohamasub-10000</span>
   <span class="badge pushed">✅ 已推</span></div>
-  <div class="pushline">✅ <b>已推</b>　提交 <code>31c88da</code>（car1＋car3，models-pipeline）</div><div class="cmeta">类别：头型く（第五轮）</div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>b126ccf</code>（car1＋car3 脸重裁，models-pipeline）</div>
   <div class="cnote"><b>MC 返工原因：</b>头型く</div>
   <div class="cnote"><b>原始理由：</b>贴图颠倒</div>
   <div class="cnote"><b>根因：</b>R4 只做了整图翻转＋UV vmax→1.0，几何鼻型从未动过：实测 live car1/car3 侧面轮廓顶部恒定、底部恒定、半宽恒定，前脸扁平垂直面——完美长方体盒子，屋顶线水平到端面再直角下折（不是胶耳，胶耳第四轮已修）。</div>
-  <div class="cnote"><b>司机端返工（2026-11-28）：</b>唯一缺陷左上灰块 (160,165,171)（侧网灰漏进脸角）用脸件窗口右下角裁切 patch（60×40）修补；最顶行 1 行侧网灰按同行邻接顶缘色清理（41→4 px）。</div>
-  <div class="cnote"><b>像素证据：</b>脸为真裁切（NCC 0.9206）；整脸 NCC 0.9206→0.9288；左缘已查无胶耳。</div>
-  <div class="cimg"><img loading="lazy" src="img/yokohamasub-10000_cab6_1.png" alt="yokohamasub-10000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后——斜视角</div></div>
-  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/yokohamasub-10000_cab6_2.png" alt="yokohamasub-10000 特写"></div>
+  <div class="cnote"><b>司机端全部重做（2026-11-28）：</b>裁切窗右移 61 px 的实锤缺陷已修：全窗重裁（1106,760,1368,1032）rot180 → 393×408；左头灯＋左橙角灯恢复对称；角部 3,122 px 纸白＋侧网灰按同行邻接顶缘色延展清理；几何不动，car2 不动。</div>
+  <div class="cnote"><b>像素证据：</b>新脸 vs 正确窗 NCC 0.9774（旧脸 0.568）；头灯亮像素左 119／右 128；橙角灯左 439／右 446；镜像 MAD 顶带 67.2→7.9、底带 67.6→13.7；两端面目检双灯对称、无白角、无灰块。</div>
+  <div class="cimg"><img loading="lazy" src="img/yokohamasub-10000_h25_1.png" alt="yokohamasub-10000 修后——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">修后图——斜视角</div></div>
+  <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="img/yokohamasub-10000_h25_2.png" alt="yokohamasub-10000 特写"></div>
+  <div class="cev"><div class="cevlab">🔍 另一端端面</div><img loading="lazy" src="img/yokohamasub-10000_h25_3.png" alt="yokohamasub-10000 特写"></div>
   <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
     <button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型く">头型く</button><button type="button" class="rb" data-reason="其他">其他</button>
