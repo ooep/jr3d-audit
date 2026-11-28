@@ -489,9 +489,9 @@ code{font-size:12px;word-break:break-all}
   <span class="badge ok">✅ 已推</span></div>
   <div class="cmeta">其他：这个司机室贴图一看就不对（第五轮）</div>
   <div class="cquote">💬 MC 原话：贴图颠倒</div>
-  <div class="cinfo"><b>根因：</b>纸模脸件本身没有风挡：脸顶是灰色屋顶设备带（两黑方块＋中央 X 盒），风挡是图纸左上单独的深色梯形件，建模时从未贴上脸；另绿灯块＋行先框整体偏低约 0.3 m，裙全白、无绿细带、无深灰裙、无车钩。<br><b>修法：</b>司机面改截图纸原图（脸件 1:1＋梯形风挡件），独立核实逐像素复现（NCC 1.0000）。<br><b>提交：</b><code>81ca917</code></div>
+  <div class="cinfo"><b>根因：</b>纸模脸件本身没有风挡：脸顶是灰色屋顶设备带（两黑方块＋中央 X 盒），风挡是图纸左上单独的深色梯形件，建模时从未贴上脸；另绿灯块＋行先框整体偏低约 0.3 m，裙全白、无绿细带、无深灰裙、无车钩。<br><b>修法：</b>侧视图核查 3 项贴图修：风挡玻璃按图纸形状边重贴（333×112，rows 76–187），侧面绿细线补回，车顶风扇＋通风口平移 ＋37 px；均只裁图纸原图。<br><b>提交：</b><code>ea6938f</code></div>
   
-  <div class="cimg"><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-183_r5_1.png" alt="jr-east-183 修后（第六轮）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="ccap">修后（第六轮）——斜视角</div></div>
+  <div class="cimg"><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-183_r5_1.png" alt="jr-east-183 修后（侧视图修）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="ccap">修后（侧视图修）——斜视角</div></div>
   <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-183_r5_2.png" alt="jr-east-183 特写"></div>
     <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
@@ -506,9 +506,9 @@ code{font-size:12px;word-break:break-all}
   <span class="badge ok">✅ 已推</span></div>
   <div class="cmeta">其他：这个司机室贴图一看就不对（第五轮）</div>
   <div class="cquote">💬 MC 原话：编组错误</div>
-  <div class="cinfo"><b>根因：</b>R4 只翻 UV：翻转后玻璃（贴图 rows 296–429）落在 v 0.69 之外、根本不被采样——脸面实际没有玻璃，只有深色弧＋3 灯；行先框落在脸底，实车在黑带上。<br><b>修法：</b>司机面改截图纸原图（波段分段重排），独立核实逐像素相同（6 波段 NCC 全 1.00000）。<br><b>提交：</b><code>847a8f4</code></div>
+  <div class="cinfo"><b>根因：</b>R4 只翻 UV：翻转后玻璃（贴图 rows 296–429）落在 v 0.69 之外、根本不被采样——脸面实际没有玻璃，只有深色弧＋3 灯；行先框落在脸底，实车在黑带上。<br><b>修法：</b>侧视图核查 4 项贴图/UV 修：侧壁 UV 改真高映射，车底带重裁（去 pepar.net 二维码、轮底触轨），鼻端裙板重裁青绿＋黑盒，鼻端胶耳折线清除；均只裁图纸原图。<br><b>提交：</b><code>d05967e</code></div>
   
-  <div class="cimg"><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-251_r5_1.png" alt="jr-east-251 修后（第六轮）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="ccap">修后（第六轮）——斜视角</div></div>
+  <div class="cimg"><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-251_r5_1.png" alt="jr-east-251 修后（侧视图修）——斜视角" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="ccap">修后（侧视图修）——斜视角</div></div>
   <div class="cev"><div class="cevlab">🔍 司机端端面</div><img loading="lazy" src="../mc-review-rework5-20261127/img/jr-east-251_r5_2.png" alt="jr-east-251 特写"></div>
     <div class="cbtns">
     <button type="button" class="pb" data-act="pass">✅ 通过</button>
