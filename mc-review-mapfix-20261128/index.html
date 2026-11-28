@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>地图修复建模审核（25辆）（25辆）</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f4f5;color:#222;padding-bottom:120px}
+header{background:#1f2937;color:#fff;padding:14px 16px 12px} header h1{margin:0 0 6px;font-size:19px} header p{margin:4px 0;font-size:14px;line-height:1.5;color:#d1d5db}
+header .stat b{color:#fff} .hl{color:#fbbf24}
+.lessons{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 14px;margin:10px 16px 0}
+.lessons h2{margin:0 0 4px;font-size:16px} .lessons p{margin:4px 0 6px;font-size:13px;color:#666}
+.lessons ol{margin:0;padding-left:20px} .lessons li{font-size:14px;line-height:1.7;margin:2px 0}
+.filters{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #ddd;padding:8px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.filters button{border:1px solid #ccc;background:#fff;border-radius:16px;padding:6px 12px;font-size:14px} .filters button.on{background:#1f2937;color:#fff;border-color:#1f2937}
+.filters input[type=search]{flex:1;min-width:120px;padding:7px 10px;font-size:15px;border:1px solid #ccc;border-radius:8px}
+.card{background:#fff;margin:10px;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px}
+.card.unpushed-card{border:2px solid #dc2626}
+.card.mark-pass{border:2px solid #16a34a} .card.mark-rework{border:2px solid #dc2626}
+.card.mark-pass.unpushed-card{border:2px solid #16a34a}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap} .num{font-weight:700;font-size:17px} .slug{font-size:15px;word-break:break-all}
+.orig{font-size:12px;color:#888;white-space:nowrap}
+.badge{margin-left:auto;font-size:13px;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.badge.pushed{background:#dcfce7;color:#166534} .badge.unpushed{background:#fee2e2;color:#991b1b}
+.cnote{font-size:13px;color:#444;margin:6px 0 8px;line-height:1.45;min-height:0} .cnote:empty{display:none}
+.cmeta{font-size:13px;color:#666;margin:6px 0;line-height:1.45}
+.pushline{font-size:14px;line-height:1.6;margin:6px 0} .pushline.un{color:#991b1b;font-weight:700}
+.warnline{font-size:13px;color:#92400e;background:#fef3c7;border-radius:6px;padding:6px 8px;margin:6px 0;line-height:1.5}
+.cimg img{width:100%;display:block;border-radius:8px;background:#eee} .noimg{padding:36px 0;text-align:center;color:#999;background:#f3f4f6;border-radius:8px}
+.cap{font-size:13px;color:#666;text-align:center;margin-top:4px}
+.cev{margin-top:8px} .cevlab{font-size:13px;color:#666;margin-bottom:4px} .cev img{width:100%;display:block;border-radius:8px;background:#eee}
+.cbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cbtns button{flex:1 1 30%;min-width:96px;padding:11px 4px;font-size:15px;border-radius:9px;border:1px solid #d1d5db;background:#f9fafb}
+.cbtns button.pb{background:#dcfce7;border-color:#86efac;font-weight:700}
+.cbtns button.sel-pass{background:#16a34a;color:#fff;border-color:#16a34a}
+.cbtns button.sel-rework{background:#dc2626;color:#fff;border-color:#dc2626}
+.cother{display:none;margin-top:8px} .cother input{width:100%;padding:9px 10px;font-size:15px;border:1px solid #f59e0b;border-radius:8px}
+.card.show-other .cother{display:block}
+.cmark{font-size:14px;font-weight:700;margin-top:8px;min-height:0} .cmark:empty{display:none}
+.cmark.pass{color:#15803d} .cmark.rework{color:#b91c1c}
+.note{font-size:13px;color:#888;line-height:1.7}
+code{font-size:12px;word-break:break-all}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#111827;color:#fff;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#bar .prog{font-size:14px;white-space:nowrap} #bar .prog b{color:#fbbf24}
+#jump{display:flex;gap:6px;align-items:center} #jump input{width:74px;padding:9px 8px;font-size:16px;border-radius:8px;border:1px solid #555;background:#fff;color:#111;text-align:center}
+#jump button, #copyBtn, #clearBtn{padding:10px 14px;font-size:15px;border-radius:9px;border:none}
+#jump button{background:#374151;color:#fff} #autoJumpBtn{background:#7c3aed;color:#fff} #autoJumpBtn.off{background:#374151;color:#d1d5db} #copyBtn{background:#16a34a;color:#fff;font-weight:700;flex:1;min-width:120px} #clearBtn{background:transparent;color:#9ca3af;border:1px solid #4b5563!important}
+#toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 18px;border-radius:20px;font-size:15px;display:none;z-index:40;white-space:nowrap}
+.jump-flash{animation:fl 1.2s ease} @keyframes fl{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}50%{box-shadow:0 0 0 5px rgba(220,38,38,.55)}}
+ul{margin:6px 0} li{font-size:14px;line-height:1.6} a{color:#93c5fd}
+</style>
+</head>
+<body>
+<header>
+<h1>🎸 地图修复建模审核（25辆） <span class="hl">25辆</span></h1>
+<p>三审清单（199 项）需建模 35 项 + 改编组 16 项的新建/改编组车。每卡三图：整列侧面、斜视角、三维形态（J 组改编组用 SITE 口径图）。点 ✅ 通过 或一个返工原因（可改选，再点一次取消）；其他点后在下方填备注。底部栏可跳转卡号、看进度、复制结果后粘贴到微信发我。标记存在本机浏览器里，刷新不丢。2 辆 tf2 改编组本地无法渲染，卡片已注明、须浏览器核验。</p>
+<p class="stat">共 25 辆 · ✅ 已推 25 · index 687 个模型（models-pipeline f51c84d，2026-11-28）</p>
+</header>
+<div class="lessons"><h2>📝 本批建模经验总结（14 条）</h2><p>这 25 辆新建／改编组里总结出来的要点，下次建模、返工直接对照：</p><ol><li>搜图须同时试形式名与车号：nankai-cable 初查按车号（N11/N21）搜不到判无图，实际文件用形式名（N10・20形）。H 组纠正后 G 组建成。</li><li>简报给的图纸也可能错：坂本ケーブル简报给的 keihan_600_sakamotocable 是京阪 600 形电车主题涂装，不是缆车；真图是 hieizan_en/huku。建前必须开 PDF 核实内容，不能只信文件名。</li><li>候选图可能是错车：大井川 DD20 的 jnr_dd20_1/2 是 1963 年国铁试作机，不是大井川 1982–86 年製 DD201–DD206；开 PDF 看标题与正文才能定。223-5500 同理：223-5000 是 4 辆マリンライナー用车，不能冒充 5500。</li><li>缆车是 2 辆交走式、每辆各有身份：筑波（もみじ/わかば）、箱根（Ke11/Ke12）、坂本（縁/福）、南海（N11/N12）——一车一 commit 亦可，但同一 slug 下两车各一 commit 更贴合“每辆一 commit”。</li><li>裙板白围裙新法：skirt_texture (v4) 只清贴图左右 2 列 alpha，端面下段被黑带/灰腿围住的白纸仍不透明；修法为裙板贴图过 rgba_from_luma（白纸→透明）。共享 builder v4 本身未改，待 skill 维护方跟进。</li><li>新 builder 端盖键一律用 front/frontf/end/endf：非标准键（frontA/frontB、inner）落到默认分支，u 被定死成单列拉伸，司机面风挡全失（南海初版一端纯红、一端白噪点）。</li><li>端面贴图边缘约 9px 白纸会在斜视角成细白竖条（胶耳类）：逐行延展邻接面色清掉（fix_face_edges.py）。</li><li>前脸/贯通端白胶耳新法 clean_flaps：逐行取最长连续非白行（前脸本身），用行中部 50% 中值色填充行外，行两端偏离中值 &gt;60 的像素各修掉 ≤15 px（去黑条与抗锯齿亮边）。</li><li>Tc 侧墙漏画司机门时用同型 Mc 侧墙（同车体、同门布局），并核对现役同型模型是否同一修法（800番台已验证）；副作用（Mc 厕所小窗带入 Tc）须披露。</li><li>净片两侧墙是同一张画的不同朝向：SIDE_R 经 CW 旋转 + 镜像后与 SIDE_L 平均绝对差仅 2.96，两侧各用其一可使司机门在两面都在司机端；无重绘时不用 mirror_side。</li><li>中间车重组法（toei-5500 法）：图纸无中间车净片时，侧墙 = Mc 侧墙司机门区用同一侧墙窗片整高克隆覆盖；车顶用 Tc 车顶（无弓）或 Mc 车顶移植弓；两端贯通端；车底按车取（サハ取 Tc UNDER、モハ取 Mc UNDER）。弓位须按图纸实测 + 实车照片定案，不能只按“镜像对称”推测（E131-800 调查“1/3”已被推翻，实测为 Tc 侧端距端约 1.2 m）。</li><li>改编组先核实源模型：tobu-10000 源模型只有 1 辆司机室车，2 辆编组重组需要的第二辆司机室车不存在，镜像复用属虚构——BLOCKED。tobu-8000 源模型 GLB 导出方向与他组相反，常规顺序两端司机面朝内，须倒置顺序 [car6,car3,car2,car1]。西武2000 PLAIN 斜视角重叠是源模型坐标系问题，SITE 图正常——审核须以 SITE 图为准。</li><li>R3 证据与 should_be 可能自相矛盾：tobu-500 的 R3 证据写 3 辆、should_be 写 6 辆；核实三列夜行现行均为 3 辆编组后按现实建 3 辆版，names 键改指待裁决。建模须以实车为准，不唯清单是从。</li><li>多车共网渲染：render_net.py 按 NETS 枚举车辆，多车共用网时只渲 2 辆；须按 CARS 枚举（I 组 render_seibu.py 已修，后续组可复用）。</li></ol></div>
+<div class="filters" id="filters">
+<button data-f="all" class="on">全部 25</button>
+<button data-f="pushed">✅已推 25</button>
+<button data-f="unreviewed">未审</button>
+<button data-f="reviewed">已审</button>
+<input type="search" id="q" placeholder="搜 slug，如 toei-5500">
+</div>
+<main id="list">
+<section class="card" id="car-1" data-num="1" data-slug="jr-east-hb-e220" data-status="pushed">
+  <div class="chead"><span class="num">#1</span> <span class="slug">jr-east-hb-e220</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>aae9a58</code>（models-pipeline）</div>
+  <div class="cmeta">组别：A　·　编组：2 両</div>
+  <div class="cnote"><b>车型：</b>HB-E220系（釜石線 / 八高線北段）</div>
+  <div class="cnote"><b>R3 条目：</b>釜石線 HB-E220系 2両編成</div>
+  <div class="cnote">新建。HB-E220系 2 辆编组，八高線北段（高麗川—高崎/倉賀野）与釜石線共用。司机面图纸原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-hb-e220_1.png" alt="jr-east-hb-e220 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-east-hb-e220_2.png" alt="jr-east-hb-e220 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-east-hb-e220_3.png" alt="jr-east-hb-e220 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-2" data-num="2" data-slug="jrw227-500" data-status="pushed">
+  <div class="chead"><span class="num">#2</span> <span class="slug">jrw227-500</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>b960736</code>（models-pipeline）</div>
+  <div class="cmeta">组别：C　·　编组：2 両</div>
+  <div class="cnote"><b>车型：</b>227系500番台 Urara（赤穂線 / 宇野線 / 宇野みなと線）</div>
+  <div class="cnote"><b>R3 条目：</b>赤穂線 / 宇野線 / 宇野みなと線 227系500番台 Urara 2/3両</div>
+  <div class="cnote">新建。227系500番台 Urara 2 辆编组，三线共用。司机面图纸原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/jrw227-500_1.png" alt="jrw227-500 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jrw227-500_2.png" alt="jrw227-500 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jrw227-500_3.png" alt="jrw227-500 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-3" data-num="3" data-slug="jr-west-103-3500" data-status="pushed">
+  <div class="chead"><span class="num">#3</span> <span class="slug">jr-west-103-3500</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>8370d53</code>（models-pipeline）</div>
+  <div class="cmeta">组别：I（C 组 build，I 组核实后推）　·　编组：2 両</div>
+  <div class="cnote"><b>车型：</b>103系3500番台（播但線）</div>
+  <div class="cnote"><b>R3 条目：</b>播但線 103系3500番台 2両</div>
+  <div class="cnote">新建。图纸核实确为 3500番台（标题「103系3500番台 播但線色」+「1996 年播但線電化」「2両編成」「ワンマン」）。Mc 轮径注：DT33 实 0.91 m vs 取值 0.86，小 5 cm 目视不可辨。司机面图纸原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-west-103-3500_1.png" alt="jr-west-103-3500 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-west-103-3500_2.png" alt="jr-west-103-3500 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-west-103-3500_3.png" alt="jr-west-103-3500 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-4" data-num="4" data-slug="seibu-4000" data-status="pushed">
+  <div class="chead"><span class="num">#4</span> <span class="slug">seibu-4000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>b5c2a50</code>（models-pipeline）</div>
+  <div class="cmeta">组别：I　·　编组：4 両 [クハ4001][モハ4101][モハ4102][クハ4002]</div>
+  <div class="cnote"><b>车型：</b>西武4000系（西武秩父線）</div>
+  <div class="cnote"><b>R3 条目：</b>西武秩父線 西武4000系 4辆（普通列車主体）</div>
+  <div class="cnote">新建。M2 用 M1 网去弓复用，Tc2 用 Tc 网绕 Y 镜像，M1 车顶保留原图 2 基菱形弓。遗留：Tc2 尾端トイレ窗/自販機板镜像错位（图纸局限，尾端 1.5 m 内）；M2 床下设备沿用 M1；pepar.net 淡淡水印未动（等 MC 定）。司机面图纸原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/seibu-4000_1.png" alt="seibu-4000 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/seibu-4000_2.png" alt="seibu-4000 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/seibu-4000_3.png" alt="seibu-4000 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-5" data-num="5" data-slug="jr-hokkaido-kiha261-1000" data-status="pushed">
+  <div class="chead"><span class="num">#5</span> <span class="slug">jr-hokkaido-kiha261-1000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>761c6d7</code>（models-pipeline）</div>
+  <div class="cmeta">组别：E　·　编组：4 両 [キロ261-1100][キハ260-1100][キハ260-1200][キハ261-1200]</div>
+  <div class="cnote"><b>车型：</b>キハ261系1000番台（北斗 / おおぞら / とかち）</div>
+  <div class="cnote"><b>R3 条目：</b>北斗 / おおぞら / とかち キハ261系1000番台</div>
+  <div class="cnote">新建。一车兼三名（北斗/おおぞら/とかち），建一次。4 辆是とかち/おおぞら精确编组、北斗的子集；精确北斗 5 辆需在 car3/car4 间插キハ260-1300。⚠️ 涂装年代差：图纸是 2007 年原涂装（蓝鼻头 + Tilt261），实车 2015–17 年已改新涂装（白前脸 + 黄贯通门 + 紫侧带）——按图纸建，未擅自重涂；如 MC 要现役新涂装需另派重涂。前脸复用 MC 已认可的 #43 前脸法（图纸 face halves 有同样缺陷，REPORT §2 已写明，非有完整原图却用生成凑数）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-hokkaido-kiha261-1000_1.png" alt="jr-hokkaido-kiha261-1000 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-hokkaido-kiha261-1000_2.png" alt="jr-hokkaido-kiha261-1000 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-hokkaido-kiha261-1000_3.png" alt="jr-hokkaido-kiha261-1000 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-6" data-num="6" data-slug="jr-hokkaido-kiha261-5000-hamanasu" data-status="pushed">
+  <div class="chead"><span class="num">#6</span> <span class="slug">jr-hokkaido-kiha261-5000-hamanasu</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4dfaf98</code>（models-pipeline）</div>
+  <div class="cmeta">组别：E　·　编组：5 両 [5101][5101][5301][5201][5201]</div>
+  <div class="cnote"><b>车型：</b>キハ261系5000番台「はまなす」（ニセコ）</div>
+  <div class="cnote"><b>R3 条目：</b>ニセコ キハ261系5000番台“はまなす”編成 5辆</div>
+  <div class="cnote">新建。はまなす编组 5 辆。司机端粉段斜扫边界 + 粉门沿用ラベンダー侧立面（佐证：_h 净片侧墙司机端本身可见粉色三角形）。前脸复用 #43 前脸法（REPORT §2 已写明来源与张力）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-hamanasu_1.png" alt="jr-hokkaido-kiha261-5000-hamanasu 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-hamanasu_2.png" alt="jr-hokkaido-kiha261-5000-hamanasu 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-hamanasu_3.png" alt="jr-hokkaido-kiha261-5000-hamanasu 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-7" data-num="7" data-slug="jr-hokkaido-kiha261-5000-lavender" data-status="pushed">
+  <div class="chead"><span class="num">#7</span> <span class="slug">jr-hokkaido-kiha261-5000-lavender</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>12abd4a</code>（models-pipeline）</div>
+  <div class="cmeta">组别：E　·　编组：5 両 [5102][5102][5302][5202][5202]</div>
+  <div class="cnote"><b>车型：</b>キハ261系5000番台「ラベンダー」（フラノラベンダーエクスプレス）</div>
+  <div class="cnote"><b>R3 条目：</b>フラノラベンダーエクスプレス キハ261系5000番台“ラベンダー”編成 5辆</div>
+  <div class="cnote">新建。ラベンダー编组 5 辆，与「はまなす」为两型（不同涂装）。前脸复用 #43 前脸法（REPORT §2 已写明来源与张力）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-lavender_1.png" alt="jr-hokkaido-kiha261-5000-lavender 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-lavender_2.png" alt="jr-hokkaido-kiha261-5000-lavender 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-hokkaido-kiha261-5000-lavender_3.png" alt="jr-hokkaido-kiha261-5000-lavender 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-8" data-num="8" data-slug="jr-east-e131-200" data-status="pushed">
+  <div class="chead"><span class="num">#8</span> <span class="slug">jr-east-e131-200</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4936f04</code>（models-pipeline）</div>
+  <div class="cmeta">组别：E　·　编组：3 両 [クモハE131-200][モハE131-200][クハE130-200]</div>
+  <div class="cnote"><b>车型：</b>E131系200番台（長野色）（中央本線）</div>
+  <div class="cnote"><b>R3 条目：</b>中央本線 E131系200番台 3両編成（長野色）</div>
+  <div class="cnote">新建。長野色 3 辆。Tc 侧墙用 Mc 侧墙（右净片 Tc 侧墙两面均漏画司机门，实车有；副作用是 Mc 的厕所小窗亦带入 Tc）。前脸顶部有图纸原样的车顶盖折线（纸模折线，实车无），按红线用原图未涂平。前脸白胶耳用 clean_flaps 新法清除。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-e131-200_1.png" alt="jr-east-e131-200 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-east-e131-200_2.png" alt="jr-east-e131-200 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-east-e131-200_3.png" alt="jr-east-e131-200 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-9" data-num="9" data-slug="tsukuba-cable" data-status="pushed">
+  <div class="chead"><span class="num">#9</span> <span class="slug">tsukuba-cable</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>2af2444</code>、<code>69249b7</code>（models-pipeline）</div>
+  <div class="cmeta">组别：G　·　编组：2 両（もみじ红 / わかば绿）</div>
+  <div class="cnote"><b>车型：</b>筑波山ケーブルカー（もみじ / わかば）</div>
+  <div class="cnote"><b>R3 条目：</b>筑波山ケーブルカー（筑波観光鉄道）</div>
+  <div class="cnote">新建。筑波山ケーブル 2 辆交走式。⚠️ 现行车 2027-01-11 最后运行，2027 年 2 月 6 代目接替（两车将保存于筑西市ユメノバ）；模型按现行车建，2026-11-28 时点仍在役。司机面全部原图裁切。裙板底部浅灰横带为图纸轨线、非胶耳。</div>
+  <div class="cimg"><img loading="lazy" src="img/tsukuba-cable_1.png" alt="tsukuba-cable 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/tsukuba-cable_2.png" alt="tsukuba-cable 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/tsukuba-cable_3.png" alt="tsukuba-cable 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-10" data-num="10" data-slug="hakone-cable" data-status="pushed">
+  <div class="chead"><span class="num">#10</span> <span class="slug">hakone-cable</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>02d223c</code>、<code>6aa2d77</code>（models-pipeline）</div>
+  <div class="cmeta">组别：G　·　编组：2 両（Ke11 红 / Ke12 青）</div>
+  <div class="cnote"><b>车型：</b>箱根登山ケーブルカー 5代目（ケ10・ケ20形）</div>
+  <div class="cnote"><b>R3 条目：</b>箱根登山ケーブルカー 5代目車両（ケ10・ケ20形）</div>
+  <div class="cnote">新建。箱根登山ケーブル 5代目 2 辆。单车尺寸以 4 代目諸元（12,239×2,510×3,740 mm）为锚。司机面全部原图裁切。裙板白围裙已用 rgba_from_luma 修掉。</div>
+  <div class="cimg"><img loading="lazy" src="img/hakone-cable_1.png" alt="hakone-cable 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/hakone-cable_2.png" alt="hakone-cable 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/hakone-cable_3.png" alt="hakone-cable 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-11" data-num="11" data-slug="sakamoto-cable" data-status="pushed">
+  <div class="chead"><span class="num">#11</span> <span class="slug">sakamoto-cable</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>4d2edcb</code>、<code>c755127</code>（models-pipeline）</div>
+  <div class="cmeta">组别：G　·　编组：2 両（「縁」绿 / 「福」红）</div>
+  <div class="cnote"><b>车型：</b>坂本ケーブル 1号「縁」/ 2号「福」</div>
+  <div class="cnote"><b>R3 条目：</b>比叡山鉄道線 坂本ケーブル 1号車「縁」号 / 2号車「福」号</div>
+  <div class="cnote">新建。真图是 hieizan_en.pdf + hieizan_huku.pdf（简报给的 keihan_600_sakamotocable 是京阪 600 形电车主题涂装，不是缆车，已纠正）。⚠️ 涂装：本批按 1993–2023 标准涂装（绿/赤）建成对车；现行是 2023-12-27 起的蓝金〈山と水と光の廻廊〉新涂装，但树内只有福号新涂装图、缘号新涂装图缺失——接受旧涂装对车 / 新涂装福号+旧涂装缘号混搭 / 等缘号新图，三选一。单车尺寸无公开来源（幅 2.5 / 高 3.4 / 长 15.0 m 为推定）。司机面全部原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/sakamoto-cable_1.png" alt="sakamoto-cable 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/sakamoto-cable_2.png" alt="sakamoto-cable 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/sakamoto-cable_3.png" alt="sakamoto-cable 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-12" data-num="12" data-slug="nankai-cable" data-status="pushed">
+  <div class="chead"><span class="num">#12</span> <span class="slug">nankai-cable</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>25d08c0</code>、<code>fb9f2bb</code>（models-pipeline）</div>
+  <div class="cmeta">组别：G　·　编组：2 両（N11 / N12 镜像配对）</div>
+  <div class="cnote"><b>车型：</b>南海高野山ケーブル N10・20形（N11 / N12）</div>
+  <div class="cnote"><b>R3 条目：</b>南海鋼索線 南海高野山ケーブル 4代目車両（N11・N21 / N12・N22，2両編成）</div>
+  <div class="cnote">新建。H 组诊断发现有图可建（nankai_n10_n20.pdf，形式名 N10・20形，2019 年登场 4 代目），由 G 组建模。2 辆镜像配对（同一车网建两辆、其一翻转）。端件标车号 N11/N12（非形式名）；上端件「11N」倒置画法，已 ROTATE_180。⚠️ 近似：镜像车沿用 1 号車白线纹理（2 号車实车为橙线，树内无橙线图）；编组外端均为 N11、接缝处均为 N12（实车每辆车只有一个车号）。Y_BOT=1.24 m 由网横断面推定，无立面核对。司机面全部原图裁切。端面 UV 键名 bug 已修（端盖键一律 front/frontf/end/endf）。</div>
+  <div class="cimg"><img loading="lazy" src="img/nankai-cable_1.png" alt="nankai-cable 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/nankai-cable_2.png" alt="nankai-cable 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/nankai-cable_3.png" alt="nankai-cable 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-13" data-num="13" data-slug="hiroden-800" data-status="pushed">
+  <div class="chead"><span class="num">#13</span> <span class="slug">hiroden-800</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>bf7e298</code>（models-pipeline）</div>
+  <div class="cmeta">组别：F　·　编组：单车 804</div>
+  <div class="cnote"><b>车型：</b>広島電鉄800形（循環線 L 系統）</div>
+  <div class="cnote"><b>R3 条目：</b>広島電鉄循環線 広島電鉄800形または1900形 単車</div>
+  <div class="cnote">新建。L 系統跑 800形/1900形单车（不是 hiroden-1000）。选 800形不建 1900形（1900形图纸车号 1900 vs 2001 歧义未解）。司机面两端均为原图裁切（cabA 经 ROTATE_180 纠正）。局限：绿带/车窗比实车低约 0.2 m（图纸自身前后视图不一致，取净片原样）。</div>
+  <div class="cimg"><img loading="lazy" src="img/hiroden-800_1.png" alt="hiroden-800 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/hiroden-800_2.png" alt="hiroden-800 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/hiroden-800_3.png" alt="hiroden-800 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-14" data-num="14" data-slug="yagan-6050" data-status="pushed">
+  <div class="chead"><span class="num">#14</span> <span class="slug">yagan-6050</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>abdee1c</code>（models-pipeline）</div>
+  <div class="cmeta">组别：F　·　编组：2 両 61101F [61101][62101]</div>
+  <div class="cnote"><b>车型：</b>野岩鉄道6050系（会津鬼怒川線）</div>
+  <div class="cnote"><b>R3 条目：</b>野岩鉄道会津鬼怒川線 野岩鉄道6050系 2両編成</div>
+  <div class="cnote">新建。司机面原图裁切。⚠️ 图纸车号 62201 实为会津番号（按原图保留）；司机面红带/风挡布局与实车不符（按图纸原样，未重排，待 MC 定）。另：确认轮终报称“野岩6050系 blocked”，与已推事实冲突——blocked 可能指 62201 会津番号问题（已披露），而非整车不能建，待核对。</div>
+  <div class="cimg"><img loading="lazy" src="img/yagan-6050_1.png" alt="yagan-6050 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/yagan-6050_2.png" alt="yagan-6050 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/yagan-6050_3.png" alt="yagan-6050 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-15" data-num="15" data-slug="kobedentetsu-2000" data-status="pushed">
+  <div class="chead"><span class="num">#15</span> <span class="slug">kobedentetsu-2000</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>556e2c7</code>（models-pipeline）</div>
+  <div class="cmeta">组别：F　·　编组：3 両 2001F [2001][2201][2002]</div>
+  <div class="cnote"><b>车型：</b>神戸電鉄2000系（公園都市線）</div>
+  <div class="cnote"><b>R3 条目：</b>公園都市線 神戸電鉄2000系（3両編成）または6500系（3両編成）</div>
+  <div class="cnote">新建。car3 为 net A 的 Y180 克隆。司机面原图裁切。局限：司机面红带/前照灯在风挡上方、风挡偏低，与实车不符（按图纸原样，未重排，待 MC 定）；行先「2105」非车号，按原图保留。</div>
+  <div class="cimg"><img loading="lazy" src="img/kobedentetsu-2000_1.png" alt="kobedentetsu-2000 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/kobedentetsu-2000_2.png" alt="kobedentetsu-2000 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/kobedentetsu-2000_3.png" alt="kobedentetsu-2000 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-16" data-num="16" data-slug="jr-west-kiha189" data-status="pushed">
+  <div class="chead"><span class="num">#16</span> <span class="slug">jr-west-kiha189</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>f4a70fe</code>（models-pipeline）</div>
+  <div class="cmeta">组别：F　·　编组：3 両 H1</div>
+  <div class="cnote"><b>车型：</b>キハ189系（はまかぜ）</div>
+  <div class="cnote"><b>R3 条目：</b>はまかぜ キハ189系</div>
+  <div class="cnote">新建。图纸确为キハ189系柴油车（非旧 189系电力车）。修了一个实测缺陷：净片右条带把红带+车窗画在顶边（距顶 21%），左条带正确（77%），致 car3 红带高 20 px、车顶被切、车底重复；修法：把左条带水平镜像贴到右条带位置（纸模自身像素），三车红带重渲染后均为 y398 对齐。胶耳亦修（cab/gang 框左偏 23 px，右移后贴图 0 列近白）。司机面原图裁切。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-west-kiha189_1.png" alt="jr-west-kiha189 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-west-kiha189_2.png" alt="jr-west-kiha189 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-west-kiha189_3.png" alt="jr-west-kiha189 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-17" data-num="17" data-slug="jr-west-117-ginga" data-status="pushed">
+  <div class="chead"><span class="num">#17</span> <span class="slug">jr-west-117-ginga</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>f51c84d</code>（models-pipeline）</div>
+  <div class="cmeta">组别：F　·　编组：6 両 M117</div>
+  <div class="cnote"><b>车型：</b>117系 WEST EXPRESS 銀河</div>
+  <div class="cnote"><b>R3 条目：</b>WEST EXPRESS 銀河 117系（WEST EXPRESS 銀河）</div>
+  <div class="cnote">新建。1 张净片建 6 辆（car1 原样、car6 Y180 克隆、car2–5 两端换贯通端，toei-5500 先例）。司机面原图裁切。局限：①6 辆侧面门窗相同，实车各车窗布局不同；②3/5 号車（モハ117）实车有受电弓、模型无（净片无，不程序画，待 MC 定是否移植）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-west-117-ginga_1.png" alt="jr-west-117-ginga 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-west-117-ginga_2.png" alt="jr-west-117-ginga 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-west-117-ginga_3.png" alt="jr-west-117-ginga 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-18" data-num="18" data-slug="sapporosub-9000-4cars" data-status="pushed">
+  <div class="chead"><span class="num">#18</span> <span class="slug">sapporosub-9000-4cars</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>5bcf671</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：4 両（re-form）</div>
+  <div class="cnote"><b>车型：</b>札幌市営地下鉄9000形（東豊線）</div>
+  <div class="cnote"><b>R3 条目：</b>東豊線 sapporosub-9000（4辆编组）</div>
+  <div class="cnote">改编组（re-form）。源模型 sapporosub-9000 重组为 4 辆。图为 SITE 口径（站内显示）。司机面贴图全部复用源模型，未重画（红线合规）。源模型中间车无弓（车顶贴图无弓描画），已记录、不重画。</div>
+  <div class="cimg"><img loading="lazy" src="img/sapporosub-9000-4cars_1.png" alt="sapporosub-9000-4cars 整列侧面（SITE）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面（SITE）</div></div><div class="cev"><div class="cevlab">🔍 斜视角（SITE）</div><img loading="lazy" src="img/sapporosub-9000-4cars_2.png" alt="sapporosub-9000-4cars 斜视角（SITE）"></div><div class="cev"><div class="cevlab">🔍 俯视（SITE）</div><img loading="lazy" src="img/sapporosub-9000-4cars_3.png" alt="sapporosub-9000-4cars 俯视（SITE）"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-19" data-num="19" data-slug="tobu-8000-4cars" data-status="pushed">
+  <div class="chead"><span class="num">#19</span> <span class="slug">tobu-8000-4cars</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>a4b383b</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：4 両（re-form）</div>
+  <div class="cnote"><b>车型：</b>東武8000系（越生線）</div>
+  <div class="cnote"><b>R3 条目：</b>越生線 tobu-8000</div>
+  <div class="cnote">改编组（re-form）。源模型 tobu-8000 重组为 4 辆。初版两端全黑已修：源模型车 GLB 导出方向与他组相反（car1 司机面 −Z、car6 +Z），修法为顺序倒置 [car6,car3,car2,car1]、无 flip；重建后两端均为正确司机面（车号 8111）。图为 SITE 口径。两端车号均为 8111（源模型两端共用同一张司机面贴图）。司机面贴图全部复用源模型，未重画。</div>
+  <div class="cimg"><img loading="lazy" src="img/tobu-8000-4cars_1.png" alt="tobu-8000-4cars 整列侧面（SITE）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面（SITE）</div></div><div class="cev"><div class="cevlab">🔍 斜视角（SITE）</div><img loading="lazy" src="img/tobu-8000-4cars_2.png" alt="tobu-8000-4cars 斜视角（SITE）"></div><div class="cev"><div class="cevlab">🔍 俯视（SITE）</div><img loading="lazy" src="img/tobu-8000-4cars_3.png" alt="tobu-8000-4cars 俯视（SITE）"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-20" data-num="20" data-slug="seibu-2000-6cars" data-status="pushed">
+  <div class="chead"><span class="num">#20</span> <span class="slug">seibu-2000-6cars</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>3854c1d</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：6 両（re-form）</div>
+  <div class="cnote"><b>车型：</b>西武2000系（国分寺線）</div>
+  <div class="cnote"><b>R3 条目：</b>国分寺線 seibu-2000</div>
+  <div class="cnote">改编组（re-form）。源模型 seibu-2000 重组为 6 辆（国分寺線）。图为 SITE 口径（站内显示）。⚠️ PLAIN 斜视角重叠是源模型坐标系问题（各车局部坐标系不一致），SITE 图正常，编组正确——审核须以 SITE 图为准。司机面贴图全部复用源模型，未重画。</div>
+  <div class="cimg"><img loading="lazy" src="img/seibu-2000-6cars_1.png" alt="seibu-2000-6cars 整列侧面（SITE）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面（SITE）</div></div><div class="cev"><div class="cevlab">🔍 斜视角（SITE）</div><img loading="lazy" src="img/seibu-2000-6cars_2.png" alt="seibu-2000-6cars 斜视角（SITE）"></div><div class="cev"><div class="cevlab">🔍 俯视（SITE）</div><img loading="lazy" src="img/seibu-2000-6cars_3.png" alt="seibu-2000-6cars 俯视（SITE）"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-21" data-num="21" data-slug="seibu-2000-4cars" data-status="pushed">
+  <div class="chead"><span class="num">#21</span> <span class="slug">seibu-2000-4cars</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>0023849</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：4 両（re-form）</div>
+  <div class="cnote"><b>车型：</b>西武2000系（西武園線）</div>
+  <div class="cnote"><b>R3 条目：</b>西武園線 seibu-2000</div>
+  <div class="cnote">改编组（re-form）。源模型 seibu-2000 重组为 4 辆（西武園線）。图为 SITE 口径。⚠️ PLAIN 斜视角重叠是源模型坐标系问题，SITE 图正常，编组正确——审核须以 SITE 图为准。司机面贴图全部复用源模型，未重画。</div>
+  <div class="cimg"><img loading="lazy" src="img/seibu-2000-4cars_1.png" alt="seibu-2000-4cars 整列侧面（SITE）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面（SITE）</div></div><div class="cev"><div class="cevlab">🔍 斜视角（SITE）</div><img loading="lazy" src="img/seibu-2000-4cars_2.png" alt="seibu-2000-4cars 斜视角（SITE）"></div><div class="cev"><div class="cevlab">🔍 俯视（SITE）</div><img loading="lazy" src="img/seibu-2000-4cars_3.png" alt="seibu-2000-4cars 俯视（SITE）"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-22" data-num="22" data-slug="nankai-2000-2cars" data-status="pushed">
+  <div class="chead"><span class="num">#22</span> <span class="slug">nankai-2000-2cars</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>5a3e02d</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：2 両 [car1+car4]（re-form）</div>
+  <div class="cnote"><b>车型：</b>南海2000系（多奈川線 / 高師浜線）</div>
+  <div class="cnote"><b>R3 条目：</b>多奈川線 / 高師浜線 nankai-2000 (2-car consist)（#102）</div>
+  <div class="cnote">改编组（re-form，#102）。取 car1+car4 拼 2 両，核对受电弓/flip/朝向，非简单截前 2 辆。俯视核对：仅 Mc 有 1 架剪式弓，Tc 无，与实车一致。图为 SITE 口径。司机面贴图全部复用源模型，未重画。</div>
+  <div class="cimg"><img loading="lazy" src="img/nankai-2000-2cars_1.png" alt="nankai-2000-2cars 整列侧面（SITE）" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面（SITE）</div></div><div class="cev"><div class="cevlab">🔍 斜视角（SITE）</div><img loading="lazy" src="img/nankai-2000-2cars_2.png" alt="nankai-2000-2cars 斜视角（SITE）"></div><div class="cev"><div class="cevlab">🔍 俯视（SITE）</div><img loading="lazy" src="img/nankai-2000-2cars_3.png" alt="nankai-2000-2cars 俯视（SITE）"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-23" data-num="23" data-slug="tobu-500-series-1854555434-tobu-500-3-crp-30a19c8a" data-status="pushed">
+  <div class="chead"><span class="num">#23</span> <span class="slug">tobu-500-series-1854555434-tobu-500-3-crp-30a19c8a</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>f9d5405</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：3 両（re-form，tf2）</div>
+  <div class="cnote"><b>车型：</b>東武500系（尾瀬夜行 / スノーパル / 日光紅葉夜行）</div>
+  <div class="cnote"><b>R3 条目：</b>尾瀬夜行23:45 / スノーパル23:45 / 日光紅葉夜行23:45 tobu-500</div>
+  <div class="cnote">改编组（re-form，tf2）。⚠️ 简报目标 6 辆版 slug 在仓库里已存在且三条 names 键已指向它；核实三列夜行现行均为 500系 3 辆编组（500系全车队 3 辆×17 本，无 6 辆固定编组，6 辆只是两列併结；R3 证据本身也写 3 辆），故建 3 辆版（取 505F 前 3 辆，flip 原样；两端 Mc 各 1 架单臂弓已几何核实）。待裁决：三条 names 键是否改指 3 辆版（数据组的事，6 辆版不动）。⚠️ 本地无法渲染 tf2（meshopt + KTX2/Basis），本卡无图，须浏览器核验。</div>
+  <div class="noimg" style="padding:28px 10px;font-size:16px;font-weight:700;color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:8px">⚠️ 本卡无图：本地无法渲染 tf2，须浏览器核验</div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-24" data-num="24" data-slug="tf2-keihan-13000-7car" data-status="pushed">
+  <div class="chead"><span class="num">#24</span> <span class="slug">tf2-keihan-13000-7car</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>b627375</code>（models-pipeline）</div>
+  <div class="cmeta">组别：J　·　编组：7 両（re-form，tf2，8→7）</div>
+  <div class="cnote"><b>车型：</b>京阪13000系（京阪本線 / 鴨東線 / 中之島線）</div>
+  <div class="cnote"><b>R3 条目：</b>京阪本線・鴨東線 / 中之島線 / 京阪本線 / 鴨東線 京阪13000系 7両編成（tf2-keihan-13000-8car を 7両に組み直し）</div>
+  <div class="cnote">改编组（re-form，tf2）。tf2-keihan-13000-8car 重组为 7 辆。几何朝向已证明（type1/type4 同 base 朝向仅 flip 区分）。⚠️ 本地无法渲染 tf2（meshopt + KTX2/Basis），本卡无图，须浏览器核验。⚠️ 京阪 M1（type2）受电弓未核实（几何上未见弓，车顶贴图为 UASTC KTX2，本地旧版 Basis 转码器无法解码）；审核页须目检 7 辆版 M1 车顶有无弓，若无弓需另派修源模型。</div>
+  <div class="noimg" style="padding:28px 10px;font-size:16px;font-weight:700;color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:8px">⚠️ 本卡无图：本地无法渲染 tf2，须浏览器核验</div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+<section class="card" id="car-25" data-num="25" data-slug="jr-east-e131" data-status="pushed">
+  <div class="chead"><span class="num">#25</span> <span class="slug">jr-east-e131</span>
+  <span class="badge pushed">✅ 已推</span></div>
+  <div class="pushline">✅ <b>已推</b>　提交 <code>7edaa0d</code>（models-pipeline）</div>
+  <div class="cmeta">组别：K　·　编组：4 両 [car1, saha, moha, car2]（扩编，2→4）</div>
+  <div class="cnote"><b>车型：</b>E131系800番台（仙石線）——2 辆扩编为 4 辆</div>
+  <div class="cnote"><b>R3 条目：</b>仙石線 E131系800番台（4両編成）</div>
+  <div class="cnote">扩编。现存 jr-east-e131 确为 800番台 2 辆；新建 2 辆中间车サハE131-800（T）+ モハE130-800（M 带弓），插成 4 辆（toei-5500 重组法；图纸无中间车净片）。弓位定案：モハ弓在 Tc 侧端、距端约 1.2 m（±5%），系目检モハE130-812 实车照片定案（调查“1/3”已被图纸实测 + 实车照片推翻）。车底分车取（サハ取 Tc UNDER、モハ取 Mc UNDER）。⚠️ 遗留：既有 car1 前脸黑脸范围过大（实车风挡周围及以下均为白色，仅一条黑带带 3 排蓝点），建议另派组修；中间车沿带 Mc 的厕所小窗（按红线不擦除）；loft 车顶肩部条纹（builder 共性）。</div>
+  <div class="cimg"><img loading="lazy" src="img/jr-east-e131_1.png" alt="jr-east-e131 整列侧面" onerror="this.parentElement.classList.add('imgerr');this.outerHTML='<div class=\'noimg\'>图加载失败</div>'"><div class="cap">整列侧面</div></div><div class="cev"><div class="cevlab">🔍 斜视角</div><img loading="lazy" src="img/jr-east-e131_2.png" alt="jr-east-e131 斜视角"></div><div class="cev"><div class="cevlab">🔍 三维形态</div><img loading="lazy" src="img/jr-east-e131_3.png" alt="jr-east-e131 三维形态"></div>
+  <div class="cbtns">
+    <button type="button" class="pb" data-act="pass">✅ 通过</button><button type="button" class="rb" data-reason="胶耳未清">胶耳未清</button><button type="button" class="rb" data-reason="贴图颠倒">贴图颠倒</button><button type="button" class="rb" data-reason="端面方向反了">端面方向反了</button><button type="button" class="rb" data-reason="转向架问题">转向架问题</button><button type="button" class="rb" data-reason="编组错误">编组错误</button><button type="button" class="rb" data-reason="头型问题">头型问题</button><button type="button" class="rb" data-reason="其他">其他</button>
+  </div>
+  <div class="cother"><input type="text" placeholder="其他原因备注（点“其他”后填这里）" maxlength="40"></div>
+  <div class="cmark"></div>
+</section>
+</main>
+<div id="bar">
+  <div id="jump"><span>#</span><input id="jumpN" type="number" min="1" max="25" inputmode="numeric" placeholder="号码"><button id="jumpBtn">跳转</button></div>
+  <div class="prog" id="prog">已审 0/25 · 通过 0 · 返工 0</div>
+  <button id="autoJumpBtn">⏭ 自动跳下一题：开</button>
+  <button id="copyBtn">📋 复制结果</button>
+  <button id="clearBtn">清空</button>
+</div>
+<div id="toast"></div>
+<script>
+const KEY='mapfix-20261128';
+let state={}; try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+const cards=[...document.querySelectorAll('.card')];
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function mark(card,st){ // st: null | {t:'pass'} | {t:'rework',reason,note}
+  const slug=card.dataset.slug;
+  if(!st) delete state[slug]; else state[slug]=st;
+  save();
+}
+function render(){
+  let done=0,pass=0,rw=0;
+  cards.forEach(c=>{
+    const st=state[c.dataset.slug];
+    c.classList.toggle('mark-pass',!!st&&st.t==='pass');
+    c.classList.toggle('mark-rework',!!st&&st.t==='rework');
+    c.classList.toggle('show-other',!!st&&st.t==='rework'&&st.reason==='其他');
+    c.querySelectorAll('.cbtns button').forEach(b=>{
+      b.classList.remove('sel-pass','sel-rework');
+      if(st&&st.t==='pass'&&b.dataset.act==='pass') b.classList.add('sel-pass');
+      if(st&&st.t==='rework'&&b.dataset.reason===st.reason) b.classList.add('sel-rework');
+    });
+    const mk=c.querySelector('.cmark');
+    if(st&&st.t==='pass'){mk.textContent='✅ 通过';mk.className='cmark pass';pass++;done++}
+    else if(st&&st.t==='rework'){mk.textContent='🔧 返工：'+st.reason+(st.note?'（'+st.note+'）':'');mk.className='cmark rework';rw++;done++}
+    else {mk.textContent='';mk.className='cmark'}
+    const inp=c.querySelector('.cother input');
+    if(st&&st.t==='rework'&&st.reason==='其他') inp.value=st.note||'';
+  });
+  document.getElementById('prog').textContent=`已审 ${done}/25 · 通过 ${pass} · 返工 ${rw}`;
+}
+// ---- 自动跳下一题（多邻国式，默认开；开关存在本机）----
+const AJKEY='mapfix-20261128_autojump';
+let autoJump=true; try{const v=localStorage.getItem(AJKEY); if(v!==null) autoJump=(v==='1')}catch(e){}
+function setAutoJump(on){autoJump=on; try{localStorage.setItem(AJKEY,on?'1':'0')}catch(e){}
+  const b=document.getElementById('autoJumpBtn');
+  b.textContent=on?'⏭ 自动跳下一题：开':'⏭ 自动跳下一题：关'; b.classList.toggle('off',!on);}
+function nextUnreviewed(afterNum){
+  let wrap=null;
+  for(const c of cards){
+    const n=+c.dataset.num;
+    if(!state[c.dataset.slug]){
+      if(n>afterNum) return c;
+      if(!wrap) wrap=c;
+    }
+  }
+  return wrap; // null = 已全部审完
+}
+function jumpToCard(el){
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+}
+function maybeAutoJump(card){
+  if(!autoJump) return;
+  const next=nextUnreviewed(+card.dataset.num);
+  if(next) setTimeout(()=>jumpToCard(next),350);
+  else { toast('🎉 已全部审完！'); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+document.getElementById('autoJumpBtn').addEventListener('click',()=>setAutoJump(!autoJump));
+document.getElementById('list').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const card=e.target.closest('.card'); if(!card) return;
+  const slug=card.dataset.slug, cur=state[slug];
+  if(b.dataset.act==='pass'){
+    mark(card,(cur&&cur.t==='pass')?null:{t:'pass'});
+  }else if(b.dataset.reason){
+    const r=b.dataset.reason;
+    if(cur&&cur.t==='rework'&&cur.reason===r) mark(card,null);
+    else mark(card,{t:'rework',reason:r,note:''});
+  } else return;
+  maybeAutoJump(card);
+});
+document.getElementById('list').addEventListener('input',e=>{
+  const inp=e.target.closest('.cother input'); if(!inp) return;
+  const card=inp.closest('.card'), st=state[card.dataset.slug];
+  if(st&&st.t==='rework'&&st.reason==='其他'){st.note=inp.value;save()}
+});
+function ranges(nums){ // [2,4,5,19,21] -> "#2、#4-#5、#19、#21"
+  if(!nums.length) return '无';
+  nums=[...nums].sort((a,b)=>a-b); const out=[]; let s=nums[0],p=nums[0];
+  for(let i=1;i<=nums.length;i++){ if(nums[i]===p+1){p=nums[i];continue} out.push(s===p?('#'+s):('#'+s+'-#'+p)); s=nums[i]; p=nums[i]; }
+  return out.join('、');
+}
+function copyText(){
+  const pass=[], rw=[], un=[];
+  cards.forEach(c=>{
+    const n=+c.dataset.num, st=state[c.dataset.slug];
+    if(!st) un.push(n);
+    else if(st.t==='pass') pass.push('#'+n+' '+c.dataset.slug);
+    else rw.push('#'+n+' '+c.dataset.slug+'（'+st.reason+(st.note?'：'+st.note:'')+'）');
+  });
+  const lines=['地图修复建模审核（2026-11-28，共25辆）',
+    '通过（'+pass.length+'辆）：'+(pass.length?pass.join('、'):'无'),
+    '返工（'+rw.length+'辆）：'+(rw.length?'':'无')];
+  rw.forEach(r=>lines.push(r));
+  lines.push('未审（'+un.length+'辆）：'+ranges(un));
+  return lines.join('\\n');
+}
+document.getElementById('copyBtn').addEventListener('click',async()=>{
+  const t=copyText();
+  try{await navigator.clipboard.writeText(t); toast('已复制，去微信粘贴')}catch(e){
+    const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy'); toast('已复制，去微信粘贴')}catch(e2){toast('复制失败，请长按全选复制')} ta.remove();
+  }
+});
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+document.getElementById('jumpBtn').addEventListener('click',()=>{
+  const n=+document.getElementById('jumpN').value;
+  if(!n||n<1||n>25){toast('请输入卡号 #1–#25');return}
+  const el=document.getElementById('car-'+n);
+  if(!el){toast('该号码不在本批（25 辆，#1–#25）');return}
+  showAll();
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('jump-flash'); void el.offsetWidth; el.classList.add('jump-flash');
+});
+document.getElementById('jumpN').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('jumpBtn').click()});
+document.getElementById('clearBtn').addEventListener('click',()=>{
+  if(!Object.keys(state).length){toast('还没有任何标记');return}
+  if(confirm('清空全部 '+Object.keys(state).length+' 条标记？')){state={};save();toast('已清空')}
+});
+let curF='all';
+function showAll(){curF='all';document.querySelectorAll('#filters button').forEach(b=>b.classList.toggle('on',b.dataset.f==='all'));applyFilter()}
+function applyFilter(){
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  cards.forEach(c=>{
+    let ok=true;
+    if(curF==='pushed'||curF==='unpushed') ok=c.dataset.status===curF;
+    else if(curF==='unreviewed') ok=!state[c.dataset.slug];
+    else if(curF==='reviewed') ok=!!state[c.dataset.slug];
+    if(ok&&q) ok=c.dataset.slug.toLowerCase().includes(q);
+    c.style.display=ok?'':'none';
+  });
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  curF=b.dataset.f; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b)); applyFilter();
+});
+document.getElementById('q').addEventListener('input',applyFilter);
+setAutoJump(autoJump);
+render();
+</script>
+</body>
+</html>
