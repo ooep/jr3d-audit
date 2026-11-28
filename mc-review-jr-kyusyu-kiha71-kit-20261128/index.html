@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jr-kyusyu-kiha71 建模套件（给别的 AI 试做）</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:860px;margin:0 auto;padding:24px 16px;color:#222;line-height:1.7}
+h1{font-size:22px} h2{font-size:18px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;line-height:1.6}
+a{color:#0b62d6} .note{background:#fff8e1;border:1px solid #f0d48a;border-radius:6px;padding:10px 14px}
+ul{padding-left:20px} li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>🚃 jr-kyusyu-kiha71 建模套件</h1>
+<p>给别的 AI 试做这辆车用的完整材料：图纸＋提示词＋实车参考＋现有模型对照。2026-11-28 整理。</p>
+
+<h2>📦 素材（可直接下载）</h2>
+<ul>
+<li><strong>图纸 PDF</strong>：<a href="jr_kyusyu_kiha71_yuhuin.pdf">jr_kyusyu_kiha71_yuhuin.pdf</a>（1.6 MB，JR九州 キハ71系「ゆふいんの森」纸模展开图）</li>
+<li><strong>完整建模方法（提示词全文）</strong>：<a href="SKILL.txt">SKILL.txt</a>（图纸转 3D 模型 v1.2.49，1362 行）</li>
+<li><strong>实车参考</strong>：<a href="https://ja.wikipedia.org/wiki/JR%E4%B9%9D%E5%B7%9E%E3%82%AD%E3%83%8F71%E7%B3%BB%E6%B0%97%E5%8B%95%E8%BB%8A">Wikipedia: JR九州キハ71系気動車</a>（编组、运用、照片；特急「ゆふいんの森」I世，久大本线 4 辆编组）</li>
+<li><strong>现有模型对照</strong>：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework5-20261127/">第五轮审核页</a> kiha71 卡片（汇总页 #53，第一批 #167）——当前模型的状态见下“现有模型问题”。</li>
+</ul>
+
+<h2>⚠️ 现有模型问题（新模型必须改掉这一点，其余已对的部分保持）</h2>
+<div class="note">
+1. car2/car3 <strong>贯通端裙板白胶耳</strong>：裙板贴图两角三角区（rows 0–28）原有白像素 1,673 / 1,643 颗——本批已清零（提交 772bf96），新模型从零重建时裁切框只取端面本身，胶耳一律不得进贴图。<br>
+2. <strong>金色方块左右待定</strong>：车身金色方块只保留图纸上有的那一块，<strong>不要加第二块</strong>——加第二块属虚构，等定夺。<br>
+3. 其余已对：司机面正脸是图纸裁切（G2 框 rotCW，NCC 0.9945）；金色 YUFUIN NO MORI 侧字、车头金色手写体均正读；头型为平面脸（图纸侧立面前缘垂直，前盖 z 纵深 0）。新模型保持这些已对的部分。
+</div>
+
+<h2>✍️ 提示词（精简版，直接复制可用）</h2>
+<pre>## 任务
+根据所附图纸 PDF（JR九州 キハ71系「ゆふいんの森」纸模展开图），从零新建 4 辆编组 3D 列车模型，
+输出 GLB + consist.json。不要复用现有模型，只以它为对照（见“现有模型问题”）。
+
+## 输入素材
+- 图纸：jr_kyusyu_kiha71_yuhuin.pdf（本页可下载；纸模展开图 net）
+- 实车参考：https://ja.wikipedia.org/wiki/JR%E4%B9%9D%E5%B7%9E%E3%82%AD%E3%83%8F71%E7%B3%BB%E6%B0%97%E5%8B%95%E8%BB%8A （编组、运用、照片）
+- 方法论全文：SKILL.txt（本页可下载，图纸转 3D 模型 v1.2.49）——按其中的 0–8 步执行。
+
+## 输出
+- car1.glb、car2.glb、car3.glb、car4.glb（每辆车一个 GLB，贴图内嵌）
+- consist.json：
+  {"name": "JR九州キハ71系「ゆふいんの森」", "car_length_m": 20.8, "middle_car_length_m": 20.8,
+   "cars": [{"model": "car1.glb"}, {"model": "car2.glb"}, {"model": "car3.glb"}, {"model": "car4.glb"}]}
+  （两头先头车、中间 2 辆；两端司机室朝外，连接端朝内）
+- 渲染图三张：整列侧面、斜视角 3/4、司机端端面（每张整列入镜、两端可见、边距 ≥2%）
+
+## 铁律（违反即返工）
+1. 只用图纸原图、不纯色填充、不加奶油边填充、不嗯凑、不生成、不瞎填充；盖不满如实报、等定夺。
+   贴图只从图纸原图裁切，严禁 AI/SVG/程序重画、填色、硬凑；图纸没有的特征先报缺、不虚构。
+2. 不拉伸：按图纸原纵横比贴；不颠倒：对照实车照片核对司机面方向（特征上下顺序与实车一致）。
+3. 胶耳必删：纸模端件左右两缘的白色梯形粘贴耳不得进贴图；裁切框只取端面本身。
+   贯通端裙板尤其注意：裙板贴图两角三角区（rows 0–28）不得留白像素。
+4. 轮底触轨（y=0），车轮圆形；车体与转向架之间无过大空白；转向架设备齐全、不删设备。
+5. GLB 贴图须保留 alphaMode MASK（透明处镂空）；模型水密：内翻 0、开边 0、非流形 0。
+
+## 车型要点（按图纸＋实车照片核对）
+- 4 辆编组，特急「ゆふいんの森」I世（久大本线，博多—由布院／别府）；车长 20.8 m。
+  编成：キハ71-1／キハ70-2／キハ70-1／キハ71-2（2 号车带ビュッフェ）。
+- 车头正脸：平面脸（图纸侧立面前缘垂直，前盖无纵深）；脸按 G2 框 (660,606,813,797) rotCW 裁切。
+- 侧面：金色 YUFUIN NO MORI 侧字、车头金色手写体，均须正读；金色方块只保留图纸上有的那一块，
+  不要加第二块（加第二块属虚构）。
+- 侧面：按图纸 net 裁切；车号、车种以图纸 net 标注为准。
+
+## 方法（按 SKILL.txt）
+0. 判断图纸类型（纸模展开图 net）；1. 取图（矢量/嵌入原图，勿截屏低清图）；
+2. 标定尺度（像素→米，用图纸参考线）；3. 选贴图源（每面裁“能无缝平铺”的一块）；
+4. 轮廓逐列扫描；5. 断面放样（鼻锥收法按两种头型区分）；
+6. UV（图纸决定窗门位置；侧面平面投影、背面镜像 u、车顶横向铺）；
+6.5 车底带只贴图不建模（裁切框避开参考线、去 pepar.net 水印/二维码）；
+7. 材质分区只用几何判据；
+8. 验证：4 个数字（三角数、体积、包围盒、0/0/0）＋对照图＋GLB 内嵌贴图方向审计。
+
+## 验收
+- 三张渲染图目检通过（脸不颠倒、侧字正读、裙板无白胶耳、金色方块不多不少、轮底触轨）。
+- 与现有模型对照：新模型贯通端裙板必须无白胶耳（现有模型的问题：car2/car3 裙板白胶耳——
+  这点必须改掉，其余已对的部分保持）。</pre>
+
+<p style="color:#666;font-size:13px">整理：Chihaya，2026-11-28。图纸为 pepar.net 纸模原图；方法论 SKILL.txt v1.2.49。</p>
+</body>
+</html>

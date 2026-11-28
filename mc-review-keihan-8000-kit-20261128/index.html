@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>keihan-8000 建模套件（给别的 AI 试做）</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:860px;margin:0 auto;padding:24px 16px;color:#222;line-height:1.7}
+h1{font-size:22px} h2{font-size:18px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;line-height:1.6}
+a{color:#0b62d6} .note{background:#fff8e1;border:1px solid #f0d48a;border-radius:6px;padding:10px 14px}
+ul{padding-left:20px} li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>🚃 keihan-8000 建模套件</h1>
+<p>给别的 AI 试做这辆车用的完整材料：图纸＋提示词＋实车参考＋现有模型对照。2026-11-28 整理。</p>
+
+<h2>📦 素材（可直接下载）</h2>
+<ul>
+<li><strong>图纸 PDF</strong>：<a href="keihan_8000.pdf">keihan_8000.pdf</a>（2.6 MB，京阪8000系纸模展开图）</li>
+<li><strong>完整建模方法（提示词全文）</strong>：<a href="SKILL.txt">SKILL.txt</a>（图纸转 3D 模型 v1.2.49，1362 行）</li>
+<li><strong>实车参考</strong>：<a href="https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%98%AA8000%E7%B3%BB%E9%9B%BB%E8%BB%8A">Wikipedia: 京阪8000系電車</a>（编组、运用、照片；1989 年登场，特急「エレガント・サルーン」，京阪本線，实车 8 辆编组）</li>
+<li><strong>现有模型对照</strong>：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework5-20261127/">第五轮审核页</a> 8000 卡片（R5 #75）——24 辆批<strong>已推 0ae69bc</strong>，当前模型的状态见下“现有模型问题”。另见<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">汇总页</a>。</li>
+</ul>
+
+<h2>⚠️ 现有模型问题（已推 0ae69bc：鸽徽已复位，其余已对的部分保持；以下两项待定）</h2>
+<div class="note">
+1. <strong>鸽徽已复位（不要再动）</strong>：原偏低 40 行（0.25 m）＋偏宽 20%，已从 300 dpi 图纸重裁（x1360–1444、y627–669），<strong>垂直翻转一次</strong>（图纸件倒印，不翻会上下颠倒），缩至 109×67，贴回图纸位 rows 250–316、x156–264（中心 x210 与原中心 208 一致——只偏低＋偏宽，未左右移位）。腾空区用邻接橙色、白耳用邻接黑色、斜纹用邻接灰色填平，<strong>全程未用奶油边/填色收口</strong>。<br>
+2. 脸左上白耳 rows 55–78 已清（白像素 129→0）；裙板斜纹 rows 528–537 已清（图纸折痕/裁切边，按列取邻接灰中值填平）。<br>
+3. <strong>头灯偏低约 20 行（0.13 m），建议暂留</strong>：live 约 rows 370–410，横跨脸/裙板接缝；图纸应为 rows 354–382（x56–105 与 x340–391）。移头灯须重贴橙带，风险大于收益。<br>
+4. 脸约 <strong>8% 竖向拉伸</strong>（建议接受）：图纸脸 153×125（纵横比 1.224）vs 3D 脸 2.78×2.45（纵横比 1.135），1.224/1.135 = 1.079；485 先例 21.7% 已接受，不重贴。
+</div>
+
+<h2>✍️ 提示词（精简版，直接复制可用）</h2>
+<pre>## 任务
+根据所附图纸 PDF（京阪8000系纸模展开图），从零新建 3 辆编组 3D 列车模型，
+输出 GLB + consist.json。不要复用现有模型，只以它为对照（见“现有模型问题”）。
+
+## 输入素材
+- 图纸：keihan_8000.pdf（本页可下载；纸模展开图 net）
+- 实车参考：https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%98%AA8000%E7%B3%BB%E9%9B%BB%E8%BB%8A （编组、运用、照片）
+- 方法论全文：SKILL.txt（本页可下载，图纸转 3D 模型 v1.2.49）——按其中的 0–8 步执行。
+
+## 输出
+- car1.glb、car2.glb、car3.glb（每辆车一个 GLB，贴图内嵌）
+- consist.json：
+  {"name": "京阪8000系", "car_length_m": 18.9, "middle_car_length_m": 18.7,
+   "cars": [{"model": "car1.glb"}, {"model": "car2.glb"}, {"model": "car3.glb"}]}
+  （两头先头车＋1 中间车；两端司机室朝外，连接端朝内。
+   实车为 8 辆编组，现有模型为 3 辆子集——按现有编组重做，不擅自扩编。）
+- 渲染图三张：整列侧面、斜视角 3/4、司机端端面（每张整列入镜、两端可见、边距 ≥2%）
+
+## 铁律（违反即返工）
+1. 贴图只从图纸原图裁切，严禁 AI/SVG/程序重画、填色、硬凑；图纸没有的特征先报缺、不虚构。
+2. 不拉伸：按图纸原纵横比贴；不颠倒：对照实车照片核对司机面方向（特征上下顺序与实车一致）。
+3. 胶耳必删：纸模端件左右两缘的白色梯形粘贴耳不得进贴图；裁切框只取端面本身。
+4. 轮底触轨（y=0），车轮圆形；车体与转向架之间无过大空白；转向架设备齐全、不删设备。
+5. GLB 贴图须保留 alphaMode MASK（透明处镂空）；模型水密：内翻 0、开边 0、非流形 0。
+6. 只用图纸原图、不纯色填充、不加奶油边填充、不嗯凑、不生成、不瞎填充；盖不满如实报、等定夺。
+
+## 车型要点（按图纸＋实车照片核对）
+- 3 辆编组（现有模型子集；实车 8 辆编组，特急「エレガント・サルーン」）；先头车长 18.9 m、中间车 18.7 m。
+- 头型是<strong>平面</strong>：前脸单块竖直平面（x±1.39、y1.15–3.60），图纸侧立面同样平矩形——无楔形/圆弧可做。
+- 车头正脸：图纸原图（去灰顶带后 NCC 0.787，vflip，sx=2.6、sy=3.0）。
+  灰顶带（件 y255–290）是折到车顶的，脸不含，去掉是对的；脸件真宽 x619–771（150 dpi），
+  用 x600 起裁会带入白边。<strong>整脸重贴方案已放弃</strong>：重贴会引入左缘白纸边（裁切含图纸白边，
+  新规则禁止的“随便加边”）与拱顶暗带（图纸拱顶阴影，原 live 脸没有）——不要重贴整脸。
+- <strong>鸽徽</strong>：风挡下黑区黑/黄交界，约脸高 70%（图纸翻转位置约 73%）。从 300 dpi 图纸重裁
+  （x1360–1444、y627–669），<strong>垂直翻转一次</strong>（图纸件倒印），缩至 109×67，贴到
+  live rows 250–316、x156–264。腾空区按行取邻接橙色中值填满，白耳按邻接黑色填。
+  脸上 14 px 奶油是鸽徽顶部红黄抗锯齿（徽章本身），无须清除。
+- 头灯偏低约 20 行（0.13 m）是已知小偏差，暂留；脸约 8% 竖向拉伸是已知局限，不重贴。
+- 实车特征：红顶、黑行先带、三片风挡（雨刮在右风挡，图纸/live/实车一致）、黄下部＋矩形头灯、
+  灰裙板＋车钩；侧面按图纸 net 裁切；车号、车种以图纸 net 标注为准。
+
+## 方法（按 SKILL.txt）
+0. 判断图纸类型（纸模展开图 net）；1. 取图（矢量/嵌入原图，勿截屏低清图；鸽徽须用 300 dpi 重裁）；
+2. 标定尺度（像素→米，用图纸参考线）；3. 选贴图源（每面裁“能无缝平铺”的一块）；
+4. 轮廓逐列扫描；5. 断面放样（鼻锥收法按两种头型区分；本车平面头，无收法）；
+6. UV（图纸决定窗门位置；侧面平面投影、背面镜像 u、车顶横向铺）；
+6.5 车底带只贴图不建模（裁切框避开参考线、去 pepar.net 水印/二维码）；
+7. 材质分区只用几何判据；
+8. 验证：4 个数字（三角数、体积、包围盒、0/0/0）＋对照图＋GLB 内嵌贴图方向审计。
+
+## 验收
+- 三张渲染图目检通过（鸽徽在脸高约 70% 处、风挡/行先带/头灯齐全、裙板对齐、轮底触轨）。
+- 与现有模型对照：新模型鸽徽位置必须与已推修复一致（rows 250–316、x156–264，翻转一次）；
+  头灯偏低、脸 8% 拉伸两项已知局限如实报，不擅自重贴整脸。</pre>
+
+<p style="color:#666;font-size:13px">整理：Chihaya，2026-11-28。图纸为 pepar.net 纸模原图；方法论 SKILL.txt v1.2.49。</p>
+</body>
+</html>

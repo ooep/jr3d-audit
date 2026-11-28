@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>keio-1000 建模套件（给别的 AI 试做）</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:860px;margin:0 auto;padding:24px 16px;color:#222;line-height:1.7}
+h1{font-size:22px} h2{font-size:18px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;line-height:1.6}
+a{color:#0b62d6} .note{background:#fff8e1;border:1px solid #f0d48a;border-radius:6px;padding:10px 14px}
+ul{padding-left:20px} li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>🚃 keio-1000 建模套件</h1>
+<p>给别的 AI 试做这辆车用的完整材料：图纸＋提示词＋实车参考＋现有模型对照。2026-11-28 整理。</p>
+
+<h2>📦 素材（可直接下载）</h2>
+<ul>
+<li><strong>图纸 PDF</strong>：<a href="keio_1000_k_bg.pdf">keio_1000_k_bg.pdf</a>（2.0 MB，京王1000系 後期型 蓝绿纸模展开图，3 页）</li>
+<li><strong>完整建模方法（提示词全文）</strong>：<a href="SKILL.txt">SKILL.txt</a>（图纸转 3D 模型 v1.2.49，1362 行）</li>
+<li><strong>实车参考</strong>：<a href="https://en.wikipedia.org/wiki/Keio_1000_series">Wikipedia: Keio 1000 series</a>（编组、运用、照片；井の頭線，5辆编组，1996年1月9日投入，1707 编成；注：日文维基检索到的 1000系条目为初代车，故用英文条目）</li>
+<li><strong>现有模型对照</strong>：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework5-20261127/">第五轮审核页</a> keio-1000 卡片（R5 页 #79）——<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">汇总页</a>同车卡片；当前模型本批合规未推，状态见下“现有模型问题”。</li>
+</ul>
+
+<h2>⚠️ 现有模型问题（新模型必须注意这三点，其余已对的部分保持）</h2>
+<div class="note">
+1. 本批<strong>合规，未推</strong>：脸为图纸真裁切（332 行，NCC 0.9644）；头型完全平面 cap（z=0），与实车垂直前面一致；29 批已修错号并推（cf1bd39）：car1 车号“1757”→“1707”已修正。<br>
+2. car1“1707”仍是<strong>重画数字，二选一待定</strong>：（A）接受现状（数字已正确、观感与实车一致）；（B）留空无号（删掉重绘字，车号位空白）。<strong>不要再重画一遍数字</strong>。背景：图纸脸件倒印，行先板是空白深色矩形、银带只有 KEIO、<strong>无车号</strong>——图纸确实缺这两处特征。<br>
+3. 行先牌有文字（“急行 渋谷”，R6 ③类按实车照片重画，G6 已接受）；其余 3 辆行先框空白属图纸忠实，不加文字。行先板微凸约 10 cm 属细部，图纸未画成立体几何，不作重建。
+</div>
+
+<h2>✍️ 提示词（精简版，直接复制可用）</h2>
+<pre>## 任务
+根据所附图纸 PDF（京王1000系 後期型 蓝绿纸模展开图），从零新建 5 辆编组 3D 列车模型，
+输出 GLB + consist.json。不要复用现有模型，只以它为对照（见“现有模型问题”）。
+
+## 输入素材
+- 图纸：keio_1000_k_bg.pdf（本页可下载；纸模展开图 net，后期型 蓝绿）
+- 实车参考：https://en.wikipedia.org/wiki/Keio_1000_series （编组、运用、照片；井の頭線，1707 编成）
+- 方法论全文：SKILL.txt（本页可下载，图纸转 3D 模型 v1.2.49）——按其中的 0–8 步执行。
+
+## 输出
+- car1.glb、car2.glb、car3.glb、car4.glb、car5.glb（每辆车一个 GLB，贴图内嵌）
+- consist.json：
+  {"name": "京王1000系", "car_length_m": 19.5, "middle_car_length_m": 19.5,
+   "cars": [{"model": "car1.glb"}, {"model": "car2.glb"}, {"model": "car3.glb"},
+            {"model": "car4.glb"}, {"model": "car5.glb"}]}
+  （两头先头车、中间 3 辆；两端司机室朝外，连接端朝内；实车亦为 5 辆编组，1707 编成）
+- 渲染图三张：整列侧面、斜视角 3/4、司机端端面（每张整列入镜、两端可见、边距 ≥2%）
+
+## 铁律（违反即返工）
+1. 只用图纸原图、不纯色填充、不加奶油边填充、不嗯凑、不生成、不瞎填充；盖不满如实报、等定夺。
+2. 贴图只从图纸原图裁切，严禁 AI/SVG/程序重画、填色、硬凑；图纸没有的特征先报缺、不虚构。
+3. 不拉伸：按图纸原纵横比贴；不颠倒：对照实车照片核对司机面方向（特征上下顺序与实车一致）。
+4. 胶耳必删：纸模端件左右两缘的白色梯形粘贴耳不得进贴图；裁切框只取端面本身。
+5. 轮底触轨（y=0），车轮圆形；车体与转向架之间无过大空白；转向架设备齐全、不删设备。
+6. GLB 贴图须保留 alphaMode MASK（透明处镂空）；模型水密：内翻 0、开边 0、非流形 0。
+
+## 车型要点（按图纸＋实车照片核对）
+- 5 辆编组；每辆车长 19.5 m（consist.json）；井の頭線（京王）；不锈钢车体，车头端面为七色之一的彩色。
+- 头型：完全平面 cap（z=0），与实车垂直前面一致；几何按图纸侧立面＋实车照片核对，不要重建几何。
+- 车头正脸：图纸真裁切（现有模型 NCC 0.9644）；图纸脸件倒印，裁切后须翻转到正确方向（以行先框定方向）。
+- 车号注意：图纸银带只有 KEIO、行先板是空白深色矩形，<strong>图纸上无车号</strong>。实车 car1 该端车号为“1707”
+  （旧模型曾错印“1757”，29 批 cf1bd39 已修正）。新模型车号处理二选一、等定夺：接受重画数字，或留空无号；
+  <strong>不要再重画一遍数字</strong>，图纸缺失的特征先报缺、不虚构。
+- 行先牌：car1 行先“急行 渋谷”为按实车照片重画（R6 ③类，G6 已接受）；其余车行先框空白属图纸忠实，不加文字。
+- 行先板微凸约 10 cm 属细部，图纸未画成立体几何，不作重建。
+- 侧面：按图纸 net 裁切；每侧 4 门；车号、车种以图纸 net 标注为准。
+
+## 方法（按 SKILL.txt）
+0. 判断图纸类型（纸模展开图 net）；1. 取图（矢量/嵌入原图，勿截屏低清图）；
+2. 标定尺度（像素→米，用图纸参考线）；3. 选贴图源（每面裁“能无缝平铺”的一块）；
+4. 轮廓逐列扫描；5. 断面放样（鼻锥收法按两种头型区分）；
+6. UV（图纸决定窗门位置；侧面平面投影、背面镜像 u、车顶横向铺）；
+6.5 车底带只贴图不建模（裁切框避开参考线、去 pepar.net 水印/二维码）；
+7. 材质分区只用几何判据；
+8. 验证：4 个数字（三角数、体积、包围盒、0/0/0）＋对照图＋GLB 内嵌贴图方向审计。
+
+## 验收
+- 三张渲染图目检通过（脸不颠倒、车号/行先牌方向正确、裙板对齐、轮底触轨）。
+- 像素验收：新脸 vs 图纸裁切 NCC ≥0.96。
+- 与现有模型对照：新模型司机面必须是图纸裁切、头型与现有模型一致（现有模型本批合规，
+  唯一待定是 car1“1707”重画数字接受还是留白——新模型不要再重画一遍，如实报、等定夺）。</pre>
+
+<p style="color:#666;font-size:13px">整理：Chihaya，2026-11-28。图纸为 pepar.net 纸模原图；方法论 SKILL.txt v1.2.49。</p>
+</body>
+</html>

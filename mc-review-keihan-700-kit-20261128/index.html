@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>keihan-700 建模套件（给别的 AI 试做）</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:860px;margin:0 auto;padding:24px 16px;color:#222;line-height:1.7}
+h1{font-size:22px} h2{font-size:18px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;line-height:1.6}
+a{color:#0b62d6} .note{background:#fff8e1;border:1px solid #f0d48a;border-radius:6px;padding:10px 14px}
+ul{padding-left:20px} li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>🚃 keihan-700 建模套件</h1>
+<p>给别的 AI 试做这辆车用的完整材料：图纸＋提示词＋实车参考＋现有模型对照。2026-11-28 整理。</p>
+
+<h2>📦 素材（可直接下载）</h2>
+<ul>
+<li><strong>图纸 PDF</strong>：<a href="keihan_700.pdf">keihan_700.pdf</a>（1.3 MB，京阪700形（3代）纸模展开图）</li>
+<li><strong>完整建模方法（提示词全文）</strong>：<a href="SKILL.txt">SKILL.txt</a>（图纸转 3D 模型 v1.2.49，1362 行）</li>
+<li><strong>实车参考</strong>：<a href="https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%98%AA700%E5%BD%A2%E9%9B%BB%E8%BB%8A_(3%E4%BB%A3)">Wikipedia: 京阪700形電車 (3代)</a>（编组、运用、照片；1992 年登场，石山坂本線 2 辆编组 Mc1+Mc2）</li>
+<li><strong>现有模型对照</strong>：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework5-20261127/">第五轮审核页</a> 700 卡片（R5 #74）——24 辆批像素核实<strong>合规、未推</strong>，当前模型的状态见下“现有模型问题”。另见<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">汇总页</a>。</li>
+</ul>
+
+<h2>⚠️ 现有模型问题（合规未推：现有模型已通过像素核实，新模型须保持这些已对的部分，并注意以下待定项）</h2>
+<div class="note">
+1. 方向是 <strong>rot180</strong>（以行先框定）：图纸行先框在脸件右下（件内 x103–139、rows 128–135），live 行先框在左上（x111–199、rows 30–56）；下→上且右→左 = 旋转 180°，单纯 vflip 会把框留在右侧，不符。<strong>NCC 的 vflip/rot180 仅差 0.002，不能定方向</strong>——不要用 NCC 定方向。<br>
+2. 约 <strong>10% 米制竖向拉伸</strong>待定（组建议接受，小于 485 先例 21.7%）：图纸脸 141×150 px（纵横比 0.94）vs 3D 脸 2.38×2.78 m（纵横比 0.856），0.94/0.856 = 1.098。重贴须改 UV＋补缺口，风险大于收益。<br>
+3. <strong>像素拉伸 ≠ 米制拉伸</strong>：纹理像素本身非正方形（1 列 = 0.00451 m、1 行 = 0.00792 m），像素各向异性会夸大真实变形；此前“18% 横向拉伸”已作废，<strong>一律按米制算</strong>（图纸纵横比 vs 3D 脸纵横比）。
+</div>
+
+<h2>✍️ 提示词（精简版，直接复制可用）</h2>
+<pre>## 任务
+根据所附图纸 PDF（京阪700形（3代）纸模展开图），从零新建 2 辆编组 3D 列车模型，
+输出 GLB + consist.json。不要复用现有模型，只以它为对照（见“现有模型问题”）。
+
+## 输入素材
+- 图纸：keihan_700.pdf（本页可下载；纸模展开图 net）
+- 实车参考：https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%98%AA700%E5%BD%A2%E9%9B%BB%E8%BB%8A_(3%E4%BB%A3) （编组、运用、照片）
+- 方法论全文：SKILL.txt（本页可下载，图纸转 3D 模型 v1.2.49）——按其中的 0–8 步执行。
+
+## 输出
+- car1.glb、car2.glb（每辆车一个 GLB，贴图内嵌）
+- consist.json：
+  {"name": "京阪700形", "car_length_m": 15.0, "middle_car_length_m": 15.0,
+   "cars": [{"model": "car1.glb"}, {"model": "car2.glb"}]}
+  （两头先头车；两端司机室朝外，连接端朝内）
+- 渲染图三张：整列侧面、斜视角 3/4、司机端端面（每张整列入镜、两端可见、边距 ≥2%）
+
+## 铁律（违反即返工）
+1. 贴图只从图纸原图裁切，严禁 AI/SVG/程序重画、填色、硬凑；图纸没有的特征先报缺、不虚构。
+2. 不拉伸：按图纸原纵横比贴；不颠倒：对照实车照片核对司机面方向（特征上下顺序与实车一致）。
+3. 胶耳必删：纸模端件左右两缘的白色梯形粘贴耳不得进贴图；裁切框只取端面本身。
+4. 轮底触轨（y=0），车轮圆形；车体与转向架之间无过大空白；转向架设备齐全、不删设备。
+5. GLB 贴图须保留 alphaMode MASK（透明处镂空）；模型水密：内翻 0、开边 0、非流形 0。
+6. 只用图纸原图、不纯色填充、不加奶油边填充、不嗯凑、不生成、不瞎填充；盖不满如实报、等定夺。
+
+## 车型要点（按图纸＋实车照片核对）
+- 2 辆编组（Mc1+Mc2），京阪大津線石山坂本線；车长 15.0 m、车宽 2.38 m、车高 3.98 m。
+- 头型是<strong>平面</strong>：前脸单块竖直平面（x±1.19、y1.20–3.98）；图纸侧立面同样平矩形。
+  实车前面为 600形2次车同样的非贯通固定窗＋中央分割 2 枚曲面玻璃（全景窗），
+  乘务员室扩大致前面倾斜消失——平面正确，不要做成斜面。
+- 车头正脸：图纸原图（NCC 0.827，部分匹配，特征位置吻合）；方向 <strong>rot180</strong>，
+  以行先框位置定（图纸右下→live 左上）；NCC 的 vflip/rot180 仅差 0.002，不能定方向。
+  图纸件顶是灰带、底是深绿裙带，翻转后灰带变裙板——不要把翻转后的灰带当成“裙板画错”。
+- 约 10% 米制竖向拉伸是已知局限（小于 485 已接受的 21.7%）；像素拉伸 ≠ 米制拉伸，
+  按米制算（1 列 0.00451 m、1 行 0.00792 m），不要按像素各向异性报“18% 横向拉伸”。
+- 白矩形 rows 343–348 是图纸内容（脸件顶带），不动；无头标牌（图纸/实车均无）。
+- 侧面：按图纸 net 裁切；每侧 2 对双开门；车号、车种以图纸 net 标注为准。
+
+## 方法（按 SKILL.txt）
+0. 判断图纸类型（纸模展开图 net）；1. 取图（矢量/嵌入原图，勿截屏低清图）；
+2. 标定尺度（像素→米，用图纸参考线；注意纹理像素非正方形，换算分 x/y 两向）；
+3. 选贴图源（每面裁“能无缝平铺”的一块）；
+4. 轮廓逐列扫描；5. 断面放样（鼻锥收法按两种头型区分；本车平面头，无收法）；
+6. UV（图纸决定窗门位置；侧面平面投影、背面镜像 u、车顶横向铺）；
+6.5 车底带只贴图不建模（裁切框避开参考线、去 pepar.net 水印/二维码）；
+7. 材质分区只用几何判据；
+8. 验证：4 个数字（三角数、体积、包围盒、0/0/0）＋对照图＋GLB 内嵌贴图方向审计。
+
+## 验收
+- 三张渲染图目检通过（脸不颠倒、行先框在左上、全景窗/门/灯齐全、裙板对齐、轮底触轨）。
+- 与现有模型对照：新模型司机面必须是图纸裁切、方向 rot180（现有模型已合规；
+  方向、拉伸两点按本页结论保持，不要用 NCC 改方向、不要按像素拉伸重贴）。</pre>
+
+<p style="color:#666;font-size:13px">整理：Chihaya，2026-11-28。图纸为 pepar.net 纸模原图；方法论 SKILL.txt v1.2.49。</p>
+</body>
+</html>

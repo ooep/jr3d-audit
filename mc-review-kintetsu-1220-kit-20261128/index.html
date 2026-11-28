@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kintetsu-1220 建模套件（给别的 AI 试做）</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:860px;margin:0 auto;padding:24px 16px;color:#222;line-height:1.7}
+h1{font-size:22px} h2{font-size:18px;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:14px;font-size:13px;line-height:1.6}
+a{color:#0b62d6} .note{background:#fff8e1;border:1px solid #f0d48a;border-radius:6px;padding:10px 14px}
+ul{padding-left:20px} li{margin:4px 0}
+</style>
+</head>
+<body>
+<h1>🚃 kintetsu-1220 建模套件</h1>
+<p>给别的 AI 试做这辆车用的完整材料：图纸＋提示词＋实车参考＋现有模型对照。2026-11-28 整理。</p>
+
+<h2>📦 素材（可直接下载）</h2>
+<ul>
+<li><strong>图纸 PDF</strong>：<a href="kintetsu-1220.pdf">kintetsu-1220.pdf</a>（2.1 MB，近鉄1220系纸模展开图）</li>
+<li><strong>完整建模方法（提示词全文）</strong>：<a href="SKILL.txt">SKILL.txt</a>（图纸转 3D 模型 v1.2.49，1362 行）</li>
+<li><strong>实车参考</strong>：<a href="https://ja.wikipedia.org/wiki/%E8%BF%91%E9%89%841422%E7%B3%BB%E9%9B%BB%E8%BB%8A">Wikipedia: 近鉄1422系電車</a>（1220系与 1422系同一条目内合併解説；1987 年登场，2 辆编组，大阪線，1220系 3 编成 6 辆，日立製 VVVF）</li>
+<li><strong>现有模型对照</strong>：<a href="https://ooep.github.io/jr3d-audit/mc-review-rework5-20261127/">第五轮审核页</a> 1220 卡片（R5 #85）——24 辆批像素核实<strong>合规、未推</strong>，当前模型的状态见下“现有模型问题”。另见<a href="https://ooep.github.io/jr3d-audit/mc-review-rework-all-20261127/">汇总页</a>。</li>
+</ul>
+
+<h2>⚠️ 现有模型问题（合规未推：现有模型已通过像素核实，新模型须保持这些已对的部分，并注意以下已核实的结论）</h2>
+<div class="note">
+1. <strong>car2_end1 底部浅灰带是图纸内容，不是残留</strong>：浅灰带 rows 231–296（~196–198）来自图纸 p1 底部贯通端件自带的白色下带＋白色车门下半（涂装）。贯通端、编组内隐藏，<strong>不要当白纸/胶耳清掉</strong>。其余色块也都是图纸内容：rows 0–32 粉灰 137,102,111；rows 165–197 偏红 91,48,58；rows 330–362 深灰 79,77,78；底部 rows 396–401 灰 132,128,128。<br>
+2. 29 批脸底白纸已改浅灰延展（图纸邻接色延展，未用奶油边）；脸 <strong>0 px 奶油</strong>，under 324 px 是车底细线，不在脸范围。<br>
+3. 方向正确：绛红顶、贯通门居中、1223 右上、绿行先左上、琥珀＋红灯、白带、灰裙板＋车钩盒；图纸车号 1221 在左下＋绿行先框在右下，live 车号 1223 在右上＋绿框在左上 = rot180。<br>
+4. live 车号 <strong>1223 vs 图纸 1221 是车号不同，非方向问题</strong>——模型按 1223 建，勿动。
+</div>
+
+<h2>✍️ 提示词（精简版，直接复制可用）</h2>
+<pre>## 任务
+根据所附图纸 PDF（近鉄1220系纸模展开图），从零新建 2 辆编组 3D 列车模型，
+输出 GLB + consist.json。不要复用现有模型，只以它为对照（见“现有模型问题”）。
+
+## 输入素材
+- 图纸：kintetsu-1220.pdf（本页可下载；纸模展开图 net）
+- 实车参考：https://ja.wikipedia.org/wiki/%E8%BF%91%E9%89%841422%E7%B3%BB%E9%9B%BB%E8%BB%8A （1220系与 1422系同一条目内合併解説；编组、运用、照片）
+- 方法论全文：SKILL.txt（本页可下载，图纸转 3D 模型 v1.2.49）——按其中的 0–8 步执行。
+
+## 输出
+- car1.glb、car2.glb（每辆车一个 GLB，贴图内嵌）
+- consist.json：
+  {"name": "近鉄1220系", "car_length_m": 20.72, "middle_car_length_m": 20.72,
+   "cars": [{"model": "car1.glb"}, {"model": "car2.glb"}]}
+  （两头先头车；两端司机室朝外，连接端朝内）
+- 渲染图三张：整列侧面、斜视角 3/4、司机端端面（每张整列入镜、两端可见、边距 ≥2%）
+
+## 铁律（违反即返工）
+1. 贴图只从图纸原图裁切，严禁 AI/SVG/程序重画、填色、硬凑；图纸没有的特征先报缺、不虚构。
+2. 不拉伸：按图纸原纵横比贴；不颠倒：对照实车照片核对司机面方向（特征上下顺序与实车一致）。
+3. 胶耳必删：纸模端件左右两缘的白色梯形粘贴耳不得进贴图；裁切框只取端面本身。
+4. 轮底触轨（y=0），车轮圆形；车体与转向架之间无过大空白；转向架设备齐全、不删设备。
+5. GLB 贴图须保留 alphaMode MASK（透明处镂空）；模型水密：内翻 0、开边 0、非流形 0。
+6. 只用图纸原图、不纯色填充、不加奶油边填充、不嗯凑、不生成、不瞎填充；盖不满如实报、等定夺。
+
+## 车型要点（按图纸＋实车照片核对）
+- 2 辆编组（モ1220 Mc＋ク1320 Tc；1221F–1223F），近鉄大阪線；车长 20.72 m。
+- 头型是<strong>平面</strong>：前脸单块竖直平面（x±1.40、y1.00–3.77），图纸侧立面同样平矩形——无斜面/圆弧可做。
+- 车头正脸：图纸原图均匀直接裁切（NCC 0.943，rot180，sx=2.3、sy=2.35，拉伸 0.979），
+  方向正确：绛红顶、贯通门居中、1223 右上、绿行先左上、琥珀＋红灯、白带、灰裙板＋车钩盒。
+  车号按 <strong>1223</strong> 建（图纸印 1221 是另一编成车号，勿“纠正”）。
+- car2 贯通端（car2_end1）底部浅灰带 rows 231–296 是<strong>图纸内容</strong>（贯通端件白下带＋
+  车门下半涂装），不是白纸/胶耳，<strong>保留</strong>；脸底白纸清理用图纸邻接浅灰延展。
+- 侧面：按图纸 net 裁切；车号、车种以图纸 net 标注为准。
+
+## 方法（按 SKILL.txt）
+0. 判断图纸类型（纸模展开图 net）；1. 取图（矢量/嵌入原图，勿截屏低清图）；
+2. 标定尺度（像素→米，用图纸参考线）；3. 选贴图源（每面裁“能无缝平铺”的一块）；
+4. 轮廓逐列扫描；5. 断面放样（鼻锥收法按两种头型区分；本车平面头，无收法）；
+6. UV（图纸决定窗门位置；侧面平面投影、背面镜像 u、车顶横向铺）；
+6.5 车底带只贴图不建模（裁切框避开参考线、去 pepar.net 水印/二维码）；
+7. 材质分区只用几何判据；
+8. 验证：4 个数字（三角数、体积、包围盒、0/0/0）＋对照图＋GLB 内嵌贴图方向审计。
+
+## 验收
+- 三张渲染图目检通过（脸不颠倒、贯通门/行先框/车号齐全、裙板对齐、轮底触轨）。
+- 与现有模型对照：新模型司机面必须是图纸裁切（现有模型已合规；car2 贯通端浅灰带是
+  图纸涂装、车号 1223 两点必须保持，不要当缺陷“修”掉）。</pre>
+
+<p style="color:#666;font-size:13px">整理：Chihaya，2026-11-28。图纸为 pepar.net 纸模原图；方法论 SKILL.txt v1.2.49。</p>
+</body>
+</html>
